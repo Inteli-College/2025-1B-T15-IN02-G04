@@ -63,8 +63,10 @@
 ### 2.1.3. Solução (sprints 1 a 5)
 
 *Explique detalhadamente os seguintes aspectos (até 60 palavras por item):*
-1. Problema a ser resolvido
+1. Problema a ser resolvido:
+    Alta rotatividade e falta de capacitação adequada dos Promotores Técnicos Digitais (PTDs) da Bayer, responsáveis pelo suporte do FieldView. Isso gera insatisfação nos produtores, sobrecarga no suporte remoto e PTDs despreparados em campo, impactando a adoção e o valor percebido da plataforma digital.
 2. Dados disponíveis (mencionar fonte e conteúdo; se não houver, indicar “não se aplica”)
+    Documentos fornecidos pelo cliente (Institucional Bayer, Termo de Abertura do Projeto). Dados públicos indicam: Climate FieldView mapeia mais de 25 milhões de hectares no Brasil (segundo maior mercado); mais de 84% dos produtores utilizam agricultura digital; Promotores Técnicos Digitais confirmados via LinkedIn; existem plataformas de capacitação agrícola (ex: Elevagro, Agriconline), mas nenhuma específica para o suporte FieldView.
 3. Solução proposta
 4. Forma de utilização da solução
 5. Benefícios esperados
