@@ -60,7 +60,7 @@
 
 <p align = "center"> Figura 2: Análise SWOT</p>
 
-
+![Análise SWOT](https://github.com/user-attachments/assets/1207da34-972f-422c-a232-33f16e3ee55e)
 <p align = "center"> Canva: Circle Infographic Diagram SWOT Analysis (sem data), adaptada pelos autores (2025). <br>
 Fontes da pesquisa em referências. </p> <br><br> 
 
