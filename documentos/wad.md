@@ -1,5 +1,4 @@
-<img src="../assets/logointeli.png">
-
+![logointeli](https://github.com/user-attachments/assets/d6efc405-cd58-47e4-9243-529a655a27d9)
 
 # WAD - Web Application Document - Módulo 2 - Inteli
 
