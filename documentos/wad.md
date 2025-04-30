@@ -1,4 +1,4 @@
-<img src="../documentos/assets/logointeli.png">
+<img src="assets/logointeli.png">
 
 # WAD - Web Application Document - Módulo 2 - Inteli
 
@@ -46,9 +46,11 @@ _Observe a seção 2 e verifique que ali é possível trazer mais detalhes, port
 
 ### 2.1.1. Modelo de 5 Forças de Porter (sprint 1)
 
-_Preencha com até 400 palavras_
+<img src="assets/5ForçasDePorter.PNG">
+<p align = 'center'>template de Porter (1979), adaptado pelos autores (2025).</p>
 
-_Posicione aqui o modelo de 5 Forças de Porter para sustentar o contexto da indústria._
+
+
 
 ### 2.1.2. Análise SWOT da Instituição Parceira (sprint 1)
 
@@ -259,6 +261,9 @@ SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publ
 
 INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>
 SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano
+
+O Tempo Economia. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025
+O Presente Rural. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr. 2025
 
 # <a name="c9"></a>Anexos
 
