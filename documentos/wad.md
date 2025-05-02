@@ -93,6 +93,12 @@ _Registre na matriz os riscos identificados no projeto._
 
 _Posicione aqui suas Personas em forma de texto markdown com imagens, ou como imagem de template preenchido. Atualize esta seção ao longo do módulo se necessário._
 
+Persona PTD:
+<img src="assets/PersonaPTD.png">
+
+Persona RTD:
+<img src="assets/PersonaRTD.png">
+
 ## 2.3. User Stories (sprints 1 a 5)
 
 _Posicione aqui a lista de User Stories levantadas para o projeto. Siga o template de User Stories e utilize a mesma referência USXX no roadmap de seu quadro Kanban. Indique todas as User Stories mapeadas, mesmo aquelas que não forem implementadas ao longo do projeto. Não se esqueça de explicar o INVEST das 5 User Stories prioritárias_
