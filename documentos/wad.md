@@ -46,7 +46,6 @@ Para enfrentar esse cenário, foi proposta a criação de uma plataforma digital
 Entre os aspectos essenciais para a criação de valor estão a centralização e organização de conteúdos técnicos, a possibilidade de diagnóstico individual de conhecimento, a certificação de profissionais antes de seu envio a campo e a oferta de recursos offline. Além disso, a plataforma permitirá à Bayer acompanhar a evolução dos colaboradores, identificar lacunas e alinhar os treinamentos às demandas regionais e de safra, otimizando o atendimento ao produtor e fortalecendo a experiência com o Climate FieldView.
 
 
-
 # <a name="c2"></a>2. Visão Geral da Aplicação Web (sprint 1)
 
 ## 2.1. Escopo do Projeto (sprints 1 e 4)
@@ -60,7 +59,7 @@ Entre os aspectos essenciais para a criação de valor estão a centralização 
 ### 2.1.2. Análise SWOT da Instituição Parceira (sprint 1)
 
 
-<img src="../documentos/assets/canvas-proposta-de-valor.png">
+
 
 *Preencha com até 100 palavras – sem necessidade de fonte*
 
