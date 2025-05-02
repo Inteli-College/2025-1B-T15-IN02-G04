@@ -36,13 +36,16 @@
 
 # <a name="c1"></a>1. Introdução (sprints 1 a 5)
 
-*Preencha com até 300 palavras – sem necessidade de fonte*
 
-*Contextualize aqui a problemática trazida pelo parceiro de projeto.*
+A Bayer Crop Science, por meio de sua solução digital Climate FieldView, oferece tecnologias que permitem aos produtores monitorar, planejar e otimizar suas operações agrícolas. No entanto, a execução dessa proposta de valor depende diretamente de uma rede de Promotores Técnicos Digitais (PTDs), profissionais responsáveis pela instalação e configuração do Kit FieldView em campo, além do treinamento inicial dos clientes e atendimento.
 
-*Descreva brevemente a solução desenvolvida para o parceiro de negócios. Descreva os aspectos essenciais para a criação de valor do produto, com o objetivo de ajudar a entender melhor a realidade do cliente e entregar uma solução que está alinhado com o que ele espera.*
+Atualmente, o onboarding desses PTDs é rápido, desestruturado e, muitas vezes, ineficiente, resultando em atendimentos de baixa qualidade, insatisfação dos produtores e sobrecarga no suporte remoto. A alta rotatividade do time agrava essa situação, dificultando a padronização de procedimentos e a retenção de conhecimento técnico.
 
-*Observe a seção 2 e verifique que ali é possível trazer mais detalhes, portanto seja objetivo aqui. Atualize esta descrição até a entrega final, conforme desenvolvimento.*
+Para enfrentar esse cenário, foi proposta a criação de uma plataforma digital de capacitação técnica, acessível via web e mobile, com trilhas de conhecimento estruturadas, conteúdos multimídia e recursos de gamificação. A solução busca nivelar o conhecimento dos PTDs, oferecer treinamentos contínuos e disponibilizar conteúdos curtos e objetivos, compatíveis com as limitações de tempo e conectividade no campo.
+
+Entre os aspectos essenciais para a criação de valor estão a centralização e organização de conteúdos técnicos, a possibilidade de diagnóstico individual de conhecimento, a certificação de profissionais antes de seu envio a campo e a oferta de recursos offline. Além disso, a plataforma permitirá à Bayer acompanhar a evolução dos colaboradores, identificar lacunas e alinhar os treinamentos às demandas regionais e de safra, otimizando o atendimento ao produtor e fortalecendo a experiência com o Climate FieldView.
+
+
 
 # <a name="c2"></a>2. Visão Geral da Aplicação Web (sprint 1)
 
@@ -55,6 +58,9 @@
 *Posicione aqui o modelo de 5 Forças de Porter para sustentar o contexto da indústria.*
 
 ### 2.1.2. Análise SWOT da Instituição Parceira (sprint 1)
+
+
+<img src="../documentos/assets/canvas-proposta-de-valor.png">
 
 *Preencha com até 100 palavras – sem necessidade de fonte*
 
@@ -71,9 +77,7 @@
 6. Critério de sucesso e como será avaliado
 
 ### 2.1.4. Value Proposition Canvas (sprint 1): 
-*Sem limite de palavras – usar template do curso*
 
-*Elaborar o Value Proposition Canvas com base na proposta de solução definida.*
 
 ### 2.1.5. Matriz de Riscos do Projeto (sprint 1)
 
