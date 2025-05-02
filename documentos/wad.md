@@ -49,9 +49,6 @@ _Observe a seção 2 e verifique que ali é possível trazer mais detalhes, port
 <img src="assets/5ForçasDePorter.PNG">
 <p align = 'center'>template de Porter (1979), adaptado pelos autores (2025).</p>
 
-
-
-
 ### 2.1.2. Análise SWOT da Instituição Parceira (sprint 1)
 
 &nbsp; &nbsp; &nbsp; &nbsp;​A **Bayer Brasil** destaca-se no setor agrícola com a plataforma digital Climate FieldView, que mapeia **mais de 28 milhões de hectares no país** (equivalente a mais da metade da área de plantio de soja no país), consolidando sua liderança em agricultura digital. Além disso, o programa PRO Carbono promove práticas sustentáveis, visando a redução de emissões e o aumento da produtividade. Entretanto, desafios como a **alta rotatividade** e **capacitação insuficiente** dos Promotores Técnicos Digitais impactam a eficiência operacional. No competitivo mercado brasileiro, a Bayer enfrenta concorrência de gigantes como **Syngenta, Corteva, BASF e FMC**, exigindo contínua inovação e aprimoramento de serviços para manter sua posição de destaque.​
@@ -71,11 +68,19 @@ Fontes da pesquisa em referências. </p> <br><br>
 5. Benefícios esperados: certificação e melhor preparo dos Promotores Técnicos Digitais antes do campo, redução da rotatividade e da carga do suporte remoto, aumento da satisfação dos produtores, padronização do conhecimento técnico sobre o FieldView e otimização do processo de capacitação da equipe.
 6. Critério de sucesso e como será avaliado: aumento na taxa de Promotores Técnicos Digitais (PTDs) certificados antes de ir a campo (>90%), redução no volume de chamados de suporte relacionados a dúvidas básicas (>20%), e alta taxa de engajamento/conclusão de trilhas na plataforma (>80%). Avaliado via relatórios da plataforma e pesquisas de satisfação com os profissionais e produtores.
 
-### 2.1.4. Value Proposition Canvas (sprint 1):
+### 2.1.4. Value Proposition Canvas (sprint 1): 
+O Canvas de Proposta de Valor é uma ferramenta visual que apoia a organização e validação de hipóteses sobre o perfil de clientes e o valor que uma solução oferece. Ele é dividido em duas áreas principais: o Perfil do Cliente (tarefas, dores e ganhos) e o Mapa de Valor (produtos/serviços, criadores de ganho e aliviadores de dor). Essa estrutura facilita o alinhamento entre as necessidades do cliente e as soluções propostas, aumentando as chances de sucesso no desenvolvimento de produtos e serviços.
 
-_Sem limite de palavras – usar template do curso_
+<img src="../documentos/assets/canvas-proposta-de-valor.png">
 
-_Elaborar o Value Proposition Canvas com base na proposta de solução definida._
+Para este projeto, foi desenvolvido um Canvas de Proposta de Valor visando mapear as necessidades, dores e expectativas dos PTDs (Profissionais Técnicos de Desenvolvimento) do Climate FieldView da Bayer no eixo de Crop Science. Eles atuam em campo, e alinham essas informações às soluções propostas pela plataforma digital de capacitação técnica. O objetivo é oferecer um ambiente acessível, atualizado e motivador, reduzindo a rotatividade e aumentando a eficiência no atendimento técnico aos produtores.
+
+No canvas, as tarefas dos clientes foram identificadas, assim como suas principais dores — como dificuldade de acesso a conteúdos técnicos atualizados, suporte remoto sobrecarregado e alta rotatividade — e os ganhos desejados, como certificações, crescimento na função e segurança técnica durante os atendimentos. Em resposta, a solução propõe trilhas de capacitação personalizadas, conteúdos acessíveis offline, gamificação para engajamento e painéis de desempenho para gestores.
+
+Esse material serviu como base para estruturar as funcionalidades e o roadmap da solução, garantindo aderência às reais demandas do público-alvo. 
+
+FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template gratuito. Somos Tera, 2023. Disponível em: https://blog.somostera.com/product-management/canvas-de-proposta-de-valor. Acesso em: 23 abril 2025.
+
 
 ### 2.1.5. Matriz de Riscos do Projeto (sprint 1)
 
