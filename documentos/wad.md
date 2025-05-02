@@ -54,9 +54,13 @@ _Observe a seção 2 e verifique que ali é possível trazer mais detalhes, port
 
 ### 2.1.2. Análise SWOT da Instituição Parceira (sprint 1)
 
-_Preencha com até 100 palavras – sem necessidade de fonte_
+&nbsp; &nbsp; &nbsp; &nbsp;​A **Bayer Brasil** destaca-se no setor agrícola com a plataforma digital Climate FieldView, que mapeia **mais de 28 milhões de hectares no país** (equivalente a mais da metade da área de plantio de soja no país), consolidando sua liderança em agricultura digital. Além disso, o programa PRO Carbono promove práticas sustentáveis, visando a redução de emissões e o aumento da produtividade. Entretanto, desafios como a **alta rotatividade** e **capacitação insuficiente** dos Promotores Técnicos Digitais impactam a eficiência operacional. No competitivo mercado brasileiro, a Bayer enfrenta concorrência de gigantes como **Syngenta, Corteva, BASF e FMC**, exigindo contínua inovação e aprimoramento de serviços para manter sua posição de destaque.​
 
-_Apresente uma visão geral da situação do parceiro com base na matriz SWOT (forças, fraquezas, oportunidades e ameaças). Foque na relação com os concorrentes e o posicionamento da instituição._
+<p align = "center"> Figura 2: Análise SWOT</p>
+
+<p align="center"> <img src="https://github.com/user-attachments/assets/1b7444b0-82f0-4c4b-a15f-2f2c52d694c2" alt="Análise SWOT"> </p>
+<p align = "center"> Canva: Circle Infographic Diagram SWOT Analysis (sem data), adaptada pelos autores (2025). <br>
+Fontes da pesquisa em referências. </p> <br><br> 
 
 ### 2.1.3. Solução (sprints 1 a 5)
 
@@ -256,11 +260,29 @@ _Relacione também quaisquer outras ideias que o grupo tenha para melhorias futu
 
 _Incluir as principais referências de seu projeto, para que seu parceiro possa consultar caso ele se interessar em aprofundar. Um exemplo de referência de livro e de site:_<br>
 
-LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>
-SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>
+*LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>*
+*SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>*
 
-INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>
-SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano
+*INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>*
+*SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano*
+
+## Gerais
+
+1. CLIMATE FIELDVIEW. Plataforma de Agricultura Digital. Disponível em: https://climatefieldview.com.br/. Acesso em: 26 abr. 2025.​
+
+
+## Pesquisa de mercado
+
+1. MORDOR INTELLIGENCE. Brazil Crop Protection Pesticides Market. Disponível em: https://www.mordorintelligence.com/industry-reports/brazil-crop-protection-pesticides-market. Acesso em: 25 abr. 2025.​
+
+2. KEN RESEARCH. Brazil Crop Protection Market. Disponível em: https://www.kenresearch.com/industry-reports/brazil-crop-protection-market. Acesso em: 25 abr. 2025.​
+
+3. SPER RESEARCH. Brazil Crop Protection Market Growth, Size, Trends, Revenue, Challenges and Future Competition. Disponível em: https://www.sperresearch.com/report-store/brazil-crop-protection-market.aspx. Acesso em: 26 abr. 2025.​
+
+4. AGROPAGES. Bayer's Digital Platform Reaches 22 Million Hectares Mapped in Brazil. Disponível em: https://news.agropages.com/News/NewsDetail---42177.htm. Acesso em: 27 abr. 2025.​
+
+
+
 
 O Tempo Economia. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025
 O Presente Rural. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr. 2025
