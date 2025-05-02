@@ -32,13 +32,13 @@
 
 # <a name="c1"></a>1. Introdução (sprints 1 a 5)
 
-_Preencha com até 300 palavras – sem necessidade de fonte_
+A Bayer Crop Science, por meio de sua solução digital Climate FieldView, oferece tecnologias que permitem aos produtores monitorar, planejar e otimizar suas operações agrícolas. No entanto, a execução dessa proposta de valor depende diretamente de uma rede de Promotores Técnicos Digitais (PTDs), profissionais responsáveis pela instalação e configuração do Kit FieldView em campo, além do treinamento inicial dos clientes e atendimento.
 
-_Contextualize aqui a problemática trazida pelo parceiro de projeto._
+Atualmente, o onboarding desses PTDs é rápido, desestruturado e, muitas vezes, ineficiente, resultando em atendimentos de baixa qualidade, insatisfação dos produtores e sobrecarga no suporte remoto. A alta rotatividade do time agrava essa situação, dificultando a padronização de procedimentos e a retenção de conhecimento técnico.
 
-_Descreva brevemente a solução desenvolvida para o parceiro de negócios. Descreva os aspectos essenciais para a criação de valor do produto, com o objetivo de ajudar a entender melhor a realidade do cliente e entregar uma solução que está alinhado com o que ele espera._
+Para enfrentar esse cenário, foi proposta a criação de uma plataforma digital de capacitação técnica, acessível via web e mobile, com trilhas de conhecimento estruturadas, conteúdos multimídia e recursos de gamificação. A solução busca nivelar o conhecimento dos PTDs, oferecer treinamentos contínuos e disponibilizar conteúdos curtos e objetivos, compatíveis com as limitações de tempo e conectividade no campo.
 
-_Observe a seção 2 e verifique que ali é possível trazer mais detalhes, portanto seja objetivo aqui. Atualize esta descrição até a entrega final, conforme desenvolvimento._
+Entre os aspectos essenciais para a criação de valor estão a centralização e organização de conteúdos técnicos, a possibilidade de diagnóstico individual de conhecimento, a certificação de profissionais antes de seu envio a campo e a oferta de recursos offline. Além disso, a plataforma permitirá à Bayer acompanhar a evolução dos colaboradores, identificar lacunas e alinhar os treinamentos às demandas regionais e de safra, otimizando o atendimento ao produtor e fortalecendo a experiência com o Climate FieldView.
 
 # <a name="c2"></a>2. Visão Geral da Aplicação Web (sprint 1)
 
@@ -50,8 +50,6 @@ _Observe a seção 2 e verifique que ali é possível trazer mais detalhes, port
 <p align = 'center'>template de Porter (1979), adaptado pelos autores (2025).</p>
 
 ### 2.1.2. Análise SWOT da Instituição Parceira (sprint 1)
-
-&nbsp; &nbsp; &nbsp; &nbsp;​A **Bayer Brasil** destaca-se no setor agrícola com a plataforma digital Climate FieldView, que mapeia **mais de 28 milhões de hectares no país** (equivalente a mais da metade da área de plantio de soja no país), consolidando sua liderança em agricultura digital. Além disso, o programa PRO Carbono promove práticas sustentáveis, visando a redução de emissões e o aumento da produtividade. Entretanto, desafios como a **alta rotatividade** e **capacitação insuficiente** dos Promotores Técnicos Digitais impactam a eficiência operacional. No competitivo mercado brasileiro, a Bayer enfrenta concorrência de gigantes como **Syngenta, Corteva, BASF e FMC**, exigindo contínua inovação e aprimoramento de serviços para manter sua posição de destaque.​
 
 <p align = "center"> Figura 2: Análise SWOT</p>
 
