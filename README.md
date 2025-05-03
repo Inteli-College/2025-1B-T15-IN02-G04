@@ -13,10 +13,10 @@
 - <a href="https://www.linkedin.com/in/leonardo-corbi/">Leonardo Corbi</a>
 - <a href="www.linkedin.com/in/lucas-pomin">Lucas Pomin</a>
 - <a href="https://www.linkedin.com/in/mariana-pereira-394280346/">Mariana Pereira</a>
-- <a href="https://github.com/NicolliVenino">Nicolli Santana</a>
+- <a href="https://www.linkedin.com/in/nicolli-venino-santana-b84341254/">Nicolli Santana</a>
 - <a href="https://www.linkedin.com/">Rafael Santana Rodrigues</a>
 - <a href="https://www.linkedin.com/in/peresvivian/">Vivian Peres</a>
-- <a href="(17) Yuri Boczar | LinkedIn">Yuri Boczar</a>
+- <a href="https://www.linkedin.com/in/yuriboczar/">Yuri Boczar</a>
 
 ## :teacher: Professores:
 
