@@ -10,13 +10,13 @@
 
 ## :student: Integrantes:
 
-- <a href="https://www.linkedin.com/">Nome do integrante 1</a>
-- <a href="https://www.linkedin.com/">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/">Nome do integrante 3</a>
-- <a href="https://www.linkedin.com/">Nome do integrante 4</a>
-- <a href="https://www.linkedin.com/">Nome do integrante 5</a>
-- <a href="https://www.linkedin.com/">Nome do integrante 6</a>
-- <a href="https://www.linkedin.com/">Nome do integrante 7</a>
+- <a href="https://www.linkedin.com/in/leonardo-corbi/">Leonardo Corbi</a>
+- <a href="www.linkedin.com/in/lucas-pomin">Lucas Pomin</a>
+- <a href="https://www.linkedin.com/in/mariana-pereira-394280346/">Mariana Pereira</a>
+- <a href="https://github.com/NicolliVenino">Nicolli Santana</a>
+- <a href="https://www.linkedin.com/">Rafael Santana Rodrigues</a>
+- <a href="https://www.linkedin.com/in/peresvivian/">Vivian Peres</a>
+- <a href="(17) Yuri Boczar | LinkedIn">Yuri Boczar</a>
 
 ## :teacher: Professores:
 
