@@ -4,9 +4,9 @@
 <a href= "https://www.inteli.edu.br/"><img src="./documentos/assets/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
 </p>
 
-# Nome do projeto
+# CropSearch🔍🌿
 
-## Nome do grupo
+## Grupo Croppers 
 
 ## :student: Integrantes:
 
@@ -22,7 +22,7 @@
 
 ### Orientador(a)
 
-- <a href="https://www.linkedin.com/">Nome do professor 1</a>
+- <a href="https://www.linkedin.com/in/marcelo-gon%C3%A7alves-phd-a550652/">Marcelo Gonçalves</a>
 
 ### Instrutores
 
