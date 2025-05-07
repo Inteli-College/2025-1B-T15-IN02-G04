@@ -411,7 +411,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 
 ### 3.5.1. Modelo relacional (sprints 2 e 4)
 
-_posicione aqui os diagramas de modelos relacionais do seu banco de dados, apresentando todos os esquemas de tabelas e suas relações. Utilize texto para complementar suas explicações, se necessário_
+<p align="center"> <img src="./assets/wad/modelagem-relacional.png" alt="Modelagem Relacional"> </p>
+<p align = 'center'>Conteúdo feito pelos autores (2025).</p>
 
 ### 3.5.2. Consultas SQL e lógica proposicional (sprint 2)
 
