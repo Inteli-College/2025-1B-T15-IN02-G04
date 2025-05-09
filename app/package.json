@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "migrate:dev": "node ./migrations/development/migrate_all.js",
+    "migrate:prod": "node ./migrations/production/migrate_all.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "init-db": "node scripts/runSQLScript.js"
