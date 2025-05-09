@@ -418,6 +418,13 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 
 #1 | ---
 --- | ---
+**Expressão SQL** | SELECT \* FROM ranking WHERE (position<11) OR (position<16 AND score>89);
+**Proposições lógicas** | $A$: A posição é menor que 11 (position<11) <br> $B$: A posição é menor que 16 (position<16) <br> $C$: A pontuação é maior que 89 (score>89)
+**Expressão lógica proposicional** | $A\lor(B \land C)$
+**Tabela Verdade** | <table> <thead> <tr> <th>$A$</th> <th>$B$</th> <th>$C$</th> <th>$(B \land C)$</th> <th>$A\lor(B \land C)$</th> </tr> </thead> <tbody> <tr> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </tr> <tr> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>V</td> </tr> <tr> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </tr> <tr> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>V</td> </tr> <tr> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </tr> <tr> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </tr> <tr> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> </tr> <tr> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </tr> </tbody> </table>
+
+#2 | ---
+--- | ---
 **Expressão SQL** | DELETE \* FROM ranking WHERE (score < 80 AND position > 50);
 **Proposições lógicas** | $A$: A pontuação é menor que 80 (score < 80) <br> $B$: A posição é maior que 50 (position > 50)
 **Expressão lógica proposicional** | $A \land B$
