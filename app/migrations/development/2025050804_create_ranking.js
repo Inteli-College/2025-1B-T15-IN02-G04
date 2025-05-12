@@ -26,9 +26,7 @@ async function migrate() {
     await pool.query('ROLLBACK;');
     console.error('Erro ao criar a tabela "ranking" no ambiente de desenvolvimento:', err.message);
     throw err;
-  } finally {
-    pool.end();
   }
 }
 
-migrate();
+module.exports = { migrate };

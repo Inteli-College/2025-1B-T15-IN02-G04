@@ -11,8 +11,8 @@ async function migrate() {
   const query = `
     CREATE TABLE IF NOT EXISTS trail (
       id BIGINT PRIMARY KEY,
-      name CHAR(100) NOT NULL,
-      description CHAR(255)
+      name VARCHAR(100) NOT NULL,
+      description VARCHAR(255)
     );
   `;
   try {
@@ -24,9 +24,7 @@ async function migrate() {
     await pool.query('ROLLBACK;');
     console.error('Erro ao criar a tabela "trail" no ambiente de desenvolvimento:', err.message);
     throw err;
-  } finally {
-    pool.end();
   }
 }
 
-migrate();
+module.exports = { migrate };
