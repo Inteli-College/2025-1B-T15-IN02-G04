@@ -11,7 +11,7 @@ async function migrate() {
   const query = `
     CREATE TABLE IF NOT EXISTS question (
       id BIGINT PRIMARY KEY,
-      question CHAR(255) NOT NULL,
+      question VARCHAR(255) NOT NULL,
       score BIGINT NOT NULL,
       id_course BIGINT NOT NULL,
       CONSTRAINT fk_question_course FOREIGN KEY (id_course) REFERENCES course(id) ON DELETE CASCADE,
@@ -27,9 +27,7 @@ async function migrate() {
     await pool.query('ROLLBACK;');
     console.error('Erro ao criar a tabela "question" no ambiente de produção:', err.message);
     throw err;
-  } finally {
-    pool.end();
   }
 }
 
-migrate();
+module.exports = { migrate };
