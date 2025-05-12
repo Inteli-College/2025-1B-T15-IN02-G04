@@ -3,33 +3,78 @@
 -- Criar extensão para suportar UUIDs, se ainda não estiver ativada
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- Criar tabela de usuários com UUID como chave primária
-CREATE TABLE IF NOT EXISTS users (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(100) UNIQUE NOT NULL
+-- Criar tabelas 
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
+first_name TEXT NOT NULL,
+last_name TEXT NOT NULL,
+email TEXT NOT NULL,
+username TEXT NOT NULL,
+password TEXT NOT NULL, 
+avatar TEXT NOT NULL,
+birth_date TEXT NOT NULL
 );
 
--- Inserir 20 usuários com nomes e emails aleatórios
-INSERT INTO users (name, email)
-VALUES 
-  ('Alice Smith', 'alice.smith@example.com'),
-  ('Bob Johnson', 'bob.johnson@example.com'),
-  ('Carol Williams', 'carol.williams@example.com'),
-  ('David Jones', 'david.jones@example.com'),
-  ('Emma Brown', 'emma.brown@example.com'),
-  ('Frank Davis', 'frank.davis@example.com'),
-  ('Grace Wilson', 'grace.wilson@example.com'),
-  ('Henry Moore', 'henry.moore@example.com'),
-  ('Isabella Taylor', 'isabella.taylor@example.com'),
-  ('Jack Lee', 'jack.lee@example.com'),
-  ('Kate Clark', 'kate.clark@example.com'),
-  ('Liam Martinez', 'liam.martinez@example.com'),
-  ('Mia Rodriguez', 'mia.rodriguez@example.com'),
-  ('Noah Garcia', 'noah.garcia@example.com'),
-  ('Olivia Hernandez', 'olivia.hernandez@example.com'),
-  ('Patrick Martinez', 'patrick.martinez@example.com'),
-  ('Quinn Lopez', 'quinn.lopez@example.com'),
-  ('Rose Thompson', 'rose.thompson@example.com'),
-  ('Samuel Perez', 'samuel.perez@example.com'),
-  ('Tara Scott', 'tara.scott@example.com');
+
+CREATE TABLE ranking (
+id SERIAL PRIMARY KEY,
+id_user INT REFERENCES users(id) ON DELETE CASCADE
+position INT,
+score INT
+);
+
+
+CREATE TABLE meritis (
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+description TEXT NOT NULL
+);
+
+
+CREATE TABLE users-meritis (
+id SERIAL PRIMARY KEY,
+id_user INT REFERENCES users(id) ON DELETE CASCADE,
+id_meriti INT REFERENCES meritis(id) ON DELETE CASCADE,
+);
+
+
+CREATE TABLE certificates
+id SERIAL PRIMARY KEY,
+description TEXT NOT NULL,
+date DATE DEFAULT CURRENT_DATE,
+id_user REFERENCES users(id) ON DELETE CASCADE
+
+
+CREATE TABLE trail
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+description TEXT NOT NULL,
+id_certificate INT REFERENCES certificates(id) ON DELETE CASCADE
+
+
+CREATE TABLE modules
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+description TEXT NOT NULL,
+id_trail REFERENCES trail(id) ON DELETE CASCADE
+
+
+CREATE TABLE course
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+description TEXT NOT NULL,
+id_module REFERENCES modules(id) ON DELETE CASCADE
+
+
+CREATE TABLE questions
+id SERIAL PRIMARY KEY,
+question TEXT NOT NULL,
+id_course REFERENCES courses(id) ON DELETE CASCADE
+
+
+CREATE TABLE answers
+id SERIAL PRIMARY KEY,
+answer TEXT NOT NULL,
+correct BOOLEAN, 
+score INT,
+id_question REFERENCES questions(id) ON DELETE CASCADE
