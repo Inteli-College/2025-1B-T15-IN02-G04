@@ -26,9 +26,7 @@ async function migrate() {
     await pool.query('ROLLBACK;');
     console.error('Erro ao criar a tabela "merits_users" no ambiente de produção:', err.message);
     throw err;
-  } finally {
-    pool.end();
   }
 }
 
-migrate();
+module.exports = { migrate };

@@ -11,7 +11,7 @@ async function migrate() {
   const query = `
     CREATE TABLE IF NOT EXISTS certificate (
       id BIGINT PRIMARY KEY,
-      description CHAR(255),
+      description VARCHAR(255),
       date DATE NOT NULL,
       id_user BIGINT NOT NULL,
       CONSTRAINT fk_certificate_user FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
@@ -26,9 +26,7 @@ async function migrate() {
     await pool.query('ROLLBACK;');
     console.error('Erro ao criar a tabela "certificate" no ambiente de produção:', err.message);
     throw err;
-  } finally {
-    pool.end();
   }
 }
 
-migrate();
+module.exports = { migrate };

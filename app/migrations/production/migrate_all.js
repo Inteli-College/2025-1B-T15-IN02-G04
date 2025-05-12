@@ -25,10 +25,19 @@ async function migrateAll() {
     await migrateCourse.migrate();
     await migrateQuestion.migrate();
     await migrateAnswer.migrate();
-    console.log('Todas as tabelas foram criadas com sucesso no ambiente de produção.');
-  } catch (err) {
-    console.error('Erro ao executar as migrações no ambiente de produção:', err.message);
-  }
-}
-
-migrateAll();
+    console.log(
+          "Todas as tabelas foram criadas com sucesso no ambiente de produção."
+        );
+      } catch (err) {
+        console.error(
+          "Erro ao executar as migrações no ambiente de produção:",
+          err.message
+        );
+        throw err;
+      } finally {
+        await pool.end();
+        console.log("Conexão com o banco de dados encerrada.");
+      }
+    }
+    
+    migrateAll();

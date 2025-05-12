@@ -11,8 +11,8 @@ async function migrate() {
   const query = `
     CREATE TABLE IF NOT EXISTS course (
       id BIGINT PRIMARY KEY,
-      name CHAR(100) NOT NULL,
-      description CHAR(255),
+      name VARCHAR(100) NOT NULL,
+      description VARCHAR(255),
       id_module BIGINT NOT NULL,
       CONSTRAINT fk_course_module FOREIGN KEY (id_module) REFERENCES module(id) ON DELETE CASCADE
     );
@@ -26,9 +26,7 @@ async function migrate() {
     await pool.query('ROLLBACK;');
     console.error('Erro ao criar a tabela "course" no ambiente de desenvolvimento:', err.message);
     throw err;
-  } finally {
-    pool.end();
   }
 }
 
-migrate();
+module.exports = { migrate };
