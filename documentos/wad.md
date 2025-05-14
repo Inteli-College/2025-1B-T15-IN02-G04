@@ -439,10 +439,10 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 
 #4 | ---
 --- | ---
-**Expressão SQL** | SELECT \* FROM answer WHERE (correct <> TRUE AND (score>0 OR score<0) OR (correct = TRUE AND score>10);
-**Proposições lógicas** | $A$: A resposta não é correta (correct <> TRUE) <br> $B$: O score é maior que 0 (score>0) <br> $C$: O score é menor que 0 (score<0) <br> $D$: A resposta é correta (correct = TRUE) <br> $B$: O score é maior que 10 (score>10)
-**Expressão lógica proposicional** | $A \land (B \lor C) \lor (D \land E)$
-**Tabela Verdade** | <table> <thead> <tr> <th>$A$</th> <th>$B$</th> <th>$C$</th> <th>$D$</th> <th>$E$</th> <th>$(B \lor C)$</th> <th>$A \land (B \lor C)$</th> <th>$(D \land E)$</th> <th>$A \land (B \lor C) \lor (D \land E)$</th> </tr> </thead> <tbody> <tr> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </tr> <tr> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>V</td> </tr> <tr> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </tr> <tr> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>V</td> </tr> <tr> <td>F</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </tr> <tr> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </tr> <tr> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> </tr> <tr> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </tr> </tbody> </table>
+**Expressão SQL** | SELECT \* FROM answer WHERE (correct <> TRUE AND score>0) OR (correct = TRUE AND score>10);
+**Proposições lógicas** | $A$: A resposta não é correta (correct <> TRUE) <br> $B$: O score é maior que 0 (score>0) <br> $C$: A resposta é correta (correct = TRUE) <br> $D$: O score é maior que 10 (score>10)
+**Expressão lógica proposicional** | $(A \land B) \lor (C \land D)$
+**Tabela Verdade** | <table> <thead> <tr> <th>$A$</th> <th>$B$</th> <th>$D$</th> <th>$E$</th> <th>$(A \land B)$</th> <th>$(C \land D)$</th> <th>$(A \land B) \lor (C \land D)$</th> </tr> </thead> <tbody> <tr> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </tr> <tr> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>V</td> </tr> <tr> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </tr> <tr> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>V</td> </tr> <tr> <td>F</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </tr> <tr> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </tr> <tr> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> </tr> <tr> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </tr> </tbody> </table>
 
 ## 3.6. WebAPI e endpoints (sprints 3 e 4)
 
