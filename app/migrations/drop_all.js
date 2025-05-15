@@ -22,7 +22,7 @@ async function dropAll() {
     await pool.query(`DROP TABLE IF EXISTS module_user CASCADE`);
     await pool.query(`DROP TABLE IF EXISTS course CASCADE`);
     await pool.query(`DROP TABLE IF EXISTS merit_user CASCADE`);
-    await pool.query(`DROP TABLE IF EXISTS rankings CASCADE`);
+    await pool.query(`DROP TABLE IF EXISTS ranking CASCADE`);
     await pool.query(`DROP TABLE IF EXISTS trail_user CASCADE`);
     await pool.query(`DROP TABLE IF EXISTS certificate CASCADE`);
     await pool.query(`DROP TABLE IF EXISTS test CASCADE`);

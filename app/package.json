@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "migrate": "node ./migrations/migrate_all.js",
     "drop": "node ./migrations/drop_all.js",
+    "populate": "node ./migrations/insert_all.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "init-db": "node scripts/runSQLScript.js"
