@@ -393,6 +393,11 @@ Um wireframe é um esboço visual simples usado para planejar a estrutura e a na
 Dentre as telas idealizadas, nós temos as seguintes funcionalidades:
 
 - Testes : A tela de **testes** permite ao usuário realizar avaliações dentro da plataforma. Ela apresenta perguntas objetivas ou dissertativas e fornece feedbacks com base no desempenho obtido.
+  <p float="left">
+  <img src="./assets/wad/tela-de testes-mobile.png" width="200"/>
+  <img src="./assets/wad/tela-de testes-desktop.png" width="600"/>
+</p>
+
 
 - Trilha de Conhecimento : A tela de **trilha de conhecimento** organiza conteúdos em etapas progressivas. O usuário pode acompanhar seu avanço e retomar de onde parou, seguindo uma jornada estruturada de aprendizado.
 
