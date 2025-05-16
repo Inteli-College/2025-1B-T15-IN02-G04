@@ -424,17 +424,11 @@ Dentre as telas idealizadas, nós temos as seguintes funcionalidades: ( Algumas 
 
 Também foram incluídas as telas essenciais para a estrutura e navegação da plataforma, como por exemplo:
 
-- **Landing Page**
+- Landing Page : A **landing page** é a porta de entrada da plataforma, apresentando uma visão geral do sistema e seus benefícios. Ela visa captar o interesse do usuário com chamadas visuais e informativas, incentivando o acesso e a navegação.
 
-A landing page é a porta de entrada da plataforma, apresentando uma visão geral do sistema e seus benefícios. Ela visa captar o interesse do usuário com chamadas visuais e informativas, incentivando o acesso e a navegação.
+- Tela de Login : A **tela de login** permite que usuários autorizados acessem a plataforma por meio de autenticação com e-mail e senha. Pode incluir opções de recuperação de senha e login institucional, garantindo segurança e praticidade.
 
-- **Tela de Login**
-
-A tela de login permite que usuários autorizados acessem a plataforma por meio de autenticação com e-mail e senha. Pode incluir opções de recuperação de senha e login institucional, garantindo segurança e praticidade.
-
-- **Tela Inicial**
-
-A tela inicial reúne os principais acessos da plataforma em um único espaço. Ela funciona como um painel de navegação, apresentando atalhos visuais para funcionalidades como trilha de conhecimento, calendário, testes e fórum.
+- Tela Inicial : A **tela inicial** reúne os principais acessos da plataforma em um único espaço. Ela funciona como um painel de navegação, apresentando atalhos visuais para funcionalidades como trilha de conhecimento, calendário, testes e fórum.
 
 
 ### Explicação sobre o fluxo de navegação das User Stories priorizadas
