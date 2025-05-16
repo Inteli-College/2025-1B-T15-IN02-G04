@@ -385,26 +385,34 @@ _Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. A
 
 Um wireframe é um esboço visual simples usado para planejar a estrutura e a navegação de uma interface, como um site ou aplicativo. Ele mostra a disposição dos elementos na tela, como botões, menus e campos, sem se preocupar com design visual ou cores. Seu objetivo é organizar ideias e funcionalidades antes da fase de desenvolvimento. Segue abaixo a idealização do nosso wireframe, desenvolvido com base no contexto e nas necessidades do projeto.
 
-[[Clique aqui para ver o wireframe completo!]<p align="center"> <img src="./assets/wad/wireframepreview.png" alt="Wireframe"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1)
+[[Clique aqui para ver o wireframe completo!]<p align="center"> <img src="./assets/wad/wireframepreview.png" alt="Wireframe"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1) 
+
 <p align = 'center'>Preview wireframe, desenvolvida pelos autores (2025).</p> <br><br>
 
 ### Elementos do Wireframe
 
-Dentre as telas idealizadas, nós temos as seguintes funcionalidades:
+Dentre as telas idealizadas, nós temos as seguintes funcionalidades: ( Algumas telas foram postas abaixo para fins ilustrativos. Para visualizar todo o wireframe,[[Acesse o link!] )<p align="center"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1)
 
 - Testes : A tela de **testes** permite ao usuário realizar avaliações dentro da plataforma. Ela apresenta perguntas objetivas ou dissertativas e fornece feedbacks com base no desempenho obtido.
   <p float="left">
   <img src="./assets/wad/tela-de testes-mobile.png" width="200"/>
   <img src="./assets/wad/tela-de testes-desktop.png" width="600"/>
 </p>
+<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
 
 - Trilha de Conhecimento : A tela de **trilha de conhecimento** organiza conteúdos em etapas progressivas. O usuário pode acompanhar seu avanço e retomar de onde parou, seguindo uma jornada estruturada de aprendizado.
     <p float="left">
   <img src="./assets/wad/trilha-conhecimento-mobile.png" width="200"/>
   <img src="./assets/wad/trilha-conhecimento-desktop.png" width="600"/>
 </p>
+<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
 
 - Calendário : A tela de **calendário** exibe eventos, prazos e compromissos relevantes para o usuário. É possível visualizar por mês, e também aparecem ao canto da tela os eventos diários.
+   <p float="left">
+  <img src="./assets/wad/calendario-mobile.png" width="200"/>
+  <img src="./assets/wad/calendario-desktop.png" width="600"/>
+</p>
+<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
 
 - Registro de Atendimento : A tela de **registro de atendimentos** armazena dados das sessões realizadas entre os PTDs e seu cliente final. Ela permite consultar históricos, anotar observações e registrar datas e horários.
 
@@ -413,6 +421,21 @@ Dentre as telas idealizadas, nós temos as seguintes funcionalidades:
 - Fórum de Posts : A tela de **fórum de posts** oferece um espaço para publicações entre os PTDs, promovendo o compartilhamento de experiências de campo reais. Ela incentiva a criação de uma comunidade engajada por meio de discussões, interações, comentários e curtidas nos posts.
 
 - Matching Mentoria e Conexões : A tela de **matching mentoria e conexões** facilita a criação de vínculos entre mentorados, mentores e colegas com objetivos em comum.
+
+Também foram incluídas as telas essenciais para a estrutura e navegação da plataforma, como por exemplo:
+
+- **Landing Page**
+
+A landing page é a porta de entrada da plataforma, apresentando uma visão geral do sistema e seus benefícios. Ela visa captar o interesse do usuário com chamadas visuais e informativas, incentivando o acesso e a navegação.
+
+- **Tela de Login**
+
+A tela de login permite que usuários autorizados acessem a plataforma por meio de autenticação com e-mail e senha. Pode incluir opções de recuperação de senha e login institucional, garantindo segurança e praticidade.
+
+- **Tela Inicial**
+
+A tela inicial reúne os principais acessos da plataforma em um único espaço. Ela funciona como um painel de navegação, apresentando atalhos visuais para funcionalidades como trilha de conhecimento, calendário, testes e fórum.
+
 
 ### Explicação sobre o fluxo de navegação das User Stories priorizadas
 
