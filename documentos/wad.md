@@ -383,7 +383,9 @@ _Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. A
 
 ## 3.2. Wireframes (sprint 2)
 
-_Posicione aqui as imagens do wireframe construído para sua solução e, opcionalmente, o link para acesso (mantenha o link sempre público para visualização)_
+Um wireframe é um esboço visual simples usado para planejar a estrutura e a navegação de uma interface, como um site ou aplicativo. Ele mostra a disposição dos elementos na tela, como botões, menus e campos, sem se preocupar com design visual ou cores. Seu objetivo é organizar ideias e funcionalidades antes da fase de desenvolvimento. Segue abaixo a idealização do nosso wireframe, desenvolvida com base no contexto e nas necessidades do projeto.
+
+[![Texto alternativo](https://img.exemplo.com/imagem-preview.jpg)](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1)
 
 ## 3.3. Guia de estilos (sprint 3)
 
