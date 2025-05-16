@@ -398,8 +398,11 @@ Dentre as telas idealizadas, nós temos as seguintes funcionalidades:
   <img src="./assets/wad/tela-de testes-desktop.png" width="600"/>
 </p>
 
-
 - Trilha de Conhecimento : A tela de **trilha de conhecimento** organiza conteúdos em etapas progressivas. O usuário pode acompanhar seu avanço e retomar de onde parou, seguindo uma jornada estruturada de aprendizado.
+    <p float="left">
+  <img src="./assets/wad/trilha-conhecimento-mobile.png" width="200"/>
+  <img src="./assets/wad/trilha-conhecimento-desktop.png" width="600"/>
+</p>
 
 - Calendário : A tela de **calendário** exibe eventos, prazos e compromissos relevantes para o usuário. É possível visualizar por mês, e também aparecem ao canto da tela os eventos diários.
 
