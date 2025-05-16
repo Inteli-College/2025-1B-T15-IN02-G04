@@ -383,7 +383,76 @@ _Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. A
 
 ## 3.2. Wireframes (sprint 2)
 
-_Posicione aqui as imagens do wireframe construído para sua solução e, opcionalmente, o link para acesso (mantenha o link sempre público para visualização)_
+Um wireframe é um esboço visual simples usado para planejar a estrutura e a navegação de uma interface, como um site ou aplicativo. Ele mostra a disposição dos elementos na tela, como botões, menus e campos, sem se preocupar com design visual ou cores. Seu objetivo é organizar ideias e funcionalidades antes da fase de desenvolvimento. Segue abaixo a idealização do nosso wireframe, desenvolvido com base no contexto e nas necessidades do projeto.
+
+[[Clique aqui para ver o wireframe completo!]<p align="center"> <img src="./assets/wad/wireframepreview.png" alt="Wireframe"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1) 
+
+<p align = 'center'>Preview wireframe, desenvolvida pelos autores (2025).</p> <br><br>
+
+### Elementos do Wireframe
+
+Dentre as telas idealizadas, nós temos as seguintes funcionalidades: ( Algumas telas foram postas abaixo para fins ilustrativos. Para visualizar todo o wireframe,[[Acesse o link!] )<p align="center"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1)
+
+- Testes : A tela de **testes** permite ao usuário realizar avaliações dentro da plataforma. Ela apresenta perguntas objetivas ou dissertativas e fornece feedbacks com base no desempenho obtido.
+  <p float="left">
+  <img src="./assets/wad/tela-de testes-mobile.png" width="200"/>
+  <img src="./assets/wad/tela-de testes-desktop.png" width="600"/>
+</p>
+<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+
+- Trilha de Conhecimento : A tela de **trilha de conhecimento** organiza conteúdos em etapas progressivas. O usuário pode acompanhar seu avanço e retomar de onde parou, seguindo uma jornada estruturada de aprendizado.
+    <p float="left">
+  <img src="./assets/wad/trilha-conhecimento-mobile.png" width="200"/>
+  <img src="./assets/wad/trilha-conhecimento-desktop.png" width="600"/>
+</p>
+<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+
+- Calendário : A tela de **calendário** exibe eventos, prazos e compromissos relevantes para o usuário. É possível visualizar por mês, e também aparecem ao canto da tela os eventos diários.
+   <p float="left">
+  <img src="./assets/wad/calendario-mobile.png" width="200"/>
+  <img src="./assets/wad/calendario-desktop.png" width="600"/>
+</p>
+<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+
+- Registro de Atendimento : A tela de **registro de atendimentos** armazena dados das sessões realizadas entre os PTDs e seu cliente final. Ela permite consultar históricos, anotar observações e registrar datas e horários.
+
+- Cards de Acesso Remoto : Os **cards de acesso remoto** funcionam como atalhos visuais para informações essenciais da trilha de conhecimento, apresentadas em fragmentos menores. Eles facilitam o acesso rápido a conteúdos e documentos relevantes de forma objetiva.
+
+- Fórum de Posts : A tela de **fórum de posts** oferece um espaço para publicações entre os PTDs, promovendo o compartilhamento de experiências de campo reais. Ela incentiva a criação de uma comunidade engajada por meio de discussões, interações, comentários e curtidas nos posts.
+
+- Matching Mentoria e Conexões : A tela de **matching mentoria e conexões** facilita a criação de vínculos entre mentorados, mentores e colegas com objetivos em comum.
+
+Também foram incluídas as telas essenciais para a estrutura e navegação da plataforma, como por exemplo:
+
+- Landing Page : A **landing page** é a porta de entrada da plataforma, apresentando uma visão geral do sistema e seus benefícios. Ela visa captar o interesse do usuário com chamadas visuais e informativas, incentivando o acesso e a navegação.
+
+- Tela de Login : A **tela de login** permite que usuários autorizados acessem a plataforma por meio de autenticação com e-mail e senha. Pode incluir opções de recuperação de senha e login institucional, garantindo segurança e praticidade.
+
+- Tela Inicial : A **tela inicial** reúne os principais acessos da plataforma em um único espaço. Ela funciona como um painel de navegação, apresentando atalhos visuais para funcionalidades como trilha de conhecimento, calendário, testes e fórum.
+
+
+### Explicação sobre o fluxo de navegação das User Stories priorizadas
+
+- **US01 - Entendimento do Parceiro**
+
+Com o objetivo de desenvolver uma aplicação web alinhada às especificações e expectativas do parceiro, nossa primeira User Story consistiu em uma pesquisa aprofundada sobre os stakeholders, seus projetos anteriores, site institucional, produtos e demais informações relevantes. Essa investigação permitiu estabelecer parâmetros mais precisos para o desenvolvimento do wireframe da plataforma, oferecendo uma visualização inicial das telas integradas ao projeto, ainda sem muitos detalhes. Além disso, foram realizadas pesquisas de campo, como a visita à Agrishow, que fez parte dessa iniciativa investigativa ampliada para toda a turma. Essa abordagem proporcionou acesso a informações valiosas, fundamentais para a idealização e construção do projeto final.
+
+- **US02 - Compreensão da Plataforma FieldView**
+
+Com o objetivo de maximizar a produtividade e a rentabilidade das lavouras, o Climate FieldView oferece uma plataforma completa de monitoramento e análise agronômica. Nosso foco é capacitar os PTDs (Product Technical Developers) — consultores responsáveis pela instalação e pelo repasse de conhecimento aos produtores — garantindo que eles compreendam todas as funcionalidades do produto adquirido. Para alcançar esse propósito, conduzimos pesquisas detalhadas com usuários e especialistas, com o intuito de entender suas necessidades e definir, de forma estratégica, as melhorias a serem incorporadas à aplicação. Dessa forma, garantimos que o Climate FieldView atenda às expectativas dos consultores e, consequentemente, dos clientes finais.
+
+- **US03 - Documentação dos Requisitos**
+
+Um de nossos objetivos é organizar e detalhar, de maneira clara, as etapas necessárias para entregar a versão final do projeto. Para isso, apresentamos as principais ferramentas que serão empregadas na compreensão do escopo fornecido pela Bayer. Esse registro garante acesso a informações precisas e consistentes para todos os desenvolvedores e stakeholders.
+
+- **US04 - Definição Realista das Funcionalidades**
+
+Alguns pré-requisitos foram estabelecidos pelo parceiro e devem ser avaliados em função das habilidades que adquirimos ao longo do módulo. Embora desejemos incorporar diversas funcionalidades interessantes, muitas delas ainda não são compatíveis com nosso nível de conhecimento nem com o escopo de desenvolvimento previsto. Por isso, é fundamental definir de forma rigorosa quais recursos serão realmente integrados ao projeto, considerando nossas limitações e competências.
+
+- **US05 - Design Acessível Centrado no Usuário**
+
+O design da aplicação tem como objetivo facilitar o acesso do usuário e incentivar o engajamento por meio de diversas estratégias. É imprescindível que tanto os PTDs quanto os consultores possam estudar e adicionar conteúdos de forma simples e gamificada. Dessa maneira, o design centrado no usuário busca eliminar a lacuna de conhecimento dos PTDs em relação ao FieldView, promovendo um aprendizado eficiente e produtivo.
+
 
 ## 3.3. Guia de estilos (sprint 3)
 
@@ -442,7 +511,7 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 **Expressão SQL** | SELECT \* FROM answer WHERE (correct <> TRUE AND score>0) OR (correct = TRUE AND score>10);
 **Proposições lógicas** | $A$: A resposta não é correta (correct <> TRUE) <br> $B$: O score é maior que 0 (score>0) <br> $C$: A resposta é correta (correct = TRUE) <br> $D$: O score é maior que 10 (score>10)
 **Expressão lógica proposicional** | $(A \land B) \lor (C \land D)$
-**Tabela Verdade** | <table> <thead> <tr> <th>$A$</th> <th>$B$</th> <th>$C$</th> <th>$D$</th> <th>$(A \land B)$</th> <th>$(C \land D)$</th> <th>$(A \land B) \lor (C \land D)$</th> </tr> </thead> <tbody> <tr> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>V</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr>
+**Tabela Verdade** | <table> <thead> <tr> <th>$A$</th> <th>$B$</th> <th>$C$</th> <th>$D$</th> <th>$(A \land B)$</th> <th>$(C \land D)$</th> <th>$(A \land B) \lor (C \land D)$</th> </tr> </thead> <tbody> <tr> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>V</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> </tbody> </table>
  
 ## 3.6. WebAPI e endpoints (sprints 3 e 4)
 
