@@ -205,16 +205,18 @@ O levantamento de User Stories é uma prática essencial na gestão ágil de pro
 
 | Identificação        | US01                                                                                                           |
 |----------------------|-----------------------------------------------------------------------------------------------------------------|
-| Persona              | Desenvolvedor                                                                                                   |
-| User Story           | Enquanto membro do Grupo 4, gostaria de entender quem é o parceiro e o que ele faz, para que o desenvolvimento da solução atenda de forma eficaz às demandas do projeto. |
+| Persona              | PTD                                                                                                             |
+| User Story           | Como PTD, desejo que o Grupo 4 compreenda quem somos e o que fazemos, para que a solução desenvolvida realmente atenda às nossas necessidades e objetivos. |
 | Critério de aceite 1 | Deve-se registrar um resumo do perfil e da atuação da instituição parceira.                                    |
 | Critério de aceite 2 | As informações precisam ser claras e de fácil acesso para todos do grupo.                                       |
+| Critério de aceite 3 | A versão final do documento deve ser validada, garantindo que as informações estejam corretas e completas. |
 | Critérios INVEST     | - **Independente**: Pode ser realizada sem dependência de outras funcionalidades, pois trata-se da coleta e síntese de informações institucionais. |
 |                      | - **Negociável**: A forma de obtenção das informações (entrevista, pesquisa, reunião) pode variar conforme o contexto do grupo e disponibilidade da instituição. |
 |                      | - **Valoroso**: Garante que o time entenda as necessidades reais do parceiro, evitando retrabalho e orientando o desenvolvimento da solução. |
 |                      | - **Estimável**: Envolve atividades claras e delimitadas, como levantamento, análise e documentação, que podem ser facilmente estimadas em horas. |
 |                      | - **Small**: A tarefa é enxuta e executável em um curto período, focando apenas no levantamento e organização das informações. |
 |                      | - **Testável**: A entrega pode ser validada pela existência de um documento acessível com o resumo claro e objetivo do perfil institucional. |
+
 
 ### US02 — Compreensão da Plataforma FieldView
 
@@ -286,35 +288,39 @@ O levantamento de User Stories é uma prática essencial na gestão ágil de pro
 
 
 
-### US06 — Documentação dos Requisitos
+### US06 — Requisitos Claros e Atualizados
 
-| Identificação       | US06                                                                                                           |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| Persona             | Desenvolvedor                                                                                                   |
-| User Story          | Como Grupo 4, deseja-se que os requisitos do projeto sejam documentados de forma organizada, integrando todos os membros e centralizando as informações de desenvolvimento. |
-| Critério de aceite 1| Criação de um documento compartilhado contendo todos os requisitos.                                             |
-| Critério de aceite 2| Atualizações devem ser registradas com histórico de mudanças.                                                  |
-
-### US07 — Definição Realista das Funcionalidades
-
-| Identificação       | US04                                                                                                           |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| Persona             | Desenvolvedor                                                                                                   |
-| User Story          | Como integrantes do Grupo 4, responsáveis pelo desenvolvimento da aplicação, reconhece-se que é de interesse mútuo que as funcionalidades do site sejam planejadas e definidas de forma realista, considerando as necessidades dos usuários finais (PTDs) e as possibilidades técnicas dos desenvolvedores. |
-| Critério de aceite 1| Elaboração de uma lista priorizada de funcionalidades.                                                         |
-| Critério de aceite 2| Validação da lista em conjunto com os membros do grupo e o orientador.                                         |
+| Identificação        | US06                                                                                                                                              |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Persona              | PTD                                                                                                                                                |
+| User Story           | Como PTD, quero que as funcionalidades da plataforma sejam desenvolvidas com base em requisitos bem definidos e atualizados, para garantir que minhas demandas reais sejam priorizadas e atendidas. |
+| Critério de aceite 1 | Deve haver um documento central com todos os requisitos do projeto.                                                                               |
+| Critério de aceite 2 | Todas as alterações dos requisitos devem ser registradas.                                                                                         |
+| Critério de aceite 3 | O documento deve ser acessível à equipe e atualizado conforme novos feedbacks dos stakeholders.                                                   |
 
 
-### US08 —  Implementação do Banco de Dados
 
-Identificação | US08
---- | ---
-Persona | Desenvolvedor
-User Story | Como integrante do Grupo 4, posso implementar o banco de dados, para armazenar todas as informações necessárias para o funcionamento do sistema.
-Critério de aceite 1 | Devem ser criadas todas as tabelas conforme o modelo relacional definido.
-Critério de aceite 2 | Os relacionamentos entre as tabelas devem ser corretamente implementados.
-Critério de aceite 3 | Devem ser desenvolvidos scripts de migração para os ambientes de desenvolvimento e produção.
-Critério de aceite 4 | As queries para as principais operações devem ser otimizadas quanto à performance.
+### US07 — Priorização Realista das Funcionalidades
+
+| Identificação        | US07                                                                                                                                                      |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Persona              | PTD                                                                                                                                                        |
+| User Story           | Como PTD, gostaria que as funcionalidades da plataforma fossem definidas de forma realista e priorizadas com base nas minhas necessidades, para que a ferramenta seja prática e útil no meu dia a dia. |
+| Critério de aceite 1 | Lista priorizada de funcionalidades com base em entrevistas ou testes com PTDs.                                                                           |
+| Critério de aceite 2 | As funcionalidades devem considerar limitações técnicas, sem comprometer as demandas dos PTDs.                                                             |
+| Critério de aceite 3 | A lista deve ser validada em conjunto com representantes dos PTDs.                                                                                        |
+
+
+
+### US08 — Estabilidade e Persistência dos Dados
+
+| Identificação        | US08                                                                                                                                              |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Persona              | Consultor                                                                                                                                         |
+| User Story           | Como Consultor, quero que a plataforma funcione de forma estável e armazene corretamente os dados e progresso dos PTDs, para que seja possível utilizar o site de forma plena, em uma experiência contínua e confiável de uso. |
+| Critério de aceite 1 | Os dados dos PTDs, como progresso nas trilhas, notas e acessos, devem ser armazenados de forma segura.                                             |
+| Critério de aceite 2 | Os relacionamentos entre os dados (trilhas, avaliações, certificados etc.) devem refletir a lógica de uso do PTD.                                 |
+| Critério de aceite 3 | A performance da plataforma deve garantir carregamento rápido das informações do usuário.                                                         |
 
 
 ### US09 —  Implementação do Sistema de Autenticação
@@ -335,19 +341,6 @@ Persona | PTD
 User Story | Como PTD, posso acessar um sistema de ensino gamificado, para tornar o aprendizado mais intuitivo e eficiente.
 Critério de aceite 1 | O sistema deve incluir atividades interativas que estimulem a participação contínua e o aprofundamento no conteúdo.
 Critério de aceite 2 | O sistema deve fornecer feedback em tempo real sobre o desempenho do usuário.
-
-
- ### US11 — Validação Visual com Wireframes e Protótipos
-
-| Identificação        | US11                                                                                                          |
-|----------------------|---------------------------------------------------------------------------------------------------------------|
-| Persona              | Desenvolvedor                                                                                                 |
-| User Story           | Como integrante do Grupo 4, posso criar wireframes e protótipos de alta fidelidade para todas as telas principais, com o objetivo de validar o fluxo de navegação e a interface visual do sistema junto aos parceiros. |
-| Critério de aceite 1 | Devem ser desenvolvidos wireframes para todas as telas principais, com elementos de interface claros e organizados. |
-| Critério de aceite 2 | O fluxo de navegação entre as telas deve estar representado de forma compreensível tanto nos wireframes quanto nos protótipos. |
-| Critério de aceite 3 | Os protótipos devem aplicar corretamente o guia de estilos e incluir interações básicas de navegação.           |
-| Critério de aceite 4 | Os wireframes devem seguir um sistema de grid consistente.                                                     |
-| Critério de aceite 5 | Os protótipos devem ser responsivos, adaptando-se a diferentes dispositivos.                                   |
 
 
 
