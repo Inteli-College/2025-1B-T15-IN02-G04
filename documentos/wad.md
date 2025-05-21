@@ -203,57 +203,99 @@ O levantamento de User Stories é uma prática essencial na gestão ágil de pro
 
 ### US01 — Entendimento do Parceiro
 
-| Identificação       | US01                                                                                                           |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| Persona             | Desenvolvedor                                                                                                   |
-| User Story          | Enquanto membro do Grupo 4, gostaria de entender de forma concreta quem é o parceiro e o que ele faz, para que o desenvolvimento da solução atenda de forma eficaz às demandas do projeto. |
-| Critério de aceite 1| Deve-se registrar um resumo do perfil e da atuação da instituição parceira.                                    |
-| Critério de aceite 2| As informações precisam ser claras e de fácil acesso para todos do grupo.                                       |
-| Critérios INVEST    | _ **Independente**: Pode ser realizada separadamente das demais funcionalidades.                               |
-|                     | _ **Negociável**: O formato do entendimento pode ser adaptado (pesquisas, reuniões, entrevistas).              |
-|                     | _ **Valoroso**: Traz clareza e propósito ao projeto, otimizando esforços.                                      |
-|                     | _ **Estimável**: Estimável em horas de levantamento e análise de dados.                                        |
-|                     | _ **Small**: A atividade pode ser concluída rapidamente.                                                       |
-|                     | _ **Testável**: Será validada pela existência de documentação clara.                                           |
-
----
+| Identificação        | US01                                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------|
+| Persona              | Desenvolvedor                                                                                                   |
+| User Story           | Enquanto membro do Grupo 4, gostaria de entender quem é o parceiro e o que ele faz, para que o desenvolvimento da solução atenda de forma eficaz às demandas do projeto. |
+| Critério de aceite 1 | Deve-se registrar um resumo do perfil e da atuação da instituição parceira.                                    |
+| Critério de aceite 2 | As informações precisam ser claras e de fácil acesso para todos do grupo.                                       |
+| Critérios INVEST     | - **Independente**: Pode ser realizada sem dependência de outras funcionalidades, pois trata-se da coleta e síntese de informações institucionais. |
+|                      | - **Negociável**: A forma de obtenção das informações (entrevista, pesquisa, reunião) pode variar conforme o contexto do grupo e disponibilidade da instituição. |
+|                      | - **Valoroso**: Garante que o time entenda as necessidades reais do parceiro, evitando retrabalho e orientando o desenvolvimento da solução. |
+|                      | - **Estimável**: Envolve atividades claras e delimitadas, como levantamento, análise e documentação, que podem ser facilmente estimadas em horas. |
+|                      | - **Small**: A tarefa é enxuta e executável em um curto período, focando apenas no levantamento e organização das informações. |
+|                      | - **Testável**: A entrega pode ser validada pela existência de um documento acessível com o resumo claro e objetivo do perfil institucional. |
 
 ### US02 — Compreensão da Plataforma FieldView
 
-| Identificação       | US02                                                                                                           |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| Persona             | PTD                                    |
-| User Story          | Como PTD, quero que o site seja intuitivo, fácil de utilizar e que centralize o conhecimento do FieldView em um única plataforma, para atenter melhor as necessidades dos produtores e evitar possíveis retrabalhos.                                    |
-| Critério de aceite 1 | Site com um Front-End Intuitivo.                                    |
-| Critério de aceite 2 | Site com conteúdos relevantes sobre o FieldView.                                    |
-| Critério de aceite 3 | Site com acesso rápido as informações.                                    |
-| Critérios INVEST    | _ **Independente**: Pelo fato de ser                 |
-|                     | _ **Negociável**:                  |
-|                     | _ **Valoroso**:                    |
-|                     | _ **Estimável**:                   |
-|                     | _ **Small**:                       |
-|                     | _ **Testável**:                    |
 
----
+| Identificação        | US02                                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------|
+| Persona              | PTD                                                                                                             |
+| User Story           | Como PTD, quero que o site seja intuitivo e centralize o conhecimento sobre o FieldView, para atender melhor às necessidades dos produtores e evitar retrabalhos. |
+| Critério de aceite 1 | Site com um Front-End intuitivo.                                                                               |
+| Critério de aceite 2 | Site com conteúdos relevantes sobre o FieldView.                                                               |
+| Critério de aceite 3 | Site com acesso rápido às informações.                                                                         |
+| Critérios INVEST     | - **Independente**: Pode ser desenvolvida separadamente, focando apenas na apresentação do conteúdo e na experiência de navegação. |
+|                      | - **Negociável**: Estrutura e distribuição das informações podem ser adaptadas com base em testes e feedbacks dos usuários. |
+|                      | - **Valoroso**: Melhora a experiência do PTD e dos produtores, facilita a adoção do FieldView e reduz dúvidas recorrentes. |
+|                      | - **Estimável**: Pode ser dividida em etapas claras (layout, conteúdo, acesso), o que facilita a estimativa do esforço necessário. |
+|                      | - **Small**: Executável em partes pequenas, como prototipagem da interface e organização inicial do conteúdo. |
+|                      | - **Testável**: Será validada por meio de testes de usabilidade e verificação da presença e clareza das informações sobre o FieldView. |
 
-### US03 — Documentação dos Requisitos
 
-| Identificação       | US03                                                                                                           |
+### US03 — Design Acessível e Centrado no Usuário
+
+| Identificação        | US03                                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------|
+| Persona              | PTD                                                                                                             |
+| User Story           | Como PTD, gostaria de um design acessível e centrado no usuário, visando atender melhor às minhas necessidades. |
+| Critério de aceite 1 | Definição de diretrizes de acessibilidade para o projeto.                                                      |
+| Critério de aceite 2 | Realização de teste de usabilidade com foco em acessibilidade.                                                 |
+| Critério de aceite 3 | Utilizar como base as personas criadas para definir o projeto, como forma de verificação.                      |
+| Critérios INVEST     | - **Independente**: Pode ser desenvolvida separadamente, já que trata da aplicação de princípios de design e não depende da finalização de outras funcionalidades. |
+|                      | - **Negociável**: As diretrizes e testes podem ser ajustados conforme as necessidades do público-alvo ou limitações técnicas identificadas durante o desenvolvimento. |
+|                      | - **Valoroso**: Contribui diretamente para a inclusão e melhora significativa na experiência dos usuários, atendendo a diferentes perfis de acessibilidade. |
+|                      | - **Estimável**: É possível estimar o tempo para definir diretrizes, executar testes e aplicar ajustes com base nas personas existentes. |
+|                      | - **Small**: A tarefa pode ser dividida em partes menores como definição de padrões, prototipação de telas e aplicação de feedbacks. |
+|                      | - **Testável**: A entrega pode ser validada por testes de usabilidade com foco em acessibilidade e pela verificação do uso das personas como referência de projeto. |
+
+                    
+### US04 — Implementação do Sistema de Avaliação
+
+| Identificação        | US04                                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------|
+| Persona              | Consultor                                                                                                       |
+| User Story           | Como consultor, posso contar com o sistema de avaliação, para verificar o conhecimento dos usuários (PTDs) e emitir certificados, com objetivo de atender de forma mais eficaz o cliente final. |
+| Critério de aceite 1 | O sistema deve permitir a criação e edição de avaliações com diferentes tipos de questões (múltipla escolha, dissertativa etc.). |
+| Critério de aceite 2 | As avaliações devem ter tempo controlado para realização.                                                      |
+| Critério de aceite 3 | Deve ser possível gerar certificados para os usuários aprovados nas avaliações.                                |
+| Critérios INVEST     | - **Independente**: A funcionalidade de avaliação pode ser desenvolvida separadamente, pois envolve um módulo próprio que não depende diretamente de outras partes do sistema. |
+|                      | - **Negociável**: Os tipos de questões, critérios de aprovação ou regras para emissão de certificados podem ser discutidos e ajustados conforme o andamento do projeto ou feedback do consultor. |
+|                      | - **Valoroso**: Permite medir o aprendizado dos usuários e formalizar esse conhecimento por meio de certificados, agregando valor tanto para o PTD quanto para o cliente final. |
+|                      | - **Estimável**: É possível estimar com clareza o esforço necessário para implementar os recursos de avaliação, controle de tempo e geração de certificados, pois são funcionalidades bem definidas. |
+|                      | - **Small**: A história pode ser dividida em partes menores, como criação de questões, temporizador e módulo de certificados, viabilizando entregas incrementais. |
+|                      | - **Testável**: A entrega será validada com a criação de avaliações, verificação do controle de tempo e geração de certificados ao final da prova, garantindo que os critérios de aceite foram atendidos. |
+
+### US05 — Implementação do Sistema de Trilhas de Conhecimento
+
+| Identificação        | US05                                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------|
+| Persona              | Consultor                                                                                                       |
+| User Story           | Como Consultor, posso utilizar o sistema de trilhas de conhecimento, para organizar e acessar materiais de estudo destinados aos PTDs, com objetivo de tornar o estudo mais produtivo e o aprendizado mais ativo, para que o cliente tenha resultados eficazes sem a necessidade de revisão de trabalho. |
+| Critério de aceite 1 | Deve ser possível criar e editar trilhas de conhecimento.                                                      |
+| Critério de aceite 2 | Os conteúdos devem ser organizados em módulos dentro das trilhas.                                               |
+| Critério de aceite 3 | O sistema deve controlar o progresso do usuário em cada trilha.                                                 |
+| Critério de aceite 4 | O usuário deve poder visualizar as trilhas disponíveis e aquelas que já foram concluídas.                      |
+| Critérios INVEST     | - **Independente**: A funcionalidade de trilhas pode ser desenvolvida de forma isolada, sem necessidade de depender de outros módulos, como o sistema de avaliação ou certificados. |
+|                      | - **Negociável**: A estrutura das trilhas, a forma de exibir o progresso e o agrupamento dos módulos podem ser ajustados conforme os feedbacks dos consultores e usuários. |
+|                      | - **Valoroso**: Organiza o aprendizado de forma estruturada, promovendo maior engajamento dos PTDs e contribuindo diretamente para a eficácia no atendimento ao cliente final. |
+|                      | - **Estimável**: Os recursos a serem implementados — como criação de trilhas, controle de progresso e visualização — são bem definidos e permitem estimativas precisas de esforço. |
+|                      | - **Small**: Pode ser dividido em partes menores, como criação de trilha, organização por módulos e visualização do progresso. |
+|                      | - **Testável**: Pode-se verificar se o usuário consegue criar e navegar por trilhas, acompanhar seu progresso e acessar conteúdos organizados por módulos. |
+
+
+
+### US06 — Documentação dos Requisitos
+
+| Identificação       | US06                                                                                                           |
 |---------------------|-----------------------------------------------------------------------------------------------------------------|
 | Persona             | Desenvolvedor                                                                                                   |
 | User Story          | Como Grupo 4, deseja-se que os requisitos do projeto sejam documentados de forma organizada, integrando todos os membros e centralizando as informações de desenvolvimento. |
 | Critério de aceite 1| Criação de um documento compartilhado contendo todos os requisitos.                                             |
 | Critério de aceite 2| Atualizações devem ser registradas com histórico de mudanças.                                                  |
-| Critérios INVEST    | _ **Independente**: Pode ser feito em paralelo às demais tarefas.                                              |
-|                     | _ **Negociável**: O formato da documentação pode ser adaptado.                                                 |
-|                     | _ **Valoroso**: Facilita o alinhamento de todos os membros.                                                    |
-|                     | _ **Estimável**: Pode-se estimar com base no número de requisitos.                                             |
-|                     | _ **Small**: Divisível em categorias (ex.: requisitos técnicos, funcionais).                                   |
-|                     | _ **Testável**: Verificável pela existência e atualização do documento.                                        |
 
----
-
-### US04 — Definição Realista das Funcionalidades
+### US07 — Definição Realista das Funcionalidades
 
 | Identificação       | US04                                                                                                           |
 |---------------------|-----------------------------------------------------------------------------------------------------------------|
@@ -261,36 +303,11 @@ O levantamento de User Stories é uma prática essencial na gestão ágil de pro
 | User Story          | Como integrantes do Grupo 4, responsáveis pelo desenvolvimento da aplicação, reconhece-se que é de interesse mútuo que as funcionalidades do site sejam planejadas e definidas de forma realista, considerando as necessidades dos usuários finais (PTDs) e as possibilidades técnicas dos desenvolvedores. |
 | Critério de aceite 1| Elaboração de uma lista priorizada de funcionalidades.                                                         |
 | Critério de aceite 2| Validação da lista em conjunto com os membros do grupo e o orientador.                                         |
-| Critérios INVEST    | _ **Independente**: Pode ser desenvolvida antes da codificação.                                                |
-|                     | _ **Negociável**: As funcionalidades podem ser adaptadas conforme feedback.                                    |
-|                     | _ **Valoroso**: Evita desperdício de recursos.                                                                 |
-|                     | _ **Estimável**: Definível em termos de funcionalidades entregáveis.                                           |
-|                     | _ **Small**: Cada funcionalidade pode ser descrita de forma sucinta.                                           |
-|                     | _ **Testável**: Confirmada pela lista aprovada.                                                                |
 
----
 
-### US05 — Design Acessível e Centrado no Usuário
+### US08 —  Implementação do Banco de Dados
 
-| Identificação       | US05                                                                                                           |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| Persona             | Desenvolvedor                                                                                                   |
-| User Story          | Como desenvolvedores da solução, deseja-se priorizar o público-alvo (PTDs) com um design acessível e centrado no usuário, visando atender melhor às suas necessidades. |
-| Critério de aceite 1| Definição de diretrizes de acessibilidade para o projeto.                                                       |
-| Critério de aceite 2| Realização de teste de usabilidade com foco em acessibilidade.                                                  |
-| Critério de aceite 3| Utilizar como base as personas criadas para definir o projeto, como forma de verificação.                       |
-| Critérios INVEST    | _ **Independente**: Não depende de outra funcionalidade.                                                       |
-|                     | _ **Negociável**: O nível de adaptação pode ser ajustado.                                                      |
-|                     | _ **Valoroso**: Garante inclusão e melhoria na experiência do usuário.                                         |
-|                     | _ **Estimável**: Pode ser planejado em etapas.                                                                 |
-|                     | _ **Small**: Divisível em entregas menores (padrões, exemplos de telas).                                       |
-|                     | _ **Testável**: Avaliado por meio de testes de usabilidade.                                                    |
-
----
-
-### US06 —  Implementação do Banco de Dados
-
-Identificação | US06
+Identificação | US08
 --- | ---
 Persona | Desenvolvedor
 User Story | Como integrante do Grupo 4, posso implementar o banco de dados, para armazenar todas as informações necessárias para o funcionamento do sistema.
@@ -299,32 +316,6 @@ Critério de aceite 2 | Os relacionamentos entre as tabelas devem ser corretamen
 Critério de aceite 3 | Devem ser desenvolvidos scripts de migração para os ambientes de desenvolvimento e produção.
 Critério de aceite 4 | As queries para as principais operações devem ser otimizadas quanto à performance.
 
----
-
-### US07 —  Implementação do Sistema de Trilhas de Conhecimento
-
-Identificação | US07
---- | ---
-Persona | PTD
-User Story | Como PTD, posso utilizar o sistema de trilhas de conhecimento, para organizar e acessar materiais de estudo.
-Critério de aceite 1 | Deve ser possível criar e editar trilhas de conhecimento.
-Critério de aceite 2 | Os conteúdos devem ser organizados em módulos dentro das trilhas.
-Critério de aceite 3 | O sistema deve controlar o progresso do usuário em cada trilha.
-Critério de aceite 4 | O usuário deve poder visualizar as trilhas disponíveis e aquelas que já foram concluídas.
-
----
-
-### US08 —  Implementação do Sistema de Avaliação
-
-Identificação | US08
---- | ---
-Persona | Consultor
-User Story | Como consultor, posso contar com o sistema de avaliação, para verificar o conhecimento dos usuários e emitir certificados.
-Critério de aceite 1 | O sistema deve permitir a criação e edição de avaliações com diferentes tipos de questões (múltipla escolha, dissertativa etc.).
-Critério de aceite 2 | As avaliações devem ter tempo controlado para realização.
-Critério de aceite 3 | Deve ser possível gerar certificados para os usuários aprovados nas avaliações.
-
----
 
 ### US09 —  Implementação do Sistema de Autenticação
 
@@ -335,7 +326,6 @@ User Story | Como consultor, posso contar com um sistema de autenticação, para
 Critério de aceite 1 | Deve ser possível realizar o cadastro de novos usuários com validação adequada dos dados inseridos.
 Critério de aceite 2 | Devem ser implementados diferentes níveis de acesso (PTD, administrador e gestor).
 
----
 
 ### US10 —   Implementação do Sistema de Gamificação
 
@@ -346,31 +336,20 @@ User Story | Como PTD, posso acessar um sistema de ensino gamificado, para torna
 Critério de aceite 1 | O sistema deve incluir atividades interativas que estimulem a participação contínua e o aprofundamento no conteúdo.
 Critério de aceite 2 | O sistema deve fornecer feedback em tempo real sobre o desempenho do usuário.
 
----
 
-### US11 —  Criação de Wireframes para Validação do Fluxo
+ ### US11 — Validação Visual com Wireframes e Protótipos
 
-Identificação | US11
---- | ---
-Persona | Desenvolvedor
-User Story | Como Grupo 4, posso criar wireframes para todas as telas principais, para validar o fluxo de navegação antes da implementação.
-Critério de aceite 1 | Devem ser desenvolvidos wireframes para todas as telas principais do sistema.
-Critério de aceite 2 | Os elementos de interface devem ser representados de forma clara e organizada.
-Critério de aceite 3 | O fluxo de navegação entre as telas deve ser indicado e compreensível.
-Critério de aceite 4 | Os wireframes devem ser estruturados utlizando um sistema de grid consistente.
+| Identificação        | US11                                                                                                          |
+|----------------------|---------------------------------------------------------------------------------------------------------------|
+| Persona              | Desenvolvedor                                                                                                 |
+| User Story           | Como integrante do Grupo 4, posso criar wireframes e protótipos de alta fidelidade para todas as telas principais, com o objetivo de validar o fluxo de navegação e a interface visual do sistema junto aos parceiros. |
+| Critério de aceite 1 | Devem ser desenvolvidos wireframes para todas as telas principais, com elementos de interface claros e organizados. |
+| Critério de aceite 2 | O fluxo de navegação entre as telas deve estar representado de forma compreensível tanto nos wireframes quanto nos protótipos. |
+| Critério de aceite 3 | Os protótipos devem aplicar corretamente o guia de estilos e incluir interações básicas de navegação.           |
+| Critério de aceite 4 | Os wireframes devem seguir um sistema de grid consistente.                                                     |
+| Critério de aceite 5 | Os protótipos devem ser responsivos, adaptando-se a diferentes dispositivos.                                   |
 
----
 
-### US12 —  Criação de Protótipos de Alta Fidelidade
-
-Identificação | US12
---- | ---
-Persona | Desenvolvedor
-User Story | Como integrante do Grupo 4, posso criar protótipos de alta fidelidade, para visualizar o produto final e validar a proposta junto aos parceiros.
-Critério de aceite 1 | Devem ser desenvolvidos protótipos de alta fidelidade para todas as telas principais do sistema.
-Critério de aceite 2 | O guia de estilos deve ser aplicado corretamente em todos os protótipos.
-Critério de aceite 3 | Devem ser implementadas interações básicas demonstrando o fluxo de navegação do usuário.
-Critério de aceite 4 | CR4: Os protótipos devem ser adaptados para diferentes dispositivos (responsividade).
 
 O conjunto de User Stories descrito acima reflete a complexidade e os objetivos do projeto, ao mesmo tempo em que segue os princípios da metodologia ágil. A priorização das cinco primeiras histórias garante um foco inicial na compreensão do problema, do contexto da plataforma, e no alinhamento das funcionalidades e design com os usuários finais. A documentação organizada em formato USXX contribui para o planejamento visual no quadro Kanban, além de facilitar a rastreabilidade e o acompanhamento da execução. Mesmo as histórias que não forem implementadas imediatamente permanecem registradas para referência futura, assegurando a continuidade e consistência do desenvolvimento do produto.
 
