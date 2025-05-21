@@ -222,16 +222,17 @@ O levantamento de User Stories é uma prática essencial na gestão ágil de pro
 
 | Identificação       | US02                                                                                                           |
 |---------------------|-----------------------------------------------------------------------------------------------------------------|
-| Persona             | Desenvolvedor                                                                                                   |
-| User Story          | Enquanto membro do Grupo 4, gostaria de entender o produto e a plataforma FieldView de forma plena, a fim de desenvolver corretamente as funcionalidades, o escopo e os parâmetros do projeto. |
-| Critério de aceite 1| Deve ser criada documentação das funcionalidades principais do FieldView.                                       |
-| Critério de aceite 2| As dúvidas devem ser esclarecidas junto ao parceiro ou orientador.                                             |
-| Critérios INVEST    | _ **Independente**: Pode ser concluída antes da implementação técnica.                                         |
-|                     | _ **Negociável**: O nível de profundidade pode ser ajustado conforme a necessidade do projeto.                 |
-|                     | _ **Valoroso**: Garante uma base sólida para o desenvolvimento.                                                |
-|                     | _ **Estimável**: Carga horária mensurável para pesquisa e registro.                                            |
-|                     | _ **Small**: Pode ser feita em etapas pequenas.                                                                |
-|                     | _ **Testável**: Verificável por meio da entrega da documentação.                                               |
+| Persona             | PTD                                    |
+| User Story          | Como PTD, quero que o site seja intuitivo, fácil de utilizar e que centralize o conhecimento do FieldView em um única plataforma, para atenter melhor as necessidades dos produtores e evitar possíveis retrabalhos.                                    |
+| Critério de aceite 1 | Site com um Front-End Intuitivo.                                    |
+| Critério de aceite 2 | Site com conteúdos relevantes sobre o FieldView.                                    |
+| Critério de aceite 3 | Site com acesso rápido as informações.                                    |
+| Critérios INVEST    | _ **Independente**: Pelo fato de ser                 |
+|                     | _ **Negociável**:                  |
+|                     | _ **Valoroso**:                    |
+|                     | _ **Estimável**:                   |
+|                     | _ **Small**:                       |
+|                     | _ **Testável**:                    |
 
 ---
 
