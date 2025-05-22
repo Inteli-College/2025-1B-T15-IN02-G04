@@ -5,6 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
 router.post('/login', login);
+router.get('/login', login);
 router.get('/perfil', authMiddleware, perfilProtegido);
 
-mpdule.exports = router;
+module.exports = router;

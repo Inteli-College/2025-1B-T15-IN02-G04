@@ -15,4 +15,4 @@ function authMiddleware(req, res, next) {
     }
 }
 
-mpdule.exports = authMiddleware;
+module.exports = authMiddleware;
