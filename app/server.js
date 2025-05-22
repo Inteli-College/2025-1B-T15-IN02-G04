@@ -7,17 +7,28 @@ const path = require('path');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+
 db.connect()
   .then(() => {
     console.log('Conectado ao banco de dados PostgreSQL');
 
     app.use(express.json());
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use('/api/usuarios', userRoutes);
 
     const userRoutes = require('./routes/userRoutes');
     app.use('/users', userRoutes);
 
     const frontendRoutes = require('./routes/frontRoutes');
     app.use('/', frontendRoutes);
+
+    const cors = require('cors');
+    
+    const bodyParser = require('body-parser');
+
+    const userRoutes = require('./routes/userRoutes');
+
 
     // Middleware para lidar com erros de rota não encontrada
     app.use((req, res, next) => {
