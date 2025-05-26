@@ -26,10 +26,7 @@ db.connect()
     const cors = require('cors');
     
     const bodyParser = require('body-parser');
-
-    const userRoutes = require('./routes/userRoutes');
-
-
+    
     // Middleware para lidar com erros de rota não encontrada
     app.use((req, res, next) => {
       res.status(404).send('Página não encontrada');
