@@ -55,18 +55,18 @@ async function seedAllData() {
       `Inserted ${moduleIds.length} modules. IDs: ${moduleIds.join(", ")}`
     );
 
-    console.log("Populating 'course' table...");
-    const courseResult = await client.query(`
-            INSERT INTO course (name, description, id_module) VALUES
+    console.log("Populating 'class' table...");
+    const classResult = await client.query(`
+            INSERT INTO class (name, description, id_module) VALUES
             ('HTML Basics', 'Learn HTML structure and elements.', ${moduleIds[0]}),
             ('CSS Styling', 'Style web pages with CSS.', ${moduleIds[0]}),
             ('JavaScript Functions', 'Understand JavaScript functions.', ${moduleIds[1]}),
             ('Python Data Types', 'Explore Python data structures.', ${moduleIds[2]})
             RETURNING id;
         `);
-    const courseIds = courseResult.rows.map((row) => row.id);
+    const classIds = classResult.rows.map((row) => row.id);
     console.log(
-      `Inserted ${courseIds.length} courses. IDs: ${courseIds.join(", ")}`
+      `Inserted ${classIds.length} classs. IDs: ${classIds.join(", ")}`
     );
 
     console.log("Notwithstanding 'certificate' table...");
@@ -95,15 +95,15 @@ async function seedAllData() {
         `);
     console.log("Inserted data into 'module_user'.");
 
-    console.log("Populating 'course_user' table...");
+    console.log("Populating 'class_user' table...");
     await client.query(`
-            INSERT INTO course_user (id_user, id_course, complete) VALUES
-            (${userIds[0]}, ${courseIds[0]}, TRUE),
-            (${userIds[0]}, ${courseIds[1]}, FALSE),
-            (${userIds[1]}, ${courseIds[3]}, TRUE),
-            (${userIds[2]}, ${courseIds[2]}, FALSE)
+            INSERT INTO class_user (id_user, id_class, complete) VALUES
+            (${userIds[0]}, ${classIds[0]}, TRUE),
+            (${userIds[0]}, ${classIds[1]}, FALSE),
+            (${userIds[1]}, ${classIds[3]}, TRUE),
+            (${userIds[2]}, ${classIds[2]}, FALSE)
         `);
-    console.log("Inserted data into 'course_user'.");
+    console.log("Inserted data into 'class_user'.");
 
     console.log("Populating 'test' table...");
     const testResult = await client.query(`
