@@ -19,10 +19,9 @@ class TrailModel {
     return result.rows[0];
   }
 
-  static async updateTrail(id, data) {
-    const result = await db.query(
-      'UPDATE trail SET name = $1, description = $2 WHERE id = $3 RETURNING *',
-      [data.name, data.description, id]
+  static async updateTrail(id, name, description) {
+    const result = await db.query( 'UPDATE trail SET name = $1, description = $2 WHERE id = $3 RETURNING *',
+    [name, description, id]
     );
     return result.rows[0];
   }

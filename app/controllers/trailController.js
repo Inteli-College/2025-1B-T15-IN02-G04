@@ -36,6 +36,23 @@ const TrailController = {
       }
   },
 
+      async updateTrail(req, res) {
+      try {
+        const { name, description } = req.body;
+        console.log("REQ.BODY:", req.body);          
+        console.log("NAME:", name);                   
+        console.log("DESCRIPTION:", description);      
+        const updatedTrail = await TrailModel.updateTrail(req.params.id, name, description);
+        if (updatedTrail) {
+        res.status(200).json(updatedTrail);
+        } else {
+        res.status(404).json({ error: 'Trilha não encontrada' });
+        }
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+   },
+
     async deleteTrail(req, res) {
     try {
       const id = parseInt(req.params.id); 
