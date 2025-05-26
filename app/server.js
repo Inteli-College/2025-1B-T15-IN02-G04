@@ -13,6 +13,9 @@ db.connect()
 
     app.use(express.json());
 
+    const trailRoutes = require('./routes/trailRoutes');
+    app.use('/api', trailRoutes);
+
     const userRoutes = require('./routes/userRoutes');
     app.use('/users', userRoutes);
 
