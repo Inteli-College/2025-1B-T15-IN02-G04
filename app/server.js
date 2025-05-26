@@ -13,6 +13,9 @@ db.connect()
 
     app.use(express.json());
 
+    const questionRoutes = require('./routes/questionRoutes');
+    app.use('/api', questionRoutes);
+
     const userRoutes = require('./routes/userRoutes');
     app.use('/users', userRoutes);
 
