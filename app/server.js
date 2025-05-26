@@ -11,6 +11,8 @@ const frontendRoutes = require('./routes/frontRoutes');
 const classRoutes = require('./routes/classRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const answerRoutes = require('./routes/answerRoutes');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
@@ -41,11 +43,15 @@ app.use((err, req, res, next) => {
   });
 
 
+
 db.connect()
   .then(() => {
     console.log('Conectado ao banco de dados PostgreSQL');
 
     app.use(express.json());
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use('/api/usuarios', userRoutes);
 
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
