@@ -5,7 +5,7 @@ const migrateTrails = require("./production/2025051302_create_trails.js");
 const migrateMerits = require("./production/2025051313_create_merits.js");
 const migrateModules = require("./production/2025051303_create_modules.js");
 const migrateTests = require("./production/2025051309_create_tests.js");
-const migrateCourses = require("./production/2025051304_create_courses.js");
+const migrateClasss = require("./production/2025051304_create_classs.js");
 const migrateCertificates = require("./production/2025051305_create_certificates.js");
 const migrateTrailUsers = require("./production/2025051306_create_trail_users.js");
 const migrateRankings = require("./production/2025051315_create_rankings.js");
@@ -13,7 +13,7 @@ const migrateMeritUsers = require("./production/2025051314_create_merit_users.js
 const migrateModuleUsers = require("./production/2025051307_create_module_users.js");
 const migrateTestUsers = require("./production/2025051310_create_test_users.js");
 const migrateQuestions = require("./production/2025051311_create_questions.js");
-const migrateCourseUsers = require("./production/2025051308_create_course_users.js");
+const migrateClassUsers = require("./production/2025051308_create_class_users.js");
 const migrateAnswers = require("./production/2025051312_create_answers.js");
 
 /**
@@ -39,11 +39,11 @@ async function migrateAll() {
     await migrateTrailUsers.migrate();
     await migrateRankings.migrate();
     await migrateMeritUsers.migrate();
-    await migrateCourses.migrate();
+    await migrateClass.migrate();
     await migrateModuleUsers.migrate();
     await migrateTestUsers.migrate();
     await migrateQuestions.migrate();
-    await migrateCourseUsers.migrate();
+    await migrateClassUsers.migrate();
     await migrateAnswers.migrate();
 
     console.log("Todas as migrações foram executadas com sucesso.");

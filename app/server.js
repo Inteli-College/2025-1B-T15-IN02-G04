@@ -38,3 +38,10 @@ db.connect()
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
   });
+
+const authMiddleware = require('./routes/authRoutes');
+
+app.use(express.json());
+app.use('/api', authMiddleware)
+const PORT = 3000;
+app.listen(PORT, () => console.log('Servidor rodando em http://Localhost:3000'));
