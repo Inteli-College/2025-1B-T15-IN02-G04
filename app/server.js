@@ -12,6 +12,9 @@ db.connect()
     console.log('Conectado ao banco de dados PostgreSQL');
 
     app.use(express.json());
+        
+    const testRoutes = require('./routes/testRoutes');
+    app.use('/api', testRoutes);
 
     const userRoutes = require('./routes/userRoutes');
     app.use('/users', userRoutes);
