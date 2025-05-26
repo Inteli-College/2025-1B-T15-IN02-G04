@@ -10,6 +10,7 @@ const userRoutes = require('./routes/userRoutes');
 const frontendRoutes = require('./routes/frontRoutes');
 const classRoutes = require('./routes/classRoutes');
 const questionRoutes = require('./routes/questionRoutes');
+const answerRoutes = require('./routes/answerRoutes');
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
@@ -21,6 +22,7 @@ app.use('/users', userRoutes);
 app.use('/', frontendRoutes);
 app.use('/api', classRoutes);
 app.use('/api', questionRoutes);
+app.use('/api', answerRoutes);
 // Middleware para lidar com erros de rota não encontrada
 app.use((req, res, next) => {
    res.status(404).send('Página não encontrada');
