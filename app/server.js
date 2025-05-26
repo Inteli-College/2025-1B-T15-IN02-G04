@@ -13,6 +13,9 @@ db.connect()
 
     app.use(express.json());
 
+    const moduleRoutes = require('./routes/moduleRoutes');
+    app.use('/api', moduleRoutes);
+
     const userRoutes = require('./routes/userRoutes');
     app.use('/users', userRoutes);
 
