@@ -9,7 +9,7 @@ if (!pool) throw new Error("Pool de conexão não inicializado.");
  */
 async function migrate() {
   const query = `
-    CREATE TABLE IF NOT EXISTS course (
+    CREATE TABLE IF NOT EXISTS class (
       id BIGSERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       description TEXT,
@@ -21,10 +21,10 @@ async function migrate() {
     await pool.query("BEGIN;");
     await pool.query(query);
     await pool.query("COMMIT;");
-    console.log('Tabela "course" criada com sucesso.');
+    console.log('Tabela "class" criada com sucesso.');
   } catch (err) {
     await pool.query("ROLLBACK;");
-    console.error('Erro ao criar a tabela "course":', err.message);
+    console.error('Erro ao criar a tabela "class":', err.message);
     throw err;
   }
 }

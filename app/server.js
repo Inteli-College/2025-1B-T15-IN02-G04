@@ -8,6 +8,7 @@ const moduleRoutes = require('./routes/moduleRoutes');
 const trailRoutes = require('./routes/trailRoutes');
 const userRoutes = require('./routes/userRoutes');
 const frontendRoutes = require('./routes/frontRoutes');
+const classRoutes = require('./routes/classRoutes');
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
@@ -17,6 +18,7 @@ app.use('/api', moduleRoutes);
 app.use('/api', trailRoutes);
 app.use('/users', userRoutes);
 app.use('/', frontendRoutes);
+app.use('/api', classRoutes);
 // Middleware para lidar com erros de rota não encontrada
 app.use((req, res, next) => {
    res.status(404).send('Página não encontrada');
@@ -40,7 +42,6 @@ db.connect()
     console.log('Conectado ao banco de dados PostgreSQL');
 
     app.use(express.json());
-
 
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
