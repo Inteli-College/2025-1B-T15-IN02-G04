@@ -4,10 +4,36 @@ const app = express();
 const db = require('./config/db');
 const path = require('path');
 const authMiddleware = require('./routes/authRoutes');
+const moduleRoutes = require('./routes/moduleRoutes');
+const trailRoutes = require('./routes/trailRoutes');
+const userRoutes = require('./routes/userRoutes');
+const frontendRoutes = require('./routes/frontRoutes');
+const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/api', authMiddleware)
+app.use('/api', moduleRoutes);
+app.use('/api', trailRoutes);
+app.use('/users', userRoutes);
+app.use('/', frontendRoutes);
+// Middleware para lidar com erros de rota não encontrada
+app.use((req, res, next) => {
+   res.status(404).send('Página não encontrada');
+   // Middleware para lidar com erros internos do servidor
+app.use((err, req, res, next) => {
+   console.error(err.stack);
+      res.status(500).send('Erro no servidor');
+    });
+ app.listen(PORT, () => {
+   console.log(`Servidor rodando na porta ${PORT}`);
+    });
+  })
+.catch(err => {
+    console.error('Erro ao conectar ao banco de dados:', err);
+  });
+  });
+
 
 db.connect()
   .then(() => {
@@ -15,34 +41,8 @@ db.connect()
 
     app.use(express.json());
 
-    const trailRoutes = require('./routes/trailRoutes');
-    app.use('/api', trailRoutes);
 
-    const userRoutes = require('./routes/userRoutes');
-    app.use('/users', userRoutes);
-
-    const frontendRoutes = require('./routes/frontRoutes');
-    app.use('/', frontendRoutes);
-
-    // Middleware para lidar com erros de rota não encontrada
-    app.use((req, res, next) => {
-      res.status(404).send('Página não encontrada');
-    });
-
-    // Middleware para lidar com erros internos do servidor
-    app.use((err, req, res, next) => {
-      console.error(err.stack);
-      res.status(500).send('Erro no servidor');
-    });
-
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`Servidor rodando na porta ${PORT}`);
-    });
-  })
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
   });
   });
-
-const authMiddleware = require('./routes/authRoutes');
