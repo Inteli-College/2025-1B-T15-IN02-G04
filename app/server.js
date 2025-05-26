@@ -1,17 +1,22 @@
-require('dotenv').config();
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const db = require('./config/db');
 const path = require('path');
+const authMiddleware = require('./routes/authRoutes');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use('/api', authMiddleware)
 
 db.connect()
   .then(() => {
     console.log('Conectado ao banco de dados PostgreSQL');
 
     app.use(express.json());
+
+    const trailRoutes = require('./routes/trailRoutes');
+    app.use('/api', trailRoutes);
 
     const userRoutes = require('./routes/userRoutes');
     app.use('/users', userRoutes);
@@ -38,10 +43,6 @@ db.connect()
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
   });
+  });
 
 const authMiddleware = require('./routes/authRoutes');
-
-app.use(express.json());
-app.use('/api', authMiddleware)
-const PORT = 3000;
-app.listen(PORT, () => console.log('Servidor rodando em http://Localhost:3000'));
