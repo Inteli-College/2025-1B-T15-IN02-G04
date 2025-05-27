@@ -13,6 +13,7 @@ const questionRoutes = require("./routes/questionRoutes");
 const answerRoutes = require("./routes/answerRoutes");
 const rankingRoutes = require("./routes/rankingRoutes");
 const cors = require("cors");
+const testRoutes = require('./routes/testRoutes');
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3000;
 
@@ -25,6 +26,7 @@ app.use("/users", userRoutes);
 app.use("/", frontendRoutes);
 app.use("/api", classRoutes);
 app.use("/api", questionRoutes);
+app.use('/api', testRoutes);
 app.use("/api", answerRoutes);
 app.use("/api", rankingRoutes);
 // Middleware para lidar com erros de rota não encontrada
