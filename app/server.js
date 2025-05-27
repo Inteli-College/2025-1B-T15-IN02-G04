@@ -19,6 +19,9 @@ db.connect()
     const frontendRoutes = require('./routes/frontRoutes');
     app.use('/', frontendRoutes);
 
+    const rankingRoutes = require('./routes/rankingRoutes');
+    app.use('/rankings', rankingRoutes);
+
     // Middleware para lidar com erros de rota não encontrada
     app.use((req, res, next) => {
       res.status(404).send('Página não encontrada');
