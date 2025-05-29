@@ -1,47 +1,42 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const db = require('./config/db');
-const path = require('path');
+require("dotenv").config();
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const indexRoutes = require("./routes/indexRoutes");
+const db = require("./config/db");
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+const PORT = process.env.PORT || 3000;
+
+const app = express();
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Rotas
+app.use(indexRoutes);
+
+// Middleware para lidar com erros de rota não encontrada
+app.use((req, res, next) => {
+  res.status(404).send("Página não encontrada");
+});
+
+// Middleware para lidar com erros internos do servidor
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Erro no servidor");
+});
 
 db.connect()
   .then(() => {
-    console.log('Conectado ao banco de dados PostgreSQL');
-
-    app.use(express.json());
-
-    const userRoutes = require('./routes/userRoutes');
-    app.use('/users', userRoutes);
-
-    const frontendRoutes = require('./routes/frontRoutes');
-    app.use('/', frontendRoutes);
-
-    // Middleware para lidar com erros de rota não encontrada
-    app.use((req, res, next) => {
-      res.status(404).send('Página não encontrada');
-    });
-
-    // Middleware para lidar com erros internos do servidor
-    app.use((err, req, res, next) => {
-      console.error(err.stack);
-      res.status(500).send('Erro no servidor');
-    });
-
-    const PORT = process.env.PORT || 3000;
+    console.log("Conectado ao banco de dados PostgreSQL");
     app.listen(PORT, () => {
       console.log(`Servidor rodando na porta ${PORT}`);
     });
   })
-  .catch(err => {
-    console.error('Erro ao conectar ao banco de dados:', err);
+  .catch((err) => {
+    console.error("Erro ao conectar ao banco de dados:", err);
   });
-
-const authMiddleware = require('./routes/authRoutes');
-
-app.use(express.json());
-app.use('/api', authMiddleware)
-const PORT = 3000;
-app.listen(PORT, () => console.log('Servidor rodando em http://Localhost:3000'));

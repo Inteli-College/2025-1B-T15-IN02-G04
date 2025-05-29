@@ -27,7 +27,7 @@ async function migrate() {
     console.log('Tabela "test_user" criada com sucesso.');
   } catch (err) {
     await pool.query("ROLLBACK;");
-    console.error('Erro ao criar a tabela "test_user"', err.message);
+    console.error('Erro ao criar a tabela "test_users"', err.message);
     throw err;
   }
 }
