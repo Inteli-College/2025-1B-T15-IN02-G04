@@ -494,8 +494,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um usuário específico a partir do id. | **http://localhost:3000/users/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os usuários | **http://localhost:3000/users** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo usuário  | **http://localhost:3000/users/:id**  | POST | Content-Type: application/json Accept: application/json | { “name”: “Lucas “, “email”: “Lucas@bayer.com“ } | 201 Created ou 500 Internal Server Error |
-| Atualiza um usuário específico a partir do id. | **http://localhost:3000/users/:id** | PUT | Content-Type: application/json Accept: application/json | { “name”: “Lucas“, “email”: “lucas@bayer.com“ } | 200 OK ou 404 Not Found |
+| Cria um novo usuário  | **http://localhost:3000/users/:id**  | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Lucas “, <br></br> “email”: “Lucas@bayer.com“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza um usuário específico a partir do id. | **http://localhost:3000/users/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Lucas“, <br></br> “email”: “lucas@bayer.com“ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um usuário a partir do id. | **http://localhost:3000/users/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Trilhas**
@@ -504,8 +504,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma trilha específica a partir do id. | **http://localhost:3000/api/trails/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as trilhas. | **http://localhost:3000/api/trails**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova trilha.  | **http://localhost:3000/api/trails** | POST | Content-Type: application/json Accept: application/json | { “name”: “ “, “description”: “ “ } | 201 Created ou 500 Internal Server Error |
-| Atualiza uma trilha específica a partir do id. | **http://localhost:3000/api/trails/:id** | PUT | Content-Type: application/json Accept: application/json | { “name”: “ “, “description”: “ “ } | 200 OK ou 404 Not Found |
+| Cria uma nova trilha.  | **http://localhost:3000/api/trails** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “trilha de treinamento“, <br></br> “description”: “trilha para os novos PTDs“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza uma trilha específica a partir do id. | **http://localhost:3000/api/trails/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “nova trilha de treinamento“, <br></br> “description”: “trilha para os PTDs novos.“ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma trilha a partir do id. | **http://localhost:3000/api/trails/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Módulos**
@@ -514,8 +514,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um módulo específico a partir do id. | **http://localhost:3000/api/modules/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os módulos. | **http://localhost:3000/api/modules**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo módulo.  | **http://localhost:3000/api/modules** | POST | Content-Type: application/json Accept: application/json | { “name”: “FieldView básico “, “description”: “aprenda sobre o básico do FieldView “, “id\_trail”: “4“ } | 201 Created ou 500 Internal Server Error |
-| Atualiza um módulo específico a partir do id. | **http://localhost:3000/api/modules/:id** | PUT | Content-Type: application/json Accept: application/json | { “name”: “novo FieldView básico“, “description”: “aprenda sobre o essencial do FieldView“, “id\_trail”: “4“ } | 200 OK ou 404 Not Found |
+| Cria um novo módulo.  | **http://localhost:3000/api/modules** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “FieldView básico “, <br></br> “description”: “aprenda sobre o básico do FieldView “, <br></br> “id\_trail”: “4“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza um módulo específico a partir do id. | **http://localhost:3000/api/modules/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “novo FieldView básico“, <br></br> “description”: “aprenda sobre o essencial do FieldView“, <br></br> “id\_trail”: “4“ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma trilha a partir do id. | **http://localhost:3000/api/modules/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Classes**
@@ -524,18 +524,18 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma aula específica a partir do id. |  **http://localhost:3000/api/classes/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as aulas.. | **http://localhost:3000/api/classes**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova aula. | **http://localhost:3000/api/classes** | POST | Content-Type: application/json Accept: application/json | { “name”: “Aprenda como tratar o cliente“, “description”: “Artigo de boas maneiras“, “id\_module”: “3“ } | 201 Created ou 500 Internal Server Error |
-| Atualiza uma aula específica a partir do id. | **http://localhost:3000/api/classes/:id** | PUT | Content-Type: application/json Accept: application/json | { “name”: “Como configurar uma colheitadeira“, “description”: “Video aula ensinando as configurações“, “id\_module”: “2“ } | 200 OK ou 404 Not Found |
+| Cria uma nova aula. | **http://localhost:3000/api/classes** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Aprenda como tratar o cliente“, <br></br> “description”: “Artigo de boas maneiras“, <br></br> “id\_module”: “3“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza uma aula específica a partir do id. | **http://localhost:3000/api/classes/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Como configurar uma colheitadeira“, <br></br> “description”: “Video aula ensinando as configurações“, <br></br> “id\_module”: “2“ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma aula a partir do id. | **http://localhost:3000/api/classes/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
-**Tests**
+**Tests** 
 
 | função | endereço | método | header | body | response |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma prova específica a partir do id. |  **http://localhost:3000/api/tests/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as provas.. | **http://localhost:3000/api/tests**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova prova. | **http://localhost:3000/api/tests** | POST | Content-Type: application/json Accept: application/json | { “name”: “Plantadeira“, “id\_trail”: “2“ **}** | 201 Created ou 500 Internal Server Error |
-| Atualiza uma prova específica a partir do id. | **http://localhost:3000/api/tests/:id** | PUT | Content-Type: application/json Accept: application/json | { “name”: “Nova Plantadeira“, “id\_trail”: “2“ **}** | 200 OK ou 404 Not Found |
+| Cria uma nova prova. | **http://localhost:3000/api/tests** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Plantadeira“, <br></br> “id\_trail”: “2“ <br></br> **}** | 201 Created ou 500 Internal Server Error |
+| Atualiza uma prova específica a partir do id. | **http://localhost:3000/api/tests/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Nova Plantadeira“, <br></br> “id\_trail”: “2“ <br></br> **}** | 200 OK ou 404 Not Found |
 | Deleta uma prova a partir do id. | **http://localhost:3000/api/tests/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Questions**
@@ -544,8 +544,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma questão específica a partir do id. |  **http://localhost:3000/api/questions/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as questões. | **http://localhost:3000/api/questions/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova questão. | **http://localhost:3000/api/questions/:id** | POST | Content-Type: application/json Accept: application/json | { “question\_text”: “Como configurar um talhão“, “Id\_test”: “22“ } | 201 Created ou 500 Internal Server Error |
-| Atualiza uma questão específica a partir do id. | **http://localhost:3000/api/questions/:id** | PUT | Content-Type: application/json Accept: application/json | { “question\_text”: “Novas instruções de como configurar um talhão“, “Id\_test”: “22“ } | 200 OK ou 404 Not Found |
+| Cria uma nova questão. | **http://localhost:3000/api/questions/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “question\_text”: “Como configurar um talhão“, <br></br> “Id\_test”: “22“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza uma questão específica a partir do id. | **http://localhost:3000/api/questions/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “question\_text”: “Novas instruções de como configurar um talhão“, <br></br> “Id\_test”: “22“ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma questão a partir do id. | **http://localhost:3000/api/questions/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Respostas**
@@ -554,8 +554,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma resposta específica a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as respostas.. | **http://localhost:3000/api/answers** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova resposta. | **http://localhost:3000/api/answers** | POST | Content-Type: application/json Accept: application/json | { “answer\_text”: “devo fazer dessa forma“, “correct”: “true“, “score”: “20“, “id\_question”: “12“ } | 201 Created ou 500 Internal Server Error |
-| Atualiza uma resposta específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { “answer\_text”: “Devo devo fazer isso“, “correct”: “true“, “score”: “20“, “id\_question”: “12 “ } | 200 OK ou 404 Not Found |
+| Cria uma nova resposta. | **http://localhost:3000/api/answers** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “answer\_text”: “devo fazer dessa forma“, <br></br> “correct”: “true“, <br></br> “score”: “20“, <br></br> “id\_question”: “12“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza uma resposta específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “answer\_text”: “Devo devo fazer isso“, <br></br> “correct”: “true“, <br></br> “score”: “20“, <br></br> “id\_question”: “12 “ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma resposta a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Ranking**
@@ -564,8 +564,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { “user\_id”: “13 “, “score”: “200 “ } | 201 Created ou 500 Internal Server Error |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { “user\_id”: “13 “, “score”: “201 “ } | 200 OK ou 404 Not Found |
+| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br>  “user\_id”: “13 “, <br></br> “score”: “200 “ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “score”: “201 “ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
