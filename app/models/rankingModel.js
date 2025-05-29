@@ -1,35 +1,60 @@
-const db = require('../config/db'); // Importa o módulo de banco de dados
+const db = require('../config/db');
 
 class Ranking {
   static async getAll() {
-    const result = await db.query('SELECT * FROM rankings ORDER BY score DESC');
-    return result.rows;
+    try {
+      const result = await db.query('SELECT * FROM ranking ORDER BY score DESC');
+      return result.rows;
+    } catch (error) {
+      console.error("Erro ao buscar rankings:", error);
+      throw error;
+    }
   }
 
   static async getById(id) {
-    const result = await db.query('SELECT * FROM rankings WHERE id = $1', [id]);
-    return result.rows[0];
+    try {
+      const result = await db.query('SELECT * FROM ranking WHERE id = $1', [id]);
+      return result.rows[0];
+    } catch (error) {
+      console.error("Erro ao buscar ranking por ID:", error);
+      throw error;
+    }
   }
 
   static async create(userId, score) {
-    const result = await db.query(
-      'INSERT INTO rankings (user_id, score) VALUES ($1, $2) RETURNING *',
-      [userId, score]
-    );
-    return result.rows[0];
+    try {
+      const result = await db.query(
+        'INSERT INTO ranking (id_user, score) VALUES ($1, $2) RETURNING *',
+        [userId, score]
+      );
+      return result.rows[0];
+    } catch (error) {
+      console.error("Erro ao criar ranking:", error);
+      throw error;
+    }
   }
 
   static async update(id, score) {
-    const result = await db.query(
-      'UPDATE rankings SET score = $1 WHERE id = $2 RETURNING *',
-      [score, id]
-    );
-    return result.rows[0];
+    try {
+      const result = await db.query(
+        'UPDATE ranking SET score = $1 WHERE id = $2 RETURNING *',
+        [score, id]
+      );
+      return result.rows[0];
+    } catch (error) {
+      console.error("Erro ao atualizar ranking:", error);
+      throw error;
+    }
   }
 
   static async delete(id) {
-    const result = await db.query('DELETE FROM rankings WHERE id = $1 RETURNING *', [id]);
-    return result.rows[0];
+    try {
+      const result = await db.query('DELETE FROM ranking WHERE id = $1 RETURNING *', [id]);
+      return result.rows[0];
+    } catch (error) {
+      console.error("Erro ao deletar ranking:", error);
+      throw error;
+    }
   }
 }
 

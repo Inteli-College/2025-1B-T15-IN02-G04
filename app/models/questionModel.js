@@ -2,34 +2,59 @@ const db = require('../config/db');
 
 class QuestionModel {
   static async getAllQuestions() {
-    const result = await db.query('SELECT * FROM question');
-    return result.rows;
+    try {
+      const result = await db.query('SELECT * FROM question');
+      return result.rows;
+    } catch (error) {
+      console.error("Erro ao buscar todas as questões:", error);
+      throw error;
+    }
   }
 
   static async getQuestionById(id) {
-    const result = await db.query('SELECT * FROM question WHERE id = $1', [id]);
-    return result.rows[0];
+    try {
+      const result = await db.query('SELECT * FROM question WHERE id = $1', [id]);
+      return result.rows[0];
+    } catch (error) {
+      console.error("Erro ao buscar questão por ID:", error);
+      throw error;
+    }
   }
 
   static async createQuestion(data) {
-    const result = await db.query(
-      'INSERT INTO question (question_text, id_test) VALUES ($1, $2) RETURNING *',
-      [data.question_text, data.id_test]
-    );
-    return result.rows[0];
+    try {
+      const result = await db.query(
+        'INSERT INTO question (question_text, id_test) VALUES ($1, $2) RETURNING *',
+        [data.question_text, data.id_test]
+      );
+      return result.rows[0];
+    } catch (error) {
+      console.error("Erro ao criar questão:", error);
+      throw error;
+    }
   }
 
-  static async updateQuestion(id, data) {
-    const result = await db.query(
-      'UPDATE question SET question_text = $1, id_test = $2 WHERE id = $3 RETURNING *',
-      [data.question_text, data.id_test, id]
-    );
-    return result.rows[0];
+  static async updateQuestion(id, question_text, id_test) {
+    try {
+      const result = await db.query(
+        'UPDATE question SET question_text = $1, id_test = $2 WHERE id = $3 RETURNING *',
+        [question_text, id_test, id]
+      );
+      return result.rows[0];
+    } catch (error) {
+      console.error("Erro ao atualizar questão:", error);
+      throw error;
+    }
   }
 
-  static async deleteTest(id) {
-    const result = await db.query('DELETE FROM test WHERE id = $1 RETURNING *', [id]);
-    return result.rowCount > 0;
+  static async deleteQuestion(id) {
+    try {
+      const result = await db.query('DELETE FROM question WHERE id = $1', [id]);
+      return result.rowCount > 0;
+    } catch (error) {
+      console.error("Erro ao deletar questão:", error);
+      throw error;
+    }
   }
 }
 
