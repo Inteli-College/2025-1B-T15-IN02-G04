@@ -1,9 +1,184 @@
-<header>
-  <nav>
-    <ul>
-      <li><a href="/">Página Inicial</a></li>
-      <li><a href="/about">Sobre Nós</a></li>
-      <!-- Adicione outras opções de navegação conforme necessário -->
-    </ul>
-  </nav>
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <!-- Logo -->
+            <a href="/" class="logo">
+                Aprends<span class="accent">AGRO</span>
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-toggle" aria-label="Abrir menu de navegação">
+                ☰
+            </button>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/cursos">Cursos</a></li>
+                    <li><a href="/sobre">Sobre</a></li>
+                    <li><a href="/contato">Contato</a></li>
+                </ul>
+
+                <!-- Authentication Buttons (Mobile) -->
+                <div class="auth-buttons">
+                    <a href="/login" class="btn btn-secondary">Entrar</a>
+                    <a href="/register" class="btn btn-primary">Cadastrar</a>
+                    <button id="logout-btn" class="btn btn-secondary" style="display: none;">
+                        Sair
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Authentication Buttons (Desktop) -->
+            <div class="auth-buttons desktop-auth">
+                <a href="/login" class="btn btn-secondary">Entrar</a>
+                <a href="/register" class="btn btn-primary">Cadastrar</a>
+                <button id="logout-btn" class="btn btn-secondary" style="display: none;">
+                    Sair
+                </button>
+            </div>
+        </div>
+    </div>
 </header>
+
+<style>
+/* Estilos específicos para o header (complementares) */
+.desktop-auth {
+    display: none;
+}
+
+@media (min-width: 769px) {
+    .desktop-auth {
+        display: flex;
+    }
+    
+    .nav-menu .auth-buttons {
+        display: none;
+    }
+    
+    .nav-menu {
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-menu ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-auth {
+        display: none;
+    }
+    
+    .nav-menu .auth-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        width: 200px;
+    }
+    
+    .nav-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-menu li {
+        margin: 1rem 0;
+    }
+    
+    .nav-menu a {
+        display: block;
+        padding: 1rem;
+        text-align: center;
+    }
+}
+
+/* User Menu (quando logado) */
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.user-menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.user-menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    min-width: 200px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition);
+}
+
+.user-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown a,
+.user-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--primary-color);
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+    background-color: var(--gray-light);
+}
+
+.user-dropdown .divider {
+    height: 1px;
+    background-color: var(--gray-medium);
+    margin: 0.5rem 0;
+}
+</style>
