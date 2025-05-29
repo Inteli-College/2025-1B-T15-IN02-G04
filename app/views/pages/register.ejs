@@ -1,0 +1,500 @@
+<div class="auth-page">
+    <div class="container">
+        <div class="auth-wrapper">
+            <!-- Auth Image/Branding -->
+            <div class="auth-image">
+                <div class="auth-brand">
+                    <h2>Aprends<span class="accent">AGRO</span></h2>
+                    <p>Junte-se a milhares de profissionais que já transformaram suas carreiras</p>
+                </div>
+                <div class="auth-illustration">
+                    <div class="illustration-content">
+                        🎓 🌱 🚀
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form-container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h1 class="form-title">Criar minha conta</h1>
+                        <p class="form-subtitle">Comece sua jornada de aprendizado hoje</p>
+                    </div>
+
+                    <form id="register-form" class="auth-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Nome</label>
+                                <input 
+                                    type="text" 
+                                    id="firstName" 
+                                    name="first_name" 
+                                    class="form-control" 
+                                    placeholder="Seu nome"
+                                    required
+                                    autocomplete="given-name"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Sobrenome</label>
+                                <input 
+                                    type="text" 
+                                    id="lastName" 
+                                    name="last_name" 
+                                    class="form-control" 
+                                    placeholder="Seu sobrenome"
+                                    required
+                                    autocomplete="family-name"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-control" 
+                                placeholder="seu@email.com"
+                                required
+                                autocomplete="email"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="password-input">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-control" 
+                                    placeholder="Mínimo 6 caracteres"
+                                    required
+                                    autocomplete="new-password"
+                                    minlength="6"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    aria-label="Mostrar/ocultar senha"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill"></div>
+                                </div>
+                                <div class="strength-text">Digite uma senha</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Senha</label>
+                            <div class="password-input">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword" 
+                                    class="form-control" 
+                                    placeholder="Digite a senha novamente"
+                                    required
+                                    autocomplete="new-password"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    aria-label="Mostrar/ocultar senha"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profession">Área de Atuação (Opcional)</label>
+                            <select id="profession" name="profession" class="form-control">
+                                <option value="">Selecione sua área</option>
+                                <option value="produtor">Produtor Rural</option>
+                                <option value="agronomia">Agronomia</option>
+                                <option value="veterinaria">Veterinária</option>
+                                <option value="zootecnia">Zootecnia</option>
+                                <option value="engenharia-agricola">Engenharia Agrícola</option>
+                                <option value="tecnologia">Tecnologia Agrícola</option>
+                                <option value="gestao">Gestão/Administração</option>
+                                <option value="consultoria">Consultoria</option>
+                                <option value="pesquisa">Pesquisa</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-agreements">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="terms" id="terms" required>
+                                <span class="checkmark"></span>
+                                Aceito os <a href="/termos" target="_blank">Termos de Uso</a> e a 
+                                <a href="/privacidade" target="_blank">Política de Privacidade</a>
+                            </label>
+                            
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="newsletter" id="newsletter">
+                                <span class="checkmark"></span>
+                                Quero receber novidades e ofertas por e-mail
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Criar Conta
+                        </button>
+
+                        <div class="divider">
+                            <span>ou</span>
+                        </div>
+
+                        <div class="social-login">
+                            <button type="button" class="btn btn-social btn-google">
+                                <span class="social-icon">G</span>
+                                Cadastrar com Google
+                            </button>
+                            <button type="button" class="btn btn-social btn-microsoft">
+                                <span class="social-icon">M</span>
+                                Cadastrar com Microsoft
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="form-footer">
+                        <p>Já tem uma conta? <a href="/login">Entre aqui</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Estilos específicos para registro (complementares ao login) */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-agreements {
+    margin-bottom: 1.5rem;
+}
+
+.form-agreements .checkbox-container {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.form-agreements a {
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+.form-agreements a:hover {
+    text-decoration: underline;
+}
+
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+.strength-bar {
+    height: 4px;
+    background-color: var(--gray-light);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--gray-medium);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.strength-text {
+    font-size: 0.75rem;
+    color: var(--gray-dark);
+}
+
+/* Password strength colors */
+.strength-weak .strength-fill {
+    width: 25%;
+    background-color: #e74c3c;
+}
+
+.strength-fair .strength-fill {
+    width: 50%;
+    background-color: #f39c12;
+}
+
+.strength-good .strength-fill {
+    width: 75%;
+    background-color: #f1c40f;
+}
+
+.strength-strong .strength-fill {
+    width: 100%;
+    background-color: var(--accent-green);
+}
+
+.strength-weak .strength-text {
+    color: #e74c3c;
+}
+
+.strength-fair .strength-text {
+    color: #f39c12;
+}
+
+.strength-good .strength-text {
+    color: #f1c40f;
+}
+
+.strength-strong .strength-text {
+    color: var(--accent-green);
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('register-form');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const passwordToggles = document.querySelectorAll('.password-toggle');
+    
+    // Password strength checker
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+        });
+    }
+    
+    // Password confirmation checker
+    if (confirmPasswordInput) {
+        confirmPasswordInput.addEventListener('input', function() {
+            checkPasswordMatch();
+        });
+        
+        passwordInput.addEventListener('input', function() {
+            if (confirmPasswordInput.value) {
+                checkPasswordMatch();
+            }
+        });
+    }
+    
+    // Toggle password visibility
+    passwordToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const input = this.parentElement.querySelector('input');
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+    });
+    
+    // Handle form submission
+    if (registerForm) {
+        registerForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm(this)) {
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const userData = {
+                first_name: formData.get('first_name'),
+                last_name: formData.get('last_name'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+                profession: formData.get('profession'),
+                newsletter: formData.get('newsletter') === 'on'
+            };
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            
+            try {
+                await register(userData);
+            } catch (error) {
+                console.error('Registration error:', error);
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+            }
+        });
+    }
+    
+    // Social registration handlers
+    const googleBtn = document.querySelector('.btn-google');
+    const microsoftBtn = document.querySelector('.btn-microsoft');
+    
+    if (googleBtn) {
+        googleBtn.addEventListener('click', function() {
+            showMessage('Cadastro com Google em desenvolvimento', 'info');
+        });
+    }
+    
+    if (microsoftBtn) {
+        microsoftBtn.addEventListener('click', function() {
+            showMessage('Cadastro com Microsoft em desenvolvimento', 'info');
+        });
+    }
+});
+
+function checkPasswordStrength(password) {
+    const strengthBar = document.querySelector('.password-strength');
+    const strengthText = document.querySelector('.strength-text');
+    
+    if (!password) {
+        strengthBar.className = 'password-strength';
+        strengthText.textContent = 'Digite uma senha';
+        return;
+    }
+    
+    let score = 0;
+    let feedback = '';
+    
+    // Length check
+    if (password.length >= 8) score++;
+    if (password.length >= 12) score++;
+    
+    // Character variety
+    if (/[a-z]/.test(password)) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^a-zA-Z0-9]/.test(password)) score++;
+    
+    // Determine strength
+    if (score < 3) {
+        strengthBar.className = 'password-strength strength-weak';
+        feedback = 'Senha fraca';
+    } else if (score < 4) {
+        strengthBar.className = 'password-strength strength-fair';
+        feedback = 'Senha razoável';
+    } else if (score < 5) {
+        strengthBar.className = 'password-strength strength-good';
+        feedback = 'Senha boa';
+    } else {
+        strengthBar.className = 'password-strength strength-strong';
+        feedback = 'Senha forte';
+    }
+    
+    strengthText.textContent = feedback;
+}
+
+function checkPasswordMatch() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const confirmInput = document.getElementById('confirmPassword');
+    
+    if (confirmPassword && password !== confirmPassword) {
+        showFieldError(confirmInput, 'As senhas não coincidem');
+    } else {
+        removeFieldError(confirmInput);
+    }
+}
+
+// Enhanced register function
+async function register(userData) {
+    try {
+        showLoading();
+        
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            showMessage('Conta criada com sucesso! Verifique seu e-mail.', 'success');
+            
+            // Clear form
+            document.getElementById('register-form').reset();
+            
+            // Redirect after delay
+            setTimeout(() => {
+                window.location.href = '/login?message=account-created';
+            }, 2000);
+            
+        } else {
+            throw new Error(data.erro || 'Erro ao criar conta');
+        }
+        
+    } catch (error) {
+        showMessage(error.message || 'Erro de conexão. Tente novamente.', 'error');
+        throw error;
+    } finally {
+        hideLoading();
+    }
+}
+
+// Enhanced form validation for registration
+function validateForm(form) {
+    let isValid = true;
+    const requiredFields = form.querySelectorAll('input[required]');
+    
+    // Basic validation
+    requiredFields.forEach(field => {
+        if (!validateField(field)) {
+            isValid = false;
+        }
+    });
+    
+    // Email validation
+    const email = form.querySelector('input[type="email"]');
+    if (email && email.value && !isValidEmail(email.value)) {
+        showFieldError(email, 'Por favor, insira um email válido');
+        isValid = false;
+    }
+    
+    // Password validation
+    const password = form.querySelector('input[name="password"]');
+    if (password && password.value) {
+        if (password.value.length < 6) {
+            showFieldError(password, 'A senha deve ter pelo menos 6 caracteres');
+            isValid = false;
+        }
+    }
+    
+    // Password confirmation
+    const confirmPassword = form.querySelector('input[name="confirmPassword"]');
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+        showFieldError(confirmPassword, 'As senhas não coincidem');
+        isValid = false;
+    }
+    
+    // Terms acceptance
+    const terms = form.querySelector('input[name="terms"]');
+    if (terms && !terms.checked) {
+        showMessage('Você deve aceitar os Termos de Uso para continuar', 'error');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+</script>
