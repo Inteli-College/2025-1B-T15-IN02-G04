@@ -21,10 +21,10 @@ async function migrate() {
     await pool.query("BEGIN;");
     await pool.query(query);
     await pool.query("COMMIT;");
-    console.log('Tabela "ranking" criada com sucesso.');
+    console.log('Tabela "rankings" criada com sucesso.');
   } catch (err) {
     await pool.query("ROLLBACK;");
-    console.error('Erro ao criar a tabela "ranking', err.message);
+    console.error('Erro ao criar a tabela "rankings', err.message);
     throw err;
   }
 }

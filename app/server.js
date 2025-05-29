@@ -1,34 +1,24 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
-const db = require("./config/db");
 const path = require("path");
-const authMiddleware = require("./routes/authRoutes");
-const moduleRoutes = require("./routes/moduleRoutes");
-const trailRoutes = require("./routes/trailRoutes");
-const userRoutes = require("./routes/userRoutes");
-const frontendRoutes = require("./routes/frontRoutes");
-const classRoutes = require("./routes/classRoutes");
-const questionRoutes = require("./routes/questionRoutes");
-const answerRoutes = require("./routes/answerRoutes");
-const rankingRoutes = require("./routes/rankingRoutes");
 const cors = require("cors");
-const testRoutes = require('./routes/testRoutes');
 const bodyParser = require("body-parser");
+const indexRoutes = require("./routes/indexRoutes");
+const db = require("./config/db");
+
 const PORT = process.env.PORT || 3000;
+
+const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use("/api", authMiddleware);
-app.use("/api", moduleRoutes);
-app.use("/api", trailRoutes);
-app.use("/users", userRoutes);
-app.use("/", frontendRoutes);
-app.use("/api", classRoutes);
-app.use("/api", questionRoutes);
-app.use('/api', testRoutes);
-app.use("/api", answerRoutes);
-app.use("/api", rankingRoutes);
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Rotas
+app.use(indexRoutes);
+
 // Middleware para lidar com erros de rota não encontrada
 app.use((req, res, next) => {
   res.status(404).send("Página não encontrada");

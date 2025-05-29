@@ -5,7 +5,7 @@ const db = require('../config/db');
 // Função para obter todos os usuários
 const getAllUsers = async () => {
   try {
-    const result = await db.query('SELECT * FROM users');
+    const result = await db.query('SELECT * FROM user');
     return result.rows;
   } catch (error) {
     throw new Error('Erro ao obter usuários: ' + error.message);
@@ -26,7 +26,7 @@ const getUserById = async (id) => {
 const createUser = async (name, email) => {
   try {
     const result = await db.query(
-      'INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO user (name, email) VALUES ($1, $2) RETURNING *',
       [name, email]
     );
     return result.rows[0];

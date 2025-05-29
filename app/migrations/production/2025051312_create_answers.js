@@ -22,10 +22,10 @@ async function migrate() {
     await pool.query("BEGIN;");
     await pool.query(query);
     await pool.query("COMMIT;");
-    console.log('Tabela "answer" criada com sucesso.');
+    console.log('Tabela "answers" criada com sucesso.');
   } catch (err) {
     await pool.query("ROLLBACK;");
-    console.error('Erro ao criar a tabela "answer"', err.message);
+    console.error('Erro ao criar a tabela "answers"', err.message);
     throw err;
   }
 }

@@ -19,10 +19,10 @@ async function migrate() {
     await pool.query("BEGIN;");
     await pool.query(query);
     await pool.query("COMMIT;");
-    console.log('Tabela "merit" criada com sucesso.');
+    console.log('Tabela "merits" criada com sucesso.');
   } catch (err) {
     await pool.query("ROLLBACK;");
-    console.error('Erro ao criar a tabela "merit"', err.message);
+    console.error('Erro ao criar a tabela "merits"', err.message);
     throw err;
   }
 }
