@@ -4,7 +4,15 @@ const ModuleController = {
 
   async getAllModules(req, res) {
     try {
-      const modules = await ModuleModel.getAllModules();
+      const { trail_id } = req.query;
+      
+      let modules;
+      if (trail_id) {
+        modules = await ModuleModel.getModulesByTrailId(trail_id);
+      } else {
+        modules = await ModuleModel.getAllModules();
+      }
+      
       return res.status(200).json(modules);
     } catch (error) {
       console.error(error);
@@ -53,7 +61,7 @@ const ModuleController = {
     async deleteModule(req, res) {
     try {
       const id = parseInt(req.params.id); 
-      const ModuleDelete = await ModuleModel.deleteModule(id);
+      const moduleDelete = await ModuleModel.deleteModule(id);
       return res.status(200).json({ message: 'Módulo deletado com sucesso' });
     } catch (err) {
       console.error('Erro ao deletar módulo:', err);
