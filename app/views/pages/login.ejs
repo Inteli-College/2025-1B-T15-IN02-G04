@@ -52,10 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const data = await response.json();
       
       if (response.ok) {
-        // Sucesso no login
+        // Sucesso no logins
         console.log('Login bem-sucedido:', data);
-        // Redirecionar para página desejada
-        window.location.href = '/dashboard'; // Ajuste conforme necessário
+        document.cookie = `token=${data.token}; path=/;`;
+        window.location.href = '/dashboard'; 
       } else {
         // Exibir mensagem de erro
         const errorDiv = document.createElement('div');
