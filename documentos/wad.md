@@ -352,9 +352,8 @@ O conjunto de User Stories descrito acima reflete a complexidade e os objetivos 
 
 ## 3.1. Arquitetura (sprints 3 e 4)
 
-<p align="center"> <img src="./assets/diagrama_arquitetura.png" alt=" DIagrama de Arquitetura"> </p>
+<p align="center"> <img src="./assets/diagrama-arquiteura-projeto.drawio.png" alt=" DIagrama de Arquitetura"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
-
 ## 3.2. Wireframes (sprint 2)
 
 Um wireframe é um esboço visual simples usado para planejar a estrutura e a navegação de uma interface, como um site ou aplicativo. Ele mostra a disposição dos elementos na tela, como botões, menus e campos, sem se preocupar com design visual ou cores. Seu objetivo é organizar ideias e funcionalidades antes da fase de desenvolvimento. Segue abaixo a idealização do nosso wireframe, desenvolvido com base no contexto e nas necessidades do projeto.
