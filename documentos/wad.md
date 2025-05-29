@@ -352,7 +352,8 @@ O conjunto de User Stories descrito acima reflete a complexidade e os objetivos 
 
 ## 3.1. Arquitetura (sprints 3 e 4)
 
-_Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. Atualize sempre que necessário_
+<p align="center"> <img src="./assets/diagrama-arquiteura-projeto.drawio.png" alt=" DIagrama de Arquitetura"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
 
 ## 3.2. Wireframes (sprint 2)
 
