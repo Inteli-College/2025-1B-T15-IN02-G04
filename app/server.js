@@ -16,6 +16,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Define a pasta pública com CSS e outros arquivos estáticos
+app.use(express.static(path.join(__dirname, "public")));
+
 // Rotas
 app.use(indexRoutes);
 
