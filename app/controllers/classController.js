@@ -4,7 +4,15 @@ const ClassController = {
 
   async getAllClasses(req, res) {
     try {
-      const classes = await ClassModel.getAllClasses();
+      const { module_id } = req.query;
+      
+      let classes;
+      if (module_id) {
+        classes = await ClassModel.getClassesByModuleId(module_id);
+      } else {
+        classes = await ClassModel.getAllClasses();
+      }
+      
       return res.status(200).json(classes);
     } catch (error) {
       console.error(error);
