@@ -91,6 +91,4 @@ router.get('/esqueci-senha', (req, res) => {
   });
 });
 
-// Adicione outras rotas conforme necessário
-
 module.exports = router;

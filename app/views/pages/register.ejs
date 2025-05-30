@@ -1,178 +1,107 @@
-<div class="auth-page">
-    <div class="container">
-        <div class="auth-wrapper">
-            <!-- Auth Image/Branding -->
-            <div class="auth-image">
-                <div class="auth-brand">
-                    <h2>Aprendis<span class="accent">AGRO</span></h2>
-                    <p>Junte-se a milhares de profissionais que já transformaram suas carreiras</p>
-                </div>
-                <div class="auth-illustration">
-                    <div class="illustration-content">
-                        🎓 🌱 🚀
-                    </div>
-                </div>
-            </div>
+<section class="content-section active auth-section">
+    <h2>Criar Conta</h2>
 
-            <!-- Register Form -->
-            <div class="auth-form-container">
-                <div class="form-container">
-                    <div class="form-header">
-                        <h1 class="form-title">Criar minha conta</h1>
-                        <p class="form-subtitle">Comece sua jornada de aprendizado hoje</p>
-                    </div>
+    <% if (typeof error !== 'undefined') { %>
+      <div class="error-message">
+        <%= error %>
+      </div>
+    <% } %>
 
-                    <form id="register-form" class="auth-form" novalidate>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="firstName">Nome</label>
-                                <input 
-                                    type="text" 
-                                    id="firstName" 
-                                    name="first_name" 
-                                    class="form-control" 
-                                    placeholder="Seu nome"
-                                    required
-                                    autocomplete="given-name"
-                                >
-                            </div>
-                            <div class="form-group">
-                                <label for="lastName">Sobrenome</label>
-                                <input 
-                                    type="text" 
-                                    id="lastName" 
-                                    name="last_name" 
-                                    class="form-control" 
-                                    placeholder="Seu sobrenome"
-                                    required
-                                    autocomplete="family-name"
-                                >
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                class="form-control" 
-                                placeholder="seu@email.com"
-                                required
-                                autocomplete="email"
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Senha</label>
-                            <div class="password-input">
-                                <input 
-                                    type="password" 
-                                    id="password" 
-                                    name="password" 
-                                    class="form-control" 
-                                    placeholder="Mínimo 6 caracteres"
-                                    required
-                                    autocomplete="new-password"
-                                    minlength="6"
-                                >
-                                <button 
-                                    type="button" 
-                                    class="password-toggle" 
-                                    aria-label="Mostrar/ocultar senha"
-                                >
-                                    👁️
-                                </button>
-                            </div>
-                            <div class="password-strength">
-                                <div class="strength-bar">
-                                    <div class="strength-fill"></div>
-                                </div>
-                                <div class="strength-text">Digite uma senha</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="confirmPassword">Confirmar Senha</label>
-                            <div class="password-input">
-                                <input 
-                                    type="password" 
-                                    id="confirmPassword" 
-                                    name="confirmPassword" 
-                                    class="form-control" 
-                                    placeholder="Digite a senha novamente"
-                                    required
-                                    autocomplete="new-password"
-                                >
-                                <button 
-                                    type="button" 
-                                    class="password-toggle" 
-                                    aria-label="Mostrar/ocultar senha"
-                                >
-                                    👁️
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="profession">Área de Atuação (Opcional)</label>
-                            <select id="profession" name="profession" class="form-control">
-                                <option value="">Selecione sua área</option>
-                                <option value="produtor">Produtor Rural</option>
-                                <option value="agronomia">Agronomia</option>
-                                <option value="veterinaria">Veterinária</option>
-                                <option value="zootecnia">Zootecnia</option>
-                                <option value="engenharia-agricola">Engenharia Agrícola</option>
-                                <option value="tecnologia">Tecnologia Agrícola</option>
-                                <option value="gestao">Gestão/Administração</option>
-                                <option value="consultoria">Consultoria</option>
-                                <option value="pesquisa">Pesquisa</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-
-                        <div class="form-agreements">
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="terms" id="terms" required>
-                                <span class="checkmark"></span>
-                                Aceito os <a href="/termos" target="_blank">Termos de Uso</a> e a 
-                                <a href="/privacidade" target="_blank">Política de Privacidade</a>
-                            </label>
-                            
-                            <label class="checkbox-container">
-                                <input type="checkbox" name="newsletter" id="newsletter">
-                                <span class="checkmark"></span>
-                                Quero receber novidades e ofertas por e-mail
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-full">
-                            Criar Conta
-                        </button>
-
-                        <div class="divider">
-                            <span>ou</span>
-                        </div>
-
-                        <div class="social-login">
-                            <button type="button" class="btn btn-social btn-google">
-                                <span class="social-icon">G</span>
-                                Cadastrar com Google
-                            </button>
-                            <button type="button" class="btn btn-social btn-microsoft">
-                                <span class="social-icon">M</span>
-                                Cadastrar com Microsoft
-                            </button>
-                        </div>
-                    </form>
-
-                    <div class="form-footer">
-                        <p>Já tem uma conta? <a href="/login">Entre aqui</a></p>
-                    </div>
-                </div>
-            </div>
+    <div class="auth-container">
+      <form action="/register" method="POST" class="auth-form" id="registerForm">
+        <div class="form-group">
+          <label for="first_name">Primeiro Nome:</label>
+          <input type="text" id="first_name" name="first_name" required>
         </div>
-    </div>
-</div>
 
-<script src="/scripts/register.js"></script>
+        <div class="form-group">
+          <label for="last_name">Sobrenome:</label>
+          <input type="text" id="last_name" name="last_name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required minlength="6">
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirme a Senha:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="nav-btn">Registrar</button>
+        </div>
+
+        <div class="auth-links">
+          <p>Já tem uma conta? <a href="/login">Faça login</a></p>
+        </div>
+      </form>
+    </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registerForm');
+    let errorMessageDiv = document.querySelector('.error-message');
+    
+    if (!errorMessageDiv) {
+      errorMessageDiv = document.createElement('div');
+      errorMessageDiv.className = 'error-message';
+      form.prepend(errorMessageDiv);
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      errorMessageDiv.textContent = '';
+      errorMessageDiv.style.color = 'red';
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      if (data.password !== data.confirmPassword) {
+        errorMessageDiv.textContent = 'As senhas não coincidem.';
+        return;
+      }
+
+      const payload = {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        password: data.password
+      };
+
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || 'Erro ao registrar usuário.');
+        }
+
+        errorMessageDiv.style.color = 'green';
+        errorMessageDiv.textContent = 'Registro bem-sucedido! Redirecionando...';
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 2000);
+      } catch (error) {
+        errorMessageDiv.textContent = error.message;
+      }
+    });
+  });
+</script>
+
+<script src="../scripts/auth.js"></script>
