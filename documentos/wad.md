@@ -495,8 +495,8 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um usuário específico a partir do id. | **http://localhost:3000/users/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os usuários | **http://localhost:3000/users** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo usuário  | **http://localhost:3000/users/:id**  | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Lucas “, <br></br> “email”: “Lucas@bayer.com“ <br></br> } | 201 Created ou 500 Internal Server Error |
-| Atualiza um usuário específico a partir do id. | **http://localhost:3000/users/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Lucas“, <br></br> “email”: “lucas@bayer.com“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo usuário  | **http://localhost:3000/users/:id**  | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “primeiro_nome”: “Lucas “, <br></br>"segundo_nome": "Pomin", <br></br> “email”: “Lucas@bayer.com“, <br></br>"senha":  "senha123"<br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza um usuário específico a partir do id. | **http://localhost:3000/users/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Lucas“, <br></br>"segundo_nome": "Pomin", <br></br> “email”: “lucas@bayer.com“, <br></br>"senha":  "senha123"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um usuário a partir do id. | **http://localhost:3000/users/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Trilhas**
