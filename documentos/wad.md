@@ -430,7 +430,18 @@ O design da aplicação tem como objetivo facilitar o acesso do usuário e incen
 
 ## 3.3. Guia de estilos (sprint 3)
 
-_Descreva aqui orientações gerais para o leitor sobre como utilizar os componentes do guia de estilos de sua solução_
+Este guia de estilos foi elaborado para garantir consistência visual, funcional e de comunicação em toda a solução. Ele reúne os principais componentes da identidade visual e da interface do sistema.
+
+A padronização aqui proposta visa facilitar a manutenção, evolução e escalabilidade da solução ao longo do tempo. Para utilizá-lo corretamente:
+
+- **Consulte o guia sempre que for desenvolver ou alterar interfaces**: ele deve ser o ponto de partida para decisões de design e desenvolvimento visual.
+
+- **Reutilize os componentes padronizados** descritos aqui para manter a uniformidade entre telas e funcionalidades.
+
+- **Siga as recomendações de uso para cada elemento**, como tamanhos, espaçamentos e combinações de cores, para garantir acessibilidade e legibilidade.
+
+- **Mantenha-se alinhado com a proposta da solução**, respeitando a identidade visual, o tom da comunicação e os princípios de usabilidade definidos neste guia.
+
 
 ### 3.3.1 Cores
 
