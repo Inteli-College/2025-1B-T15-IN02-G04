@@ -460,7 +460,7 @@ A padronização aqui proposta visa facilitar a manutenção, evolução e escal
 ## 3.4 Protótipo de alta fidelidade (sprint 3)
 
 
-Os Mockups, presentes no protótipo de alta fidelidade do projeto, tem o objetivo de adicionar ao projeto, à partir do mapeamento de funcionalidades constituido nos Wyreframes, o refinamento visual e detalhamentos destes elementos - de forma a priorizar a acessibilidade, clareza das informações e experiência total do usuário PTD. Nesse sentido, desenvolvemos as cerca de 20 telas presentes no projeto. Como exemplo, seguem:
+Os Mockups, presentes no protótipo de alta fidelidade do projeto, tem o objetivo de adicionar ao projeto, à partir do mapeamento de funcionalidades constituido nos Wireframes, o refinamento visual e detalhamentos destes elementos - de forma a priorizar a acessibilidade, clareza das informações e experiência total do usuário PTD. Nesse sentido, desenvolvemos as cerca de 20 telas presentes no projeto. Como exemplo, seguem:
 
 --- 
 
