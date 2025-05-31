@@ -448,7 +448,55 @@ _posicione aqui imagens e textos contendo exemplos padronizados de ícones e ima
 
 ## 3.4 Protótipo de alta fidelidade (sprint 3)
 
-_posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelidade e o link para acesso ao protótipo completo (mantenha o link sempre público para visualização)_
+Os Mockups, presentes no protótipo de alta fidelidade do projeto, tem o objetivo de adicionar ao projeto, à partir do mapeamento de funcionalidades constituido nos Wyreframes, o refinamento visual e detalhamentos destes elementos - de forma a priorizar a acessibilidade, clareza das informações e experiência total do usuário PTD. Nesse sentido, desenvolvemos as cerca de 20 telas presentes no projeto. Como exemplo, seguem:
+---
+
+## Mockups da Aplicação
+
+Todas as telas estão reunidas na imagem `assets/mockups.png` abaixo, dispostas na seguinte ordem:
+
+1. **Tela de Login**
+2. **Tela de Quiz**
+3. **Tela de Equipe**
+4. **Tela de Postagem**
+
+![Mockups AprendizAGRO](assets/mockups.png)
+
+---
+
+## 📌 Descrição das Telas
+
+### Tela de Login
+
+**Descrição:**  
+Tela inicial da aplicação, onde o usuário insere e-mail e senha para acessar a plataforma AprendizAGRO. O fundo destaca uma plantação, reforçando a identidade visual do setor agrícola, e o logo do projeto aparece no centro da tela.
+
+---
+
+### Tela de Quiz: Sobre a Bayer
+
+**Descrição:**  
+Tela interativa de quiz educativo sobre a Bayer, com uma pergunta de múltipla escolha e quatro alternativas. O usuário navega entre as perguntas utilizando botões de seta. A imagem institucional reforça o branding da empresa e contextualiza o conteúdo.
+
+---
+
+### Tela de Equipe
+
+**Descrição:**  
+Tela para visualização e gerenciamento de membros da equipe. Cada colaborador é exibido com foto de perfil, nome e função. Há opções para editar ou excluir integrantes, além de um botão para adicionar um novo membro à equipe.
+
+---
+
+### Tela de Postagem
+
+**Descrição:**  
+Área destinada à criação de postagens, onde o usuário pode inserir um título, escrever um texto e anexar uma imagem. Ideal para compartilhar notícias, informações relevantes e atualizações entre os membros da equipe.
+
+---
+
+[Acesse o arquivo completo dos Mockups no Figma do projeto](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/AprendizAGRO?node-id=311-2&t=cy9sbQrGQE5XfVv9-1)
+
+---
 
 ## 3.5. Modelagem do banco de dados (sprints 2 e 4)
 
