@@ -448,8 +448,10 @@ _posicione aqui imagens e textos contendo exemplos padronizados de ícones e ima
 
 ## 3.4 Protótipo de alta fidelidade (sprint 3)
 
+
 Os Mockups, presentes no protótipo de alta fidelidade do projeto, tem o objetivo de adicionar ao projeto, à partir do mapeamento de funcionalidades constituido nos Wyreframes, o refinamento visual e detalhamentos destes elementos - de forma a priorizar a acessibilidade, clareza das informações e experiência total do usuário PTD. Nesse sentido, desenvolvemos as cerca de 20 telas presentes no projeto. Como exemplo, seguem:
----
+
+--- 
 
 ## Mockups da Aplicação
 
@@ -460,7 +462,7 @@ Todas as telas estão reunidas na imagem `assets/mockups.png` abaixo, dispostas 
 3. **Tela de Equipe**
 4. **Tela de Postagem**
 
-![Mockups AprendizAGRO](assets/mockups.png)
+![Mockups AprendizAGRO](assets/wad/mockups.png)
 
 ---
 
