@@ -430,21 +430,32 @@ O design da aplicação tem como objetivo facilitar o acesso do usuário e incen
 
 ## 3.3. Guia de estilos (sprint 3)
 
-_Descreva aqui orientações gerais para o leitor sobre como utilizar os componentes do guia de estilos de sua solução_
+Este guia de estilos foi elaborado para garantir consistência visual, funcional e de comunicação em toda a solução. Ele reúne os principais componentes da identidade visual e da interface do sistema.
+
+A padronização aqui proposta visa facilitar a manutenção, evolução e escalabilidade da solução ao longo do tempo. Para utilizá-lo corretamente:
+
+- **Consulte o guia sempre que for desenvolver ou alterar interfaces**: ele deve ser o ponto de partida para decisões de design e desenvolvimento visual.
+
+- **Reutilize os componentes padronizados** descritos aqui para manter a uniformidade entre telas e funcionalidades.
+
+- **Siga as recomendações de uso para cada elemento**, como tamanhos, espaçamentos e combinações de cores, para garantir acessibilidade e legibilidade.
+
+- **Mantenha-se alinhado com a proposta da solução**, respeitando a identidade visual, o tom da comunicação e os princípios de usabilidade definidos neste guia.
+
 
 ### 3.3.1 Cores
 
-_Apresente aqui a paleta de cores, com seus códigos de aplicação e suas respectivas funções_
+<p align="center"> <img src="./assets/wad/Paleta de Cores.png" alt="Paleta de Cores"> </p>
+<p align = 'center'> criado pelos autores (2025).</p>
 
 ### 3.3.2 Tipografia
 
-_Apresente aqui a tipografia da solução, com famílias de fontes e suas respectivas funções_
+<p align="center"> <img src="./assets/wad/Tipografia.png" alt="Tipografia"> </p>
+<p align = 'center'> criado pelos autores (2025).</p>
 
-### 3.3.3 Iconografia e imagens
+<p align="center"> <img src="./assets/wad/Hierarquia Tipográfica.png" alt="Hierarquia Tipográfica"> </p>
+<p align = 'center'> criado pelos autores (2025).</p>
 
-_(esta subseção é opcional, caso não existam ícones e imagens, apague esta subseção)_
-
-_posicione aqui imagens e textos contendo exemplos padronizados de ícones e imagens, com seus respectivos atributos de aplicação, utilizadas na solução_
 
 ## 3.4 Protótipo de alta fidelidade (sprint 3)
 
