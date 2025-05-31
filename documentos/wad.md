@@ -445,17 +445,17 @@ A padronização aqui proposta visa facilitar a manutenção, evolução e escal
 
 ### 3.3.1 Cores
 
-_Apresente aqui a paleta de cores, com seus códigos de aplicação e suas respectivas funções_
+<p align="center"> <img src="./assets/wad/Paleta de Cores.png" alt="Paleta de Cores"> </p>
+<p align = 'center'> criado pelos autores (2025).</p>
 
 ### 3.3.2 Tipografia
 
-_Apresente aqui a tipografia da solução, com famílias de fontes e suas respectivas funções_
+<p align="center"> <img src="./assets/wad/Tipografia.png" alt="Tipografia"> </p>
+<p align = 'center'> criado pelos autores (2025).</p>
 
-### 3.3.3 Iconografia e imagens
+<p align="center"> <img src="./assets/wad/Hierarquia Tipográfica.png" alt="Hierarquia Tipográfica"> </p>
+<p align = 'center'> criado pelos autores (2025).</p>
 
-_(esta subseção é opcional, caso não existam ícones e imagens, apague esta subseção)_
-
-_posicione aqui imagens e textos contendo exemplos padronizados de ícones e imagens, com seus respectivos atributos de aplicação, utilizadas na solução_
 
 ## 3.4 Protótipo de alta fidelidade (sprint 3)
 
