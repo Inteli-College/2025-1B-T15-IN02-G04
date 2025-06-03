@@ -727,8 +727,8 @@ Em razão do contexto acadêmico sob o qual o produto foi confeccionado, entende
 
 No entanto, caso houvesse desígnio de precificação, dentre as opções de estratégias de preço adotadas, compreende-se a assinatura corporativa como a forma mais eficiente no cenário em questão - de forma que os PTDs ou a Bayer poderia aderir à aplicação por intermédio de assinatura mensal por usuário, ou por licenciamento anual baseado no número de PTDs.
 
-_6.3 Praça (Distribuição) (até 200 palavras)_
-_Apresente os canais digitais utilizados para distribuir e entregar a aplicação ao público._
+### Praça
+No que tange aos canais de distribuição da aplicação, o produto será disponibilizado via web e aplicativo móvel, diretamente no ambiente de trabalho dos canais internos da Bayer Crop Science. Os argumentos que sustentam essa escolha dizem respeito ao contexto da aplicação (a qual configura-se uma aplicação digital e, por isso, requer um meio similar para ser executado) e ao fato de, a via web e a aplicação móvel estar disponível ao PTD mesmo fora do ambiente de trabalho da empresa, de modo que o funcionário pode acessar os conteúdos independentemente do lugar e do horário, conforme as suas necessidades. 
 
 _6.4 Promoção (até 200 palavras)_
 _Descreva as estratégias digitais planejadas, como SEO, redes sociais, marketing de conteúdo e campanhas pagas._
