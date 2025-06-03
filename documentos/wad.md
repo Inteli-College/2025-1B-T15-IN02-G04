@@ -594,9 +594,9 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 
 | função | endereço | método | header | body | response |
 | :---- | :---- | :---- | :---- | :---- | :---- |
-| Obtém uma prova específica a partir do id. |  **http://localhost:3000/api/tests/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Obtém uma prova específica a partir do id. |  **http://localhost:3000/api/tests/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found ou 404 not found ou 500 internal server error|
 | Lista todas as provas.. | **http://localhost:3000/api/tests**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova prova. | **http://localhost:3000/api/tests** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Plantadeira“, <br></br> “id\_trail”: “2“ <br></br> **}** | 201 Created ou 500 Internal Server Error |
+| Cria uma nova prova. | **http://localhost:3000/api/tests** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Plantadeira“, <br></br> “id\_trail”: “2“ <br></br> **}** | 201 Created ou 500 Internal Server Error ou 400 Bad Request |
 | Atualiza uma prova específica a partir do id. | **http://localhost:3000/api/tests/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Nova Plantadeira“, <br></br> “id\_trail”: “2“ <br></br> **}** | 200 OK ou 404 Not Found |
 | Deleta uma prova a partir do id. | **http://localhost:3000/api/tests/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
@@ -606,7 +606,7 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma questão específica a partir do id. |  **http://localhost:3000/api/questions/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as questões. | **http://localhost:3000/api/questions/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova questão. | **http://localhost:3000/api/questions/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “question\_text”: “Como configurar um talhão“, <br></br> “Id\_test”: “22“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Cria uma nova questão. | **http://localhost:3000/api/questions/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “question\_text”: “Como configurar um talhão“, <br></br> “Id\_test”: “22“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
 | Atualiza uma questão específica a partir do id. | **http://localhost:3000/api/questions/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “question\_text”: “Novas instruções de como configurar um talhão“, <br></br> “Id\_test”: “22“ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma questão a partir do id. | **http://localhost:3000/api/questions/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
@@ -616,7 +616,7 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma resposta específica a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as respostas.. | **http://localhost:3000/api/answers** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova resposta. | **http://localhost:3000/api/answers** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “answer\_text”: “devo fazer dessa forma“, <br></br> “correct”: “true“, <br></br> “score”: “20“, <br></br> “id\_question”: “12“ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Cria uma nova resposta. | **http://localhost:3000/api/answers** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “answer\_text”: “devo fazer dessa forma“, <br></br> “correct”: “true“, <br></br> “score”: “20“, <br></br> “id\_question”: “12“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
 | Atualiza uma resposta específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “answer\_text”: “Devo devo fazer isso“, <br></br> “correct”: “true“, <br></br> “score”: “20“, <br></br> “id\_question”: “12 “ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma resposta a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
@@ -626,9 +626,9 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/ranking/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os rankings. | **http://localhost:3000/api/ranking/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/ranking/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br>  “user\_id”: “13 “, <br></br> “score”: “200 “ <br></br> } | 201 Created ou 500 Internal Server Error |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/ranking/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “score”: “201 “ <br></br> } | 200 OK ou 404 Not Found |
-| Deleta um ranking a partir do id. | **http://localhost:3000/api/ranking/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Cria um novo ranking. | **http://localhost:3000/api/ranking/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br>  “user\_id”: “13 “, <br></br> “score”: “200 “ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “score”: “201 “ <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
 
