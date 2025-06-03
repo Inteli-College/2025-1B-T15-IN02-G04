@@ -722,8 +722,10 @@ Diante disso, a plataforma contempla trilhas de aprendizagem, cursos, conteúdos
 
 Além disso, o produto se destaca pela sua gamificação. Sob a ótica do PTD, a equipe enxergou a imprescindibilidade de fornecer mecanismos e dinâmicas para engajar o funcionário à se desenvolver profissionalmente na plataforma, de modo que, para tal efeito, tornou o produto ainda mais atrativo por intermédio de um ranking e de um talhão gamificado - segundo o qual, a cada término de responsabilidade, o usuário recebe uma plantação em seu talhão fictício. 
 
-_6.2 Preço (até 200 palavras)_
-_Explique o modelo de precificação adotado e justifique com base nas análises anteriores._
+### Preço
+Em razão do contexto acadêmico sob o qual o produto foi confeccionado, entende-se que não há intenções de monetizá-lo. Nesse sentido, quanto a quaisquer custos imprevistos tangentes à plataforma, acredita-se que serão financiados integralmente pela empresa Bayer, de modo que os PTDs tenham acesso gratuito. 
+
+No entanto, caso houvesse desígnio de precificação, dentre as opções de estratégias de preço adotadas, compreende-se a assinatura corporativa como a forma mais eficiente no cenário em questão - de forma que os PTDs ou a Bayer poderia aderir à aplicação por intermédio de assinatura mensal por usuário, ou por licenciamento anual baseado no número de PTDs.
 
 _6.3 Praça (Distribuição) (até 200 palavras)_
 _Apresente os canais digitais utilizados para distribuir e entregar a aplicação ao público._
