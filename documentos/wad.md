@@ -563,11 +563,11 @@ _posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 
 | função | endereço | método | header | body | response |
 | :---- | :---- | :---- | :---- | :---- | :---- |
-| Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
-| Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br>  “user\_id”: “13 “, <br></br> “score”: “200 “ <br></br> } | 201 Created ou 500 Internal Server Error |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “score”: “201 “ <br></br> } | 200 OK ou 404 Not Found |
-| Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/ranking/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os rankings. | **http://localhost:3000/api/raking/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo ranking. | **http://localhost:3000/api/ranking/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br>  “user\_id”: “13 “, <br></br> “score”: “200 “ <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/ranking/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “score”: “201 “ <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um ranking a partir do id. | **http://localhost:3000/api/ranking/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
 
