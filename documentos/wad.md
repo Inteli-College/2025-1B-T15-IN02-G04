@@ -730,8 +730,8 @@ No entanto, caso houvesse desígnio de precificação, dentre as opções de est
 ### Praça
 No que tange aos canais de distribuição da aplicação, o produto será disponibilizado via web e aplicativo móvel, diretamente no ambiente de trabalho dos canais internos da Bayer Crop Science. Os argumentos que sustentam essa escolha dizem respeito ao contexto da aplicação (a qual configura-se uma aplicação digital e, por isso, requer um meio similar para ser executado) e ao fato de, a via web e a aplicação móvel estar disponível ao PTD mesmo fora do ambiente de trabalho da empresa, de modo que o funcionário pode acessar os conteúdos independentemente do lugar e do horário, conforme as suas necessidades. 
 
-_6.4 Promoção (até 200 palavras)_
-_Descreva as estratégias digitais planejadas, como SEO, redes sociais, marketing de conteúdo e campanhas pagas._
+### Promoção
+Em função do contexto em que o produto está inserido (cujo objetivo consiste em ser uma aplicação de uso interno da Bayer Crop Science), é possível inferir que a promoção será realizada por intermédio do incentivo da empresa, focando na maximização de engajamento dos PTDs. Nesse sentido, as possibilidades estruturadas para tal finalidade foram: notificações nos dispositivos dos funcionários, por exemplo por meio de e-mails, incentivando o uso da plataforma; Workshops de treinamento para capacitação dos funcionários no que tange a utilização da plataforma, aproveitando para potencializar a promoção; O reconhecimento, em reuniões e eventos da empresa, dos PTDs que mais se destacam no ranking que o produto contempla, de modo a motivar os usuários que ainda não se demonstraram engajados. Além disso, a plataforma também poderá ser divulgada em demais reuniões e eventos corporativos, assim como por meio das redes sociais corporativas da Bayer, ampliando o alcance, a visibilidade e a importância do AprendizaAgro no processo de capacitação dos PTDs.
 
 # <a name="c7"></a>7. Conclusões e trabalhos futuros (sprint 5)
 
