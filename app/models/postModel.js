@@ -3,7 +3,7 @@ const db = require('../config/db');
 class PostModel {
   static async getAllPosts() {
     try {
-      const result = await db.query('SELECT * FROM post ORDER BY data DESC');
+      const result = await db.query('SELECT * FROM post ORDER BY created_at DESC');
       return result.rows;
     } catch (error) {
       console.error("Erro ao buscar todos os posts:", error);
@@ -24,8 +24,8 @@ class PostModel {
   static async createPost(data) {
     try {
       const result = await db.query(
-        'INSERT INTO post (id_user, descripton, tittle, data) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING *',
-        [data.id_user, data.descripton, data.tittle]
+        'INSERT INTO post (id_user, title, description, image) VALUES ($1, $2, $3, $4) RETURNING *',
+        [data.id_user, data.title, data.description, data.image]
       );
       return result.rows[0];
     } catch (error) {
@@ -37,8 +37,8 @@ class PostModel {
   static async updatePost(id, data) {
     try {
       const result = await db.query(
-        'UPDATE post SET descripton = $1, tittle = $2 WHERE id = $3 RETURNING *',
-        [data.descripton, data.tittle, id]
+        'UPDATE post SET title = $1, description = $2, image = $3, updated_at = CURRENT_TIMESTAMP WHERE id = $4 RETURNING *',
+        [data.title, data.description, data.image, id]
       );
       return result.rows[0];
     } catch (error) {
@@ -58,4 +58,4 @@ class PostModel {
   }
 }
 
-module.exports = PostModel; 
+module.exports = PostModel;
