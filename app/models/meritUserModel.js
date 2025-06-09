@@ -8,13 +8,13 @@ module.exports = {
 
   async create({ id_user, id_merit }) {
     const res = await pool.query(
-      'INSERT INTO user_merit (id_user, id_merit) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO merit_user (id_user, id_merit) VALUES ($1, $2) RETURNING *',
       [id_user, id_merit]
     );
     return res.rows[0];
   },
 
   async delete(id) {
-    await pool.query('DELETE FROM user_merit WHERE id = $1', [id]);
+    await pool.query('DELETE FROM merit_user WHERE id = $1', [id]);
   }
 };
