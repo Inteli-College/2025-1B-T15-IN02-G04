@@ -10,6 +10,10 @@ const questionRoutes = require("./questionRoutes");
 const testRoutes = require("./testRoutes");
 const answerRoutes = require("./answerRoutes");
 const rankingRoutes = require("./rankingRoutes");
+const meritRoutes = require("./meritRoutes");
+const certificateRoutes = require("./certificateRoutes");
+const cardRoutes = require("./cardRoutes");
+const comentRoutes = require("./comentRoutes");
 const postRoutes = require("./postRoutes");
 const likeRoutes = require("./likeRoutes");
 
@@ -24,6 +28,10 @@ router.use("/api", answerRoutes);
 router.use("/api", rankingRoutes);
 router.use("/api", postRoutes);
 router.use("/api", likeRoutes);
+router.use("/api", meritRoutes);
+router.use("/api", certificateRoutes);
+router.use("/api", cardRoutes);
+router.use("/api", comentRoutes);
 
 // Frontend routes
 router.use("/", frontendRoutes);
