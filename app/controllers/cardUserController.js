@@ -9,12 +9,12 @@ module.exports = {
   async create(req, res) {
     const { id_user, id_card } = req.body;
     await cardUserModel.create({ id_user, id_card });
-    res.redirect('/user-cards');
+    res.redirect('/card-user');
   },
 
   async delete(req, res) {
     const { id } = req.params;
     await cardUserModel.delete(id);
-    res.redirect('/user-cards');
+    res.redirect('/card-user');
   }
 };
