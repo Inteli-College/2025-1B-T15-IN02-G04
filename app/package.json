@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "migrate-js": "node ./migrations/migrate_all.js",
-    "migrate-sql": "node ./migrations/migrate_all.js",
+    "migrate-sql": "node ./scripts/init.sql",
     "drop": "node ./migrations/drop_all.js",
     "populate": "node ./migrations/insert_all.js",
     "test": "jest",
