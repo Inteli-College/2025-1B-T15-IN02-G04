@@ -2,7 +2,7 @@ const pool = require('../db');
 
 module.exports = {
   async getAll() {
-    const res = await pool.query('SELECT * FROM user_test');
+    const res = await pool.query('SELECT * FROM test_user');
     return res.rows;
   },
 
