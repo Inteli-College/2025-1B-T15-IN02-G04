@@ -1,20 +1,20 @@
-const userCardModel = require('../models/userCardModel');
+const cardUserModel = require('../models/cardUserModel');
 
 module.exports = {
   async list(req, res) {
-    const userCards = await userCardModel.getAll();
-    res.render('userCards/list', { userCards });
+    const cardUsers = await cardUserModel.getAll();
+    res.render('cardUsers/list', { cardUsers });
   },
 
   async create(req, res) {
     const { id_user, id_card } = req.body;
-    await userCardModel.create({ id_user, id_card });
+    await cardUserModel.create({ id_user, id_card });
     res.redirect('/user-cards');
   },
 
   async delete(req, res) {
     const { id } = req.params;
-    await userCardModel.delete(id);
+    await cardUserModel.delete(id);
     res.redirect('/user-cards');
   }
 };
