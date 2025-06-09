@@ -1,14 +1,3 @@
--- ========================================
--- SISTEMA EDUCACIONAL COMPLETO
--- Script para criar a estrutura completa do banco de dados
--- Baseado nos arquivos Parte1BD.sql e Parte2BD.sql
--- ========================================
-
--- ========================================
--- CRIAR TABELAS PRINCIPAIS - CORE SYSTEM
--- ========================================
-
--- Tabela principal de usuários
 CREATE TABLE IF NOT EXISTS "user" (
   id BIGSERIAL PRIMARY KEY,
   first_name VARCHAR(255) NOT NULL,
@@ -22,7 +11,6 @@ CREATE TABLE IF NOT EXISTS "user" (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de papéis/roles
 CREATE TABLE IF NOT EXISTS role (
   id BIGSERIAL PRIMARY KEY,
   role_name VARCHAR(255) NOT NULL UNIQUE,
@@ -30,7 +18,6 @@ CREATE TABLE IF NOT EXISTS role (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de associação usuário-papel
 CREATE TABLE IF NOT EXISTS role_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -41,11 +28,6 @@ CREATE TABLE IF NOT EXISTS role_user (
   UNIQUE(id_user, id_role)
 );
 
--- ========================================
--- SISTEMA EDUCACIONAL - TRILHAS E CONTEÚDO
--- ========================================
-
--- Tabela de trilhas educacionais
 CREATE TABLE IF NOT EXISTS trail (
   id BIGSERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -54,7 +36,6 @@ CREATE TABLE IF NOT EXISTS trail (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de módulos dentro das trilhas
 CREATE TABLE IF NOT EXISTS module (
   id BIGSERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -65,7 +46,7 @@ CREATE TABLE IF NOT EXISTS module (
   FOREIGN KEY (id_trail) REFERENCES trail(id) ON DELETE CASCADE
 );
 
--- Tabela de aulas dentro dos módulos
+
 CREATE TABLE IF NOT EXISTS class (
   id BIGSERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -76,11 +57,11 @@ CREATE TABLE IF NOT EXISTS class (
   FOREIGN KEY (id_module) REFERENCES module(id) ON DELETE CASCADE
 );
 
--- ========================================
--- SISTEMA DE CERTIFICADOS E MÉRITOS
--- ========================================
 
--- Tabela de certificados
+
+
+
+
 CREATE TABLE IF NOT EXISTS certificate (
   id BIGSERIAL PRIMARY KEY,
   description TEXT,
@@ -92,7 +73,7 @@ CREATE TABLE IF NOT EXISTS certificate (
   FOREIGN KEY (id_trail) REFERENCES trail(id) ON DELETE CASCADE
 );
 
--- Tabela de méritos/conquistas
+
 CREATE TABLE IF NOT EXISTS merit (
   id BIGSERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE,
@@ -101,7 +82,7 @@ CREATE TABLE IF NOT EXISTS merit (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de méritos dos usuários
+
 CREATE TABLE IF NOT EXISTS merit_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -112,11 +93,11 @@ CREATE TABLE IF NOT EXISTS merit_user (
   UNIQUE(id_user, id_merit)
 );
 
--- ========================================
--- SISTEMA DE AVALIAÇÕES E TESTES
--- ========================================
 
--- Tabela de testes
+
+
+
+
 CREATE TABLE IF NOT EXISTS test (
   id BIGSERIAL PRIMARY KEY,
   id_trail BIGINT NOT NULL,
@@ -128,7 +109,7 @@ CREATE TABLE IF NOT EXISTS test (
   FOREIGN KEY (id_trail) REFERENCES trail(id) ON DELETE CASCADE
 );
 
--- Tabela de perguntas dos testes
+
 CREATE TABLE IF NOT EXISTS question (
   id BIGSERIAL PRIMARY KEY,
   question_text TEXT NOT NULL,
@@ -138,7 +119,7 @@ CREATE TABLE IF NOT EXISTS question (
   FOREIGN KEY (id_test) REFERENCES test(id) ON DELETE CASCADE
 );
 
--- Tabela de respostas das perguntas
+
 CREATE TABLE IF NOT EXISTS answer (
   id BIGSERIAL PRIMARY KEY,
   answer_text TEXT NOT NULL,
@@ -149,11 +130,11 @@ CREATE TABLE IF NOT EXISTS answer (
   FOREIGN KEY (id_question) REFERENCES question(id) ON DELETE CASCADE
 );
 
--- ========================================
--- SISTEMA DE PROGRESSO DO USUÁRIO
--- ========================================
 
--- Progresso dos usuários nas trilhas
+
+
+
+
 CREATE TABLE IF NOT EXISTS trail_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -166,7 +147,7 @@ CREATE TABLE IF NOT EXISTS trail_user (
   UNIQUE(id_user, id_trail)
 );
 
--- Progresso dos usuários nos módulos
+
 CREATE TABLE IF NOT EXISTS module_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -179,7 +160,6 @@ CREATE TABLE IF NOT EXISTS module_user (
   UNIQUE(id_user, id_module)
 );
 
--- Progresso dos usuários nas aulas
 CREATE TABLE IF NOT EXISTS class_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -192,7 +172,6 @@ CREATE TABLE IF NOT EXISTS class_user (
   UNIQUE(id_user, id_class)
 );
 
--- Resultados dos testes dos usuários
 CREATE TABLE IF NOT EXISTS test_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -204,11 +183,6 @@ CREATE TABLE IF NOT EXISTS test_user (
   FOREIGN KEY (id_test) REFERENCES test(id) ON DELETE CASCADE
 );
 
--- ========================================
--- SISTEMA SOCIAL - POSTS E INTERAÇÕES
--- ========================================
-
--- Tabela de posts/publicações
 CREATE TABLE IF NOT EXISTS post (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -220,7 +194,6 @@ CREATE TABLE IF NOT EXISTS post (
   FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE
 );
 
--- Tabela de comentários
 CREATE TABLE IF NOT EXISTS comment (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -230,7 +203,6 @@ CREATE TABLE IF NOT EXISTS comment (
   FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE
 );
 
--- Comentários em posts
 CREATE TABLE IF NOT EXISTS comment_post (
   id BIGSERIAL PRIMARY KEY,
   id_post BIGINT NOT NULL,
@@ -240,7 +212,7 @@ CREATE TABLE IF NOT EXISTS comment_post (
   UNIQUE(id_post, id_comment)
 );
 
--- Comentários em aulas
+
 CREATE TABLE IF NOT EXISTS comment_class (
   id BIGSERIAL PRIMARY KEY,
   id_class BIGINT NOT NULL,
@@ -250,7 +222,6 @@ CREATE TABLE IF NOT EXISTS comment_class (
   UNIQUE(id_class, id_comment)
 );
 
--- Curtidas dos usuários em posts
 CREATE TABLE IF NOT EXISTS user_like (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -262,21 +233,15 @@ CREATE TABLE IF NOT EXISTS user_like (
   UNIQUE(id_user, id_post)
 );
 
--- ========================================
--- SISTEMA DE GAMIFICAÇÃO
--- ========================================
-
--- Tabela de cards/cartões colecionáveis
 CREATE TABLE IF NOT EXISTS card (
   id BIGSERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   image VARCHAR(255) NOT NULL,
-  rarity VARCHAR(50) DEFAULT 'common', -- common, rare, epic, legendary
+  rarity VARCHAR(50) DEFAULT 'common', 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Cards dos usuários
 CREATE TABLE IF NOT EXISTS card_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -287,7 +252,6 @@ CREATE TABLE IF NOT EXISTS card_user (
   UNIQUE(id_user, id_card)
 );
 
--- Sistema de ranking
 CREATE TABLE IF NOT EXISTS ranking (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL UNIQUE,
@@ -297,50 +261,37 @@ CREATE TABLE IF NOT EXISTS ranking (
   FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE
 );
 
--- ========================================
--- SISTEMA DE HIERARQUIA
--- ========================================
-
--- Hierarquia entre usuários (mentor/aprendiz, etc.)
 CREATE TABLE IF NOT EXISTS hierarchy (
   id BIGSERIAL PRIMARY KEY,
-  id_role_user1 BIGINT NOT NULL, -- Usuário superior na hierarquia
-  id_role_user2 BIGINT NOT NULL, -- Usuário subordinado na hierarquia
-  hierarchy_type VARCHAR(50) DEFAULT 'mentor', -- mentor, supervisor, etc.
+  id_role_user1 BIGINT NOT NULL, 
+  id_role_user2 BIGINT NOT NULL, 
+  hierarchy_type VARCHAR(50) DEFAULT 'mentor', 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_role_user1) REFERENCES role_user(id) ON DELETE CASCADE,
   FOREIGN KEY (id_role_user2) REFERENCES role_user(id) ON DELETE CASCADE
 );
 
--- Hierarquia específica para trilhas
 CREATE TABLE IF NOT EXISTS hierarchy_trail (
   id BIGSERIAL PRIMARY KEY,
   id_hierarchy BIGINT NOT NULL,
   id_trail BIGINT NOT NULL,
-  permissions TEXT, -- JSON ou texto com permissões específicas
+  permissions TEXT, 
   FOREIGN KEY (id_hierarchy) REFERENCES hierarchy(id) ON DELETE CASCADE,
   FOREIGN KEY (id_trail) REFERENCES trail(id) ON DELETE CASCADE,
   UNIQUE(id_hierarchy, id_trail)
 );
 
--- ========================================
--- ÍNDICES PARA PERFORMANCE
--- ========================================
-
--- Índices para tabelas de usuários e roles
 CREATE INDEX IF NOT EXISTS idx_user_email ON "user"(email);
 CREATE INDEX IF NOT EXISTS idx_user_username ON "user"(username);
 CREATE INDEX IF NOT EXISTS idx_role_user_user_id ON role_user(id_user);
 CREATE INDEX IF NOT EXISTS idx_role_user_role_id ON role_user(id_role);
 
--- Índices para sistema educacional
 CREATE INDEX IF NOT EXISTS idx_module_trail_id ON module(id_trail);
 CREATE INDEX IF NOT EXISTS idx_class_module_id ON class(id_module);
 CREATE INDEX IF NOT EXISTS idx_test_trail_id ON test(id_trail);
 CREATE INDEX IF NOT EXISTS idx_question_test_id ON question(id_test);
 CREATE INDEX IF NOT EXISTS idx_answer_question_id ON answer(id_question);
 
--- Índices para progresso do usuário
 CREATE INDEX IF NOT EXISTS idx_trail_user_user_id ON trail_user(id_user);
 CREATE INDEX IF NOT EXISTS idx_trail_user_trail_id ON trail_user(id_trail);
 CREATE INDEX IF NOT EXISTS idx_module_user_user_id ON module_user(id_user);
@@ -350,23 +301,16 @@ CREATE INDEX IF NOT EXISTS idx_class_user_class_id ON class_user(id_class);
 CREATE INDEX IF NOT EXISTS idx_test_user_user_id ON test_user(id_user);
 CREATE INDEX IF NOT EXISTS idx_test_user_test_id ON test_user(id_test);
 
--- Índices para sistema social
 CREATE INDEX IF NOT EXISTS idx_post_user_id ON post(id_user);
 CREATE INDEX IF NOT EXISTS idx_post_created_at ON post(created_at);
 CREATE INDEX IF NOT EXISTS idx_comment_user_id ON comment(id_user);
 CREATE INDEX IF NOT EXISTS idx_user_like_user_id ON user_like(id_user);
 CREATE INDEX IF NOT EXISTS idx_user_like_post_id ON user_like(id_post);
 
--- Índices para gamificação
 CREATE INDEX IF NOT EXISTS idx_ranking_score ON ranking(score DESC);
 CREATE INDEX IF NOT EXISTS idx_ranking_position ON ranking(position);
 CREATE INDEX IF NOT EXISTS idx_card_user_user_id ON card_user(id_user);
 
--- ========================================
--- VIEWS ÚTEIS
--- ========================================
-
--- View para progresso completo dos usuários
 CREATE OR REPLACE VIEW v_user_progress AS
 SELECT 
   u.id as user_id,
@@ -391,7 +335,6 @@ LEFT JOIN class c ON m.id = c.id_module
 LEFT JOIN class_user cu ON u.id = cu.id_user AND c.id = cu.id_class AND cu.complete = TRUE
 GROUP BY u.id, u.first_name, u.last_name, u.email, t.id, t.name, tu.percentage, tu.started_at, tu.completed_at;
 
--- View para ranking com detalhes dos usuários
 CREATE OR REPLACE VIEW v_ranking_detailed AS
 SELECT 
   r.position,
@@ -411,7 +354,6 @@ LEFT JOIN certificate c ON u.id = c.id_user
 GROUP BY r.position, r.score, u.id, u.first_name, u.last_name, u.username, u.avatar, r.last_updated
 ORDER BY r.position;
 
--- View para posts com interações
 CREATE OR REPLACE VIEW v_posts_with_interactions AS
 SELECT 
   p.id as post_id,
@@ -431,11 +373,6 @@ LEFT JOIN comment_post cp ON p.id = cp.id_post
 GROUP BY p.id, p.title, p.description, p.image, p.created_at, u.first_name, u.last_name, u.username
 ORDER BY p.created_at DESC;
 
--- ========================================
--- FUNÇÕES UTILITÁRIAS
--- ========================================
-
--- Função para calcular o progresso de uma trilha
 CREATE OR REPLACE FUNCTION calculate_trail_progress(
   p_user_id BIGINT,
   p_trail_id BIGINT
@@ -445,13 +382,12 @@ DECLARE
   v_completed_classes INTEGER;
   v_progress INTEGER;
 BEGIN
-  -- Contar total de aulas na trilha
+  
   SELECT COUNT(c.id) INTO v_total_classes
   FROM class c
   JOIN module m ON c.id_module = m.id
   WHERE m.id_trail = p_trail_id;
   
-  -- Contar aulas completadas pelo usuário
   SELECT COUNT(cu.id) INTO v_completed_classes
   FROM class_user cu
   JOIN class c ON cu.id_class = c.id
@@ -460,14 +396,12 @@ BEGIN
     AND m.id_trail = p_trail_id 
     AND cu.complete = TRUE;
   
-  -- Calcular progresso
   IF v_total_classes = 0 THEN
     v_progress := 0;
   ELSE
     v_progress := ROUND((v_completed_classes::DECIMAL / v_total_classes::DECIMAL) * 100);
   END IF;
   
-  -- Atualizar tabela trail_user
   UPDATE trail_user 
   SET percentage = v_progress,
       completed_at = CASE WHEN v_progress = 100 THEN CURRENT_TIMESTAMP ELSE NULL END
@@ -477,24 +411,16 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Função para atualizar ranking
 CREATE OR REPLACE FUNCTION update_user_ranking(p_user_id BIGINT) RETURNS VOID AS $$
 DECLARE
   v_score INTEGER := 0;
-BEGIN
-  -- Calcular pontuação baseada em:
-  -- Trilhas completadas (100 pontos cada)
-  -- Módulos completados (25 pontos cada)
-  -- Aulas completadas (5 pontos cada)
-  -- Testes aprovados (50 pontos cada)
-  -- Méritos conquistados (30 pontos cada)
-  
+BEGIN  
   SELECT 
-    (COUNT(DISTINCT tu.id) * 100) + -- Trilhas completas
-    (COUNT(DISTINCT mu.id) * 25) + -- Módulos completos
-    (COUNT(DISTINCT cu.id) * 5) + -- Aulas completas
-    (COUNT(DISTINCT tst.id) * 50) + -- Testes aprovados
-    (COUNT(DISTINCT mrt.id) * 30) -- Méritos
+    (COUNT(DISTINCT tu.id) * 100) + 
+    (COUNT(DISTINCT mu.id) * 25) + 
+    (COUNT(DISTINCT cu.id) * 5) + 
+    (COUNT(DISTINCT tst.id) * 50) + 
+    (COUNT(DISTINCT mrt.id) * 30) 
   INTO v_score
   FROM "user" u
   LEFT JOIN trail_user tu ON u.id = tu.id_user AND tu.percentage = 100
@@ -504,14 +430,12 @@ BEGIN
   LEFT JOIN merit_user mrt ON u.id = mrt.id_user
   WHERE u.id = p_user_id;
   
-  -- Inserir ou atualizar ranking
   INSERT INTO ranking (id_user, score, last_updated)
   VALUES (p_user_id, v_score, CURRENT_TIMESTAMP)
   ON CONFLICT (id_user) DO UPDATE SET
     score = EXCLUDED.score,
     last_updated = EXCLUDED.last_updated;
     
-  -- Atualizar posições
   WITH ranked_users AS (
     SELECT id_user, ROW_NUMBER() OVER (ORDER BY score DESC, last_updated ASC) as new_position
     FROM ranking
@@ -524,7 +448,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Função para verificar se usuário pode acessar trilha
 CREATE OR REPLACE FUNCTION can_access_trail(
   p_user_id BIGINT,
   p_trail_id BIGINT
@@ -532,7 +455,7 @@ CREATE OR REPLACE FUNCTION can_access_trail(
 DECLARE
   v_has_access BOOLEAN := FALSE;
 BEGIN
-  -- Verificar se usuário tem acesso direto ou através de hierarquia
+  
   SELECT EXISTS(
     SELECT 1 FROM trail_user tu WHERE tu.id_user = p_user_id AND tu.id_trail = p_trail_id
     UNION
@@ -546,21 +469,16 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ========================================
--- TRIGGERS PARA ATUALIZAÇÕES AUTOMÁTICAS
--- ========================================
-
--- Trigger para atualizar progresso ao completar aula
 CREATE OR REPLACE FUNCTION trigger_update_progress() RETURNS TRIGGER AS $$
 BEGIN
   IF NEW.complete = TRUE AND (OLD.complete IS NULL OR OLD.complete = FALSE) THEN
-    -- Atualizar progresso do módulo
+    
     PERFORM calculate_trail_progress(NEW.id_user, 
       (SELECT m.id_trail FROM module m 
        JOIN class c ON m.id = c.id_module 
        WHERE c.id = NEW.id_class));
     
-    -- Atualizar ranking
+    
     PERFORM update_user_ranking(NEW.id_user);
   END IF;
   
@@ -573,11 +491,6 @@ CREATE TRIGGER trigger_class_user_update
   FOR EACH ROW
   EXECUTE FUNCTION trigger_update_progress();
 
--- ========================================
--- INSERIR DADOS BÁSICOS
--- ========================================
-
--- Inserir roles básicos
 INSERT INTO role (role_name, description) VALUES
 ('admin', 'Administrador do sistema'),
 ('instructor', 'Instrutor de trilhas'),
@@ -585,13 +498,8 @@ INSERT INTO role (role_name, description) VALUES
 ('mentor', 'Mentor de outros usuários')
 ON CONFLICT (role_name) DO NOTHING;
 
--- ========================================
--- VERIFICAÇÃO FINAL
--- ========================================
-
 SELECT 'SISTEMA EDUCACIONAL COMPLETO CRIADO COM SUCESSO!' as resultado;
 
--- Verificar se as tabelas foram criadas
 SELECT 
   'Tabelas criadas:' as info,
   COUNT(*) as total_tabelas
@@ -605,7 +513,6 @@ WHERE table_schema = 'public'
     'card', 'card_user', 'ranking', 'hierarchy', 'hierarchy_trail'
   );
 
--- Verificar se as funções foram criadas
 SELECT 
   'Funções criadas:' as info,
   COUNT(*) as total_funcoes
