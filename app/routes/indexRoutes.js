@@ -14,6 +14,8 @@ const meritRoutes = require("./meritRoutes");
 const certificateRoutes = require("./certificateRoutes");
 const cardRoutes = require("./cardRoutes");
 const comentRoutes = require("./comentRoutes");
+const postRoutes = require("./postRoutes");
+const likeRoutes = require("./likeRoutes");
 
 // API routes
 router.use("/api/auth", authRoutes);
@@ -24,6 +26,8 @@ router.use("/api", questionRoutes);
 router.use("/api", testRoutes);
 router.use("/api", answerRoutes);
 router.use("/api", rankingRoutes);
+router.use("/api", postRoutes);
+router.use("/api", likeRoutes);
 router.use("/api", meritRoutes);
 router.use("/api", certificateRoutes);
 router.use("/api", cardRoutes);
