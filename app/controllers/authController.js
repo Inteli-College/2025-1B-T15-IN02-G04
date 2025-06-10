@@ -44,14 +44,14 @@ async function register(req, res) {
 
     // Hash da senha
     const saltRounds = 10;
-    const hash_password = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Criar usuário
+    // Criar usuário (passando a senha hasheada para o parâmetro correto)
     const user = await createUser(
       first_name,
       last_name,
       email,
-      hash_password,
+      hashedPassword, // Este valor irá para a coluna 'password' no banco
       username
     );
 
@@ -99,7 +99,8 @@ async function login(req, res) {
       return res.status(401).json({ erro: "Email ou senha inválidos" });
     }
     
-    const isPasswordValid = await bcrypt.compare(password, user.hash_password);
+    // Usar user.password em vez de user.hash_password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       console.log("Senha inválida para:", email);
       return res.status(401).json({ erro: "Email ou senha inválidos" });

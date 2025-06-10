@@ -26,7 +26,7 @@ class User {
       console.log("Criando usuário com dados:", { first_name, last_name, email, username });
       
       const result = await db.query(
-        'INSERT INTO "user" (first_name, last_name, email, hash_password, username) VALUES ($1, $2, $3, $4, $5) RETURNING id, first_name, last_name, email, username',
+        'INSERT INTO "user" (first_name, last_name, email, password, username) VALUES ($1, $2, $3, $4, $5) RETURNING id, first_name, last_name, email, username',
         [first_name, last_name, email, hash_password, username]
       );
       
