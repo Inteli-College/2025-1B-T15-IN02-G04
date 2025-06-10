@@ -4,8 +4,8 @@ class LikeModel {
   static async createLike(data) {
     try {
       const result = await db.query(
-        'INSERT INTO "user_like" (id_user, id_post, "like") VALUES ($1, $2, $3) RETURNING *',
-        [data.id_user, data.id_post, data.like]
+        'INSERT INTO "user_like" (id_user, id_post, liked) VALUES ($1, $2, $3) RETURNING *',
+        [data.id_user, data.id_post, data.liked]
       );
       return result.rows[0];
     } catch (error) {
@@ -30,7 +30,7 @@ class LikeModel {
         `SELECT ul.*, u.username 
          FROM "user_like" ul 
          JOIN "user" u ON ul.id_user = u.id 
-         WHERE ul.id_post = $1 AND ul."like" = true`,
+         WHERE ul.id_post = $1 AND ul.liked = true`,
         [postId]
       );
       return result.rows;
@@ -46,7 +46,7 @@ class LikeModel {
         `SELECT ul.*, p.tittle as post_title 
          FROM "user_like" ul 
          JOIN post p ON ul.id_post = p.id 
-         WHERE ul.id_user = $1 AND ul."like" = true`,
+         WHERE ul.id_user = $1 AND ul.liked = true`,
         [userId]
       );
       return result.rows;
@@ -59,7 +59,7 @@ class LikeModel {
   static async getLikeCount(postId) {
     try {
       const result = await db.query(
-        'SELECT COUNT(*) as count FROM "user_like" WHERE id_post = $1 AND "like" = true',
+        'SELECT COUNT(*) as count FROM "user_like" WHERE id_post = $1 AND liked = true',
         [postId]
       );
       return result.rows[0].count;
@@ -80,14 +80,14 @@ class LikeModel {
       if (existingLike.rows.length > 0) {
         // Se existe, inverte o estado do like
         const result = await db.query(
-          'UPDATE "user_like" SET "like" = NOT "like" WHERE id_user = $1 AND id_post = $2 RETURNING *',
+          'UPDATE "user_like" SET liked = NOT liked WHERE id_user = $1 AND id_post = $2 RETURNING *',
           [userId, postId]
         );
         return result.rows[0];
       } else {
         // Se não existe, cria um novo like
         const result = await db.query(
-          'INSERT INTO "user_like" (id_user, id_post, "like") VALUES ($1, $2, true) RETURNING *',
+          'INSERT INTO "user_like" (id_user, id_post, liked) VALUES ($1, $2, true) RETURNING *',
           [userId, postId]
         );
         return result.rows[0];
