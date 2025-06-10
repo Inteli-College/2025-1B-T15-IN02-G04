@@ -61,6 +61,9 @@ const LikeController = {
   async toggleLike(req, res) {
     try {
       const { userId, postId } = req.body;
+      if (!userId || !postId) {
+        return res.status(400).json({ error: 'userId e postId são obrigatórios' });
+      }
       const result = await LikeModel.toggleLike(userId, postId);
       return res.status(200).json(result);
     } catch (error) {

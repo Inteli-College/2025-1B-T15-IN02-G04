@@ -71,7 +71,7 @@ class LikeModel {
 
   static async toggleLike(userId, postId) {
     try {
-      // Verifica se já existe um like
+      // Primeiro, verifica se já existe um like
       const existingLike = await db.query(
         'SELECT * FROM "user_like" WHERE id_user = $1 AND id_post = $2',
         [userId, postId]
@@ -79,10 +79,12 @@ class LikeModel {
 
       if (existingLike.rows.length > 0) {
         // Se existe, deleta o like
-        return await this.deleteLike(existingLike.rows[0].id);
+        const deletedLike = await this.deleteLike(existingLike.rows[0].id);
+        return { action: 'deleted', like: deletedLike };
       } else {
         // Se não existe, cria um novo like
-        return await this.createLike({ id_user: userId, id_post: postId });
+        const newLike = await this.createLike({ id_user: userId, id_post: postId });
+        return { action: 'created', like: newLike };
       }
     } catch (error) {
       console.error("Erro ao alternar like:", error);
