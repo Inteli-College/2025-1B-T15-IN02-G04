@@ -17,8 +17,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="/css/global.css">
+    
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    
+    <!-- Page-specific Styles -->
+    <% if (typeof pageCSS !== 'undefined' && pageCSS) { %>
+        <% if (Array.isArray(pageCSS)) { %>
+            <% pageCSS.forEach(function(cssFile) { %>
+                <link rel="stylesheet" href="/css/<%= cssFile %>">
+            <% }); %>
+        <% } else { %>
+            <link rel="stylesheet" href="/css/<%= pageCSS %>">
+        <% } %>
+    <% } %>
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="<%= pageTitle %> | AprendizAGRO">
@@ -56,6 +71,17 @@
     <script src="/scripts/main.js"></script>
     
     <!-- Page-specific scripts -->
+    <% if (typeof pageJS !== 'undefined' && pageJS) { %>
+        <% if (Array.isArray(pageJS)) { %>
+            <% pageJS.forEach(function(jsFile) { %>
+                <script src="/scripts/<%= jsFile %>"></script>
+            <% }); %>
+        <% } else { %>
+            <script src="/scripts/<%= pageJS %>"></script>
+        <% } %>
+    <% } %>
+    
+    <!-- Additional Scripts -->
     <% if (typeof additionalScripts !== 'undefined') { %>
         <%- additionalScripts %>
     <% } %>
