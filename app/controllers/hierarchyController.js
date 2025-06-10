@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const db = require('../config/db');
 
 // Get all hierarchies
 exports.getAllHierarchies = async (req, res) => {
@@ -134,13 +134,11 @@ exports.getMenteesByMentor = async (req, res) => {
         const { userId } = req.params;
         const result = await db.query(`
             SELECT h.*, 
-                   u.id as mentee_id,
-                   u.name as mentee_name,
+                   ru2.id_user as mentee_id,
                    r.role_name as mentee_role
             FROM hierarchy h
             INNER JOIN role_user ru1 ON h.id_role_user1 = ru1.id
             INNER JOIN role_user ru2 ON h.id_role_user2 = ru2.id
-            INNER JOIN "user" u ON ru2.id_user = u.id
             INNER JOIN role r ON ru2.id_role = r.id
             WHERE ru1.id_user = $1 AND h.hierarchy_type = 'mentor'
             ORDER BY h.created_at DESC
@@ -158,13 +156,11 @@ exports.getMentorsByMentee = async (req, res) => {
         const { userId } = req.params;
         const result = await db.query(`
             SELECT h.*, 
-                   u.id as mentor_id,
-                   u.name as mentor_name,
+                   ru1.id_user as mentor_id,
                    r.role_name as mentor_role
             FROM hierarchy h
             INNER JOIN role_user ru1 ON h.id_role_user1 = ru1.id
             INNER JOIN role_user ru2 ON h.id_role_user2 = ru2.id
-            INNER JOIN "user" u ON ru1.id_user = u.id
             INNER JOIN role r ON ru1.id_role = r.id
             WHERE ru2.id_user = $1 AND h.hierarchy_type = 'mentor'
             ORDER BY h.created_at DESC

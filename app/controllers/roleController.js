@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const db = require('../config/db');
 
 const VALID_ROLES = ['admin', 'instructor', 'student', 'mentor'];
 
