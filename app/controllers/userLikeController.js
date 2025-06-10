@@ -1,4 +1,4 @@
-const userLikeModel = require('../models/trailUserModel');
+const userLikeModel = require('../models/userLikeModel');
 
 module.exports = {
   async list(req, res) {
