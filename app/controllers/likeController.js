@@ -16,7 +16,7 @@ const LikeController = {
       const { id } = req.params;
       const deleted = await LikeModel.deleteLike(id);
       if (deleted) {
-        return res.status(200).json({ message: 'Like removido com sucesso' });
+        return res.status(200).json(deleted);
       }
       return res.status(404).json({ error: 'Like não encontrado' });
     } catch (error) {
