@@ -1,5 +1,7 @@
 const db = require('../config/database');
 
+const VALID_ROLES = ['admin', 'instructor', 'student', 'mentor'];
+
 // Get all roles
 exports.getAllRoles = async (req, res) => {
     try {
@@ -26,35 +28,23 @@ exports.getRoleById = async (req, res) => {
     }
 };
 
-// Create new role
+// Create new role - Disabled to prevent creation of new roles
 exports.createRole = async (req, res) => {
-    try {
-        const { role_name, description } = req.body;
-        
-        const result = await db.query(
-            'INSERT INTO role (role_name, description) VALUES ($1, $2) RETURNING *',
-            [role_name, description]
-        );
-        
-        res.status(201).json(result.rows[0]);
-    } catch (error) {
-        if (error.code === '23505') { // Unique violation
-            res.status(400).json({ error: 'Role name already exists' });
-        } else {
-            res.status(500).json({ error: error.message });
-        }
-    }
+    res.status(403).json({ 
+        error: 'Creation of new roles is not allowed. Valid roles are: admin, instructor, student, mentor' 
+    });
 };
 
-// Update role
+// Update role - Only allows updating description
 exports.updateRole = async (req, res) => {
     try {
         const { id } = req.params;
-        const { role_name, description } = req.body;
+        const { description } = req.body;
         
+        // Only allow updating description, not role_name
         const result = await db.query(
-            'UPDATE role SET role_name = $1, description = $2 WHERE id = $3 RETURNING *',
-            [role_name, description, id]
+            'UPDATE role SET description = $1 WHERE id = $2 RETURNING *',
+            [description, id]
         );
         
         if (result.rows.length === 0) {
@@ -63,28 +53,15 @@ exports.updateRole = async (req, res) => {
         
         res.json(result.rows[0]);
     } catch (error) {
-        if (error.code === '23505') { // Unique violation
-            res.status(400).json({ error: 'Role name already exists' });
-        } else {
-            res.status(500).json({ error: error.message });
-        }
+        res.status(500).json({ error: error.message });
     }
 };
 
-// Delete role
+// Delete role - Disabled to prevent deletion of existing roles
 exports.deleteRole = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const result = await db.query('DELETE FROM role WHERE id = $1 RETURNING *', [id]);
-        
-        if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Role not found' });
-        }
-        
-        res.json({ message: 'Role deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    res.status(403).json({ 
+        error: 'Deletion of roles is not allowed. Valid roles are: admin, instructor, student, mentor' 
+    });
 };
 
 // Get users by role
@@ -109,6 +86,19 @@ exports.assignUserToRole = async (req, res) => {
     try {
         const { id } = req.params;
         const { userId } = req.body;
+
+        // Verify if the role exists and is valid
+        const roleCheck = await db.query('SELECT role_name FROM role WHERE id = $1', [id]);
+        if (roleCheck.rows.length === 0) {
+            return res.status(404).json({ message: 'Role not found' });
+        }
+
+        const roleName = roleCheck.rows[0].role_name;
+        if (!VALID_ROLES.includes(roleName)) {
+            return res.status(400).json({ 
+                error: 'Invalid role. Valid roles are: admin, instructor, student, mentor' 
+            });
+        }
         
         const result = await db.query(
             'INSERT INTO role_user (id_user, id_role) VALUES ($1, $2) RETURNING *',
