@@ -4,7 +4,7 @@ class LikeModel {
   static async createLike(data) {
     try {
       const result = await db.query(
-        'INSERT INTO "user-like" (id_user, id_post, "like") VALUES ($1, $2, $3) RETURNING *',
+        'INSERT INTO "user_like" (id_user, id_post, "like") VALUES ($1, $2, $3) RETURNING *',
         [data.id_user, data.id_post, data.like]
       );
       return result.rows[0];
@@ -16,7 +16,7 @@ class LikeModel {
 
   static async deleteLike(id) {
     try {
-      const result = await db.query('DELETE FROM "user-like" WHERE id = $1', [id]);
+      const result = await db.query('DELETE FROM "user_like" WHERE id = $1', [id]);
       return result.rowCount > 0;
     } catch (error) {
       console.error("Erro ao deletar like:", error);
@@ -28,7 +28,7 @@ class LikeModel {
     try {
       const result = await db.query(
         `SELECT ul.*, u.username 
-         FROM "user-like" ul 
+         FROM "user_like" ul 
          JOIN "user" u ON ul.id_user = u.id 
          WHERE ul.id_post = $1 AND ul."like" = true`,
         [postId]
@@ -44,7 +44,7 @@ class LikeModel {
     try {
       const result = await db.query(
         `SELECT ul.*, p.tittle as post_title 
-         FROM "user-like" ul 
+         FROM "user_like" ul 
          JOIN post p ON ul.id_post = p.id 
          WHERE ul.id_user = $1 AND ul."like" = true`,
         [userId]
@@ -59,7 +59,7 @@ class LikeModel {
   static async getLikeCount(postId) {
     try {
       const result = await db.query(
-        'SELECT COUNT(*) as count FROM "user-like" WHERE id_post = $1 AND "like" = true',
+        'SELECT COUNT(*) as count FROM "user_like" WHERE id_post = $1 AND "like" = true',
         [postId]
       );
       return result.rows[0].count;
@@ -73,21 +73,21 @@ class LikeModel {
     try {
       // Verifica se já existe um like
       const existingLike = await db.query(
-        'SELECT * FROM "user-like" WHERE id_user = $1 AND id_post = $2',
+        'SELECT * FROM "user_like" WHERE id_user = $1 AND id_post = $2',
         [userId, postId]
       );
 
       if (existingLike.rows.length > 0) {
         // Se existe, inverte o estado do like
         const result = await db.query(
-          'UPDATE "user-like" SET "like" = NOT "like" WHERE id_user = $1 AND id_post = $2 RETURNING *',
+          'UPDATE "user_like" SET "like" = NOT "like" WHERE id_user = $1 AND id_post = $2 RETURNING *',
           [userId, postId]
         );
         return result.rows[0];
       } else {
         // Se não existe, cria um novo like
         const result = await db.query(
-          'INSERT INTO "user-like" (id_user, id_post, "like") VALUES ($1, $2, true) RETURNING *',
+          'INSERT INTO "user_like" (id_user, id_post, "like") VALUES ($1, $2, true) RETURNING *',
           [userId, postId]
         );
         return result.rows[0];
