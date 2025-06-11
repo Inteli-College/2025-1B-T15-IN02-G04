@@ -676,8 +676,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “13“, <br></br> “post\_id”: “122“, <br></br> “like”: “true” <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “17“, <br></br> “post\_id”: “122“, <br></br> “like”: “false” <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “13“, <br></br> “post\_id”: “122“, <br></br> “liked”: “true” <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “17“, <br></br> “post\_id”: “122“, <br></br> “liked”: “false” <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Posts**
@@ -696,8 +696,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um role específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os roles. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo role. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “role”: “PTD“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um role específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “role”: “ADM “ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo role. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “role”: “PTD“ "description": estudante <br></br>} | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um role específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “role”: “ADM“ "description": adiministrador <br></br>} | 200 OK ou 404 Not Found |
 | Deleta um role a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Hierarchy**
@@ -706,8 +706,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma hierarchy específica a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as hierarchys. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova hierarchy. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “1“, <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza uma hierarchy específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “3“, <br></br> } | 200 OK ou 404 Not Found |
+| Cria uma nova hierarchy. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “1“ “id\_role-user2”: “4“ "hierarchy_type": "mentor"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza uma hierarchy específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “id\_role-user2”: “6“ "hierarchy_type": "estudante“, <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
