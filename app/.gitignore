@@ -6,6 +6,9 @@
 Yuri/
 Yuri
 
+### vscode ###
+.vscode/
+
 ### Node ###
 # Logs
 logs
