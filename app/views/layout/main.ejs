@@ -17,6 +17,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- DEBUG: Mostrar variáveis -->
+    <% console.log('DEBUG - pageCSS:', typeof pageCSS !== 'undefined' ? pageCSS : 'undefined'); %>
+    <% console.log('DEBUG - pageJS:', typeof pageJS !== 'undefined' ? pageJS : 'undefined'); %>
+    
     <!-- Global Styles -->
     <link rel="stylesheet" href="/css/global.css">
     
@@ -26,13 +30,18 @@
     
     <!-- Page-specific Styles -->
     <% if (typeof pageCSS !== 'undefined' && pageCSS) { %>
+        <% console.log('DEBUG - Carregando CSS específico:', pageCSS); %>
         <% if (Array.isArray(pageCSS)) { %>
             <% pageCSS.forEach(function(cssFile) { %>
+                <% console.log('DEBUG - Carregando arquivo CSS:', cssFile); %>
                 <link rel="stylesheet" href="/css/<%= cssFile %>">
             <% }); %>
         <% } else { %>
+            <% console.log('DEBUG - Carregando arquivo CSS único:', pageCSS); %>
             <link rel="stylesheet" href="/css/<%= pageCSS %>">
         <% } %>
+    <% } else { %>
+        <% console.log('DEBUG - Nenhum CSS específico definido'); %>
     <% } %>
     
     <!-- Open Graph Meta Tags -->
@@ -47,6 +56,12 @@
     <% } %>
 </head>
 <body>
+    <!-- DEBUG: Mostrar informações no HTML -->
+    <!-- DEBUG INFO: 
+         pageCSS: <%= typeof pageCSS !== 'undefined' ? JSON.stringify(pageCSS) : 'undefined' %>
+         pageJS: <%= typeof pageJS !== 'undefined' ? JSON.stringify(pageJS) : 'undefined' %>
+    -->
+    
     <!-- Header -->
     <%- include('../components/header') %>
 
@@ -84,11 +99,6 @@
     <!-- Additional Scripts -->
     <% if (typeof additionalScripts !== 'undefined') { %>
         <%- additionalScripts %>
-    <% } %>
-    
-    <!-- Analytics (opcional) -->
-    <% if (typeof analytics !== 'undefined' && analytics) { %>
-        <!-- Google Analytics ou outro código de tracking -->
     <% } %>
 </body>
 </html>
