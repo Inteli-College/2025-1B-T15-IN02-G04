@@ -16,7 +16,7 @@ const LikeController = {
       const { id } = req.params;
       const deleted = await LikeModel.deleteLike(id);
       if (deleted) {
-        return res.status(200).json({ message: 'Like removido com sucesso' });
+        return res.status(200).json(deleted);
       }
       return res.status(404).json({ error: 'Like não encontrado' });
     } catch (error) {
@@ -61,6 +61,9 @@ const LikeController = {
   async toggleLike(req, res) {
     try {
       const { userId, postId } = req.body;
+      if (!userId || !postId) {
+        return res.status(400).json({ error: 'userId e postId são obrigatórios' });
+      }
       const result = await LikeModel.toggleLike(userId, postId);
       return res.status(200).json(result);
     } catch (error) {

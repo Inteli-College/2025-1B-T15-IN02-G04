@@ -630,6 +630,86 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “score”: “201 “ <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
+**Comentário**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém um comentário específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os comentários.. | **http://localhost:3000/api/answers/:idt** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo comentário. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “id\_user”: “1 “, <br></br> “coment”: “Aula incrível“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um comentário específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “id\_user”: “1 “, <br></br> “coment”: “Aula muito boa\!“ <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um comentário a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
+**Méritos**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém um mérito específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os méritos. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo mérito. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Primeiro Módulo Concluído\!“, <br></br> “description”: “Todas as aulas do primeiro módulo completas. “ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um mérito específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Primeiro Módulo Concluído!“, <br></br> “description”: “Todas as instruções do primeiro módulo completas.“ <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um mérito a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
+**Certificados**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém um certificado específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os certificados.. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo certificado. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Trilha de Treinamento “, <br></br> “description”: “todas os módulos da trilha de treinamento completas“, <br></br> “date”: “20/10/2025“, <br></br> “id\_user”: “1“, <br></br> “id\_trail”: “1” <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um certificado específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Trilha de Treinamento “, <br></br> “description”: “todas os módulos da trilha de treinamento completas“, <br></br> “date”: “20/11/2025“, <br></br> “id\_user”: “1“, <br></br> “id\_trail”: “1” <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um certificado a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
+**Cards**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém um card específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os cards. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo card. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “title”: “Valores da Bayer.“, <br></br> “description”: “Todos os valores da Bayer. “, <br></br> “image”: “images/card..png“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um card específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “title”: “Valores da Bayer.Crop Science“, <br></br> “description”: “Todos os valores da Bayer.Crop Science.“, <br></br> “image”: “images/card..png“ <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um card a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
+**Like**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “13“, <br></br> “post\_id”: “122“, <br></br> “like”: “true” <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “17“, <br></br> “post\_id”: “122“, <br></br> “like”: “false” <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
+**Posts**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém um post específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “description”: “Muito interessante“, <br></br> “title”: “Visita na fazenda”, <br></br> “imagem”: “images/foto.png”, <br></br> “data”: 12/06/2025 <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “15 “, <br></br> “description”: “Nada interessante“, <br></br> “title”: “Visita na fazenda”, <br></br> “imagem”: “images/foto.png”, <br></br> “data”: 12/06/2025 <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
+**Role**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém um role específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todos os roles. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria um novo role. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “role”: “PTD“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um role específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “role”: “ADM “ <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um role a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
+**Hierarchy**
+
+| função | endereço | método | header | body | response |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Obtém uma hierarchy específica a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+| Lista todas as hierarchys. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
+| Cria uma nova hierarchy. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “1“, <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza uma hierarchy específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “3“, <br></br> } | 200 OK ou 404 Not Found |
+| Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
+
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
 
 ## 4.1. Primeira versão da aplicação web (sprint 3)

@@ -16,6 +16,8 @@ const cardRoutes = require("./cardRoutes");
 const comentRoutes = require("./comentRoutes");
 const postRoutes = require("./postRoutes");
 const likeRoutes = require("./likeRoutes");
+const roleRoutes = require("./roleRoutes");
+const hierarchyRoutes = require("./hierarchyRoutes");
 
 // API routes
 router.use("/api/auth", authRoutes);
@@ -32,6 +34,8 @@ router.use("/api", meritRoutes);
 router.use("/api", certificateRoutes);
 router.use("/api", cardRoutes);
 router.use("/api", comentRoutes);
+router.use("/api", roleRoutes);
+router.use("/api", hierarchyRoutes);
 
 // Frontend routes
 router.use("/", frontendRoutes);
