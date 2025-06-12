@@ -43,3 +43,5 @@ db.connect()
   .catch((err) => {
     console.error("Erro ao conectar ao banco de dados:", err);
   });
+
+

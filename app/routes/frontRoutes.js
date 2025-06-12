@@ -105,4 +105,25 @@ router.get('/esqueci-senha', (req, res) => {
   });
 });
 
+// Página de Trilhas/módulos
+router.get('/Trilhas', (req, res) => {
+  res.render('layout/main', {
+    pageTitle: 'Trilhas',
+    content: '../pages/trail',
+    pageCSS: 'pages/trail.css',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  });
+});
+
+// Página de Aulas
+router.get('/Aulas', (req, res) => {
+  res.render('layout/main', {
+    pageTitle: 'Aulas',
+    content: '../pages/class',
+    pageCSS: 'pages/class.css',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  });
+});
+
+
 module.exports = router;
