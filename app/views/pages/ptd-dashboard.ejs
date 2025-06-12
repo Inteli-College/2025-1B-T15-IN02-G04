@@ -1,0 +1,238 @@
+<!-- PTD Dashboard -->
+<section class="dashboard-hero">
+    <div class="container">
+        <div class="welcome-section">
+            <h1 id="welcome-message">Bem-vindo(a), <span id="user-name">PTD</span>!</h1>
+            <p>Continue sua jornada de aprendizado no agronegócio</p>
+        </div>
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="completed-trails">0</div>
+                <div class="stat-label">Trilhas Concluídas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="in-progress-trails">0</div>
+                <div class="stat-label">Em Progresso</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avg-progress">0%</div>
+                <div class="stat-label">Progresso Médio</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-points">0</div>
+                <div class="stat-label">Pontos Conquistados</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PTD Menu Section -->
+<section class="ptd-menu-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Meu Painel</h2>
+            <p>Acesse suas funcionalidades principais</p>
+        </div>
+        
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openProfile()">
+                <div class="menu-icon">👤</div>
+                <h3>Meu Perfil</h3>
+                <p>Visualize e edite suas informações pessoais</p>
+            </div>
+            
+            <div class="menu-card" onclick="openTalhao()">
+                <div class="menu-icon">🌽</div>
+                <h3>Talhão (Perfil)</h3>
+                <p>Sua plantação virtual - ganha milho a cada trilha concluída</p>
+            </div>
+            
+            <div class="menu-card" onclick="openProgressoCurso()">
+                <div class="menu-icon">📊</div>
+                <h3>Progresso Curso</h3>
+                <p>Acompanhe o andamento dos seus cursos</p>
+            </div>
+            
+            <div class="menu-card" onclick="openRanking()">
+                <div class="menu-icon">🏆</div>
+                <h3>Ranking e Comparativos</h3>
+                <p>Veja sua posição em rankings e comparações</p>
+            </div>
+            
+            <div class="menu-card" onclick="openAtendimento()">
+                <div class="menu-icon">🎧</div>
+                <h3>Atendimento</h3>
+                <p>Acesso a suporte e informações de atendimento</p>
+            </div>
+            
+            <div class="menu-card" onclick="openCalendario()">
+                <div class="menu-icon">📅</div>
+                <h3>Calendário</h3>
+                <p>Visualização de eventos, prazos e aulas</p>
+            </div>
+            
+            <div class="menu-card" onclick="openBancoCursos()">
+                <div class="menu-icon">📚</div>
+                <h3>Banco de Cursos</h3>
+                <p>Catálogo de cursos disponíveis</p>
+            </div>
+            
+            <div class="menu-card" onclick="openComunidade()">
+                <div class="menu-icon">👥</div>
+                <h3>Comunidade</h3>
+                <p>Interação com outros usuários</p>
+            </div>
+            
+            <div class="menu-card" onclick="openProvasTestes()">
+                <div class="menu-icon">📝</div>
+                <h3>Provas e Testes</h3>
+                <p>Acesso a avaliações</p>
+            </div>
+            
+            <div class="menu-card" onclick="openInsignias()">
+                <div class="menu-icon">🎖️</div>
+                <h3>Insígnias e Medalhas</h3>
+                <p>Conquistas e recompensas</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Progresso Atual Section -->
+<section class="dashboard-section current-progress" id="current-progress-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Progresso em Andamento</h2>
+            <p>Continue de onde parou</p>
+        </div>
+        
+        <div class="progress-tabs">
+            <button class="tab-btn active" onclick="showProgressTab('andamento')">Em Andamento</button>
+            <button class="tab-btn" onclick="showProgressTab('lista')">Minha Lista</button>
+            <button class="tab-btn" onclick="showProgressTab('concluidos')">Concluídos</button>
+        </div>
+        
+        <div class="progress-content">
+            <div id="andamento-content" class="tab-content active">
+                <div class="progress-grid" id="progress-grid">
+                    <!-- Progresso em andamento será carregado aqui -->
+                </div>
+            </div>
+            
+            <div id="lista-content" class="tab-content">
+                <div class="progress-grid" id="lista-grid">
+                    <!-- Minha lista será carregada aqui -->
+                </div>
+            </div>
+            
+            <div id="concluidos-content" class="tab-content">
+                <div class="progress-grid" id="concluidos-grid">
+                    <!-- Cursos concluídos serão carregados aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para Detalhes do Curso -->
+<div class="modal" id="course-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modal-course-title">Título do Curso</h3>
+            <button class="modal-close" onclick="closeCourseModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="course-player">
+                <div class="video-placeholder" id="video-player">
+                    <div class="play-button">▶️</div>
+                    <p>Player de vídeo será carregado aqui</p>
+                </div>
+            </div>
+            
+            <div class="course-progress-detail">
+                <h4>Progresso do Curso</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="course-progress-fill"></div>
+                </div>
+                <span id="course-progress-text">0%</span>
+            </div>
+            
+            <div class="course-modules" id="course-modules">
+                <!-- Módulos e aulas serão carregados aqui -->
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeCourseModal()">Fechar</button>
+                <button class="btn btn-primary" id="take-test-btn" onclick="openTest()" style="display: none;">
+                    Realizar Prova
+                </button>
+                <button class="btn btn-green" id="get-certificate-btn" onclick="getCertificate()" style="display: none;">
+                    Obter Certificado
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Talhão -->
+<div class="modal" id="talhao-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Meu Talhão 🌽</h3>
+            <button class="modal-close" onclick="closeTalhaoModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="talhao-visualization">
+                <div class="farm-grid" id="farm-grid">
+                    <!-- Grid da plantação será gerado aqui -->
+                </div>
+            </div>
+            <div class="talhao-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Milhos Conquistados:</span>
+                    <span class="stat-value" id="corn-count">0 🌽</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Nível da Plantação:</span>
+                    <span class="stat-value" id="farm-level">Nível 1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Próxima Expansão:</span>
+                    <span class="stat-value" id="next-expansion">5 trilhas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Ranking -->
+<div class="modal" id="ranking-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Ranking e Comparativos 🏆</h3>
+            <button class="modal-close" onclick="closeRankingModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="ranking-tabs">
+                <button class="tab-btn active" onclick="showRankingTab('geral')">Geral</button>
+                <button class="tab-btn" onclick="showRankingTab('mensal')">Mensal</button>
+                <button class="tab-btn" onclick="showRankingTab('equipe')">Minha Equipe</button>
+            </div>
+            
+            <div class="ranking-content">
+                <div class="your-position">
+                    <h4>Sua Posição</h4>
+                    <div class="position-card">
+                        <span class="position-number" id="user-position">#-</span>
+                        <span class="position-points" id="user-points">0 pontos</span>
+                    </div>
+                </div>
+                
+                <div class="ranking-list" id="ranking-list">
+                    <!-- Lista de ranking será carregada aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
