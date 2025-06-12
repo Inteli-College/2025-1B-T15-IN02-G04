@@ -1,0 +1,278 @@
+<!-- Manager Dashboard -->
+<section class="dashboard-hero manager-hero">
+    <div class="container">
+        <div class="welcome-section">
+            <h1 id="welcome-message">Painel do Gestor 👨‍💼</h1>
+            <p>Gerencie sua equipe e acompanhe o progresso dos PTDs</p>
+        </div>
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-ptds">0</div>
+                <div class="stat-label">PTDs na Equipe</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completed-trails">0</div>
+                <div class="stat-label">Trilhas Concluídas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="team-avg-progress">0%</div>
+                <div class="stat-label">Progresso Médio</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="recent-activity">0</div>
+                <div class="stat-label">Atividade Recente</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Manager Menu Section -->
+<section class="manager-menu-section">
+    <div class="container">
+        <div class="manager-cards-grid">
+            <div class="manager-card ranking-card" onclick="openTeamRanking()">
+                <div class="card-icon">🏆</div>
+                <h3>Ranking</h3>
+                <p>Visualize o ranking da sua equipe</p>
+            </div>
+            
+            <div class="manager-card calendar-card" onclick="openCalendar()">
+                <div class="card-icon">📅</div>
+                <h3>Calendário</h3>
+                <p>Calendário específico para gestão de equipe</p>
+            </div>
+            
+            <div class="manager-card analytics-card" onclick="openAnalytics()">
+                <div class="card-icon">📊</div>
+                <h3>Analytics</h3>
+                <p>Dados analíticos sobre o desempenho da equipe</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Management Section -->
+<section class="team-management-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Gestão de Equipe</h2>
+            <p>Gerencie os PTDs da sua equipe e atribua trilhas</p>
+        </div>
+        
+        <div class="management-tabs">
+            <button class="tab-btn active" onclick="showManagementTab('equipe')">Minha Equipe</button>
+            <button class="tab-btn" onclick="showManagementTab('adicionar')">Adicionar PTD</button>
+            <button class="tab-btn" onclick="showManagementTab('trilhas')">Atribuir Trilhas</button>
+            <button class="tab-btn" onclick="showManagementTab('feedback')">Feedback</button>
+        </div>
+        
+        <div class="management-content">
+            <!-- Minha Equipe Tab -->
+            <div id="equipe-content" class="tab-content active">
+                <div class="team-controls">
+                    <div class="search-box">
+                        <input type="text" id="team-search" placeholder="Buscar na equipe..." class="form-control">
+                        <button onclick="searchTeam()" class="btn btn-primary">🔍</button>
+                    </div>
+                    <button class="btn btn-green" onclick="refreshTeam()">Atualizar</button>
+                </div>
+                
+                <div class="team-grid" id="team-grid">
+                    <!-- Team members will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Adicionar PTD Tab -->
+            <div id="adicionar-content" class="tab-content">
+                <div class="add-ptd-section">
+                    <div class="search-ptd">
+                        <h4>Buscar PTD para adicionar à equipe</h4>
+                        <div class="search-box">
+                            <input type="text" id="ptd-search" placeholder="Digite o nome, email ou username do PTD..." class="form-control">
+                            <button onclick="searchAvailablePTDs()" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-results" id="ptd-search-results">
+                        <!-- Search results will appear here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Atribuir Trilhas Tab -->
+            <div id="trilhas-content" class="tab-content">
+                <div class="assign-trails-section">
+                    <h4>Atribuir Trilha para PTD</h4>
+                    
+                    <form id="assign-trail-form" class="assign-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="select-ptd">Selecionar PTD:</label>
+                                <select id="select-ptd" class="form-control" required>
+                                    <option value="">Escolha um PTD da sua equipe</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="select-trail">Selecionar Trilha:</label>
+                                <select id="select-trail" class="form-control" required>
+                                    <option value="">Escolha uma trilha</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="assignment-notes">Observações (opcional):</label>
+                            <textarea id="assignment-notes" class="form-control" rows="3" placeholder="Adicione observações sobre esta atribuição..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">Atribuir Trilha</button>
+                    </form>
+                    
+                    <div class="recent-assignments" id="recent-assignments">
+                        <h4>Atribuições Recentes</h4>
+                        <!-- Recent assignments will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feedback Tab -->
+            <div id="feedback-content" class="tab-content">
+                <div class="feedback-section">
+                    <h4>Feedback da Equipe</h4>
+                    
+                    <div class="feedback-controls">
+                        <select id="feedback-ptd-select" class="form-control">
+                            <option value="">Selecione um PTD para dar feedback</option>
+                        </select>
+                        <button onclick="openFeedbackModal()" class="btn btn-blue">Novo Feedback</button>
+                    </div>
+                    
+                    <div class="feedback-list" id="feedback-list">
+                        <!-- Feedback items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Analytics Modal -->
+<div class="modal" id="analytics-modal">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h3>Analytics da Equipe 📊</h3>
+            <button class="modal-close" onclick="closeAnalyticsModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="analytics-tabs">
+                <button class="tab-btn active" onclick="showAnalyticsTab('overview')">Visão Geral</button>
+                <button class="tab-btn" onclick="showAnalyticsTab('performance')">Performance</button>
+                <button class="tab-btn" onclick="showAnalyticsTab('activity')">Atividade</button>
+            </div>
+            
+            <div class="analytics-content">
+                <div id="overview-analytics" class="tab-content active">
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h4>Progresso da Equipe</h4>
+                            <div id="team-progress-chart" class="chart-placeholder">
+                                📈 Gráfico de progresso será exibido aqui
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <h4>Distribuição de Trilhas</h4>
+                            <div id="trails-distribution-chart" class="chart-placeholder">
+                                🥧 Gráfico de pizza será exibido aqui
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="performance-analytics" class="tab-content">
+                    <div class="performance-metrics">
+                        <h4>Top Performers</h4>
+                        <div id="top-performers-list">
+                            <!-- Top performers will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="activity-analytics" class="tab-content">
+                    <div class="activity-timeline">
+                        <h4>Atividade Recente</h4>
+                        <div id="activity-timeline">
+                            <!-- Activity timeline will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal" id="feedback-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Dar Feedback</h3>
+            <button class="modal-close" onclick="closeFeedbackModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="feedback-form">
+                <div class="form-group">
+                    <label for="feedback-ptd">PTD:</label>
+                    <select id="feedback-ptd" class="form-control" required>
+                        <option value="">Selecione um PTD</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedback-type">Tipo de Feedback:</label>
+                    <select id="feedback-type" class="form-control" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="positive">Positivo</option>
+                        <option value="constructive">Construtivo</option>
+                        <option value="improvement">Melhoria</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedback-text">Feedback:</label>
+                    <textarea id="feedback-text" class="form-control" rows="5" required placeholder="Digite seu feedback aqui..."></textarea>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Enviar Feedback</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- PTD Detail Modal -->
+<div class="modal" id="ptd-detail-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="ptd-detail-name">Detalhes do PTD</h3>
+            <button class="modal-close" onclick="closePTDDetailModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="ptd-info" id="ptd-detail-info">
+                <!-- PTD info will be loaded here -->
+            </div>
+            
+            <div class="ptd-progress" id="ptd-detail-progress">
+                <!-- PTD progress will be loaded here -->
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closePTDDetailModal()">Fechar</button>
+                <button class="btn btn-blue" onclick="openAssignTrailModal()">Atribuir Trilha</button>
+                <button class="btn btn-green" onclick="openFeedbackModalForPTD()">Dar Feedback</button>
+            </div>
+        </div>
+    </div>
+</div>
