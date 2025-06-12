@@ -13,7 +13,7 @@ class CertificateModel {
 
   static async createCertificate(data) {
     const result = await db.query(
-      'INSERT INTO certificate (name, description, date, id_user, id_trail) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO certificate (name, description, date, id_user, id_trail) VALUES ($1, $2, $3, $4, $5) RETURNING *',
       [data.name, data.description, data.date, data.id_user, data.id_trail]
     );
     return result.rows[0];

@@ -13,15 +13,15 @@ class CardModel {
 
   static async createCard(data) {
     const result = await db.query(
-      'INSERT INTO card (title, description, image) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO card (title, description, image) VALUES ($1, $2, $3) RETURNING *',
       [data.name, data.description]
     );
     return result.rows[0];
   }
 
-  static async updateCard(id, name, description) {
-    const result = await db.query( 'UPDATE card SET title = $1, description = $2, image = $3 WHERE id = $3 RETURNING *',
-    [name, description, id]
+  static async updateCard(id, title, description, image) {
+    const result = await db.query( 'UPDATE card SET title = $1, description = $2, image = $3 WHERE id = $4 RETURNING *',
+    [title, description, image, id]
     );
     return result.rows[0];
   }
