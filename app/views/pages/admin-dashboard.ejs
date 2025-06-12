@@ -1,0 +1,365 @@
+<!-- Admin Dashboard -->
+<section class="dashboard-hero admin-hero">
+    <div class="container">
+        <div class="welcome-section">
+            <h1 id="welcome-message">Painel do Administrador 🛠️</h1>
+            <p>Gerencie conteúdo, usuários e configurações da plataforma</p>
+        </div>
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-users">0</div>
+                <div class="stat-label">Total de Usuários</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-trails">0</div>
+                <div class="stat-label">Trilhas Criadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-posts">0</div>
+                <div class="stat-label">Posts na Comunidade</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="new-enrollments">0</div>
+                <div class="stat-label">Novas Inscrições (30d)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Admin Menu Section -->
+<section class="admin-menu-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Administração Técnica</h2>
+            <p>Ferramentas para criação e edição de conteúdo</p>
+        </div>
+        
+        <div class="admin-menu-grid">
+            <div class="admin-menu-card" onclick="openContentEditor()">
+                <div class="menu-icon">📝</div>
+                <h3>Editor de Conteúdo</h3>
+                <p>Criar e editar trilhas, módulos e aulas</p>
+            </div>
+            
+            <div class="admin-menu-card" onclick="openTestManagement()">
+                <div class="menu-icon">📋</div>
+                <h3>Provas e Testes</h3>
+                <p>Gerenciar avaliações e questões</p>
+            </div>
+            
+            <div class="admin-menu-card" onclick="openUserManagement()">
+                <div class="menu-icon">👥</div>
+                <h3>Gestão de Usuários</h3>
+                <p>Gerenciar usuários e permissões</p>
+            </div>
+            
+            <div class="admin-menu-card" onclick="openCommunityManagement()">
+                <div class="menu-icon">💬</div>
+                <h3>Comunidade</h3>
+                <p>Moderar posts e interações</p>
+            </div>
+            
+            <div class="admin-menu-card" onclick="openAnalyticsDashboard()">
+                <div class="menu-icon">📊</div>
+                <h3>Analytics Gerais</h3>
+                <p>Relatórios e métricas da plataforma</p>
+            </div>
+            
+            <div class="admin-menu-card" onclick="openSystemSettings()">
+                <div class="menu-icon">⚙️</div>
+                <h3>Configurações</h3>
+                <p>Configurações do sistema</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content Management Section -->
+<section class="content-management-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Gerenciamento de Conteúdo</h2>
+            <p>Administre trilhas, módulos, aulas e avaliações</p>
+        </div>
+        
+        <div class="content-tabs">
+            <button class="tab-btn active" onclick="showContentTab('trilhas')">Trilhas</button>
+            <button class="tab-btn" onclick="showContentTab('cursos')">Cursos</button>
+            <button class="tab-btn" onclick="showContentTab('provas')">Provas</button>
+            <button class="tab-btn" onclick="showContentTab('usuarios')">Usuários</button>
+        </div>
+        
+        <div class="content-tab-content">
+            <!-- Trilhas Tab -->
+            <div id="trilhas-content" class="tab-content active">
+                <div class="content-header">
+                    <h3>Gerenciar Trilhas</h3>
+                    <button class="btn btn-primary" onclick="openCreateTrailModal()">+ Nova Trilha</button>
+                </div>
+                
+                <div class="content-table-container">
+                    <table class="content-table" id="trails-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Módulos</th>
+                                <th>Criado em</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trails-table-body">
+                            <!-- Trails will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Cursos Tab -->
+            <div id="cursos-content" class="tab-content">
+                <div class="content-header">
+                    <h3>Gerenciar Cursos/Aulas</h3>
+                    <button class="btn btn-primary" onclick="openCreateClassModal()">+ Nova Aula</button>
+                </div>
+                
+                <div class="content-table-container">
+                    <table class="content-table" id="classes-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Módulo</th>
+                                <th>Trilha</th>
+                                <th>Criado em</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="classes-table-body">
+                            <!-- Classes will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Provas Tab -->
+            <div id="provas-content" class="tab-content">
+                <div class="content-header">
+                    <h3>Gerenciar Provas e Testes</h3>
+                    <button class="btn btn-primary" onclick="openCreateTestModal()">+ Nova Prova</button>
+                </div>
+                
+                <div class="content-table-container">
+                    <table class="content-table" id="tests-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Trilha</th>
+                                <th>Questões</th>
+                                <th>Criado em</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tests-table-body">
+                            <!-- Tests will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Usuários Tab -->
+            <div id="usuarios-content" class="tab-content">
+                <div class="content-header">
+                    <h3>Gerenciar Usuários</h3>
+                    <div class="user-filters">
+                        <select id="role-filter" class="form-control">
+                            <option value="">Todas as funções</option>
+                            <option value="PTD">PTD</option>
+                            <option value="Gerente">Gerente</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                        <input type="text" id="user-search" class="form-control" placeholder="Buscar usuário...">
+                        <button class="btn btn-primary" onclick="searchUsers()">Buscar</button>
+                    </div>
+                </div>
+                
+                <div class="content-table-container">
+                    <table class="content-table" id="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Função</th>
+                                <th>Cadastro</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Create/Edit Trail Modal -->
+<div class="modal" id="trail-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="trail-modal-title">Nova Trilha</h3>
+            <button class="modal-close" onclick="closeTrailModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="trail-form">
+                <input type="hidden" id="trail-id">
+                
+                <div class="form-group">
+                    <label for="trail-name">Nome da Trilha:</label>
+                    <input type="text" id="trail-name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trail-description">Descrição:</label>
+                    <textarea id="trail-description" class="form-control" rows="4" required></textarea>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeTrailModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Trilha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Create/Edit Class Modal -->
+<div class="modal" id="class-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="class-modal-title">Nova Aula</h3>
+            <button class="modal-close" onclick="closeClassModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="class-form">
+                <input type="hidden" id="class-id">
+                
+                <div class="form-group">
+                    <label for="class-trail">Trilha:</label>
+                    <select id="class-trail" class="form-control" onchange="loadModulesByTrail(this.value)" required>
+                        <option value="">Selecione uma trilha</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="class-module">Módulo:</label>
+                    <select id="class-module" class="form-control" required>
+                        <option value="">Primeiro selecione uma trilha</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="class-name">Nome da Aula:</label>
+                    <input type="text" id="class-name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="class-description">Descrição:</label>
+                    <textarea id="class-description" class="form-control" rows="4" required></textarea>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeClassModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Aula</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Create/Edit Test Modal -->
+<div class="modal" id="test-modal">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h3 id="test-modal-title">Nova Prova</h3>
+            <button class="modal-close" onclick="closeTestModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="test-form">
+                <input type="hidden" id="test-id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="test-name">Nome da Prova:</label>
+                        <input type="text" id="test-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="test-trail">Trilha:</label>
+                        <select id="test-trail" class="form-control" required>
+                            <option value="">Selecione uma trilha</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="test-description">Descrição:</label>
+                    <textarea id="test-description" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="questions-section">
+                    <h4>Questões <button type="button" class="btn btn-small btn-green" onclick="addQuestion()">+ Adicionar Questão</button></h4>
+                    <div id="questions-container">
+                        <!-- Questions will be added here -->
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeTestModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Prova</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- User Detail Modal -->
+<div class="modal" id="user-detail-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="user-detail-title">Detalhes do Usuário</h3>
+            <button class="modal-close" onclick="closeUserDetailModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="user-detail-content">
+                <!-- User details will be loaded here -->
+            </div>
+            
+            <div class="user-roles-section">
+                <h4>Funções do Usuário</h4>
+                <div id="user-roles-list">
+                    <!-- User roles will be loaded here -->
+                </div>
+                
+                <div class="add-role-section">
+                    <select id="new-role-select" class="form-control">
+                        <option value="">Adicionar função</option>
+                        <option value="PTD">PTD</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="addRoleToUser()">Adicionar</button>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeUserDetailModal()">Fechar</button>
+                <button class="btn btn-red" onclick="deactivateUser()">Desativar Usuário</button>
+            </div>
+        </div>
+    </div>
+</div>
+
