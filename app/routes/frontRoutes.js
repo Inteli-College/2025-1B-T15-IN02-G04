@@ -24,6 +24,39 @@ router.get('/login', (req, res) => {
   });
 });
 
+// Página do dashboard do ptd
+router.get('/ptd-dashboard', (req, res) => {
+  res.render('layout/main', {
+    pageTitle: 'PTD Dashboard',
+    content: '../pages/ptd-dashboard',
+    pageCSS: 'pages/ptd-dashboard.css',
+    pageJS: 'ptd-dashboard.js',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  });
+});
+
+// Página do dashboard do gerente
+router.get('/manager-dashboard', (req, res) => {
+  res.render('layout/main', {
+    pageTitle: 'Gerente Dashboard',
+    content: '../pages/manager-dashboard',
+    pageCSS: 'pages/manager-dashboard.css',
+    pageJS: 'manager-dashboard.js',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  });
+});
+
+// Página de login
+router.get('/admin-dashboard', (req, res) => {
+  res.render('layout/main', {
+    pageTitle: 'Gerente Dashboard',
+    content: '../pages/admin-dashboard',
+    pageCSS: 'pages/admin-dashboard.css',
+    pageJS: 'admin-dashboard.js',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  });
+});
+
 // Página de registro
 router.get('/register', (req, res) => {
   res.render('layout/main', {
