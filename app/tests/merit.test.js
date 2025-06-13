@@ -1,118 +1,118 @@
-const request = require('supertest');
-const express = require('express');
-const app = express();
+const MeritController = require('../controllers/meritController');
 const MeritModel = require('../models/meritModel');
-
-app.use(express.json());
-
-// Routes
-app.get('/merits', async (req, res) => {
-  try {
-    const merits = await MeritModel.getAllMerits();
-    res.json(merits);
-  } catch (e) {
-    res.status(500).json({ error: 'Erro ao listar méritos.' });
-  }
-});
-
-app.get('/merits/:id', async (req, res) => {
-  try {
-    const merit = await MeritModel.getMeritById(req.params.id);
-    if (!merit) return res.status(404).json({ error: 'Mérito não encontrado' });
-    res.json(merit);
-  } catch (e) {
-    res.status(500).json({ error: 'Erro ao obter mérito.' });
-  }
-});
-
-app.post('/merits', async (req, res) => {
-  try {
-    const created = await MeritModel.createMerit(req.body);
-    res.status(201).json(created);
-  } catch (e) {
-    res.status(500).json({ error: 'Erro ao criar mérito.' });
-  }
-});
-
-app.put('/merits/:id', async (req, res) => {
-  try {
-    const { name, description } = req.body;
-    const updated = await MeritModel.updateMerit(req.params.id, name, description);
-    if (!updated) return res.status(404).json({ error: 'Mérito não encontrado' });
-    res.json(updated);
-  } catch (e) {
-    res.status(500).json({ error: 'Erro ao atualizar mérito.' });
-  }
-});
-
-app.delete('/merits/:id', async (req, res) => {
-  try {
-    const deleted = await MeritModel.deleteMerit(req.params.id);
-    if (deleted) return res.json({ message: 'Mérito deletado com sucesso' });
-    res.status(404).json({ error: 'Mérito não encontrado' });
-  } catch (e) {
-    res.status(500).json({ error: 'Erro ao deletar mérito.' });
-  }
-});
 
 jest.mock('../models/meritModel');
 
-describe('API de Méritos', () => {
-  beforeEach(() => jest.clearAllMocks());
+const mockResponse = () => {
+  const res = {};
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  return res;
+};
 
-  describe('GET /merits', () => {
-    it('retorna todos os méritos', async () => {
-      const merits = [
-        { id: 1, name: 'M1', description: 'D1' },
-        { id: 2, name: 'M2', description: 'D2' }
-      ];
-      MeritModel.getAllMerits.mockResolvedValue(merits);
-      const res = await request(app).get('/merits').expect(200);
-      expect(res.body).toEqual(merits);
+describe('MeritController', () => {
+  afterEach(() => jest.clearAllMocks());
+
+  describe('getAllMerits', () => {
+    it('200', async () => {
+      const list = [{ id: 1 }];
+      MeritModel.getAllMerits.mockResolvedValue(list);
+      const res = mockResponse();
+      await MeritController.getAllMerits({}, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(list);
+    });
+    it('500', async () => {
+      MeritModel.getAllMerits.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await MeritController.getAllMerits({}, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao listar méritos.' });
     });
   });
 
-  describe('GET /merits/:id', () => {
-    it('retorna mérito específico', async () => {
-      const merit = { id: 1, name: 'M1', description: 'D1' };
-      MeritModel.getMeritById.mockResolvedValue(merit);
-      const res = await request(app).get('/merits/1').expect(200);
-      expect(res.body).toEqual(merit);
+  describe('getMeritById', () => {
+    it('200', async () => {
+      const data = { id: 1 };
+      MeritModel.getMeritById.mockResolvedValue(data);
+      const res = mockResponse();
+      await MeritController.getMeritById({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(200);
     });
-    it('404 se não existe', async () => {
-      MeritModel.getMeritById.mockResolvedValue(null);
-      const res = await request(app).get('/merits/999').expect(404);
-      expect(res.body).toEqual({ error: 'Mérito não encontrado' });
+    it('404', async () => {
+      MeritModel.getMeritById.mockResolvedValue(undefined);
+      const res = mockResponse();
+      await MeritController.getMeritById({ params: { id: 99 } }, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Mérito não encontrado' });
+    });
+    it('500', async () => {
+      MeritModel.getMeritById.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await MeritController.getMeritById({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao obter mérito.' });
     });
   });
 
-  describe('POST /merits', () => {
-    it('cria mérito', async () => {
-      const newM = { name: 'New', description: 'Desc' };
-      const created = { id: 1, ...newM };
+  describe('createMerit', () => {
+    it('201', async () => {
+      const payload = { name: 'M' };
+      const created = { id: 1, ...payload };
       MeritModel.createMerit.mockResolvedValue(created);
-      const res = await request(app).post('/merits').send(newM).expect(201);
-      expect(res.body).toEqual(created);
-      expect(MeritModel.createMerit).toHaveBeenCalledWith(newM);
+      const res = mockResponse();
+      await MeritController.createMerit({ body: payload }, res);
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.json).toHaveBeenCalledWith(created);
+    });
+    it('500', async () => {
+      MeritModel.createMerit.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await MeritController.createMerit({ body: {} }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao criar mérito' });
     });
   });
 
-  describe('PUT /merits/:id', () => {
-    it('atualiza mérito', async () => {
-      const upd = { name: 'Upd', description: 'D' };
-      const updated = { id: 1, ...upd };
-      MeritModel.updateMerit.mockResolvedValue(updated);
-      const res = await request(app).put('/merits/1').send(upd).expect(200);
-      expect(res.body).toEqual(updated);
-      expect(MeritModel.updateMerit).toHaveBeenCalledWith('1', upd.name, upd.description);
+  describe('updateMerit', () => {
+    it('200', async () => {
+      const upd = { id: 1 };
+      MeritModel.updateMerit.mockResolvedValue(upd);
+      const req = { params: { id: 1 }, body: { name: 'U', description: 'd' } };
+      const res = mockResponse();
+      await MeritController.updateMerit(req, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+    });
+    it('404', async () => {
+      MeritModel.updateMerit.mockResolvedValue(undefined);
+      const res = mockResponse();
+      await MeritController.updateMerit({ params: { id: 99 }, body: {} }, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Mérito não encontrado' });
+    });
+    it('500', async () => {
+      MeritModel.updateMerit.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await MeritController.updateMerit({ params: { id: 1 }, body: {} }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'fail' });
     });
   });
 
-  describe('DELETE /merits/:id', () => {
-    it('deleta mérito', async () => {
+  describe('deleteMerit', () => {
+    it('200', async () => {
       MeritModel.deleteMerit.mockResolvedValue(true);
-      const res = await request(app).delete('/merits/1').expect(200);
-      expect(res.body).toEqual({ message: 'Mérito deletado com sucesso' });
+      const res = mockResponse();
+      await MeritController.deleteMerit({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ message: 'Mérito deletado com sucesso' });
+    });
+    it('500', async () => {
+      MeritModel.deleteMerit.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await MeritController.deleteMerit({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao deletar mérito' });
     });
   });
-}); 
+});

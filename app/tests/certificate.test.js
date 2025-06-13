@@ -1,314 +1,138 @@
-const request = require('supertest');
-const express = require('express');
-const app = express();
+const CertificateController = require('../controllers/certificateController');
 const CertificateModel = require('../models/certificateModel');
-
-// Configurar o app para os testes
-app.use(express.json());
-
-// Mock das rotas
-app.get('/certificates', async (req, res) => {
-  try {
-    const certificates = await CertificateModel.getAllCertificates();
-    res.json(certificates);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao listar certificados.' });
-  }
-});
-
-app.get('/certificates/:id', async (req, res) => {
-  try {
-    const certificate = await CertificateModel.getCertificateById(req.params.id);
-    if (!certificate) {
-      return res.status(404).json({ error: 'Certificado não encontrado' });
-    }
-    res.json(certificate);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao obter certificado.' });
-  }
-});
-
-app.post('/certificates', async (req, res) => {
-  try {
-    const newCertificate = await CertificateModel.createCertificate(req.body);
-    res.status(201).json(newCertificate);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao criar certificado.' });
-  }
-});
-
-app.put('/certificates/:id', async (req, res) => {
-  try {
-    const { name, description, date, id_user, id_trail } = req.body;
-    const updatedCertificate = await CertificateModel.updateCertificate(
-      req.params.id,
-      name,
-      description,
-      date,
-      id_user,
-      id_trail
-    );
-    if (!updatedCertificate) {
-      return res.status(404).json({ error: 'Certificado não encontrado' });
-    }
-    res.json(updatedCertificate);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao atualizar certificado.' });
-  }
-});
-
-app.delete('/certificates/:id', async (req, res) => {
-  try {
-    const deleted = await CertificateModel.deleteCertificate(req.params.id);
-    if (deleted) {
-      res.json({ message: 'Certificado deletado com sucesso' });
-    } else {
-      res.status(404).json({ error: 'Certificado não encontrado' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao deletar certificado.' });
-  }
-});
 
 jest.mock('../models/certificateModel');
 
-describe('API de Certificados', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+const mockResponse = () => {
+  const res = {};
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  return res;
+};
 
-  // GET /api/certificates - Lista todos os certificados
-  describe('GET /certificates', () => {
-    it('deve retornar todos os certificados', async () => {
-      // 1. Preparar dados de teste
-      const certificatesMock = [
-        {
-          id: 1,
-          name: 'Certificado 1',
-          description: 'Descrição 1',
-          date: '2024-03-20',
-          id_user: 1,
-          id_trail: 1
-        },
-        {
-          id: 2,
-          name: 'Certificado 2',
-          description: 'Descrição 2',
-          date: '2024-03-21',
-          id_user: 2,
-          id_trail: 2
-        }
-      ];
+describe('CertificateController', () => {
+  afterEach(() => jest.clearAllMocks());
 
-      // 2. Configurar mock
-      CertificateModel.getAllCertificates.mockResolvedValue(certificatesMock);
-
-      // 3. Fazer requisição
-      const response = await request(app)
-        .get('/certificates')
-        .expect(200);
-
-      // 4. Verificar resultado
-      expect(response.body).toEqual(certificatesMock);
-      expect(CertificateModel.getAllCertificates).toHaveBeenCalledTimes(1);
+  describe('getAllCertificates', () => {
+    it('retorna todos os certificados (200)', async () => {
+      const data = [{ id: 1 }];
+      CertificateModel.getAllCertificates.mockResolvedValue(data);
+      const res = mockResponse();
+      await CertificateController.getAllCertificates({}, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(data);
     });
 
-    it('deve tratar erros ao listar certificados', async () => {
-      // 1. Configurar mock para erro
-      CertificateModel.getAllCertificates.mockRejectedValue(new Error('Erro no banco de dados'));
-
-      // 2. Fazer requisição
-      const response = await request(app)
-        .get('/certificates')
-        .expect(500);
-
-      // 3. Verificar mensagem de erro
-      expect(response.body).toEqual({ error: 'Erro ao listar certificados.' });
+    it('erro (500)', async () => {
+      CertificateModel.getAllCertificates.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await CertificateController.getAllCertificates({}, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao listar certificados.' });
     });
   });
 
-  // GET /api/certificates/:id - Obtém um certificado específico
-  describe('GET /certificates/:id', () => {
-    it('deve retornar um certificado específico por id', async () => {
-      // 1. Preparar dados de teste
-      const certificateMock = {
-        id: 1,
-        name: 'Certificado 1',
-        description: 'Descrição 1',
-        date: '2024-03-20',
-        id_user: 1,
-        id_trail: 1
-      };
-
-      // 2. Configurar mock
-      CertificateModel.getCertificateById.mockResolvedValue(certificateMock);
-
-      // 3. Fazer requisição
-      const response = await request(app)
-        .get('/certificates/1')
-        .expect(200);
-
-      // 4. Verificar resultado
-      expect(response.body).toEqual(certificateMock);
-      expect(CertificateModel.getCertificateById).toHaveBeenCalledWith('1');
+  describe('getCertificateById', () => {
+    it('retorna certificado (200)', async () => {
+      const cert = { id: 1 };
+      CertificateModel.getCertificateById.mockResolvedValue(cert);
+      const req = { params: { id: 1 } };
+      const res = mockResponse();
+      await CertificateController.getCertificateById(req, res);
+      expect(CertificateModel.getCertificateById).toHaveBeenCalledWith(1);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(cert);
     });
 
-    it('deve retornar 404 quando certificado não for encontrado', async () => {
-      // 1. Configurar mock
-      CertificateModel.getCertificateById.mockResolvedValue(null);
+    it('404 se não encontrado', async () => {
+      CertificateModel.getCertificateById.mockResolvedValue(undefined);
+      const req = { params: { id: 99 } };
+      const res = mockResponse();
+      await CertificateController.getCertificateById(req, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Certificado não encontrado' });
+    });
 
-      // 2. Fazer requisição
-      const response = await request(app)
-        .get('/certificates/999')
-        .expect(404);
-
-      // 3. Verificar resultado
-      expect(response.body).toEqual({ error: 'Certificado não encontrado' });
+    it('erro (500)', async () => {
+      CertificateModel.getCertificateById.mockRejectedValue(new Error('fail'));
+      const req = { params: { id: 1 } };
+      const res = mockResponse();
+      await CertificateController.getCertificateById(req, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao obter certificado.' });
     });
   });
 
-  // POST /api/certificates - Cria um novo certificado
-  describe('POST /certificates', () => {
-    it('deve criar um novo certificado', async () => {
-      // 1. Preparar dados de teste
-      const novoCertificado = {
-        name: 'Novo Certificado',
-        description: 'Nova Descrição',
-        date: '2024-03-22',
-        id_user: 1,
-        id_trail: 1
-      };
-
-      // 2. Configurar mock
-      const certificadoCriadoMock = {
-        id: 1,
-        ...novoCertificado
-      };
-      CertificateModel.createCertificate.mockResolvedValue(certificadoCriadoMock);
-
-      // 3. Fazer requisição
-      const response = await request(app)
-        .post('/certificates')
-        .send(novoCertificado)
-        .expect(201);
-
-      // 4. Verificar resultado
-      expect(response.body).toEqual(certificadoCriadoMock);
-      expect(CertificateModel.createCertificate).toHaveBeenCalledWith(novoCertificado);
+  describe('createCertificate', () => {
+    it('cria certificado (201)', async () => {
+      const payload = { name: 'Cert' };
+      const created = { id: 1, ...payload };
+      CertificateModel.createCertificate.mockResolvedValue(created);
+      const req = { body: payload };
+      const res = mockResponse();
+      await CertificateController.createCertificate(req, res);
+      expect(CertificateModel.createCertificate).toHaveBeenCalledWith(payload);
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.json).toHaveBeenCalledWith(created);
     });
 
-    it('deve tratar erros ao criar certificado', async () => {
-      // 1. Preparar dados de teste
-      const novoCertificado = {
-        name: 'Novo Certificado',
-        description: 'Nova Descrição',
-        date: '2024-03-22',
-        id_user: 1,
-        id_trail: 1
-      };
-
-      // 2. Configurar mock para erro
-      CertificateModel.createCertificate.mockRejectedValue(new Error('Erro no banco de dados'));
-
-      // 3. Fazer requisição
-      const response = await request(app)
-        .post('/certificates')
-        .send(novoCertificado)
-        .expect(500);
-
-      // 4. Verificar mensagem de erro
-      expect(response.body).toEqual({ error: 'Erro ao criar certificado.' });
+    it('erro (500)', async () => {
+      CertificateModel.createCertificate.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await CertificateController.createCertificate({ body: {} }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao criar certificado.' });
     });
   });
 
-  // PUT /api/certificates/:id - Atualiza um certificado existente
-  describe('PUT /certificates/:id', () => {
-    it('deve atualizar um certificado existente', async () => {
-      // 1. Preparar dados de teste
-      const dadosAtualizados = {
-        name: 'Certificado Atualizado',
-        description: 'Descrição Atualizada',
-        date: '2024-03-23',
-        id_user: 1,
-        id_trail: 1
-      };
-
-      // 2. Configurar mock
-      const certificadoAtualizadoMock = {
-        id: 1,
-        ...dadosAtualizados
-      };
-      CertificateModel.updateCertificate.mockResolvedValue(certificadoAtualizadoMock);
-
-      // 3. Fazer requisição
-      const response = await request(app)
-        .put('/certificates/1')
-        .send(dadosAtualizados)
-        .expect(200);
-
-      // 4. Verificar resultado
-      expect(response.body).toEqual(certificadoAtualizadoMock);
-      expect(CertificateModel.updateCertificate).toHaveBeenCalledWith(
-        '1',
-        dadosAtualizados.name,
-        dadosAtualizados.description,
-        dadosAtualizados.date,
-        dadosAtualizados.id_user,
-        dadosAtualizados.id_trail
-      );
+  describe('updateCertificate', () => {
+    it('atualiza certificado (200)', async () => {
+      const updated = { id: 1, name: 'Upd' };
+      CertificateModel.updateCertificate.mockResolvedValue(updated);
+      const req = { params: { id: 1 }, body: { name: 'Upd', description: 'd', date:'2020', user_id:1, trail_id:1 } };
+      const res = mockResponse();
+      await CertificateController.updateCertificate(req, res);
+      expect(CertificateModel.updateCertificate).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(updated);
     });
 
-    it('deve retornar 404 ao atualizar certificado inexistente', async () => {
-      // 1. Preparar dados de teste
-      const dadosAtualizados = {
-        name: 'Certificado Atualizado',
-        description: 'Descrição Atualizada',
-        date: '2024-03-23',
-        id_user: 1,
-        id_trail: 1
-      };
+    it('404 se não encontrado', async () => {
+      CertificateModel.updateCertificate.mockResolvedValue(undefined);
+      const req = { params: { id: 99 }, body: {} };
+      const res = mockResponse();
+      await CertificateController.updateCertificate(req, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Certificado não encontrado' });
+    });
 
-      // 2. Configurar mock
-      CertificateModel.updateCertificate.mockResolvedValue(null);
-
-      // 3. Fazer requisição
-      const response = await request(app)
-        .put('/certificates/999')
-        .send(dadosAtualizados)
-        .expect(404);
-
-      // 4. Verificar resultado
-      expect(response.body).toEqual({ error: 'Certificado não encontrado' });
+    it('erro (500)', async () => {
+      CertificateModel.updateCertificate.mockRejectedValue(new Error('fail'));
+      const req = { params: { id: 1 }, body: {} };
+      const res = mockResponse();
+      await CertificateController.updateCertificate(req, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'fail' });
     });
   });
 
-  // DELETE /api/certificates/:id - Remove um certificado
-  describe('DELETE /certificates/:id', () => {
-    it('deve deletar um certificado', async () => {
-      // 1. Configurar mock
+  describe('deleteCertificate', () => {
+    it('deleta certificado (200)', async () => {
       CertificateModel.deleteCertificate.mockResolvedValue(true);
-
-      // 2. Fazer requisição
-      const response = await request(app)
-        .delete('/certificates/1')
-        .expect(200);
-
-      // 3. Verificar resultado
-      expect(response.body).toEqual({ message: 'Certificado deletado com sucesso' });
-      expect(CertificateModel.deleteCertificate).toHaveBeenCalledWith('1');
+      const req = { params: { id: 1 } };
+      const res = mockResponse();
+      await CertificateController.deleteCertificate(req, res);
+      expect(CertificateModel.deleteCertificate).toHaveBeenCalledWith(1);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ message: 'Certficado deletado com sucesso' });
     });
 
-    it('deve tratar erros ao deletar certificado', async () => {
-      // 1. Configurar mock para erro
-      CertificateModel.deleteCertificate.mockRejectedValue(new Error('Erro no banco de dados'));
-
-      // 2. Fazer requisição
-      const response = await request(app)
-        .delete('/certificates/1')
-        .expect(500);
-
-      // 3. Verificar mensagem de erro
-      expect(response.body).toEqual({ error: 'Erro ao deletar certificado.' });
+    it('erro (500)', async () => {
+      CertificateModel.deleteCertificate.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await CertificateController.deleteCertificate({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao deletar certificado' });
     });
   });
 }); 

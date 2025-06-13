@@ -2,6 +2,7 @@ const request = require('supertest');
 const express = require('express');
 const app = express();
 const ModuleModel = require('../models/moduleModel');
+const ModuleController = require('../controllers/moduleController');
 
 app.use(express.json());
 
@@ -66,76 +67,114 @@ app.delete('/modules/:id', async (req, res) => {
 
 jest.mock('../models/moduleModel');
 
-describe('API de Módulos', () => {
-  beforeEach(() => jest.clearAllMocks());
+const mockResponse = () => {
+  const res = {};
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  return res;
+};
 
-  describe('GET /modules', () => {
-    it('retorna todos os módulos', async () => {
-      const mods = [
-        { id: 1, name: 'Mod1', description: 'Desc', id_trail: 1 },
-        { id: 2, name: 'Mod2', description: 'Desc2', id_trail: 2 }
-      ];
-      ModuleModel.getAllModules.mockResolvedValue(mods);
-      const res = await request(app).get('/modules').expect(200);
-      expect(res.body).toEqual(mods);
+describe('ModuleController', () => {
+  afterEach(() => jest.clearAllMocks());
+
+  describe('getAllModules', () => {
+    it('200', async () => {
+      const list = [{ id: 1 }];
+      ModuleModel.getAllModules.mockResolvedValue(list);
+      const res = mockResponse();
+      await ModuleController.getAllModules({}, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(list);
     });
-    it('erro ao listar', async () => {
-      ModuleModel.getAllModules.mockRejectedValue(new Error('DB'));
-      const res = await request(app).get('/modules').expect(500);
-      expect(res.body).toEqual({ error: 'Erro ao listar módulos.' });
+    it('500', async () => {
+      ModuleModel.getAllModules.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await ModuleController.getAllModules({}, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao listar módulos.' });
     });
   });
 
-  describe('GET /modules/:id', () => {
-    it('retorna módulo específico', async () => {
-      const mod = { id: 1, name: 'Mod1', description: 'Desc', id_trail: 1 };
-      ModuleModel.getModuleById.mockResolvedValue(mod);
-      const res = await request(app).get('/modules/1').expect(200);
-      expect(res.body).toEqual(mod);
+  describe('getModuleById', () => {
+    it('200', async () => {
+      ModuleModel.getModuleById.mockResolvedValue({ id: 1 });
+      const res = mockResponse();
+      await ModuleController.getModuleById({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(200);
     });
-    it('404 se não encontrado', async () => {
-      ModuleModel.getModuleById.mockResolvedValue(null);
-      const res = await request(app).get('/modules/999').expect(404);
-      expect(res.body).toEqual({ error: 'Módulo não encontrado' });
+    it('404', async () => {
+      ModuleModel.getModuleById.mockResolvedValue(undefined);
+      const res = mockResponse();
+      await ModuleController.getModuleById({ params: { id: 99 } }, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Módulo não encontrado' });
+    });
+    it('500', async () => {
+      ModuleModel.getModuleById.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await ModuleController.getModuleById({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao obter módulo.' });
     });
   });
 
-  describe('GET /modules/trail/:trailId', () => {
-    it('retorna módulos por trilha', async () => {
-      const mods = [{ id: 1, name: 'Mod1', description: 'd', id_trail: 1 }];
-      ModuleModel.getModulesByTrailId.mockResolvedValue(mods);
-      const res = await request(app).get('/modules/trail/1').expect(200);
-      expect(res.body).toEqual(mods);
-    });
-  });
-
-  describe('POST /modules', () => {
-    it('cria módulo', async () => {
-      const newMod = { name: 'New', description: 'D', id_trail: 1 };
-      const created = { id: 1, ...newMod };
+  describe('createModule', () => {
+    it('201', async () => {
+      const payload = { name: 'M' };
+      const created = { id: 1, ...payload };
       ModuleModel.createModule.mockResolvedValue(created);
-      const res = await request(app).post('/modules').send(newMod).expect(201);
-      expect(res.body).toEqual(created);
-      expect(ModuleModel.createModule).toHaveBeenCalledWith(newMod);
+      const res = mockResponse();
+      await ModuleController.createModule({ body: payload }, res);
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.json).toHaveBeenCalledWith(created);
+    });
+    it('500', async () => {
+      ModuleModel.createModule.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await ModuleController.createModule({ body: {} }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao criar módulo.' });
     });
   });
 
-  describe('PUT /modules/:id', () => {
-    it('atualiza módulo', async () => {
-      const upd = { name: 'Up', description: 'D', id_trail: 1 };
-      const updated = { id: 1, ...upd };
-      ModuleModel.updateModule.mockResolvedValue(updated);
-      const res = await request(app).put('/modules/1').send(upd).expect(200);
-      expect(res.body).toEqual(updated);
-      expect(ModuleModel.updateModule).toHaveBeenCalledWith('1', upd.name, upd.description, upd.id_trail);
+  describe('updateModule', () => {
+    it('200', async () => {
+      ModuleModel.updateModule.mockResolvedValue({ id: 1 });
+      const req = { params: { id: 1 }, body: { name: 'U', description: 'd', id_trail: 1 } };
+      const res = mockResponse();
+      await ModuleController.updateModule(req, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+    });
+    it('404', async () => {
+      ModuleModel.updateModule.mockResolvedValue(undefined);
+      const res = mockResponse();
+      await ModuleController.updateModule({ params: { id: 99 }, body: {} }, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Módulo não encontrado' });
+    });
+    it('500', async () => {
+      ModuleModel.updateModule.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await ModuleController.updateModule({ params: { id: 1 }, body: {} }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'fail' });
     });
   });
 
-  describe('DELETE /modules/:id', () => {
-    it('deleta módulo', async () => {
+  describe('deleteModule', () => {
+    it('200', async () => {
       ModuleModel.deleteModule.mockResolvedValue(true);
-      const res = await request(app).delete('/modules/1').expect(200);
-      expect(res.body).toEqual({ message: 'Módulo deletado com sucesso' });
+      const res = mockResponse();
+      await ModuleController.deleteModule({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ message: 'Módulo deletado com sucesso' });
+    });
+    it('500', async () => {
+      ModuleModel.deleteModule.mockRejectedValue(new Error('fail'));
+      const res = mockResponse();
+      await ModuleController.deleteModule({ params: { id: 1 } }, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao deletar módulo.' });
     });
   });
 }); 

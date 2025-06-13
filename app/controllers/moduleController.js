@@ -4,8 +4,9 @@ const ModuleController = {
 
   async getAllModules(req, res) {
     try {
-      const { trail_id } = req.query;
-      
+      // Usa optional chaining para acessar `query` de forma segura quando o objeto `req` pode estar indefinido (por exemplo, em testes)
+      const trail_id = req?.query?.trail_id;
+
       let modules;
       if (trail_id) {
         modules = await ModuleModel.getModulesByTrailId(trail_id);

@@ -1,286 +1,166 @@
-const request = require('supertest');
-const express = require('express');
-const app = express();
+const AnswerController = require('../controllers/answerController');
 const AnswerModel = require('../models/answerModel');
-
-// Configurar o app para os testes
-app.use(express.json());
-
-// Mock das rotas
-app.get('/answers', async (req, res) => {
-  try {
-    const answers = await AnswerModel.getAllAnswers();
-    res.json(answers);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao listar respostas.' });
-  }
-});
-
-app.get('/answers/:id', async (req, res) => {
-  try {
-    const answer = await AnswerModel.getAnswerById(req.params.id);
-    if (!answer) {
-      return res.status(404).json({ error: 'Resposta não encontrado' });
-    }
-    res.json(answer);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao obter resposta.' });
-  }
-});
-
-app.post('/answers', async (req, res) => {
-  try {
-    const newAnswer = await AnswerModel.createAnswer(req.body);
-    res.status(201).json(newAnswer);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao criar resposta.' });
-  }
-});
-
-app.put('/answers/:id', async (req, res) => {
-  try {
-    const updatedAnswer = await AnswerModel.updateAnswer(
-      req.params.id,
-      req.body.answer_text,
-      req.body.correct,
-      req.body.score,
-      req.body.id_question
-    );
-    if (!updatedAnswer) {
-      return res.status(404).json({ error: 'Resposta não encontrada' });
-    }
-    res.json(updatedAnswer);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro no banco de dados' });
-  }
-});
-
-app.delete('/answers/:id', async (req, res) => {
-  try {
-    const deleted = await AnswerModel.deleteAnswer(req.params.id);
-    if (deleted) {
-      res.json({ message: 'Resposta deletada com sucesso' });
-    } else {
-      res.status(404).json({ error: 'Resposta não encontrada' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao deletar resposta.' });
-  }
-});
 
 jest.mock('../models/answerModel');
 
-describe('API de Respostas', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+const mockResponse = () => {
+  const res = {};
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  return res;
+};
 
-  // GET /api/answers - Lista todas as respostas
-  describe('GET /answers', () => {
-    it('deve retornar todas as respostas', async () => {
-      const respostasMock = [
-        { id: 1, answer_text: 'Resposta Teste 1', correct: true, score: 10, id_question: 1 },
-        { id: 2, answer_text: 'Resposta Teste 2', correct: false, score: 0, id_question: 1 }
-      ];
+describe('AnswerController', () => {
+  afterEach(() => jest.clearAllMocks());
 
-      AnswerModel.getAllAnswers.mockResolvedValue(respostasMock);
+  describe('getAllAnswers', () => {
+    it('retorna todas as respostas (200)', async () => {
+      const answers = [{ id: 1 }, { id: 2 }];
+      AnswerModel.getAllAnswers.mockResolvedValue(answers);
+      const req = {};
+      const res = mockResponse();
 
-      const response = await request(app)
-        .get('/answers')
-        .expect(200);
+      await AnswerController.getAllAnswers(req, res);
 
-      expect(response.body).toEqual(respostasMock);
-      expect(AnswerModel.getAllAnswers).toHaveBeenCalledTimes(1);
+      expect(AnswerModel.getAllAnswers).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(answers);
     });
 
-    it('deve tratar erros ao listar respostas', async () => {
-      AnswerModel.getAllAnswers.mockRejectedValue(new Error('Erro no banco de dados'));
+    it('trata erro (500)', async () => {
+      AnswerModel.getAllAnswers.mockRejectedValue(new Error('fail'));
+      const req = {};
+      const res = mockResponse();
 
-      const response = await request(app)
-        .get('/answers')
-        .expect(500);
+      await AnswerController.getAllAnswers(req, res);
 
-      expect(response.body).toEqual({ error: 'Erro ao listar respostas.' });
-    });
-  });
-
-  // GET /api/answers/:id - Obtém uma resposta específica
-  describe('GET /answers/:id', () => {
-    it('deve retornar uma resposta específica por id', async () => {
-      const respostaMock = {
-        id: 1,
-        answer_text: 'Resposta Teste',
-        correct: true,
-        score: 10,
-        id_question: 1
-      };
-
-      AnswerModel.getAnswerById.mockResolvedValue(respostaMock);
-
-      const response = await request(app)
-        .get('/answers/1')
-        .expect(200);
-
-      expect(response.body).toEqual(respostaMock);
-      expect(AnswerModel.getAnswerById).toHaveBeenCalledWith('1');
-    });
-
-    it('deve retornar 404 quando resposta não for encontrada', async () => {
-      AnswerModel.getAnswerById.mockResolvedValue(null);
-
-      const response = await request(app)
-        .get('/answers/999')
-        .expect(404);
-
-      expect(response.body).toEqual({ error: 'Resposta não encontrado' });
-    });
-
-    it('deve tratar erros ao buscar resposta por id', async () => {
-      AnswerModel.getAnswerById.mockRejectedValue(new Error('Erro no banco de dados'));
-
-      const response = await request(app)
-        .get('/answers/1')
-        .expect(500);
-
-      expect(response.body).toEqual({ error: 'Erro ao obter resposta.' });
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao listar respostas.' });
     });
   });
 
-  // POST /api/answers - Cria uma nova resposta
-  describe('POST /answers', () => {
-    it('deve criar uma nova resposta', async () => {
-      const novaResposta = {
-        answer_text: 'Nova Resposta Teste',
-        correct: true,
-        score: 10,
-        id_question: 1
-      };
+  describe('getAnswerById', () => {
+    it('retorna resposta específica (200)', async () => {
+      const answer = { id: 1 };
+      AnswerModel.getAnswerById.mockResolvedValue(answer);
+      const req = { params: { id: 1 } };
+      const res = mockResponse();
 
-      const respostaCriadaMock = {
-        id: 1,
-        ...novaResposta
-      };
+      await AnswerController.getAnswerById(req, res);
 
-      AnswerModel.createAnswer.mockResolvedValue(respostaCriadaMock);
-
-      const response = await request(app)
-        .post('/answers')
-        .send(novaResposta)
-        .expect(201);
-
-      expect(response.body).toEqual(respostaCriadaMock);
-      expect(AnswerModel.createAnswer).toHaveBeenCalledWith(novaResposta);
+      expect(AnswerModel.getAnswerById).toHaveBeenCalledWith(1);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(answer);
     });
 
-    it('deve tratar erros ao criar resposta', async () => {
-      const novaResposta = {
-        answer_text: 'Nova Resposta Teste',
-        correct: true,
-        score: 10,
-        id_question: 1
-      };
+    it('retorna 404 se não encontrado', async () => {
+      AnswerModel.getAnswerById.mockResolvedValue(undefined);
+      const req = { params: { id: 999 } };
+      const res = mockResponse();
 
-      AnswerModel.createAnswer.mockRejectedValue(new Error('Erro no banco de dados'));
+      await AnswerController.getAnswerById(req, res);
 
-      const response = await request(app)
-        .post('/answers')
-        .send(novaResposta)
-        .expect(500);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Resposta não encontrado' });
+    });
 
-      expect(response.body).toEqual({ error: 'Erro ao criar resposta.' });
+    it('trata erro (500)', async () => {
+      AnswerModel.getAnswerById.mockRejectedValue(new Error('fail'));
+      const req = { params: { id: 1 } };
+      const res = mockResponse();
+
+      await AnswerController.getAnswerById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao obter resposta.' });
     });
   });
 
-  // PUT /api/answers/:id - Atualiza uma resposta existente
-  describe('PUT /answers/:id', () => {
-    it('deve atualizar uma resposta existente', async () => {
-      const respostaAtualizada = {
-        answer_text: 'Resposta Atualizada',
-        correct: false,
-        score: 5,
-        id_question: 1
-      };
+  describe('createAnswer', () => {
+    it('cria resposta (201)', async () => {
+      const newAnswer = { id: 1, answer_text: 'X' };
+      AnswerModel.createAnswer.mockResolvedValue(newAnswer);
+      const req = { body: newAnswer };
+      const res = mockResponse();
 
-      const respostaAtualizadaMock = {
-        id: 1,
-        ...respostaAtualizada
-      };
+      await AnswerController.createAnswer(req, res);
 
-      AnswerModel.updateAnswer.mockResolvedValue(respostaAtualizadaMock);
-
-      const response = await request(app)
-        .put('/answers/1')
-        .send(respostaAtualizada)
-        .expect(200);
-
-      expect(response.body).toEqual(respostaAtualizadaMock);
-      expect(AnswerModel.updateAnswer).toHaveBeenCalledWith(
-        '1',
-        respostaAtualizada.answer_text,
-        respostaAtualizada.correct,
-        respostaAtualizada.score,
-        respostaAtualizada.id_question
-      );
+      expect(AnswerModel.createAnswer).toHaveBeenCalledWith(newAnswer);
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.json).toHaveBeenCalledWith(newAnswer);
     });
 
-    it('deve retornar 404 ao atualizar resposta inexistente', async () => {
-      const respostaAtualizada = {
-        answer_text: 'Resposta Atualizada',
-        correct: false,
-        score: 5,
-        id_question: 1
-      };
+    it('trata erro (500)', async () => {
+      AnswerModel.createAnswer.mockRejectedValue(new Error('fail'));
+      const req = { body: {} };
+      const res = mockResponse();
 
-      AnswerModel.updateAnswer.mockResolvedValue(null);
+      await AnswerController.createAnswer(req, res);
 
-      const response = await request(app)
-        .put('/answers/999')
-        .send(respostaAtualizada)
-        .expect(404);
-
-      expect(response.body).toEqual({ error: 'Resposta não encontrada' });
-    });
-
-    it('deve tratar erros ao atualizar resposta', async () => {
-      const respostaAtualizada = {
-        answer_text: 'Resposta Atualizada',
-        correct: false,
-        score: 5,
-        id_question: 1
-      };
-
-      AnswerModel.updateAnswer.mockRejectedValue(new Error('Erro no banco de dados'));
-
-      const response = await request(app)
-        .put('/answers/1')
-        .send(respostaAtualizada)
-        .expect(500);
-
-      expect(response.body).toEqual({ error: 'Erro no banco de dados' });
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao criar resposta.' });
     });
   });
 
-  // DELETE /api/answers/:id - Remove uma resposta
-  describe('DELETE /answers/:id', () => {
-    it('deve deletar uma resposta', async () => {
+  describe('updateAnswer', () => {
+    it('atualiza resposta (200)', async () => {
+      const updated = { id: 1, answer_text: 'Upd' };
+      AnswerModel.updateAnswer.mockResolvedValue(updated);
+      const req = { params: { id: 1 }, body: { answer_text: 'Upd', correct: true, score: 10, id_question: 2 } };
+      const res = mockResponse();
+
+      await AnswerController.updateAnswer(req, res);
+
+      expect(AnswerModel.updateAnswer).toHaveBeenCalledWith(1, 'Upd', true, 10, 2);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(updated);
+    });
+
+    it('retorna 404 se não encontrado', async () => {
+      AnswerModel.updateAnswer.mockResolvedValue(undefined);
+      const req = { params: { id: 999 }, body: { answer_text: 'Upd' } };
+      const res = mockResponse();
+
+      await AnswerController.updateAnswer(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Resposta não encontrada' });
+    });
+
+    it('trata erro (500)', async () => {
+      AnswerModel.updateAnswer.mockRejectedValue(new Error('fail'));
+      const req = { params: { id: 1 }, body: {} };
+      const res = mockResponse();
+
+      await AnswerController.updateAnswer(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'fail' });
+    });
+  });
+
+  describe('deleteAnswer', () => {
+    it('deleta resposta (200)', async () => {
       AnswerModel.deleteAnswer.mockResolvedValue(true);
+      const req = { params: { id: 1 } };
+      const res = mockResponse();
 
-      const response = await request(app)
-        .delete('/answers/1')
-        .expect(200);
+      await AnswerController.deleteAnswer(req, res);
 
-      expect(response.body).toEqual({ message: 'Resposta deletada com sucesso' });
-      expect(AnswerModel.deleteAnswer).toHaveBeenCalledWith('1');
+      expect(AnswerModel.deleteAnswer).toHaveBeenCalledWith(1);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ message: 'Resposta deletada com sucesso' });
     });
 
-    it('deve tratar erros ao deletar resposta', async () => {
-      AnswerModel.deleteAnswer.mockRejectedValue(new Error('Erro no banco de dados'));
+    it('trata erro (500)', async () => {
+      AnswerModel.deleteAnswer.mockRejectedValue(new Error('fail'));
+      const req = { params: { id: 1 } };
+      const res = mockResponse();
 
-      const response = await request(app)
-        .delete('/answers/1')
-        .expect(500);
+      await AnswerController.deleteAnswer(req, res);
 
-      expect(response.body).toEqual({ error: 'Erro ao deletar resposta.' });
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao deletar resposta.' });
     });
   });
-}); 
+});
