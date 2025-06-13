@@ -1,4 +1,4 @@
-// AprendisAGRO - JavaScript Principal
+// AprendizAGRO - JavaScript Principal
 
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar componentes
