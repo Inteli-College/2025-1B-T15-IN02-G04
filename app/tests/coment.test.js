@@ -105,22 +105,22 @@ describe('API de Comentários', () => {
   // GET /api/coments/:id - Obtém um comentário específica
   describe('GET /coments/:id', () => {
     it('deve retornar um comentário específico por id', async () => {
-      const comentariosMock = {
-        id: 1,
-        id_user: 1,
-        coment: "Muito legal sua visita"
+      const comentarioMock = { 
+        id: 1, 
+        content: 'Comentário Teste', 
+        user_id: 1 
       };
-
-      ComentModel.getComentById.mockResolvedValue(comentariosMock);
+      
+      ComentModel.getComentById.mockResolvedValue(comentarioMock);
 
       const response = await request(app)
         .get('/coments/1')
         .expect(200);
 
-      expect(response.body).toEqual(comantariosMock);
+      expect(response.body).toEqual(comentarioMock);
       expect(ComentModel.getComentById).toHaveBeenCalledWith('1');
     });
-
+    
     it('deve retornar 404 quando o comentário não for encontrado', async () => {
       ComentModel.getComentById.mockResolvedValue(null);
 
@@ -187,8 +187,8 @@ describe('API de Comentários', () => {
   describe('PUT /coments/:id', () => {
     it('deve atualizar um comentário existente', async () => {
       const comentarioAtualizado = {
-        id_user: 1,
-        coment: "Comentário atualizado"
+        content: 'Comentário Atualizado',
+        user_id: 1
       };
 
       const comentarioAtualizadoMock = {
@@ -206,11 +206,11 @@ describe('API de Comentários', () => {
       expect(response.body).toEqual(comentarioAtualizadoMock);
       expect(ComentModel.updateComent).toHaveBeenCalledWith(
         '1',
-        comentarioAtualizado.id_user,
-        comentarioAtualizado.coment,
+        comentarioAtualizado.content,
+        comentarioAtualizado.user_id
       );
     });
-
+    
     it('deve retornar 404 ao atualizar comentário inexistente', async () => {
       const comentarioAtualizado = {
         id_user: 1,
@@ -267,4 +267,4 @@ describe('API de Comentários', () => {
       expect(response.body).toEqual({ error: 'Erro ao deletar comentário.' });
     });
   });
-}); 
+});
