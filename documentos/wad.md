@@ -60,7 +60,7 @@ Fontes da pesquisa em referências. </p> <br><br>
 ### 2.1.3. Solução (sprints 1 a 5)
 
 1. Problema a ser resolvido: alta rotatividade e falta de capacitação adequada dos Promotores Técnicos Digitais (PTDs) da Bayer, responsáveis pelo suporte do FieldView. Isso gera insatisfação nos produtores, sobrecarga no suporte remoto e PTDs despreparados em campo, impactando a adoção e o valor percebido da plataforma digital.
-2. Dados disponíveis (mencionar fonte e conteúdo; se não houver, indicar “não se aplica”): não se aplica.
+2. Dados disponíveis (mencionar fonte e conteúdo; se não houver, indicar "não se aplica"): não se aplica.
 3. Solução proposta: desenvolvimento de uma plataforma web de capacitação para Promotores Técnicos Digitais. Incluirá avaliação de nivelamento, trilhas de conhecimento personalizadas com conteúdos multimídia, avaliações interativas, testes de certificação, sistema de busca rápida, elementos de gamificação (sistema de pontuação/ranking) e área administrativa para monitoramento e gestão de conteúdo.
 4. Forma de utilização da solução: os Promotores Técnicos Digitais (PTDs) acessarão a plataforma para realizar testes, seguir trilhas de aprendizado, consultar materiais e acompanhar seu progresso. Administradores utilizarão a área restrita para monitorar o desempenho dos profissionais, gerenciar usuários, atribuir treinamentos e atualizar o conteúdo das trilhas e avaliações.
 5. Benefícios esperados: certificação e melhor preparo dos Promotores Técnicos Digitais antes do campo, redução da rotatividade e da carga do suporte remoto, aumento da satisfação dos produtores, padronização do conhecimento técnico sobre o FieldView e otimização do processo de capacitação da equipe.
@@ -126,7 +126,7 @@ FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template
 
    **Probabilidade:** 31% a 50%, pois apesar do projeto dever ocupar um nível de prioridade na rotina dos membros, não é raro superestimar o quanto é possível responsabilizar-se em atividades extracurriculares que consomem tempo e esforço, o que resulta, dessa forma, no desprezo das tarefas do projeto.
 
-   **Plano de Ação:** motivar os membros que não estão engajados e que encontram-se sobrecarregados com outras atividades a desenvolver uma rotina saudável que respeite suas obrigações dentro do projeto. Assim também, vale reforçar ao membro a importância do seu trabalho para o andamento de toda a equipe.
+   **Plano de ação:** motivar os membros que não estão engajados e que encontram-se sobrecarregados com outras atividades a desenvolver uma rotina saudável que respeite suas obrigações dentro do projeto. Assim também, vale reforçar ao membro a importância do seu trabalho para o andamento de toda a equipe.
 
 6. **Impossibilidade de realização de testes:** não conseguir realizar testes com potenciais usuários caracteriza um risco para o projeto, haja vista que, tanto nos testes de usabilidade, quanto nos testes de integração de endpoints automatizados, existe possibilidade da equipe não encontrar voluntários para testar a plataforma, ou de não haver tempo suficiente para a realização.
 
@@ -199,7 +199,7 @@ Persona RTD:
 
 ## 2.3. User Stories (sprints 1 a 5)
 
-O levantamento de User Stories é uma prática essencial na gestão ágil de projetos, pois permite representar de forma objetiva as necessidades e expectativas dos usuários e stakeholders. As User Stories (US) são formuladas com base em perfis reais dos envolvidos no sistema, facilitando o alinhamento entre o time de desenvolvimento e os objetivos do projeto. Este documento apresenta a lista completa de User Stories levantadas para o projeto, organizadas de acordo com a estrutura padrão “Como [persona], posso [ação/meta], para [benefício/razão]”. Todas foram numeradas com a referência USXX, a ser utilizada também no roadmap do quadro Kanban. Dentre elas, cinco foram priorizadas com base em critérios de valor, dependência e viabilidade, e seus aspectos INVEST estão detalhados a seguir.
+O levantamento de User Stories é uma prática essencial na gestão ágil de projetos, pois permite representar de forma objetiva as necessidades e expectativas dos usuários e stakeholders. As User Stories (US) são formuladas com base em perfis reais dos envolvidos no sistema, facilitando o alinhamento entre o time de desenvolvimento e os objetivos do projeto. Este documento apresenta a lista completa de User Stories levantadas para o projeto, organizadas de acordo com a estrutura padrão "Como [persona], posso [ação/meta], para [benefício/razão]". Todas foram numeradas com a referência USXX, a ser utilizada também no roadmap do quadro Kanban. Dentre elas, cinco foram priorizadas com base em critérios de valor, dependência e viabilidade, e seus aspectos INVEST estão detalhados a seguir.
 
 ### US01 — Entendimento do Parceiro
 
@@ -556,8 +556,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um usuário específico a partir do id. | **http://localhost:3000/users/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os usuários | **http://localhost:3000/users** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo usuário  | **http://localhost:3000/users/:id**  | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “primeiro_nome”: “Lucas “, <br></br>"segundo_nome": "Pomin", <br></br> “email”: “Lucas@bayer.com“, <br></br>"senha":  "senha123"<br></br> } | 201 Created ou 500 Internal Server Error |
-| Atualiza um usuário específico a partir do id. | **http://localhost:3000/users/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Lucas“, <br></br>"segundo_nome": "Pomin", <br></br> “email”: “lucas@bayer.com“, <br></br>"senha":  "senha123"<br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo usuário  | **http://localhost:3000/users/:id**  | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "primeiro_nome": "Lucas ", <br></br>"segundo_nome": "Pomin", <br></br> "email": "Lucas@bayer.com", <br></br>"senha":  "senha123"<br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza um usuário específico a partir do id. | **http://localhost:3000/users/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "Lucas", <br></br>"segundo_nome": "Pomin", <br></br> "email": "lucas@bayer.com", <br></br>"senha":  "senha123"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um usuário a partir do id. | **http://localhost:3000/users/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Trilhas**
@@ -566,8 +566,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma trilha específica a partir do id. | **http://localhost:3000/api/trails/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as trilhas. | **http://localhost:3000/api/trails**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova trilha.  | **http://localhost:3000/api/trails** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “trilha de treinamento“, <br></br> “description”: “trilha para os novos PTDs“ <br></br> } | 201 Created ou 500 Internal Server Error |
-| Atualiza uma trilha específica a partir do id. | **http://localhost:3000/api/trails/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “nova trilha de treinamento“, <br></br> “description”: “trilha para os PTDs novos.“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria uma nova trilha.  | **http://localhost:3000/api/trails** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "trilha de treinamento", <br></br> "description": "trilha para os novos PTDs" <br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza uma trilha específica a partir do id. | **http://localhost:3000/api/trails/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "nova trilha de treinamento", <br></br> "description": "trilha para os PTDs novos." <br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma trilha a partir do id. | **http://localhost:3000/api/trails/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Módulos**
@@ -576,8 +576,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um módulo específico a partir do id. | **http://localhost:3000/api/modules/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os módulos. | **http://localhost:3000/api/modules**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo módulo.  | **http://localhost:3000/api/modules** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “FieldView básico “, <br></br> “description”: “aprenda sobre o básico do FieldView “, <br></br> “id\_trail”: “4“ <br></br> } | 201 Created ou 500 Internal Server Error |
-| Atualiza um módulo específico a partir do id. | **http://localhost:3000/api/modules/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “novo FieldView básico“, <br></br> “description”: “aprenda sobre o essencial do FieldView“, <br></br> “id\_trail”: “4“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo módulo.  | **http://localhost:3000/api/modules** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "FieldView básico ", <br></br> "description": "aprenda sobre o básico do FieldView ", <br></br> "id_trail": "4"<br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza um módulo específico a partir do id. | **http://localhost:3000/api/modules/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "novo FieldView básico", <br></br> "description": "aprenda sobre o essencial do FieldView", <br></br> "id_trail": "4"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma trilha a partir do id. | **http://localhost:3000/api/modules/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Classes**
@@ -586,8 +586,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma aula específica a partir do id. |  **http://localhost:3000/api/classes/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as aulas.. | **http://localhost:3000/api/classes**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova aula. | **http://localhost:3000/api/classes** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Aprenda como tratar o cliente“, <br></br> “description”: “Artigo de boas maneiras“, <br></br> “id\_module”: “3“ <br></br> } | 201 Created ou 500 Internal Server Error |
-| Atualiza uma aula específica a partir do id. | **http://localhost:3000/api/classes/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Como configurar uma colheitadeira“, <br></br> “description”: “Video aula ensinando as configurações“, <br></br> “id\_module”: “2“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria uma nova aula. | **http://localhost:3000/api/classes** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "Aprenda como tratar o cliente", <br></br> "description": "Artigo de boas maneiras", <br></br> "id_module": "3"<br></br> } | 201 Created ou 500 Internal Server Error |
+| Atualiza uma aula específica a partir do id. | **http://localhost:3000/api/classes/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "Como configurar uma colheitadeira", <br></br> "description": "Video aula ensinando as configurações", <br></br> "id_module": "2"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma aula a partir do id. | **http://localhost:3000/api/classes/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Tests** 
@@ -596,8 +596,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma prova específica a partir do id. |  **http://localhost:3000/api/tests/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found ou 404 not found ou 500 internal server error|
 | Lista todas as provas.. | **http://localhost:3000/api/tests**  | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova prova. | **http://localhost:3000/api/tests** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Plantadeira“, <br></br> “id\_trail”: “2“ <br></br> **}** | 201 Created ou 500 Internal Server Error ou 400 Bad Request |
-| Atualiza uma prova específica a partir do id. | **http://localhost:3000/api/tests/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “name”: “Nova Plantadeira“, <br></br> “id\_trail”: “2“ <br></br> **}** | 200 OK ou 404 Not Found |
+| Cria uma nova prova. | **http://localhost:3000/api/tests** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "Plantadeira", <br></br> "id_trail": "2"<br></br> **}** | 201 Created ou 500 Internal Server Error ou 400 Bad Request |
+| Atualiza uma prova específica a partir do id. | **http://localhost:3000/api/tests/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "name": "Nova Plantadeira", <br></br> "id_trail": "2"<br></br> **}** | 200 OK ou 404 Not Found |
 | Deleta uma prova a partir do id. | **http://localhost:3000/api/tests/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Questions**
@@ -606,8 +606,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma questão específica a partir do id. |  **http://localhost:3000/api/questions/:id** | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as questões. | **http://localhost:3000/api/questions/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova questão. | **http://localhost:3000/api/questions/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “question\_text”: “Como configurar um talhão“, <br></br> “Id\_test”: “22“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza uma questão específica a partir do id. | **http://localhost:3000/api/questions/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “question\_text”: “Novas instruções de como configurar um talhão“, <br></br> “Id\_test”: “22“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria uma nova questão. | **http://localhost:3000/api/questions/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "question_text": "Como configurar um talhão", <br></br> "Id_test": "22"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza uma questão específica a partir do id. | **http://localhost:3000/api/questions/:id** | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "question_text": "Novas instruções de como configurar um talhão", <br></br> "Id_test": "22"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma questão a partir do id. | **http://localhost:3000/api/questions/:id** | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Respostas**
@@ -616,8 +616,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma resposta específica a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as respostas.. | **http://localhost:3000/api/answers** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova resposta. | **http://localhost:3000/api/answers** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “answer\_text”: “devo fazer dessa forma“, <br></br> “correct”: “true“, <br></br> “score”: “20“, <br></br> “id\_question”: “12“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza uma resposta específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “answer\_text”: “Devo devo fazer isso“, <br></br> “correct”: “true“, <br></br> “score”: “20“, <br></br> “id\_question”: “12 “ <br></br> } | 200 OK ou 404 Not Found |
+| Cria uma nova resposta. | **http://localhost:3000/api/answers** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "answer_text": "devo fazer dessa forma", <br></br> "correct": "true", <br></br> "score": "20", <br></br> "id_question": "12"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza uma resposta específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "answer_text": "Devo devo fazer isso", <br></br> "correct": "true", <br></br> "score": "20", <br></br> "id_question": "12 "<br></br> } | 200 OK ou 404 Not Found |
 | Deleta uma resposta a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Ranking**
@@ -626,8 +626,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/ranking/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os rankings. | **http://localhost:3000/api/ranking/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/ranking/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br>  “user\_id”: “13 “, <br></br> “score”: “200 “ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “score”: “201 “ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo ranking. | **http://localhost:3000/api/ranking/:id** | POST | Content-Type: application/json <br></br> Accept: application/json | { <br></br>  "user_id": "13 ", <br></br> "score": "200 "<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json <br></br> Accept: application/json | { <br></br> "user_id": "13 ", <br></br> "score": "201 "<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Comentário**
@@ -636,8 +636,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um comentário específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os comentários.. | **http://localhost:3000/api/answers/:idt** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo comentário. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “id\_user”: “1 “, <br></br> “coment”: “Aula incrível“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um comentário específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “id\_user”: “1 “, <br></br> “coment”: “Aula muito boa\!“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo comentário. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "id_user": "1 ", <br></br> "coment": "Aula incrível"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um comentário específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "id_user": "1 ", <br></br> "coment": "Aula muito boa!"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um comentário a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Méritos**
@@ -646,8 +646,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um mérito específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os méritos. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo mérito. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Primeiro Módulo Concluído\!“, <br></br> “description”: “Todas as aulas do primeiro módulo completas. “ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um mérito específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Primeiro Módulo Concluído!“, <br></br> “description”: “Todas as instruções do primeiro módulo completas.“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo mérito. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "name": "Primeiro Módulo Concluído!", <br></br> "description": "Todas as aulas do primeiro módulo completas. "<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um mérito específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "name": "Primeiro Módulo Concluído!", <br></br> "description": "Todas as instruções do primeiro módulo completas."<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um mérito a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Certificados**
@@ -656,8 +656,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um certificado específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os certificados.. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo certificado. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Trilha de Treinamento “, <br></br> “description”: “todas os módulos da trilha de treinamento completas“, <br></br> “date”: “20/10/2025“, <br></br> “id\_user”: “1“, <br></br> “id\_trail”: “1” <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um certificado específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “name”: “Trilha de Treinamento “, <br></br> “description”: “todas os módulos da trilha de treinamento completas“, <br></br> “date”: “20/11/2025“, <br></br> “id\_user”: “1“, <br></br> “id\_trail”: “1” <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo certificado. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "name": "Trilha de Treinamento ", <br></br> "description": "todas os módulos da trilha de treinamento completas", <br></br> "date": "20/10/2025", <br></br> "id_user": "1", <br></br> "id_trail": "1"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um certificado específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "name": "Trilha de Treinamento ", <br></br> "description": "todas os módulos da trilha de treinamento completas", <br></br> "date": "20/11/2025", <br></br> "id_user": "1", <br></br> "id_trail": "1"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um certificado a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Cards**
@@ -666,8 +666,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um card específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os cards. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo card. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “title”: “Valores da Bayer.“, <br></br> “description”: “Todos os valores da Bayer. “, <br></br> “image”: “images/card..png“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um card específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “title”: “Valores da Bayer.Crop Science“, <br></br> “description”: “Todos os valores da Bayer.Crop Science.“, <br></br> “image”: “images/card..png“ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo card. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "title": "Valores da Bayer.", <br></br> "description": "Todos os valores da Bayer.", <br></br> "image": "images/card..png"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um card específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "title": "Valores da Bayer.Crop Science", <br></br> "description": "Todos os valores da Bayer.Crop Science.", <br></br> "image": "images/card..png"<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um card a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Like**
@@ -676,8 +676,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “13“, <br></br> “post\_id”: “122“, <br></br> “like”: “true” <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “17“, <br></br> “post\_id”: “122“, <br></br> “like”: “false” <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "user\_id": "13", <br></br> "post\_id": "122", <br></br> "like": "true" <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "user\_id": "17", <br></br> "post\_id": "122", <br></br> "like": "false" <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Posts**
@@ -686,8 +686,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um post específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “13 “, <br></br> “description”: “Muito interessante“, <br></br> “title”: “Visita na fazenda”, <br></br> “imagem”: “images/foto.png”, <br></br> “data”: 12/06/2025 <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “15 “, <br></br> “description”: “Nada interessante“, <br></br> “title”: “Visita na fazenda”, <br></br> “imagem”: “images/foto.png”, <br></br> “data”: 12/06/2025 <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "user\_id": "13 ", <br></br> "description": "Muito interessante", <br></br> "title": "Visita na fazenda", <br></br> "imagem": "images/foto.png", <br></br> "data": 12/06/2025 <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "user\_id": "15 ", <br></br> "description": "Nada interessante", <br></br> "title": "Visita na fazenda", <br></br> "imagem": "images/foto.png", <br></br> "data": 12/06/2025 <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Role**
@@ -696,8 +696,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um role específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os roles. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo role. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “role”: “PTD“ <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um role específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “role”: “ADM “ <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo role. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "role": "PTD"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um role específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "role": "ADM "<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um role a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Hierarchy**
@@ -706,8 +706,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma hierarchy específica a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as hierarchys. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova hierarchy. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “1“, <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza uma hierarchy específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “3“, <br></br> } | 200 OK ou 404 Not Found |
+| Cria uma nova hierarchy. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "id\_role-user": "1",<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza uma hierarchy específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "id\_role-user": "3",<br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
@@ -716,7 +716,7 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 
 No que tange à primeira versão da aplicação web - realizada durante a terceira Sprint -, a equipe desenvolveu o backend consoante a estrutura MVC e deu início ao frontend. Nesse sentido, vale mencionar que todas as APIs criadas foram testadas com o software Insomnia e foram elaborados 40 endpoints no total - documentados na seção 3.6 do WAD.
 
-Diante disso, a primeira versão do sistema web contempla as seguintes APIs: users (usuários) - a qual compreende a autenticação dos usuários e retorna um token -, trails (trilhas) - a qual corresponde as trilhas de aprendizado dos usuários -, modules (módulos) - os quais pertencem a uma trilha -, classes (aulas) - as quais configuram-se como as orientações técnicas e de conhecimento -, testes (provas) - as quais caracterizam-se pelo conjunto de questões para medir o aprendizado dos PTDs -, questions (questões) - as quais estão associadas a uma prova -, answers (respostas) - as quais contém o atributo booleano “correct” (para definir se a resposta é uma alternativa correta ou falsa), “score” (para medir o quanto a resposta vale em termos de pontuação) - e ranking - dinâmica de gamificação para motivar os usuários.
+Diante disso, a primeira versão do sistema web contempla as seguintes APIs: users (usuários) - a qual compreende a autenticação dos usuários e retorna um token -, trails (trilhas) - a qual corresponde as trilhas de aprendizado dos usuários -, modules (módulos) - os quais pertencem a uma trilha -, classes (aulas) - as quais configuram-se como as orientações técnicas e de conhecimento -, testes (provas) - as quais caracterizam-se pelo conjunto de questões para medir o aprendizado dos PTDs -, questions (questões) - as quais estão associadas a uma prova -, answers (respostas) - as quais contém o atributo booleano "correct" (para definir se a resposta é uma alternativa correta ou falsa), "score" (para medir o quanto a resposta vale em termos de pontuação) - e ranking - dinâmica de gamificação para motivar os usuários.
 
 Por fim, seguem as imagens do frontend desenvolvido durante a sprint: 
 
@@ -744,104 +744,54 @@ _Descreva e ilustre aqui o desenvolvimento da última versão do sistema web, ex
 
 ## 5.1. Relatório de testes de integração de endpoints automatizados (sprint 4)
 
-_Liste e descreva os testes unitários dos endpoints criados, automatizados e planejados para sua solução. Posicione aqui também o relatório de cobertura de testes Jest se houver (através de link ou transcrito para estrutura markdown)_
+Durante a Sprint&nbsp;4 foi criada uma suíte **100 % automatizada** para garantir a qualidade de todos os endpoints REST do back-end.  A estratégia adotada concentrou-se em testes de integração dos controladores, onde cada rota é exercitada de ponta-a-ponta, porém com as dependências de banco de dados simuladas por _mocks_.
 
-## 5.2. Testes de usabilidade (sprint 5)
+**Ferramentas utilizadas**
 
-_Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de testes de usabilidade. Ou utilize um link para seu relatório de testes (mantenha o link sempre público para visualização)_
+* **Jest&nbsp;v30.x** – framework de testes, _runner_ e biblioteca de asserções.
+* **Supertest&nbsp;v7.x** – gera requisições HTTP contra instâncias locais do Express sem precisar levantar o servidor.
+* **Express (instância in-memory)** – cada arquivo de teste cria uma aplicação enxuta apenas com as rotas necessárias.
+* **`jest.mock()`** – recurso nativo do Jest empregado para isolar a camada `models/` e forçar cenários de sucesso/erro.
 
-# <a name="c6"></a>6. Estudo de Mercado e Plano de Marketing (sprint 4)
+**Estrutura dos testes**
 
-## 6.1 Resumo Executivo
+```text
+app/tests
+├── answer.test.js           ├── moduleUser.test.js
+├── card.test.js             ├── postController.test.js
+├── cardUser.test.js         ├── question.test.js
+├── class.test.js            ├── ranking.test.js
+├── classUser.test.js        ├── roleUser.test.js
+├── coment.test.js           ├── test.test.js
+├── comentClass.test.js      ├── trail.test.js
+├── comentPost.test.js       ├── trailUser.test.js
+├── hierarchyTrail.test.js   ├── userController.test.js
+├── merit.test.js            ├── userLike.test.js
+├── meritUser.test.js        └── module.test.js
+```
 
-_Preencher com até 300 palavras, sem necessidade de fonte_
+Cada arquivo cobre **um recurso da API** e segue o mesmo padrão:
 
-_Apresente de forma clara e objetiva os principais destaques do projeto: oportunidades de mercado, diferenciais competitivos da aplicação web e os objetivos estratégicos pretendidos._
+1. Montagem de uma mini-aplicação Express com as rotas do respectivo _controller_.
+2. Mock dos métodos do _model_ (ex.: `UserModel.getAllUsers`).
+3. Execução, via Supertest, dos fluxos _happy-path_ (200/201) e cenários de exceção – `404 Not Found` e `500 Internal Server Error`.
+4. Verificação das asserções de resposta HTTP e se o _model_ foi acionado com os parâmetros corretos.
 
-## 6.2 Análise de Mercado
+**Exemplo resumido**
 
-_a) Visão Geral do Setor (até 250 palavras)_
-_Contextualize o setor no qual a aplicação está inserida, considerando aspectos econômicos, tecnológicos e regulatórios. Utilize fontes confiáveis._
+```js
+it('deve retornar todos os usuários', async () => {
+  UserModel.getAllUsers.mockResolvedValue([{ id: 1 }, { id: 2 }]);
+  const res = await request(app).get('/users').expect(200);
+  expect(res.body).toEqual([{ id: 1 }, { id: 2 }]);
+  expect(UserModel.getAllUsers).toHaveBeenCalledTimes(1);
+});
+```
 
-_b) Tamanho e Crescimento do Mercado (até 250 palavras)_
-_Apresente dados quantitativos sobre o tamanho atual e projeções de crescimento do mercado. Utilize fontes confiáveis._
+### Resultado da execução
 
-_c) Tendências de Mercado (até 300 palavras)_
-_Identifique e analise tendências relevantes (tecnológicas, comportamentais e mercadológicas) que influenciam o setor. Utilize fontes confiáveis._
-
-## 6.3 Análise da Concorrência
-
-_a) Principais Concorrentes (até 250 palavras)_
-_Liste os concorrentes diretos e indiretos, destacando suas principais características e posicionamento no mercado._
-
-_b) Vantagens Competitivas da Aplicação Web (até 250 palavras)_
-_Descreva os diferenciais da sua aplicação em relação aos concorrentes, sem necessidade de citação de fontes._
-
-## 6.4 Público-Alvo
-
-_a) Segmentação de Mercado (até 250 palavras)_
-Descreva os principais segmentos de mercado a serem atendidos pela aplicação. Utilize bases de dados e fontes confiáveis.\*
-
-_b) Perfil do Público-Alvo (até 250 palavras)_
-_Caracterize o público-alvo com dados demográficos, psicográficos e comportamentais, incluindo necessidades específicas. Utilize fontes obrigatórias._
-
-## 6.5 Posicionamento
-
-_a) Proposta de Valor Única (até 250 palavras)_
-_Defina de maneira clara o que torna a sua aplicação única e valiosa para o mercado._
-
-_b) Estratégia de Diferenciação (até 250 palavras)_
-_Explique como sua aplicação se destacará da concorrência, evidenciando a lógica por trás do posicionamento._
-
-## 6.6 Estratégia de Marketing
-
-_a) Produto/Serviço (até 200 palavras)_
-_Descreva as funcionalidades, benefícios e diferenciais da aplicação_
-
-_6.2 Preço (até 200 palavras)_
-_Explique o modelo de precificação adotado e justifique com base nas análises anteriores._
-
-_6.3 Praça (Distribuição) (até 200 palavras)_
-_Apresente os canais digitais utilizados para distribuir e entregar a aplicação ao público._
-
-_6.4 Promoção (até 200 palavras)_
-_Descreva as estratégias digitais planejadas, como SEO, redes sociais, marketing de conteúdo e campanhas pagas._
-
-# <a name="c7"></a>7. Conclusões e trabalhos futuros (sprint 5)
-
-_Escreva de que formas a solução da aplicação web atingiu os objetivos descritos na seção 2 deste documento. Indique pontos fortes e pontos a melhorar de maneira geral._
-
-_Relacione os pontos de melhorias evidenciados nos testes com planos de ações para serem implementadas. O grupo não precisa implementá-las, pode deixar registrado aqui o plano para ações futuras_
-
-_Relacione também quaisquer outras ideias que o grupo tenha para melhorias futuras_
-
-# <a name="c8"></a>8. Referências (sprints 1 a 5)
-
-_Incluir as principais referências de seu projeto, para que seu parceiro possa consultar caso ele se interessar em aprofundar. Um exemplo de referência de livro e de site:_<br>
-
-_LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>_
-_SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>_
-
-_INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>_
-_SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano_
-
-## Gerais
-
-1. CLIMATE FIELDVIEW. Plataforma de Agricultura Digital. Disponível em: https://climatefieldview.com.br/. Acesso em: 26 abr. 2025.​
-
-## Pesquisa de mercado
-
-1. MORDOR INTELLIGENCE. Brazil Crop Protection Pesticides Market. Disponível em: https://www.mordorintelligence.com/industry-reports/brazil-crop-protection-pesticides-market. Acesso em: 25 abr. 2025.​
-
-2. KEN RESEARCH. Brazil Crop Protection Market. Disponível em: https://www.kenresearch.com/industry-reports/brazil-crop-protection-market. Acesso em: 25 abr. 2025.​
-
-3. SPER RESEARCH. Brazil Crop Protection Market Growth, Size, Trends, Revenue, Challenges and Future Competition. Disponível em: https://www.sperresearch.com/report-store/brazil-crop-protection-market.aspx. Acesso em: 26 abr. 2025.​
-
-4. AGROPAGES. Bayer's Digital Platform Reaches 22 Million Hectares Mapped in Brazil. Disponível em: https://news.agropages.com/News/NewsDetail---42177.htm. Acesso em: 27 abr. 2025.​
-
-O Tempo Economia. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025
-O Presente Rural. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr. 2025
-
-# <a name="c9"></a>Anexos
-
-_Inclua aqui quaisquer complementos para seu projeto, como diagramas, imagens, tabelas etc. Organize em sub-tópicos utilizando headings menores (use ## ou ### para isso)_
+```text
+$ npx jest --coverage
+Test Suites: 25 passed, 25 total
+Tests:       214 passed, 214 total
+Time:        ≈4 s
