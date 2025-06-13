@@ -795,17 +795,23 @@ _Explique como sua aplicação se destacará da concorrência, evidenciando a l�
 
 ## 6.6 Estratégia de Marketing
 
-_a) Produto/Serviço (até 200 palavras)_
-_Descreva as funcionalidades, benefícios e diferenciais da aplicação_
+### Produto
+O produto configura-se como uma aplicação web direcionada aos PTDs da Bayer Crop Science, com o fito de promover uma capacitação de excelência a esses funcionários. 
 
-_6.2 Preço (até 200 palavras)_
-_Explique o modelo de precificação adotado e justifique com base nas análises anteriores._
+Diante disso, a plataforma contempla trilhas de aprendizagem, cursos, conteúdos instrutivos - os quais são anexados pelos gestores da empresa -, cards para acesso rápido aos assuntos, página de progresso para que o PTD e o gestor possam acompanhar o desenvolvimento de aprendizagem do usuário, calendário para organização e notificação das obrigações do usuário, página de comunidade com feed de posts para a troca de experiências e conquistas entre os funcionários e página de registro de atendimentos. Assim, é notório que, com essas funcionalidades, torna-se possível conquistar excelência no que tange a fornecer treinamento adequado à equipe da empresa parceira.
 
-_6.3 Praça (Distribuição) (até 200 palavras)_
-_Apresente os canais digitais utilizados para distribuir e entregar a aplicação ao público._
+Além disso, o produto se destaca pela sua gamificação. Sob a ótica do PTD, a equipe enxergou a imprescindibilidade de fornecer mecanismos e dinâmicas para engajar o funcionário à se desenvolver profissionalmente na plataforma, de modo que, para tal efeito, tornou o produto ainda mais atrativo por intermédio de um ranking e de um talhão gamificado - segundo o qual, a cada término de responsabilidade, o usuário recebe uma plantação em seu talhão fictício. 
 
-_6.4 Promoção (até 200 palavras)_
-_Descreva as estratégias digitais planejadas, como SEO, redes sociais, marketing de conteúdo e campanhas pagas._
+### Preço
+Em razão do contexto acadêmico sob o qual o produto foi confeccionado, entende-se que não há intenções de monetizá-lo. Nesse sentido, quanto a quaisquer custos imprevistos tangentes à plataforma, acredita-se que serão financiados integralmente pela empresa Bayer, de modo que os PTDs tenham acesso gratuito. 
+
+No entanto, caso houvesse desígnio de precificação, dentre as opções de estratégias de preço adotadas, compreende-se a assinatura corporativa como a forma mais eficiente no cenário em questão - de forma que os PTDs ou a Bayer poderia aderir à aplicação por intermédio de assinatura mensal por usuário, ou por licenciamento anual baseado no número de PTDs.
+
+### Praça
+No que tange aos canais de distribuição da aplicação, o produto será disponibilizado via web e aplicativo móvel, diretamente no ambiente de trabalho dos canais internos da Bayer Crop Science. Os argumentos que sustentam essa escolha dizem respeito ao contexto da aplicação (a qual configura-se uma aplicação digital e, por isso, requer um meio similar para ser executado) e ao fato de, a via web e a aplicação móvel estar disponível ao PTD mesmo fora do ambiente de trabalho da empresa, de modo que o funcionário pode acessar os conteúdos independentemente do lugar e do horário, conforme as suas necessidades. Dessa forma, o produto é acessado no ambiente adequada e mais coerente ao contexto em questão. 
+
+### Promoção
+Em função do contexto em que o produto está inserido (cujo objetivo consiste em ser uma aplicação de uso interno da Bayer Crop Science), é possível inferir que a promoção será realizada por intermédio do incentivo da empresa, focando na maximização de engajamento dos PTDs. Nesse sentido, as possibilidades estruturadas para tal finalidade foram: notificações nos dispositivos dos funcionários, por exemplo por meio de e-mails, incentivando o uso da plataforma; Workshops de treinamento para capacitação dos funcionários no que tange a utilização da plataforma, aproveitando para potencializar a promoção; O reconhecimento, em reuniões e eventos da empresa, dos PTDs que mais se destacam no ranking que o produto contempla, de modo a motivar os usuários que ainda não se demonstraram engajados. Além disso, a plataforma também poderá ser divulgada em demais reuniões e eventos corporativos, assim como por meio das redes sociais corporativas da Bayer, ampliando o alcance, a visibilidade e a importância do AprendizaAgro no processo de capacitação dos PTDs.
 
 # <a name="c7"></a>7. Conclusões e trabalhos futuros (sprint 5)
 
