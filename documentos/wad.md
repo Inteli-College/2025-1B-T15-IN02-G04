@@ -734,68 +734,35 @@ Por fim, seguem as imagens do frontend desenvolvido durante a sprint:
 
 ## 4.2. Segunda versão da aplicação web (sprint 4)
 
-## Visão Geral
 Na Sprint 4, desenvolvemos a parte da aplicação que permite aos usuários navegar por trilhas de aprendizado, acessar módulos específicos e participar de aulas interativas. O sistema implementa um fluxo completo de **Trilhas → Módulos → Aulas** com funcionalidades avançadas de interação e acompanhamento de progresso.
 
-## 🛠️ Funcionalidades Implementadas
+### Funcionalidades Implementadas
 
 ### Página de Trilhas (`trail.ejs`)
 
-![Tela de Trilhas](./screenshots/trilhas-overview.png)
-*Figura 1: Página principal com categorias de trilhas organizadas em carrossel*
+Figura 1: Página principal com categorias de trilhas organizadas em carrossel
+<p align="center"> <img src="./assets/wad/modelagem-relacional-banco.png" alt="Modelagem Relacional"> </p>
 
-![Modal de Módulos](./screenshots/modulos-modal.png)
-*Figura 2: Modal popup mostrando módulos disponíveis em uma trilha*
+Figura 2: Modal popup mostrando módulos disponíveis em uma trilha
+ <img src="./assets/wad/Módulos.png" alt="Modelagem Relacional"> </p>
 
 ### Página de Aulas (`class.ejs`)
+
+Figura 3: Interface de aula com conteúdo 
+ <img src="./assets/wad/Módulos.png" alt="Modelagem Relacional"> </p>
+
 - **Menu lateral** com navegação entre aulas
 - **Barra de progresso** visual dinâmica
 - **Sistema de desbloqueio** progressivo de conteúdo
 - **4 tipos de conteúdo** diferentes:
-
-#### 📹 Conteúdo em Vídeo
-- Player HTML5 integrado
-- Controles nativos do navegador
-- Descrição e resumo da aula
-- Quiz ao final para validação
-
-![Aula em Vídeo](./screenshots/aula-video.png)
-*Figura 3: Interface de aula com conteúdo em vídeo*
-
-#### 📄 Conteúdo em Artigo
-- **Rich text** com formatação completa
-- **Syntax highlighting** para código
-- **Estrutura hierárquica** com títulos
-- Blocos de código interativos
-
-![Aula Artigo](./screenshots/aula-artigo.png)
-*Figura 4: Aula no formato artigo com código destacado*
-
-#### 📋 Conteúdo PDF
-- **Visualizador incorporado** de PDF
-- **Interface responsiva** para diferentes telas
-- Descrição complementar do conteúdo
+-  Conteúdo em Vídeo
+-  Conteúdo em Artigo
+-  Conteúdo PDF
+-  Sistema de Quiz
+-  Prova Final
 
 
-#### 🎯 Sistema de Quiz
-- **Perguntas de múltipla escolha**
-- **Feedback imediato** (correto/incorreto)
-- **Explicações detalhadas** para cada resposta
-- **Sistema visual** de seleção de respostas
-
-![Sistema de Quiz](./screenshots/quiz-feedback.png)
-*Figura 6: Sistema de quiz com feedback visual e explicações*
-
-#### 🏆 Prova Final
-- **Múltiplas questões** sobre todo o módulo
-- **Sistema de pontuação** (mínimo 60% para aprovação)
-- **Navegação entre questões**
-
-![Prova Final](./screenshots/prova-final.png)
-*Figura 7: Interface da prova final com navegação entre questões*
-
-
-## 📊 Progresso e Gamificação
+### Progresso e Gamificação
 
 ### Sistema de Progresso
 - **Barra de progresso visual** no menu lateral
@@ -823,7 +790,7 @@ Na Sprint 4, desenvolvemos a parte da aplicação que permite aos usuários nave
 - **Menu lateral** que se torna superior no mobile
 - **Botões e textos** escaláveis
 
-## 🔧 Arquitetura Técnica
+###  Arquitetura Técnica
 
 
 ### Tecnologias Utilizadas
@@ -844,7 +811,7 @@ Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final
 - **Estado compartilhado:** localStorage para comunicação entre páginas
 - **IDs únicos** para trilhas, módulos e aulas
 
-## 📈 Métricas de Desenvolvimento
+###  Métricas de Desenvolvimento
 
 ### Linhas de Código
 - **HTML:** ~400 linhas (2 arquivos)
@@ -854,7 +821,7 @@ Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final
 
 
 
-## 🚧 Dificuldades Encontradas
+###  Dificuldades Encontradas
 
 ### 1. Integração Entre Páginas
 - **Problema:** Compartilhar dados entre trilhas, módulos e aulas
@@ -866,9 +833,8 @@ Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final
 - **Solução:** Refatoração completa do sistema de eventos
 - **Tempo gasto:** 6 horas de debug e reimplementação
 
-## 🎯 Próximos Passos
+###  Próximos Passos
 
-### Sprint 5 - Sistema de Administração
 - [ ] **Painel administrativo** para gestão de conteúdo
 - [ ] **CRUD de trilhas** (criar, editar, excluir)
 - [ ] **CRUD de módulos** e aulas
