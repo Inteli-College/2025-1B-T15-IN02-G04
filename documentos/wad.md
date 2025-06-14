@@ -741,15 +741,15 @@ Na Sprint 4, desenvolvemos a parte da aplicação que permite aos usuários nave
 ### Página de Trilhas (`trail.ejs`)
 
 Figura 1: Página principal com categorias de trilhas organizadas em carrossel
-<p align="center"> <img src="./assets/wad/modelagem-relacional-banco.png" alt="Modelagem Relacional"> </p>
+<p align="center"> <img src="./assets/wad/Trilha.png" alt="Trilhas"> </p>
 
 Figura 2: Modal popup mostrando módulos disponíveis em uma trilha
- <img src="./assets/wad/Módulos.png" alt="Modelagem Relacional"> </p>
+ <img src="./assets/wad/Módulos.png" alt="Módulos"> </p>
 
 ### Página de Aulas (`class.ejs`)
 
 Figura 3: Interface de aula com conteúdo 
- <img src="./assets/wad/Módulos.png" alt="Modelagem Relacional"> </p>
+ <img src="./assets/wad/Provas.png" alt="Aulas"> </p>
 
 - **Menu lateral** com navegação entre aulas
 - **Barra de progresso** visual dinâmica
