@@ -5,7 +5,7 @@ const userController = require("../models/userModel");
 const UserController = {
   async getAllUsers(req, res) {
     try {
-      const users = await UserModels.getAllUsers();
+      const users = await userController.getAllUsers();
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -15,7 +15,7 @@ const UserController = {
   async getUserById(req, res) {
     try {
       const { id } = req.params;
-      const user = await UserModels.getUserById(id);
+      const user = await userController.getUserById(id);
       if (!user) {
         return res.status(404).json({ error: "Usuário não encontrado" });
       }
@@ -28,7 +28,7 @@ const UserController = {
 
   async createUser(req, res) {
     try {
-      const newUser = await UserModels.createUser(req.body);
+      const newUser = await userController.createUser(req.body);
       return res.status(201).json(newUser);
     } catch (err) {
       console.error("Erro ao criar usuário:", err);
@@ -46,13 +46,9 @@ const UserController = {
       console.log("EMAIL:", email);
       console.log("HASH_PASSWORD:", hash_password);
       console.log("USERNAME:", username);
-      const updatedUser = await UserModels.updateUser(
+      const updatedUser = await userController.updateUser(
         req.params.id,
-        first_name,
-        last_name,
-        email,
-        hash_password,
-        username
+        { first_name, last_name, email, hash_password, username }
       );
       if (updatedUser) {
         res.status(200).json(updatedUser);
@@ -66,7 +62,7 @@ const UserController = {
 
   async deleteUser(req, res) {
     try {
-      const deletedUser = await userModels.deleteUser(req.params.id);
+      const deletedUser = await userController.deleteUser(req.params.id);
       if (deletedUser) {
         res.status(200).json(deletedUser);
       } else {

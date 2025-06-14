@@ -1,71 +1,162 @@
-// tests/userController.test.js
+const UserController = require('../controllers/userController');
+const UserModels = require('../models/userModel');
 
-const userController = require('../controllers/userController');
-const userService = require('../services/userService');
+jest.mock('../models/userModel');
 
-jest.mock('../services/userService');
+const mockResponse = () => {
+  const res = {};
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  return res;
+};
 
-describe('userController', () => {
-  let req, res;
+// getAllUsers
+describe('UserController - getAllUsers', () => {
+  afterEach(() => jest.resetAllMocks());
 
-  beforeEach(() => {
-    req = {};
-    res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-  });
-
-  test('getAllUsers deve retornar todos os usuários', async () => {
-    const mockUsers = [
-      { id: '1', name: 'John Doe', email: 'john@example.com' },
-      { id: '2', name: 'Jane Doe', email: 'jane@example.com' },
-    ];
-    userService.getAllUsers.mockResolvedValueOnce(mockUsers);
-
-    await userController.getAllUsers(req, res);
+  it('deve retornar todos os usuários com status 200', async () => {
+    const users = [{ id: 1 }, { id: 2 }];
+    UserModels.getAllUsers.mockResolvedValue(users);
+    const req = {};
+    const res = mockResponse();
+    await UserController.getAllUsers(req, res);
+    expect(UserModels.getAllUsers).toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(mockUsers);
+    expect(res.json).toHaveBeenCalledWith(users);
   });
 
-  test('getUserById deve retornar o usuário correto', async () => {
-    const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
-    req.params = { id: '1' };
-    userService.getUserById.mockResolvedValueOnce(mockUser);
+  it('deve retornar erro 500 ao falhar', async () => {
+    UserModels.getAllUsers.mockRejectedValue(new Error('falha'));
+    const req = {};
+    const res = mockResponse();
+    await UserController.getAllUsers(req, res);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'falha' });
+  });
+});
 
-    await userController.getUserById(req, res);
+// getUserById
+describe('UserController - getUserById', () => {
+  afterEach(() => jest.resetAllMocks());
+
+  it('deve retornar usuário por id com status 200', async () => {
+    const user = { id: 1 };
+    UserModels.getUserById.mockResolvedValue(user);
+    const req = { params: { id: 1 } };
+    const res = mockResponse();
+    await UserController.getUserById(req, res);
+    expect(UserModels.getUserById).toHaveBeenCalledWith(1);
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(mockUser);
+    expect(res.json).toHaveBeenCalledWith(user);
   });
 
-  test('createUser deve criar um novo usuário', async () => {
-    const newUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
-    req.body = { name: 'John Doe', email: 'john@example.com' };
-    userService.createUser.mockResolvedValueOnce(newUser);
+  it('deve retornar 404 se usuário não encontrado', async () => {
+    UserModels.getUserById.mockResolvedValue(undefined);
+    const req = { params: { id: 999 } };
+    const res = mockResponse();
+    await UserController.getUserById(req, res);
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Usuário não encontrado' });
+  });
 
-    await userController.createUser(req, res);
+  it('deve retornar erro 500 ao falhar', async () => {
+    UserModels.getUserById.mockRejectedValue(new Error('falha'));
+    const req = { params: { id: 1 } };
+    const res = mockResponse();
+    await UserController.getUserById(req, res);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao obter usuário.' });
+  });
+});
+
+// createUser
+describe('UserController - createUser', () => {
+  afterEach(() => jest.resetAllMocks());
+
+  it('deve criar usuário e retornar status 201', async () => {
+    const newUser = { id: 1, first_name: 'A' };
+    UserModels.createUser.mockResolvedValue(newUser);
+    const req = { body: newUser };
+    const res = mockResponse();
+    await UserController.createUser(req, res);
+    expect(UserModels.createUser).toHaveBeenCalledWith(newUser);
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith(newUser);
   });
 
-  test('updateUser deve atualizar um usuário', async () => {
-    const updatedUser = { id: '1', name: 'John Doe', email: 'john_updated@example.com' };
-    req.params = { id: '1' };
-    req.body = { name: 'John Doe', email: 'john_updated@example.com' };
-    userService.updateUser.mockResolvedValueOnce(updatedUser);
-
-    await userController.updateUser(req, res);
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(updatedUser);
-  });
-
-  test('deleteUser deve deletar um usuário', async () => {
-    const deletedUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
-    req.params = { id: '1' };
-    userService.deleteUser.mockResolvedValueOnce(deletedUser);
-
-    await userController.deleteUser(req, res);
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(deletedUser);
+  it('deve retornar erro 500 ao falhar', async () => {
+    UserModels.createUser.mockRejectedValue(new Error('falha'));
+    const req = { body: {} };
+    const res = mockResponse();
+    await UserController.createUser(req, res);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao criar usuário' });
   });
 });
+
+// updateUser
+describe('UserController - updateUser', () => {
+  afterEach(() => jest.resetAllMocks());
+
+  it('deve atualizar usuário e retornar status 200', async () => {
+    const updated = { id: 1, first_name: 'Novo' };
+    UserModels.updateUser.mockResolvedValue(updated);
+    const req = { params: { id: 1 }, body: { first_name: 'Novo' } };
+    const res = mockResponse();
+    await UserController.updateUser(req, res);
+    expect(UserModels.updateUser).toHaveBeenCalledWith(1, { first_name: 'Novo' });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(updated);
+  });
+
+  it('deve retornar 404 se usuário não encontrado', async () => {
+    UserModels.updateUser.mockResolvedValue(undefined);
+    const req = { params: { id: 999 }, body: { first_name: 'X' } };
+    const res = mockResponse();
+    await UserController.updateUser(req, res);
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Usuário não encontrado' });
+  });
+
+  it('deve retornar erro 500 ao falhar', async () => {
+    UserModels.updateUser.mockRejectedValue(new Error('falha'));
+    const req = { params: { id: 1 }, body: {} };
+    const res = mockResponse();
+    await UserController.updateUser(req, res);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'falha' });
+  });
+});
+
+// deleteUser
+describe('UserController - deleteUser', () => {
+  afterEach(() => jest.resetAllMocks());
+
+  it('deve deletar usuário e retornar status 200', async () => {
+    UserModels.deleteUser.mockResolvedValue(true);
+    const req = { params: { id: 1 } };
+    const res = mockResponse();
+    await UserController.deleteUser(req, res);
+    expect(UserModels.deleteUser).toHaveBeenCalledWith(1);
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(true);
+  });
+
+  it('deve retornar 404 se usuário não encontrado', async () => {
+    UserModels.deleteUser.mockResolvedValue(false);
+    const req = { params: { id: 999 } };
+    const res = mockResponse();
+    await UserController.deleteUser(req, res);
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Usuário não encontrado' });
+  });
+
+  it('deve retornar erro 500 ao falhar', async () => {
+    UserModels.deleteUser.mockRejectedValue(new Error('falha'));
+    const req = { params: { id: 1 } };
+    const res = mockResponse();
+    await UserController.deleteUser(req, res);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'falha' });
+  });
+}); 
