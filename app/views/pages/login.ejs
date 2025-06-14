@@ -1,77 +1,99 @@
-<section class="content-section active auth-section">
-  <h2>Login</h2>
-  
-  <% if (typeof error !== 'undefined') { %>
-    <div class="error-message">
-      <%= error %>
+<div class="auth-page">
+    <div class="container">
+        <div class="auth-wrapper">
+            <!-- Auth Image/Branding -->
+            <div class="auth-image">
+                <div class="auth-brand">
+                    <h2>Aprendiz<span class="accent">AGRO</span></h2>
+                    <p>Transformando o futuro do agronegócio através da educação</p>
+                </div>
+                <div class="auth-illustration">
+                    <div class="illustration-content">
+                        🌾 🚜 📚
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div class="auth-form-container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h1 class="form-title">Bem-vindo de volta!</h1>
+                        <p class="form-subtitle">Faça login para acessar seus cursos</p>
+                    </div>
+
+                    <form id="login-form" class="auth-form" novalidate>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-control" 
+                                placeholder="seu@email.com"
+                                required
+                                autocomplete="email"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="password-input">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-control" 
+                                    placeholder="Sua senha"
+                                    required
+                                    autocomplete="current-password"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    aria-label="Mostrar/ocultar senha"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="remember" id="remember">
+                                <span class="checkmark"></span>
+                                Lembrar de mim
+                            </label>
+                            <a href="/esqueci-senha" class="forgot-link">
+                                Esqueci minha senha
+                            </a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Entrar
+                        </button>
+
+                        <div class="divider">
+                            <span>ou</span>
+                        </div>
+
+                        <div class="social-login">
+                            <button type="button" class="btn btn-social btn-google">
+                                <span class="social-icon">G</span>
+                                Continuar com Google
+                            </button>
+                            <button type="button" class="btn btn-social btn-microsoft">
+                                <span class="social-icon">M</span>
+                                Continuar com Microsoft
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="form-footer">
+                        <p>Não tem uma conta? <a href="/register">Cadastre-se aqui</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  <% } %>
-  
-  <div class="auth-container">
-    <form action="/api/auth/login" method="POST" class="auth-form" id="loginForm">
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      
-      <div class="form-actions">
-        <button type="submit" class="nav-btn">Entrar</button>
-      </div>
-      
-      <div class="auth-links">
-        <p>Não tem uma conta? <a href="/register">Registre-se</a></p>
-      </div>
-    </form>
-  </div>
-</section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('loginForm');
-  
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password })
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        // Sucesso no logins
-        console.log('Login bem-sucedido:', data);
-        document.cookie = `token=${data.token}; path=/;`;
-        window.location.href = '/dashboard'; 
-      } else {
-        // Exibir mensagem de erro
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.textContent = data.message || 'Erro ao fazer login';
-        form.prepend(errorDiv);
-      }
-    } catch (error) {
-      console.error('Erro na requisição:', error);
-      const errorDiv = document.createElement('div');
-      errorDiv.className = 'error-message';
-      errorDiv.textContent = 'Erro de conexão com o servidor';
-      form.prepend(errorDiv);
-    }
-  });
-});
-</script>
-
-<script src="../scripts/auth.js"></script>
+</div>
