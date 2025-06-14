@@ -676,8 +676,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um ranking específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os rankings. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "user\_id": "13", <br></br> "post\_id": "122", <br></br> "like": "true" <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "user\_id": "17", <br></br> "post\_id": "122", <br></br> "like": "false" <br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo ranking. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “13“, <br></br> “post\_id”: “122“, <br></br> “liked”: “true” <br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um ranking específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “user\_id”: “17“, <br></br> “post\_id”: “122“, <br></br> “liked”: “false” <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Posts**
@@ -696,8 +696,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém um role específico a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todos os roles. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria um novo role. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "role": "PTD"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza um role específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "role": "ADM "<br></br> } | 200 OK ou 404 Not Found |
+| Cria um novo role. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “role”: “PTD“ "description": estudante <br></br>} | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza um role específico a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “role”: “ADM“ "description": adiministrador <br></br>} | 200 OK ou 404 Not Found |
 | Deleta um role a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 **Hierarchy**
@@ -706,8 +706,8 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | Obtém uma hierarchy específica a partir do id. |  **http://localhost:3000/api/answers/:id**  | GET | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 | Lista todas as hierarchys. | **http://localhost:3000/api/answers/:id** | GET  | Accept: application/json | **\-** | 200 OK  |
-| Cria uma nova hierarchy. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> "id\_role-user": "1",<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
-| Atualiza uma hierarchy específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> "id\_role-user": "3",<br></br> } | 200 OK ou 404 Not Found |
+| Cria uma nova hierarchy. | **http://localhost:3000/api/answers/:id** | POST | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “1“ “id\_role-user2”: “4“ "hierarchy_type": "mentor"<br></br> } | 201 Created ou 500 Internal Server Error ou 400 Bad Request ou 404 Not Found |
+| Atualiza uma hierarchy específica a partir do id. | **http://localhost:3000/api/answers/:id**  | PUT | Content-Type: application/json Accept: application/json | { <br></br> “id\_role-user”: “id\_role-user2”: “6“ "hierarchy_type": "estudante“, <br></br> } | 200 OK ou 404 Not Found |
 | Deleta um ranking a partir do id. | **http://localhost:3000/api/answers/:id**  | DELETE | Accept: application/json | **\-** | 200 OK ou 404 Not Found |
 
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
@@ -795,3 +795,110 @@ $ npx jest --coverage
 Test Suites: 25 passed, 25 total
 Tests:       214 passed, 214 total
 Time:        ≈4 s
+
+## 5.2. Testes de usabilidade (sprint 5)
+
+_Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de testes de usabilidade. Ou utilize um link para seu relatório de testes (mantenha o link sempre público para visualização)_
+
+# <a name="c6"></a>6. Estudo de Mercado e Plano de Marketing (sprint 4)
+
+## 6.1 Resumo Executivo
+
+_Preencher com até 300 palavras, sem necessidade de fonte_
+
+_Apresente de forma clara e objetiva os principais destaques do projeto: oportunidades de mercado, diferenciais competitivos da aplicação web e os objetivos estratégicos pretendidos._
+
+## 6.2 Análise de Mercado
+
+_a) Visão Geral do Setor (até 250 palavras)_
+_Contextualize o setor no qual a aplicação está inserida, considerando aspectos econômicos, tecnológicos e regulatórios. Utilize fontes confiáveis._
+
+_b) Tamanho e Crescimento do Mercado (até 250 palavras)_
+_Apresente dados quantitativos sobre o tamanho atual e projeções de crescimento do mercado. Utilize fontes confiáveis._
+
+_c) Tendências de Mercado (até 300 palavras)_
+_Identifique e analise tendências relevantes (tecnológicas, comportamentais e mercadológicas) que influenciam o setor. Utilize fontes confiáveis._
+
+## 6.3 Análise da Concorrência
+
+_a) Principais Concorrentes (até 250 palavras)_
+_Liste os concorrentes diretos e indiretos, destacando suas principais características e posicionamento no mercado._
+
+_b) Vantagens Competitivas da Aplicação Web (até 250 palavras)_
+_Descreva os diferenciais da sua aplicação em relação aos concorrentes, sem necessidade de citação de fontes._
+
+## 6.4 Público-Alvo
+
+_a) Segmentação de Mercado (até 250 palavras)_
+Descreva os principais segmentos de mercado a serem atendidos pela aplicação. Utilize bases de dados e fontes confiáveis.\*
+
+_b) Perfil do Público-Alvo (até 250 palavras)_
+_Caracterize o público-alvo com dados demográficos, psicográficos e comportamentais, incluindo necessidades específicas. Utilize fontes obrigatórias._
+
+## 6.5 Posicionamento
+
+_a) Proposta de Valor Única (até 250 palavras)_
+_Defina de maneira clara o que torna a sua aplicação única e valiosa para o mercado._
+
+_b) Estratégia de Diferenciação (até 250 palavras)_
+_Explique como sua aplicação se destacará da concorrência, evidenciando a lógica por trás do posicionamento._
+
+## 6.6 Estratégia de Marketing
+
+### Produto
+O produto configura-se como uma aplicação web direcionada aos PTDs da Bayer Crop Science, com o fito de promover uma capacitação de excelência a esses funcionários. 
+
+Diante disso, a plataforma contempla trilhas de aprendizagem, cursos, conteúdos instrutivos - os quais são anexados pelos gestores da empresa -, cards para acesso rápido aos assuntos, página de progresso para que o PTD e o gestor possam acompanhar o desenvolvimento de aprendizagem do usuário, calendário para organização e notificação das obrigações do usuário, página de comunidade com feed de posts para a troca de experiências e conquistas entre os funcionários e página de registro de atendimentos. Assim, é notório que, com essas funcionalidades, torna-se possível conquistar excelência no que tange a fornecer treinamento adequado à equipe da empresa parceira.
+
+Além disso, o produto se destaca pela sua gamificação. Sob a ótica do PTD, a equipe enxergou a imprescindibilidade de fornecer mecanismos e dinâmicas para engajar o funcionário à se desenvolver profissionalmente na plataforma, de modo que, para tal efeito, tornou o produto ainda mais atrativo por intermédio de um ranking e de um talhão gamificado - segundo o qual, a cada término de responsabilidade, o usuário recebe uma plantação em seu talhão fictício. 
+
+### Preço
+Em razão do contexto acadêmico sob o qual o produto foi confeccionado, entende-se que não há intenções de monetizá-lo. Nesse sentido, quanto a quaisquer custos imprevistos tangentes à plataforma, acredita-se que serão financiados integralmente pela empresa Bayer, de modo que os PTDs tenham acesso gratuito. 
+
+No entanto, caso houvesse desígnio de precificação, dentre as opções de estratégias de preço adotadas, compreende-se a assinatura corporativa como a forma mais eficiente no cenário em questão - de forma que os PTDs ou a Bayer poderia aderir à aplicação por intermédio de assinatura mensal por usuário, ou por licenciamento anual baseado no número de PTDs.
+
+### Praça
+No que tange aos canais de distribuição da aplicação, o produto será disponibilizado via web e aplicativo móvel, diretamente no ambiente de trabalho dos canais internos da Bayer Crop Science. Os argumentos que sustentam essa escolha dizem respeito ao contexto da aplicação (a qual configura-se uma aplicação digital e, por isso, requer um meio similar para ser executado) e ao fato de, a via web e a aplicação móvel estar disponível ao PTD mesmo fora do ambiente de trabalho da empresa, de modo que o funcionário pode acessar os conteúdos independentemente do lugar e do horário, conforme as suas necessidades. Dessa forma, o produto é acessado no ambiente adequada e mais coerente ao contexto em questão. 
+
+### Promoção
+Em função do contexto em que o produto está inserido (cujo objetivo consiste em ser uma aplicação de uso interno da Bayer Crop Science), é possível inferir que a promoção será realizada por intermédio do incentivo da empresa, focando na maximização de engajamento dos PTDs. Nesse sentido, as possibilidades estruturadas para tal finalidade foram: notificações nos dispositivos dos funcionários, por exemplo por meio de e-mails, incentivando o uso da plataforma; Workshops de treinamento para capacitação dos funcionários no que tange a utilização da plataforma, aproveitando para potencializar a promoção; O reconhecimento, em reuniões e eventos da empresa, dos PTDs que mais se destacam no ranking que o produto contempla, de modo a motivar os usuários que ainda não se demonstraram engajados. Além disso, a plataforma também poderá ser divulgada em demais reuniões e eventos corporativos, assim como por meio das redes sociais corporativas da Bayer, ampliando o alcance, a visibilidade e a importância do AprendizaAgro no processo de capacitação dos PTDs.
+
+# <a name="c7"></a>7. Conclusões e trabalhos futuros (sprint 5)
+
+_Escreva de que formas a solução da aplicação web atingiu os objetivos descritos na seção 2 deste documento. Indique pontos fortes e pontos a melhorar de maneira geral._
+
+_Relacione os pontos de melhorias evidenciados nos testes com planos de ações para serem implementadas. O grupo não precisa implementá-las, pode deixar registrado aqui o plano para ações futuras_
+
+_Relacione também quaisquer outras ideias que o grupo tenha para melhorias futuras_
+
+# <a name="c8"></a>8. Referências (sprints 1 a 5)
+
+_Incluir as principais referências de seu projeto, para que seu parceiro possa consultar caso ele se interessar em aprofundar. Um exemplo de referência de livro e de site:_<br>
+
+_LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>_
+_SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>_
+
+_INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>_
+_SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano_
+
+## Gerais
+
+1. CLIMATE FIELDVIEW. Plataforma de Agricultura Digital. Disponível em: https://climatefieldview.com.br/. Acesso em: 26 abr. 2025.​
+
+## Pesquisa de mercado
+
+1. MORDOR INTELLIGENCE. Brazil Crop Protection Pesticides Market. Disponível em: https://www.mordorintelligence.com/industry-reports/brazil-crop-protection-pesticides-market. Acesso em: 25 abr. 2025.​
+
+2. KEN RESEARCH. Brazil Crop Protection Market. Disponível em: https://www.kenresearch.com/industry-reports/brazil-crop-protection-market. Acesso em: 25 abr. 2025.​
+
+3. SPER RESEARCH. Brazil Crop Protection Market Growth, Size, Trends, Revenue, Challenges and Future Competition. Disponível em: https://www.sperresearch.com/report-store/brazil-crop-protection-market.aspx. Acesso em: 26 abr. 2025.​
+
+4. AGROPAGES. Bayer's Digital Platform Reaches 22 Million Hectares Mapped in Brazil. Disponível em: https://news.agropages.com/News/NewsDetail---42177.htm. Acesso em: 27 abr. 2025.​
+
+O Tempo Economia. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025
+O Presente Rural. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr. 2025
+
+# <a name="c9"></a>Anexos
+
+_Inclua aqui quaisquer complementos para seu projeto, como diagramas, imagens, tabelas etc. Organize em sub-tópicos utilizando headings menores (use ## ou ### para isso)_
+
