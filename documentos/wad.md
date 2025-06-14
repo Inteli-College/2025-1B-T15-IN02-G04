@@ -900,6 +900,7 @@ $ npx jest --coverage
 Test Suites: 25 passed, 25 total
 Tests:       214 passed, 214 total
 Time:        ≈4 s
+```
 
 ## 5.2. Testes de usabilidade (sprint 5)
 
