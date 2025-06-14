@@ -734,7 +734,112 @@ Por fim, seguem as imagens do frontend desenvolvido durante a sprint:
 
 ## 4.2. Segunda versão da aplicação web (sprint 4)
 
-_Descreva e ilustre aqui o desenvolvimento da sua segunda versão do sistema web, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar. Indique as eventuais dificuldades e próximos passos._
+Na Sprint 4, desenvolvemos a parte da aplicação que permite aos usuários navegar por trilhas de aprendizado, acessar módulos específicos e participar de aulas interativas. O sistema implementa um fluxo completo de **Trilhas → Módulos → Aulas** com funcionalidades avançadas de interação e acompanhamento de progresso.
+
+### Funcionalidades Implementadas
+
+### Página de Trilhas (`trail.ejs`)
+
+Figura 1: Página principal com categorias de trilhas organizadas em carrossel
+<p align="center"> <img src="./assets/wad/Trilha.png" alt="Trilhas"> </p>
+
+Figura 2: Modal popup mostrando módulos disponíveis em uma trilha
+ <img src="./assets/wad/Módulos.png" alt="Módulos"> </p>
+
+### Página de Aulas (`class.ejs`)
+
+Figura 3: Interface de aula com conteúdo 
+ <img src="./assets/wad/Provas.png" alt="Aulas"> </p>
+
+- **Menu lateral** com navegação entre aulas
+- **Barra de progresso** visual dinâmica
+- **Sistema de desbloqueio** progressivo de conteúdo
+- **4 tipos de conteúdo** diferentes:
+-  Conteúdo em Vídeo
+-  Conteúdo em Artigo
+-  Conteúdo PDF
+-  Sistema de Quiz
+-  Prova Final
+
+
+### Progresso e Gamificação
+
+### Sistema de Progresso
+- **Barra de progresso visual** no menu lateral
+- **Indicadores de status** para cada aula:
+  - 🔵 Disponível
+  - ✅ Concluída  
+  - 🔒 Bloqueada
+  - 🎯 Prova Final
+
+### Gamificação
+- **Sistema de pontuação** nas provas
+- **Certificados visuais** de conclusão
+- **Feedback positivo** nas respostas corretas
+- **Motivação visual** com emojis e cores
+
+
+### Responsividade
+- **Design mobile-first**
+- **Breakpoints otimizados:**
+  - Desktop: >1200px
+  - Tablet: 768px-1200px  
+  - Mobile: <768px
+
+- **Carrosséis adaptativos** por tamanho de tela
+- **Menu lateral** que se torna superior no mobile
+- **Botões e textos** escaláveis
+
+###  Arquitetura Técnica
+
+
+### Tecnologias Utilizadas
+- **Frontend:** HTML5, CSS3, JavaScript ES6+
+- **Template Engine:** EJS
+- **Storage:** localStorage para persistência
+- **Responsividade:** CSS Grid + Flexbox
+- **Animações:** CSS Transitions + Transform
+
+### Fluxo de Navegação
+```
+Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final 
+```
+
+### Sistema de Dados
+- **Estrutura hierárquica:** Trilha > Módulo > Aulas
+- **Dados em JavaScript:** Objetos aninhados para facilidade
+- **Estado compartilhado:** localStorage para comunicação entre páginas
+- **IDs únicos** para trilhas, módulos e aulas
+
+###  Métricas de Desenvolvimento
+
+### Linhas de Código
+- **HTML:** ~400 linhas (2 arquivos)
+- **CSS:** ~1200 linhas (2 arquivos)  
+- **JavaScript:** ~1800 linhas (2 arquivos)
+- **Total:** ~3400 linhas de código
+
+
+
+###  Dificuldades Encontradas
+
+### 1. Integração Entre Páginas
+- **Problema:** Compartilhar dados entre trilhas, módulos e aulas
+- **Solução:** Implementação de localStorage + parâmetros URL
+- **Tempo gasto:** 4 horas para resolver completamente
+
+### 2. Carrossel Responsivo
+- **Problema:** Setas não funcionavam corretamente em diferentes telas
+- **Solução:** Refatoração completa do sistema de eventos
+- **Tempo gasto:** 6 horas de debug e reimplementação
+
+###  Próximos Passos
+
+- [ ] **Painel administrativo** para gestão de conteúdo
+- [ ] **CRUD de trilhas** (criar, editar, excluir)
+- [ ] **CRUD de módulos** e aulas
+- [ ] **Editor de perguntas** com interface visual
+- [ ] **Gerenciamento de usuários** e progresso
 
 ## 4.3. Versão final da aplicação web (sprint 5)
 
