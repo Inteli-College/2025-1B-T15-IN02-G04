@@ -1,0 +1,176 @@
+<div class="auth-page">
+    <div class="container">
+        <div class="auth-wrapper">
+            <!-- Auth Image/Branding -->
+            <div class="auth-image">
+                <div class="auth-brand">
+                    <h2>Aprendiz<span class="accent">AGRO</span></h2>
+                    <p>Junte-se a milhares de profissionais que já transformaram suas carreiras</p>
+                </div>
+                <div class="auth-illustration">
+                    <div class="illustration-content">
+                        🎓 🌱 🚀
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form-container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h1 class="form-title">Criar minha conta</h1>
+                        <p class="form-subtitle">Comece sua jornada de aprendizado hoje</p>
+                    </div>
+
+                    <form id="register-form" class="auth-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Nome</label>
+                                <input 
+                                    type="text" 
+                                    id="firstName" 
+                                    name="first_name" 
+                                    class="form-control" 
+                                    placeholder="Seu nome"
+                                    required
+                                    autocomplete="given-name"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Sobrenome</label>
+                                <input 
+                                    type="text" 
+                                    id="lastName" 
+                                    name="last_name" 
+                                    class="form-control" 
+                                    placeholder="Seu sobrenome"
+                                    required
+                                    autocomplete="family-name"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-control" 
+                                placeholder="seu@email.com"
+                                required
+                                autocomplete="email"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="password-input">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-control" 
+                                    placeholder="Mínimo 6 caracteres"
+                                    required
+                                    autocomplete="new-password"
+                                    minlength="6"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    aria-label="Mostrar/ocultar senha"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill"></div>
+                                </div>
+                                <div class="strength-text">Digite uma senha</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Senha</label>
+                            <div class="password-input">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword" 
+                                    class="form-control" 
+                                    placeholder="Digite a senha novamente"
+                                    required
+                                    autocomplete="new-password"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    aria-label="Mostrar/ocultar senha"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profession">Área de Atuação (Opcional)</label>
+                            <select id="profession" name="profession" class="form-control">
+                                <option value="">Selecione sua área</option>
+                                <option value="produtor">Produtor Rural</option>
+                                <option value="agronomia">Agronomia</option>
+                                <option value="veterinaria">Veterinária</option>
+                                <option value="zootecnia">Zootecnia</option>
+                                <option value="engenharia-agricola">Engenharia Agrícola</option>
+                                <option value="tecnologia">Tecnologia Agrícola</option>
+                                <option value="gestao">Gestão/Administração</option>
+                                <option value="consultoria">Consultoria</option>
+                                <option value="pesquisa">Pesquisa</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-agreements">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="terms" id="terms" required>
+                                <span class="checkmark"></span>
+                                Aceito os <a href="/termos" target="_blank">Termos de Uso</a> e a 
+                                <a href="/privacidade" target="_blank">Política de Privacidade</a>
+                            </label>
+                            
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="newsletter" id="newsletter">
+                                <span class="checkmark"></span>
+                                Quero receber novidades e ofertas por e-mail
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Criar Conta
+                        </button>
+
+                        <div class="divider">
+                            <span>ou</span>
+                        </div>
+
+                        <div class="social-login">
+                            <button type="button" class="btn btn-social btn-google">
+                                <span class="social-icon">G</span>
+                                Cadastrar com Google
+                            </button>
+                            <button type="button" class="btn btn-social btn-microsoft">
+                                <span class="social-icon">M</span>
+                                Cadastrar com Microsoft
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="form-footer">
+                        <p>Já tem uma conta? <a href="/login">Entre aqui</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
