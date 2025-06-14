@@ -917,37 +917,84 @@ _Apresente de forma clara e objetiva os principais destaques do projeto: oportun
 ## 6.2 Análise de Mercado
 
 _a) Visão Geral do Setor (até 250 palavras)_
-_Contextualize o setor no qual a aplicação está inserida, considerando aspectos econômicos, tecnológicos e regulatórios. Utilize fontes confiáveis._
+
+O projeto consiste no desenvolvimento de uma plataforma web interna para capacitação dos PTDs da Bayer Crop Science. No que tange ao setor agrícola e de agronegócio, é perceptível a constante transformação, demandando profissionais cada vez mais atualizados quanto às tecnologias. Já no ponto de vista econômico, o investimento em capacitação digital cresce impulsionado pela necessidade de inovação e pela competitividade global. A principal oportunidade reside na modernização dos processos de treinamento, substituindo materiais dispersos e métodos tradicionais por uma solução digital, interativa e centralizada.
+Entre os diferenciais competitivos estão a gamificação, trilhas de aprendizagem adaptativas, gamificação e dashboards de desempenho. 
+Os objetivos estratégicos do projeto incluem: acelerar a curva de aprendizado dos funcionários, reduzir custos operacionais com treinamentos presenciais, aumentar a retenção de conhecimento e fortalecer a cultura organizacional. Ao oferecer uma experiência digital eficiente, a Bayer garante que seus colaboradores estejam preparados para atuar com excelência em um mercado agrícola cada vez mais competitivo e tecnológico.
 
 _b) Tamanho e Crescimento do Mercado (até 250 palavras)_
-_Apresente dados quantitativos sobre o tamanho atual e projeções de crescimento do mercado. Utilize fontes confiáveis._
+O mercado global de EdTech corporativa foi avaliado em aproximadamente US$ 27 bilhões em 2023, com projeções de crescimento anual composto (CAGR) de cerca de 15% até 2030, segundo relatório da Grand View Research (2023).
+
+No Brasil, o mercado de educação corporativa movimentou cerca de R$ 8 bilhões em 2023, de acordo com dados da ABED (Associação Brasileira de Educação a Distância). O agronegócio, sendo responsável por cerca de 24,8% do PIB brasileiro (CNA, 2024), representa um segmento estratégico, com alta demanda por capacitação técnica e digital. As empresas do setor estão investindo significativamente em treinamento remoto, principalmente em plataformas personalizadas para suas operações específicas.
 
 _c) Tendências de Mercado (até 300 palavras)_
-_Identifique e analise tendências relevantes (tecnológicas, comportamentais e mercadológicas) que influenciam o setor. Utilize fontes confiáveis._
+As principais tendências que impactam o mercado de treinamento corporativo no agronegócio incluem:
+
+Transformação Digital: Crescimento do uso de plataformas LMS, inteligência artificial e análise de dados para personalizar trilhas de aprendizagem.
+
+Microlearning: Conteúdos curtos e objetivos, que facilitam o aprendizado no dia a dia operacional.
+
+Gamificação: Aumento do engajamento dos colaboradores por meio de elementos de jogos, como desafios, rankings e recompensas.
+
+Capacitação ESG: Maior foco em treinamentos voltados para práticas sustentáveis, responsabilidade social e governança, alinhados às metas globais e aos princípios da Bayer.
+
+Aprendizado Mobile: Plataformas que oferecem acesso via smartphone e tablet, permitindo flexibilidade para funcionários em campo ou áreas operacionais.
+
+IA Generativa e Chatbots: Apoio no esclarecimento de dúvidas e na geração de materiais de suporte em tempo real.
+
+Análise de Dados: Uso de dashboards e relatórios inteligentes para medir desempenho e aderência dos treinamentos.
 
 ## 6.3 Análise da Concorrência
 
 _a) Principais Concorrentes (até 250 palavras)_
-_Liste os concorrentes diretos e indiretos, destacando suas principais características e posicionamento no mercado._
+Os principais concorrentes são plataformas de LMS (Learning Management Systems) e soluções de treinamento corporativo, como:
+
+Sambatech: Oferece soluções de educação corporativa com foco em vídeos, trilhas e gamificação.
+
+Dot Digital Group: Plataforma de treinamento digital com personalização de conteúdos.
+
+Moodlerooms e Moodle: Sistema open-source muito utilizado no meio corporativo, com foco em ensino à distância.
+
+Udemy Business e Coursera for Business: Oferecem cursos prontos de capacitação, mas com menor personalização para contextos específicos do agronegócio.
 
 _b) Vantagens Competitivas da Aplicação Web (até 250 palavras)_
-_Descreva os diferenciais da sua aplicação em relação aos concorrentes, sem necessidade de citação de fontes._
+As principais vantagens competitivas são a gameficação, a experiência centrada no usuário, com design responsivo e acessível e as trilhas de aprendizagem que se adaptam ao perfil e progresso de cada funcionário.
 
 ## 6.4 Público-Alvo
 
 _a) Segmentação de Mercado (até 250 palavras)_
-Descreva os principais segmentos de mercado a serem atendidos pela aplicação. Utilize bases de dados e fontes confiáveis.\*
+O público-alvo está segmentado em:
+
+Funcionários recém-contratados: Participantes de programas de onboarding e treinamento inicial.
+
+Funcionários operacionais: Atuam diretamente nas plantas, fábricas, centros de distribuição e campo.
+
+Funcionários administrativos e técnicos: Envolvidos em processos de controle, gestão, P&D e qualidade.
+
+Gestores: Líderes responsáveis pela condução de equipes, que necessitam de treinamento em gestão de pessoas, processos e compliance.
 
 _b) Perfil do Público-Alvo (até 250 palavras)_
-_Caracterize o público-alvo com dados demográficos, psicográficos e comportamentais, incluindo necessidades específicas. Utilize fontes obrigatórias._
+Demográficos: Idade entre 22 e 55 anos, com predominância de profissionais de ensino médio técnico, superior e pós-graduação. Localizados em áreas rurais, semiurbanas e sedes corporativas.
+
+Psicográficos: Profissionais orientados à inovação, sustentabilidade, segurança e alta performance. Valorizam aprendizado prático, aplicável e acessível.
+
+Comportamentais: Utilizam tecnologia no trabalho (smartphones, tablets, sistemas internos), buscam desenvolvimento contínuo, aprendizado rápido e eficiente. Precisam de treinamentos alinhados a normas de segurança, boas práticas agrícolas e tecnologias emergentes.
 
 ## 6.5 Posicionamento
 
 _a) Proposta de Valor Única (até 250 palavras)_
-_Defina de maneira clara o que torna a sua aplicação única e valiosa para o mercado._
+A plataforma oferece uma experiência de capacitação digital totalmente adaptada à realidade da Bayer Crop Science, unindo conteúdo especializado, interação dinâmica, gamificação e dados analíticos para acelerar o desenvolvimento dos colaboradores. Diferente de soluções genéricas, nosso sistema entende as dores do setor agrícola e as necessidades internas da empresa, proporcionando treinamentos altamente relevantes, eficazes e escaláveis.
 
 _b) Estratégia de Diferenciação (até 250 palavras)_
-_Explique como sua aplicação se destacará da concorrência, evidenciando a lógica por trás do posicionamento._
+Nossa diferenciação está no desenvolvimento de uma solução que não é um LMS genérico, mas sim uma plataforma sob medida, que incorpora os processos, tecnologias, cultura e desafios específicos da Bayer Crop Science. Utilizamos uma abordagem centrada no usuário, com foco em:
+
+Flexibilidade e acessibilidade: Treinamentos disponíveis em qualquer dispositivo, online e offline.
+
+Alta personalização: Trilhas específicas por cargo, setor e nível de conhecimento.
+
+Tecnologia de ponta: Dashboards, IA para recomendações e suporte, e gamificação para engajamento.
+
+Alinhamento estratégico: Atende não só às necessidades operacionais, mas também às metas de sustentabilidade, inovação e compliance da empresa.
 
 ## 6.6 Estratégia de Marketing
 
