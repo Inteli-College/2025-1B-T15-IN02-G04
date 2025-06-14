@@ -916,18 +916,18 @@ _Apresente de forma clara e objetiva os principais destaques do projeto: oportun
 
 ## 6.2 Análise de Mercado
 
-_a) Visão Geral do Setor (até 250 palavras)_
+###  Visão Geral do Setor 
 
 O projeto consiste no desenvolvimento de uma plataforma web interna para capacitação dos PTDs da Bayer Crop Science. No que tange ao setor agrícola e de agronegócio, é perceptível a constante transformação, demandando profissionais cada vez mais atualizados quanto às tecnologias. Já no ponto de vista econômico, o investimento em capacitação digital cresce impulsionado pela necessidade de inovação e pela competitividade global. A principal oportunidade reside na modernização dos processos de treinamento, substituindo materiais dispersos e métodos tradicionais por uma solução digital, interativa e centralizada.
 Entre os diferenciais competitivos estão a gamificação, trilhas de aprendizagem adaptativas, gamificação e dashboards de desempenho. 
 Os objetivos estratégicos do projeto incluem: acelerar a curva de aprendizado dos funcionários, reduzir custos operacionais com treinamentos presenciais, aumentar a retenção de conhecimento e fortalecer a cultura organizacional. Ao oferecer uma experiência digital eficiente, a Bayer garante que seus colaboradores estejam preparados para atuar com excelência em um mercado agrícola cada vez mais competitivo e tecnológico.
 
-_b) Tamanho e Crescimento do Mercado (até 250 palavras)_
+### Tamanho e Crescimento do Mercado 
 O mercado global de EdTech corporativa foi avaliado em aproximadamente US$ 27 bilhões em 2023, com projeções de crescimento anual composto (CAGR) de cerca de 15% até 2030, segundo relatório da Grand View Research (2023).
 
 No Brasil, o mercado de educação corporativa movimentou cerca de R$ 8 bilhões em 2023, de acordo com dados da ABED (Associação Brasileira de Educação a Distância). O agronegócio, sendo responsável por cerca de 24,8% do PIB brasileiro (CNA, 2024), representa um segmento estratégico, com alta demanda por capacitação técnica e digital. As empresas do setor estão investindo significativamente em treinamento remoto, principalmente em plataformas personalizadas para suas operações específicas.
 
-_c) Tendências de Mercado (até 300 palavras)_
+###  Tendências de Mercado 
 As principais tendências que impactam o mercado de treinamento corporativo no agronegócio incluem:
 
 Transformação Digital: Crescimento do uso de plataformas LMS, inteligência artificial e análise de dados para personalizar trilhas de aprendizagem.
@@ -946,7 +946,7 @@ Análise de Dados: Uso de dashboards e relatórios inteligentes para medir desem
 
 ## 6.3 Análise da Concorrência
 
-_a) Principais Concorrentes (até 250 palavras)_
+###  Principais Concorrentes 
 Os principais concorrentes são plataformas de LMS (Learning Management Systems) e soluções de treinamento corporativo, como:
 
 Sambatech: Oferece soluções de educação corporativa com foco em vídeos, trilhas e gamificação.
@@ -957,12 +957,12 @@ Moodlerooms e Moodle: Sistema open-source muito utilizado no meio corporativo, c
 
 Udemy Business e Coursera for Business: Oferecem cursos prontos de capacitação, mas com menor personalização para contextos específicos do agronegócio.
 
-_b) Vantagens Competitivas da Aplicação Web (até 250 palavras)_
+###  Vantagens Competitivas da Aplicação Web 
 As principais vantagens competitivas são a gameficação, a experiência centrada no usuário, com design responsivo e acessível e as trilhas de aprendizagem que se adaptam ao perfil e progresso de cada funcionário.
 
 ## 6.4 Público-Alvo
 
-_a) Segmentação de Mercado (até 250 palavras)_
+###  Segmentação de Mercado 
 O público-alvo está segmentado em:
 
 Funcionários recém-contratados: Participantes de programas de onboarding e treinamento inicial.
@@ -973,7 +973,7 @@ Funcionários administrativos e técnicos: Envolvidos em processos de controle, 
 
 Gestores: Líderes responsáveis pela condução de equipes, que necessitam de treinamento em gestão de pessoas, processos e compliance.
 
-_b) Perfil do Público-Alvo (até 250 palavras)_
+###  Perfil do Público-Alvo 
 Demográficos: Idade entre 22 e 55 anos, com predominância de profissionais de ensino médio técnico, superior e pós-graduação. Localizados em áreas rurais, semiurbanas e sedes corporativas.
 
 Psicográficos: Profissionais orientados à inovação, sustentabilidade, segurança e alta performance. Valorizam aprendizado prático, aplicável e acessível.
@@ -982,10 +982,10 @@ Comportamentais: Utilizam tecnologia no trabalho (smartphones, tablets, sistemas
 
 ## 6.5 Posicionamento
 
-_a) Proposta de Valor Única (até 250 palavras)_
+### Proposta de Valor Única 
 A plataforma oferece uma experiência de capacitação digital totalmente adaptada à realidade da Bayer Crop Science, unindo conteúdo especializado, interação dinâmica, gamificação e dados analíticos para acelerar o desenvolvimento dos colaboradores. Diferente de soluções genéricas, nosso sistema entende as dores do setor agrícola e as necessidades internas da empresa, proporcionando treinamentos altamente relevantes, eficazes e escaláveis.
 
-_b) Estratégia de Diferenciação (até 250 palavras)_
+###  Estratégia de Diferenciação 
 Nossa diferenciação está no desenvolvimento de uma solução que não é um LMS genérico, mas sim uma plataforma sob medida, que incorpora os processos, tecnologias, cultura e desafios específicos da Bayer Crop Science. Utilizamos uma abordagem centrada no usuário, com foco em:
 
 Flexibilidade e acessibilidade: Treinamentos disponíveis em qualquer dispositivo, online e offline.
