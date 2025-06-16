@@ -44,11 +44,9 @@ _Coloque aqui o link para seu projeto publicado e link para vídeo de demonstra�
 
 Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
-- <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
+- <b>documentos</b>: aqui está o documento do projeto, como o Web Application Document (WAD) bem como as imagens complementares, na pasta assets.
 
-- <b>document</b>: aqui estão todos os documentos do projeto, como o Web Application Document (WAD) bem como documentos complementares, na pasta "other".
-
-- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto de aplicação web.
+- <b>app</b>: aqui está a pasta principal da aplicação, onde estão centralizadas as configurações do banco de dados, os modelos, os controllers, as rotas e o arquivo responsável por iniciar a aplicação.
 
 - <b>README.md</b>: arquivo que serve como guia introdutório e explicação geral sobre o projeto e a aplicação (o mesmo arquivo que você está lendo agora).
 
@@ -62,7 +60,7 @@ Aqui encontram-se todas as instruções necessárias para a instalação de todo
 
 1. Baixar e instalar o node.js: [https://nodejs.org/pt-br/](https://nodejs.org/pt-br/) (versão 16.15.1 LTS)
 2. Clone o repositório em questão.
-3. No modo administrador, abra o "prompt de comando" ou o "terminal" e, após, abra a pasta "src/backend" no diretório raiz do repositório clonado e digite o segundo comando:
+3. No modo administrador, abra o "prompt de comando" ou o "terminal" e, após, abra a pasta "/app" no diretório raiz do repositório clonado e digite o segundo comando:
 
 ```sh
 npm install
@@ -71,10 +69,10 @@ npm install
 Isso instalará todas as dependências definidas no arquivo <b>package.json</b> que são necessárias para rodar o projeto. Agora o projeto já está pronto para ser modificado. Caso ainda deseje iniciar a aplicação, digite o comando abaixo no terminal:
 
 ```sh
-npm start
+npm run dev
 ```
 
-5. Agora você pode acessar a aplicação através do link http://localhost:1234/
+5. Agora você pode acessar a aplicação através do link http://localhost:3000/
 6. O servidor está online.
 
 ## 🗃 Histórico de lançamentos
