@@ -1,12 +1,19 @@
-<img src="assets/logointeli.png">
+![Logo Inteli](assets/logointeli.png)
 
 # WAD - Web Application Document - Módulo 2 - Inteli
-
-**_Os trechos em itálico servem apenas como guia para o preenchimento da seção. Por esse motivo, não devem fazer parte da documentação final_**
 
 ## Nome do Grupo
 
 #### Nomes dos integrantes do grupo
+
+[1. Leonardo Corbi](https://www.linkedin.com/in/leonardo-corbi/)  
+[2. Lucas Pomin](https://www.linkedin.com/in/lucas-pomin)  
+[3. Mariana Pereira](https://www.linkedin.com/in/mariana-pereira-394280346/)  
+[4. Nicolli Santana](https://www.linkedin.com/in/nicolli-venino-santana-b84341254/)  
+[5. Rafael Santana Rodrigues](https://www.linkedin.com/in/rafael-santana-rodrigues/)  
+[6. Vivian Peres](https://www.linkedin.com/in/peresvivian/)  
+[7. Yuri Boczar](https://www.linkedin.com/in/yuriboczar/)  
+
 
 ## Sumário
 
@@ -188,8 +195,6 @@ FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template
 <p align = 'center'>Tabela de Napoleão (2020), adaptada pelos autores (2025).</p> <br><br>
 
 ## 2.2. Personas (sprint 1)
-
-_Posicione aqui suas Personas em forma de texto markdown com imagens, ou como imagem de template preenchido. Atualize esta seção ao longo do módulo se necessário._
 
 Persona PTD:
 <p align="center"> <img src="./assets/wad/persona-ptd.png" alt="Persona PTD"> </p>
@@ -1026,14 +1031,6 @@ _Relacione também quaisquer outras ideias que o grupo tenha para melhorias futu
 
 # <a name="c8"></a>8. Referências (sprints 1 a 5)
 
-_Incluir as principais referências de seu projeto, para que seu parceiro possa consultar caso ele se interessar em aprofundar. Um exemplo de referência de livro e de site:_<br>
-
-_LUCK, Heloisa. Liderança em gestão escolar. 4. ed. Petrópolis: Vozes, 2010. <br>_
-_SOBRENOME, Nome. Título do livro: subtítulo do livro. Edição. Cidade de publicação: Nome da editora, Ano de publicação. <br>_
-
-_INTELI. Adalove. Disponível em: https://adalove.inteli.edu.br/feed. Acesso em: 1 out. 2023 <br>_
-_SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia Mês Ano_
-
 ## Gerais
 
 1. CLIMATE FIELDVIEW. Plataforma de Agricultura Digital. Disponível em: https://climatefieldview.com.br/. Acesso em: 26 abr. 2025.​
@@ -1048,10 +1045,9 @@ _SOBRENOME, Nome. Título do site. Disponível em: link do site. Acesso em: Dia 
 
 4. AGROPAGES. Bayer's Digital Platform Reaches 22 Million Hectares Mapped in Brazil. Disponível em: https://news.agropages.com/News/NewsDetail---42177.htm. Acesso em: 27 abr. 2025.​
 
-O Tempo Economia. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025
-O Presente Rural. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr. 2025
+5. O TEMPO ECONOMIA. Setor farmacêutico cresce 11% e movimenta R$ 158,4 bilhões em 2024, mostra levantamento. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025.
+
+6. O PRESENTE RURAL. Mercado brasileiro de sementes deve crescer 8,3% ao ano até 2027. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr 2025.
 
 # <a name="c9"></a>Anexos
-
-_Inclua aqui quaisquer complementos para seu projeto, como diagramas, imagens, tabelas etc. Organize em sub-tópicos utilizando headings menores (use ## ou ### para isso)_
 
