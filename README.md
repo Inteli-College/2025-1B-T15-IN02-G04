@@ -34,7 +34,13 @@
 
 ## 📝 Descrição
 
-_Descreva seu projeto (até 600 palavras)_
+O AprendizAgro é uma plataforma de aprendizado e busca rápida de conteúdo, que tem como objetivo principal auxiliar os PTD’s em sua jornada no campo com o cliente final. Ou seja, capacitá-los e apoiá-los com informações relevantes para o seu trabalho diário no campo. Para isso, desenvolvemos nossa aplicação com algumas ferramentas essenciais para a efetivação dessas funcionalidades.
+
+Primeiro, temos as trilhas, módulos e aulas, que estão diretamente interligados. As trilhas trazem um conteúdo mais geral, abordando o contexto dos módulos, enquanto dentro de cada módulo estão as aulas, focadas em assuntos específicos. Todo esse conjunto se conecta de forma integrada para facilitar e potencializar o aprendizado dos conteúdos disponíveis.
+
+Também contamos com os cards, que são responsáveis pela pesquisa rápida dentro da plataforma. Neles, o usuário encontra informações objetivas e de fácil acesso, que podem ser consultadas tanto durante o atendimento no campo quanto em momentos de estudo, por conterem respostas rápidas para dúvidas pontuais.
+
+Além disso, temos um feed, onde é possível registrar os atendimentos em campo e compartilhar com outros PTD’s as suas experiências. Essa é uma ótima oportunidade para apoiar colegas de trabalho, por meio de postagens que relatam as atividades realizadas, as soluções aplicadas e os aprendizados adquiridos durante os atendimentos.
 
 ## 📝 Link de demonstração
 
