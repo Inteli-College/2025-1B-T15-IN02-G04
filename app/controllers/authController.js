@@ -99,7 +99,7 @@ async function login(req, res) {
       return res.status(401).json({ erro: "Email ou senha inválidos" });
     }
     
-    const isPasswordValid = await bcrypt.compare(password, user.hash_password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       console.log("Senha inválida para:", email);
       return res.status(401).json({ erro: "Email ou senha inválidos" });
