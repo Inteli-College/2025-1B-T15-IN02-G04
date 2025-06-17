@@ -22,15 +22,15 @@
 
 ### Orientador(a)
 
-•⁠ ⁠<a href="https://www.linkedin.com/in/marcelo-gon%C3%A7alves-phd-a550652/">Marcelo Luiz do Amaral Gonçalves</a>
+- <a href="https://www.linkedin.com/in/marcelo-gon%C3%A7alves-phd-a550652/">Marcelo Luiz do Amaral Gonçalves</a>
 
 ### Instrutores
 
-•⁠ ⁠<a href="https://www.linkedin.com/in/cristiano-benites-ph-d-687647a8/">Cristiano da Silva Benitez</a>
-•⁠ ⁠<a href="https://www.linkedin.com/in/francisco-escobar/">Francisco de Souza Escobar</a>
-•⁠ ⁠<a href="https://www.linkedin.com/in/filipe-gon%C3%A7alves-08a55015b/">Filipe Gonçalves de Souza Nogueira da Silva</a>
-•⁠ ⁠<a href="https://www.linkedin.com/in/geraldo-magela-severino-vasconcelos-22b1b220/">Geraldo Magela Severino Vasconcelos</a>
-•⁠ ⁠<a href="https://www.linkedin.com/in/pedroteberga/">Pedro Marins Freire Teberga</a>
+- ⁠<a href="https://www.linkedin.com/in/cristiano-benites-ph-d-687647a8/">Cristiano da Silva Benitez</a>
+- <a href="https://www.linkedin.com/in/francisco-escobar/">Francisco de Souza Escobar</a>
+- ⁠<a href="https://www.linkedin.com/in/filipe-gon%C3%A7alves-08a55015b/">Filipe Gonçalves de Souza Nogueira da Silva</a>
+- <a href="https://www.linkedin.com/in/geraldo-magela-severino-vasconcelos-22b1b220/">Geraldo Magela Severino Vasconcelos</a>
+- ⁠<a href="https://www.linkedin.com/in/pedroteberga/">Pedro Marins Freire Teberga</a>
 
 ## 📝 Descrição
 
