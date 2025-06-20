@@ -54,8 +54,190 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 - <b>app</b>: aqui está a pasta principal da aplicação, onde estão centralizadas as configurações do banco de dados, os modelos, os controllers, as rotas e o arquivo responsável por iniciar a aplicação.
 
-- <b>README.md</b>: arquivo que serve como guia introdutório e explicação geral sobre o projeto e a aplicação (o mesmo arquivo que você está lendo agora).
+- <b>README.md</b>: arquivo que serve como guia introdutório e explicação geral sobre o projeto e a aplicação (o mesmo arquivo que você está lendo agora).}
 
+
+```plaintext
+aprendizAgro/
+│
+├── app/                     # Núcleo da aplicação: backend, frontend, configurações e scripts
+│   │
+│   ├── config/              # Configurações globais da aplicação
+│   │   ├── db.js            # Configuração da conexão com o banco de dados
+│   │   └── jwtConfig.js     # Configuração do JWT para autenticação
+│   │
+│   ├── controllers/         # Controladores que tratam as requisições e implementam regras de negócio
+│   │   ├── answerController.js
+│   │   ├── authController.js
+│   │   ├── cardController.js
+│   │   ├── cardUserController.js
+│   │   ├── certificateController.js
+│   │   ├── classController.js
+│   │   ├── classUserController.js
+│   │   ├── comentClassController.js
+│   │   ├── comentController.js
+│   │   ├── comentPostController.js
+│   │   ├── hierarchyController.js
+│   │   ├── hierarchyTrailController.js
+│   │   ├── likeController.js
+│   │   ├── meritController.js
+│   │   ├── meritUserController.js
+│   │   ├── moduleController.js
+│   │   ├── moduleUserController.js
+│   │   ├── postController.js
+│   │   ├── questionController.js
+│   │   ├── rankingController.js
+│   │   ├── roleController.js
+│   │   ├── roleUserController.js
+│   │   ├── testController.js
+│   │   ├── testUserController.js
+│   │   ├── trailController.js
+│   │   ├── trailUserController.js
+│   │   ├── userController.js
+│   │   └── userLikeController.js
+│   │
+│   ├── middleware/          # Middlewares para tratamento de requisições
+│   │   └── authMiddleware.js
+│   │
+│   ├── migrations/          # Scripts de criação, alteração e manipulação de tabelas no banco
+│   │   ├── development/
+│   │   ├── production/
+│   │   ├── drop_all.js
+│   │   ├── insert_all.js
+│   │   └── migrate_all.js
+│   │
+│   ├── models/              # Definição dos modelos de dados (ORM)
+│   │   ├── answerModel.js
+│   │   ├── cardModel.js
+│   │   ├── cardUserModel.js
+│   │   ├── certificateModel.js
+│   │   ├── classModel.js
+│   │   ├── classUserModel.js
+│   │   ├── comentClassModel.js
+│   │   ├── comentModel.js
+│   │   ├── comentPostModel.js
+│   │   ├── hierarchyTrailModel.js
+│   │   ├── likeModel.js
+│   │   ├── meritModel.js
+│   │   ├── meritUserModel.js
+│   │   ├── moduleModel.js
+│   │   ├── moduleUserModel.js
+│   │   ├── postModel.js
+│   │   ├── questionModel.js
+│   │   ├── rankingModel.js
+│   │   ├── roleUserModel.js
+│   │   ├── testModel.js
+│   │   ├── testUserModel.js
+│   │   ├── trailModel.js
+│   │   ├── trailUserModel.js
+│   │   ├── userLikeModel.js
+│   │   └── userModel.js
+│   │
+│   ├── public/              # Arquivos públicos (frontend estático)
+│   │   ├── assets/
+│   │   │   └── favicon.ico
+│   │   ├── css/
+│   │   │   ├── global.css
+│   │   │   ├── components/
+│   │   │   │   ├── footer.css
+│   │   │   │   └── header.css
+│   │   │   └── pages/
+│   │   │       ├── auth.css
+│   │   │       ├── class.css
+│   │   │       ├── dashboard.css
+│   │   │       ├── home.css
+│   │   │       └── trail.css
+│   │   └── scripts/
+│   │       ├── class.js
+│   │       ├── dashboard.js
+│   │       ├── footer.js
+│   │       ├── home.js
+│   │       ├── login.js
+│   │       ├── main.js
+│   │       ├── register.js
+│   │       └── trail.js
+│   │
+│   ├── routes/              # Definição das rotas/endpoints da API
+│   │   ├── answerRoutes.js
+│   │   ├── authRoutes.js
+│   │   ├── cardRoutes.js
+│   │   ├── certificateRoutes.js
+│   │   ├── classRoutes.js
+│   │   ├── comentRoutes.js
+│   │   ├── frontRoutes.js
+│   │   ├── indexRoutes.js
+│   │   ├── likeRoutes.js
+│   │   ├── meritRoutes.js
+│   │   ├── moduleRoutes.js
+│   │   ├── postRoutes.js
+│   │   ├── questionRoutes.js
+│   │   ├── rankingRoutes.js
+│   │   ├── testRoutes.js
+│   │   ├── trailRoutes.js
+│   │   └── userRoutes.js
+│   │
+│   ├── scripts/             # Scripts utilitários (ex: rodar comandos SQL)
+│   │   ├── init.sql
+│   │   └── runSQLScript.js
+│   │
+│   ├── tests/               # Testes unitários (Jest)
+│   │   ├── answer.test.js
+│   │   ├── card.test.js
+│   │   ├── cardUser.test.js
+│   │   ├── certificate.test.js
+│   │   ├── class.test.js
+│   │   ├── classUser.test.js
+│   │   ├── coment.test.js
+│   │   ├── comentClass.test.js
+│   │   ├── comentPost.test.js
+│   │   ├── hierarchyTrail.test.js
+│   │   ├── likeController.test.js
+│   │   ├── merit.test.js
+│   │   ├── meritUser.test.js
+│   │   ├── module.test.js
+│   │   ├── moduleUser.test.js
+│   │   ├── postController.test.js
+│   │   ├── question.test.js
+│   │   ├── ranking.test.js
+│   │   ├── roleUser.test.js
+│   │   ├── test.test.js
+│   │   ├── testUser.test.js
+│   │   ├── trail.test.js
+│   │   ├── trailUser.test.js
+│   │   ├── userController.test.js
+│   │   └── userLike.test.js
+│   │
+│   ├── views/               # Templates EJS para as páginas renderizadas no servidor
+│   │   ├── layout/
+│   │   │   └── main.ejs
+│   │   ├── components/
+│   │   │   ├── footer.ejs
+│   │   │   └── header.ejs
+│   │   ├── pages/
+│   │   │   ├── class.ejs
+│   │   │   ├── dashboard.ejs
+│   │   │   ├── home.ejs
+│   │   │   ├── login.ejs
+│   │   │   ├── register.ejs
+│   │   │   └── trail.ejs
+│   │   └── scripts/
+│   │       └── auth.js
+│   │
+│   ├── .env                 # Variáveis de ambiente (ex: PORT, DATABASE_URL)
+│   ├── .gitignore           # Arquivos e pastas que devem ser ignorados pelo Git
+│   ├── jest.config.js       # Configuração do Jest para os testes
+│   ├── package.json         # Lista de dependências, scripts e informações do projeto Node.js
+│   ├── package-lock.json    # Controle de versões exatas das dependências
+│   └── server.js            # Arquivo principal que inicializa o servidor Express
+│
+├── documentos/              # Documentação geral do projeto
+│   ├── assets/              # Imagens utilizadas na documentação
+│   │   └── ... (várias imagens relacionadas ao projeto)
+│   └── wad.md               # Documento de Arquitetura e Design Web Application Description
+│
+├── README.md                # Explicação geral do projeto: descrição, como rodar, estrutura, etc
+
+```
 ## 💻 Configuração para desenvolvimento e execução do código
 
 _Acrescentar as informações necessárias sobre pré-requisitos (IDEs, bibliotecas, serviços etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o código e executar a aplicação a partir de sua máquina local._
