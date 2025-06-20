@@ -239,26 +239,93 @@ aprendizAgro/
 
 ```
 ## 💻 Configuração para desenvolvimento e execução do código
+Aqui estão todas as instruções necessárias para configurar o ambiente de desenvolvimento, instalar as dependências e executar a aplicação localmente.
 
-_Acrescentar as informações necessárias sobre pré-requisitos (IDEs, bibliotecas, serviços etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o código e executar a aplicação a partir de sua máquina local._
+#### ✅ Pré-requisitos
 
-_exemplo de instruções_
+Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 
-Aqui encontram-se todas as instruções necessárias para a instalação de todos os programas, bibliotecas e ferramentas imprescindíveis para a configuração do ambiente de desenvolvimento.
+- [Node.js](https://nodejs.org/pt-br/) (versão recomendada: **16.15.1 LTS** ou superior)
+- [NPM](https://www.npmjs.com/) (gerenciador de pacotes que já vem junto com o Node.js)
+- Um banco de dados **PostgreSQL** instalado e configurado (é necessário criar um banco e atualizar o arquivo `.env` com suas credenciais)
+- (Opcional) Um cliente para PostgreSQL, como **pgAdmin**, **DBeaver**, ou **TablePlus**, para visualizar as tabelas e os dados
 
-1. Baixar e instalar o node.js: [https://nodejs.org/pt-br/](https://nodejs.org/pt-br/) (versão 16.15.1 LTS)
-2. Clone o repositório em questão.
-3. No modo administrador, abra o "prompt de comando" ou o "terminal" e, após, abra a pasta "/app" no diretório raiz do repositório clonado e digite o segundo comando:
+#### ✅ Clonando o repositório
 
-```sh
+Abra o terminal (ou prompt de comando) e execute os seguintes comandos:
+
+```bash
+git clone https://github.com/Inteli-College/2025-1B-T15-IN02-G04.git
+```
+
+Depois, entre na pasta do projeto:
+
+```bash
+cd 2025-1B-T15-IN02-G04
+```
+
+#### ✅ Instalando as dependências
+
+Agora navegue até a pasta `/app` dentro do projeto e instale as dependências:
+
+```bash
+cd app
 npm install
 ```
 
-Isso instalará todas as dependências definidas no arquivo <b>package.json</b> que são necessárias para rodar o projeto. Agora o projeto já está pronto para ser modificado. Caso ainda deseje iniciar a aplicação, digite o comando abaixo no terminal:
+Este comando vai instalar todas as bibliotecas necessárias que estão listadas no arquivo `package.json`.
 
-```sh
+#### ✅ Configuração das Variáveis de Ambiente (.env)
+
+Antes de rodar o projeto, é necessário configurar as variáveis de ambiente.
+
+Na raiz da pasta `/app`, crie um arquivo `.env` (se já não existir), com o seguinte conteúdo básico (exemplo):
+
+```dotenv
+PORT=3000
+DATABASE_URL=postgres://seu_usuario:sua_senha@localhost:5432/nome_do_banco
+JWT_SECRET=sua_chave_secreta
+```
+
+⚠️ **Altere os valores conforme a configuração do seu PostgreSQL.**
+
+#### ✅ Rodando o servidor
+
+Para iniciar o projeto em ambiente de desenvolvimento, use o comando:
+
+```bash
 npm run dev
 ```
+Se tudo estiver correto, você verá no terminal algo como:
+
+```
+Conectado ao banco de dados PostgreSQL
+Servidor rodando na porta 3000
+```
+
+#### ✅ Acessando a aplicação no navegador
+
+Abra o navegador e acesse:
+
+```
+http://localhost:3000/
+```
+
+Pronto! A aplicação estará rodando localmente.
+
+#### ✅ Rodando os testes (Opcional)
+
+Se desejar executar os testes unitários com o Jest:
+
+```bash
+npm test
+```
+
+#### ✅ Dicas úteis
+
+- Se fizer alterações no código, o Nodemon já está configurado para reiniciar o servidor automaticamente.
+- Se houver problemas com o banco, verifique se o PostgreSQL está rodando e se os dados no `.env` estão corretos.
+- Caso necessário, use os scripts de migração que estão na pasta `/app/migrations` para criar ou popular as tabelas do banco.
 
 5. Agora você pode acessar a aplicação através do link http://localhost:3000/
 6. O servidor está online.
