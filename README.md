@@ -56,7 +56,6 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 - <b>README.md</b>: arquivo que serve como guia introdutório e explicação geral sobre o projeto e a aplicação (o mesmo arquivo que você está lendo agora).}
 
-
 ```plaintext
 aprendizAgro/
 │
@@ -238,7 +237,9 @@ aprendizAgro/
 ├── README.md                # Explicação geral do projeto: descrição, como rodar, estrutura, etc
 
 ```
+
 ## 💻 Configuração para desenvolvimento e execução do código
+
 Aqui estão todas as instruções necessárias para configurar o ambiente de desenvolvimento, instalar as dependências e executar a aplicação localmente.
 
 #### ✅ Pré-requisitos
@@ -296,6 +297,7 @@ Para iniciar o projeto em ambiente de desenvolvimento, use o comando:
 ```bash
 npm run dev
 ```
+
 Se tudo estiver correto, você verá no terminal algo como:
 
 ```
