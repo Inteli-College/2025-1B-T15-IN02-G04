@@ -32,7 +32,7 @@ class CardController {
       if (!card) {
         return res.status(404).json({ error: 'Card não encontrado' });
       }
-      return res.status(200).json(cards);
+      return res.status(200).json(card);
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: 'Erro ao obter card.' });
