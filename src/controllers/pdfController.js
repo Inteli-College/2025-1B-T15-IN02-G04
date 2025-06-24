@@ -1,322 +1,365 @@
-const puppeteer = require('puppeteer');
 const CardModel = require('../models/cardModel');
 
 class PDFController {
+  // Teste para verificar se Puppeteer está funcionando
+  static async testPuppeteer(req, res) {
+    console.log('🧪 Teste de Puppeteer solicitado');
+    
+    try {
+      // Tentar carregar Puppeteer
+      const puppeteer = require('puppeteer');
+      console.log('✅ Puppeteer carregado');
+
+      // Tentar criar browser
+      const browser = await puppeteer.launch({
+        headless: true,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage'
+        ]
+      });
+      
+      console.log('✅ Browser criado');
+
+      const page = await browser.newPage();
+      
+      // HTML de teste simples
+      const testHTML = `
+      <!DOCTYPE html>
+      <html>
+      <head><meta charset="UTF-8"><title>Teste</title></head>
+      <body><h1>Teste do Puppeteer</h1><p>Data: ${new Date().toLocaleString('pt-BR')}</p></body>
+      </html>
+      `;
+
+      await page.setContent(testHTML);
+      
+      const pdfBuffer = await page.pdf({ format: 'A4' });
+
+      await browser.close();
+      
+      console.log('✅ PDF de teste gerado:', pdfBuffer.length, 'bytes');
+
+      res.status(200).json({
+        success: true,
+        message: 'Puppeteer está funcionando corretamente',
+        pdfSize: pdfBuffer.length,
+        timestamp: new Date().toISOString()
+      });
+
+    } catch (error) {
+      console.error('❌ Erro no teste do Puppeteer:', error);
+      
+      res.status(500).json({
+        success: false,
+        message: 'Erro no Puppeteer',
+        error: error.message,
+        timestamp: new Date().toISOString()
+      });
+    }
+  }
+
+  // Gerar PDF do card - VERSÃO CORRIGIDA SEM waitForTimeout
   static async generateCardPDF(req, res) {
+    console.log('📄 Solicitação de PDF para card:', req.params.cardId);
+    
     let browser;
     
     try {
       const { cardId } = req.params;
       
-      // Buscar dados do card
+      // Validar cardId
+      if (!cardId || isNaN(cardId)) {
+        console.error('❌ ID do card inválido:', cardId);
+        return res.status(400).json({ error: 'ID do card inválido' });
+      }
+
+      // Buscar card no banco
+      console.log('🔍 Buscando card no banco...');
       const card = await CardModel.getCardById(cardId);
+      
       if (!card) {
+        console.error('❌ Card não encontrado:', cardId);
         return res.status(404).json({ error: 'Card não encontrado' });
       }
 
-      // Inicializar o Puppeteer
+      console.log('✅ Card encontrado:', { id: card.id, title: card.title.substring(0, 50) });
+
+      // Tentar carregar Puppeteer
+      let puppeteer;
+      try {
+        puppeteer = require('puppeteer');
+        console.log('✅ Puppeteer carregado');
+      } catch (error) {
+        console.error('❌ Erro ao carregar Puppeteer:', error);
+        return res.status(500).json({ 
+          error: 'Puppeteer não disponível',
+          details: error.message,
+          suggestion: 'Use /download para arquivo texto'
+        });
+      }
+
+      // Inicializar browser com configurações mínimas
+      console.log('🚀 Iniciando browser...');
       browser = await puppeteer.launch({
         headless: true,
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--no-first-run',
-          '--no-zygote',
-          '--single-process',
-          '--disable-gpu'
+          '--disable-dev-shm-usage'
         ]
       });
 
       const page = await browser.newPage();
 
-      // Configurar viewport
-      await page.setViewport({ width: 1200, height: 800 });
+      // Gerar HTML simples e compatível
+      const htmlContent = PDFController.generateSimpleCardHTML(card);
+      console.log('📝 HTML gerado');
 
-      // Criar HTML para o PDF
-      const htmlContent = PDFController.generateCardHTML(card);
+      // Carregar HTML de forma simples
+      console.log('🔄 Carregando HTML na página...');
+      await page.setContent(htmlContent);
 
-      // Carregar o HTML na página
-      await page.setContent(htmlContent, { 
-        waitUntil: 'networkidle0',
-        timeout: 30000 
-      });
-
-      // Gerar PDF
+      // Gerar PDF imediatamente (sem waitForTimeout)
+      console.log('📄 Gerando PDF...');
       const pdfBuffer = await page.pdf({
         format: 'A4',
         margin: {
           top: '20mm',
-          right: '20mm',
+          right: '15mm',
           bottom: '20mm',
-          left: '20mm'
+          left: '15mm'
         },
-        printBackground: true,
-        preferCSSPageSize: true
+        printBackground: true
       });
 
-      // Configurar headers para download
-      const fileName = `card-${card.title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}.pdf`;
+      console.log('✅ PDF gerado com sucesso:', pdfBuffer.length, 'bytes');
+
+      // Limpar recursos
+      await browser.close();
+      browser = null;
+
+      // Preparar resposta
+      const fileName = `card-${card.title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '-').toLowerCase()}.pdf`;
       
+      console.log('📤 Enviando PDF:', fileName);
+
+      // Headers para PDF
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
       res.setHeader('Content-Length', pdfBuffer.length);
 
-      // Enviar o PDF
+      // Enviar PDF
       res.send(pdfBuffer);
 
     } catch (error) {
-      console.error('Erro ao gerar PDF:', error);
+      console.error('❌ Erro ao gerar PDF:', error);
+      
+      // Limpar browser se ainda estiver aberto
+      if (browser) {
+        try {
+          await browser.close();
+        } catch (closeError) {
+          console.error('❌ Erro ao fechar browser:', closeError);
+        }
+      }
+      
       res.status(500).json({ 
         error: 'Erro interno ao gerar PDF',
-        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        details: error.message,
+        timestamp: new Date().toISOString(),
+        suggestion: 'Tente novamente ou use a opção de download de texto'
       });
-    } finally {
-      if (browser) {
-        await browser.close();
-      }
     }
   }
 
-  static generateCardHTML(card) {
+  // Gerar HTML SIMPLES e COMPATÍVEL (sem recursos avançados)
+  static generateSimpleCardHTML(card) {
     const currentDate = new Date().toLocaleDateString('pt-BR');
+    const currentTime = new Date().toLocaleTimeString('pt-BR');
     
     return `
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${card.title}</title>
+        <title>${this.escapeHtml(card.title)}</title>
         <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
             body {
-                font-family: 'Arial', sans-serif;
+                font-family: Arial, sans-serif;
                 line-height: 1.6;
                 color: #333;
                 background: #fff;
-            }
-
-            .container {
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 40px;
+                margin: 0;
+                padding: 30px;
             }
 
             .header {
-                background: linear-gradient(135deg, #10384F 0%, #89D329 100%);
+                background: #10384F;
                 color: white;
-                padding: 30px;
-                border-radius: 10px;
-                margin-bottom: 30px;
+                padding: 20px;
                 text-align: center;
+                margin-bottom: 30px;
             }
 
             .logo {
-                font-size: 28px;
-                font-weight: bold;
-                margin-bottom: 10px;
-            }
-
-            .header-subtitle {
-                font-size: 14px;
-                opacity: 0.9;
-            }
-
-            .card-content {
-                background: #f8f9fa;
-                border-radius: 10px;
-                padding: 30px;
-                margin-bottom: 30px;
-                border: 2px solid #e9ecef;
-            }
-
-            .card-title {
                 font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .content {
+                background: #f8f9fa;
+                padding: 25px;
+                margin-bottom: 30px;
+                border: 1px solid #ddd;
+            }
+
+            .title {
+                font-size: 20px;
                 font-weight: bold;
                 color: #10384F;
                 margin-bottom: 20px;
                 text-align: center;
-                border-bottom: 3px solid #89D329;
-                padding-bottom: 15px;
+                border-bottom: 2px solid #89D329;
+                padding-bottom: 10px;
             }
 
-            .card-description {
-                font-size: 16px;
-                line-height: 1.8;
+            .description {
+                font-size: 14px;
+                line-height: 1.7;
                 color: #555;
                 text-align: justify;
-                margin-bottom: 20px;
-            }
-
-            .card-image {
-                text-align: center;
-                margin: 20px 0;
-            }
-
-            .card-image img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             }
 
             .metadata {
                 background: #fff;
-                border-radius: 10px;
-                padding: 20px;
-                border: 1px solid #e9ecef;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-                gap: 15px;
+                padding: 15px;
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
             }
 
             .metadata-item {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 14px;
+                margin-bottom: 8px;
+                font-size: 12px;
                 color: #666;
             }
 
-            .metadata-icon {
-                width: 16px;
-                height: 16px;
-                fill: #89D329;
-            }
-
             .footer {
-                margin-top: 40px;
                 text-align: center;
-                font-size: 12px;
+                font-size: 11px;
                 color: #999;
-                border-top: 1px solid #e9ecef;
-                padding-top: 20px;
+                border-top: 1px solid #ddd;
+                padding-top: 15px;
             }
 
-            .qr-section {
-                text-align: center;
-                margin: 30px 0;
-                padding: 20px;
-                background: #f8f9fa;
-                border-radius: 10px;
-            }
-
-            @media print {
-                .container {
-                    padding: 20px;
-                }
-                
-                .header {
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                }
+            .footer p {
+                margin: 5px 0;
             }
         </style>
     </head>
     <body>
-        <div class="container">
-            <!-- Header -->
-            <div class="header">
-                <div class="logo">aprendizAGRO</div>
-                <div class="header-subtitle">Plataforma Educacional em Agronegócio</div>
-            </div>
+        <div class="header">
+            <div class="logo">aprendizAGRO</div>
+            <div class="subtitle">Plataforma Educacional em Agronegócio</div>
+        </div>
 
-            <!-- Card Content -->
-            <div class="card-content">
-                <h1 class="card-title">${card.title}</h1>
-                
-                ${card.image ? `
-                <div class="card-image">
-                    <img src="${card.image}" alt="${card.title}" onerror="this.style.display='none'">
-                </div>
-                ` : ''}
-                
-                <div class="card-description">
-                    ${card.description}
-                </div>
+        <div class="content">
+            <h1 class="title">${this.escapeHtml(card.title)}</h1>
+            <div class="description">
+                ${this.escapeHtml(card.description)}
             </div>
+        </div>
 
-            <!-- Metadata -->
-            <div class="metadata">
-                <div class="metadata-item">
-                    <svg class="metadata-icon" viewBox="0 0 24 24">
-                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                    </svg>
-                    <span>Gerado em: ${currentDate}</span>
-                </div>
-                
-                <div class="metadata-item">
-                    <svg class="metadata-icon" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                    <span>ID do Card: #${card.id}</span>
-                </div>
-                
-                <div class="metadata-item">
-                    <svg class="metadata-icon" viewBox="0 0 24 24">
-                        <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19V1h-2v1H7V1H5v1H4.5C3.12 2 2 3.12 2 4.5v15C2 20.88 3.12 22 4.5 22h15c1.38 0 2.5-1.12 2.5-2.5v-15C22 3.12 20.88 2 19.5 2z"/>
-                    </svg>
-                    <span>Categoria: Educacional</span>
-                </div>
-            </div>
+        <div class="metadata">
+            <div class="metadata-item">Data de geração: ${currentDate} às ${currentTime}</div>
+            <div class="metadata-item">ID do Card: #${card.id}</div>
+            <div class="metadata-item">Categoria: Educacional</div>
+        </div>
 
-            <!-- Footer -->
-            <div class="footer">
-                <p><strong>AprendizAGRO</strong> - Transformando conhecimento em resultados no agronegócio</p>
-                <p>Este documento foi gerado automaticamente pela plataforma AprendizAGRO</p>
-                <p>© 2025 Bayer. Todos os direitos reservados.</p>
-            </div>
+        <div class="footer">
+            <p><strong>AprendizAGRO</strong> - Transformando conhecimento em resultados no agronegócio</p>
+            <p>Este documento foi gerado automaticamente pela plataforma AprendizAGRO</p>
+            <p>© 2025 Bayer. Todos os direitos reservados.</p>
         </div>
     </body>
     </html>
     `;
   }
 
-  // Método alternativo usando template mais simples (para casos de erro)
+  // Método auxiliar para escapar HTML
+  static escapeHtml(text) {
+    if (!text) return '';
+    
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, (m) => map[m]);
+  }
+
+  // Download de arquivo texto (fallback)
   static async generateSimpleCardPDF(req, res) {
+    console.log('📝 Download de texto solicitado para card:', req.params.cardId);
+    
     try {
       const { cardId } = req.params;
       
+      if (!cardId || isNaN(cardId)) {
+        return res.status(400).json({ error: 'ID do card inválido' });
+      }
+
       const card = await CardModel.getCardById(cardId);
       if (!card) {
         return res.status(404).json({ error: 'Card não encontrado' });
       }
 
-      // Simular um PDF simples usando texto
       const content = `
 APRENDIZAGRO - CARD EDUCACIONAL
+
+${'='.repeat(60)}
 
 Título: ${card.title}
 
 Descrição:
 ${card.description}
 
-ID do Card: #${card.id}
-Data de geração: ${new Date().toLocaleDateString('pt-BR')}
+${'='.repeat(60)}
 
----
-© 2025 AprendizAGRO - Plataforma Educacional em Agronegócio
-      `;
+Informações do Documento:
+- ID do Card: #${card.id}
+- Data de geração: ${new Date().toLocaleDateString('pt-BR')}
+- Hora de geração: ${new Date().toLocaleTimeString('pt-BR')}
 
-      const fileName = `card-${card.title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}.txt`;
+${'='.repeat(60)}
+
+© 2025 AprendizAGRO
+Plataforma Educacional em Agronegócio
+Bayer - Todos os direitos reservados
+      `.trim();
+
+      const fileName = `card-${card.title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '-').toLowerCase()}.txt`;
       
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
       res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+      res.setHeader('Content-Length', Buffer.byteLength(content, 'utf8'));
       
       res.send(content);
 
     } catch (error) {
-      console.error('Erro ao gerar arquivo simples:', error);
-      res.status(500).json({ error: 'Erro ao gerar arquivo' });
+      console.error('❌ Erro ao gerar arquivo texto:', error);
+      res.status(500).json({ 
+        error: 'Erro interno ao gerar arquivo texto',
+        details: error.message 
+      });
     }
   }
 }

@@ -291,15 +291,15 @@ function updateFavoriteButton(cardId, isFavorited) {
 
 // Baixar card como PDF
 async function downloadCardAsPDF(cardId) {
-    console.log('🔄 Iniciando download do card:', cardId);
+    console.log('📥 Iniciando download do card:', cardId);
+    
+    const button = document.querySelector(`[data-card-id="${cardId}"].download-btn`);
+    if (button) {
+        button.classList.add('loading');
+    }
     
     try {
-        const button = document.querySelector(`[data-card-id="${cardId}"].download-btn`);
-        if (button) {
-            button.classList.add('loading');
-        }
-        
-        // STEP 1: Tentar PDF primeiro
+        // PRIMEIRO: Tentar gerar PDF (rota principal)
         console.log('📄 Tentando gerar PDF...');
         
         const pdfResponse = await fetch(`/api/cards/${cardId}/pdf`, {
@@ -309,99 +309,101 @@ async function downloadCardAsPDF(cardId) {
             }
         });
 
-        console.log('📄 Resposta PDF:', {
+        console.log('📄 Resposta da rota PDF:', {
             status: pdfResponse.status,
             statusText: pdfResponse.statusText,
-            headers: Object.fromEntries(pdfResponse.headers.entries())
+            contentType: pdfResponse.headers.get('Content-Type')
         });
 
-        if (pdfResponse.ok) {
-            console.log('✅ PDF gerado com sucesso');
+        // Se PDF foi gerado com sucesso
+        if (pdfResponse.ok && pdfResponse.headers.get('Content-Type')?.includes('application/pdf')) {
+            console.log('✅ PDF gerado com sucesso!');
             
-            // Download do PDF
             const blob = await pdfResponse.blob();
             console.log('📄 Blob PDF criado:', blob.size, 'bytes');
+            
+            // Verificar se é realmente um PDF
+            if (blob.type === 'application/pdf' || blob.size > 0) {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                
+                // Extrair nome do arquivo do cabeçalho
+                const contentDisposition = pdfResponse.headers.get('Content-Disposition');
+                let fileName = `card-${cardId}.pdf`;
+                
+                if (contentDisposition) {
+                    const fileNameMatch = contentDisposition.match(/filename="([^"]+)"/);
+                    if (fileNameMatch) {
+                        fileName = fileNameMatch[1];
+                    }
+                }
+                
+                console.log('📄 Baixando PDF:', fileName);
+                
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                showToast('📄 PDF baixado com sucesso!', 'success');
+                return; // Sucesso! Não precisa do fallback
+            }
+        }
+
+        // Se chegou aqui, o PDF falhou. Vamos ver por quê.
+        let errorMessage = 'PDF não disponível';
+        
+        if (!pdfResponse.ok) {
+            try {
+                const errorData = await pdfResponse.json();
+                errorMessage = errorData.error || errorData.details || pdfResponse.statusText;
+                console.log('❌ Erro detalhado do PDF:', errorData);
+            } catch (e) {
+                errorMessage = `Erro HTTP ${pdfResponse.status}: ${pdfResponse.statusText}`;
+                console.log('❌ Erro HTTP:', errorMessage);
+            }
+        }
+
+        // SEGUNDO: Tentar fallback (arquivo texto)
+        console.log('⚠️ PDF falhou, tentando download alternativo...');
+        console.log('⚠️ Motivo da falha:', errorMessage);
+        
+        const fallbackResponse = await fetch(`/api/cards/${cardId}/download`);
+        
+        console.log('📝 Resposta do fallback:', {
+            status: fallbackResponse.status,
+            statusText: fallbackResponse.statusText,
+            contentType: fallbackResponse.headers.get('Content-Type')
+        });
+        
+        if (fallbackResponse.ok) {
+            const blob = await fallbackResponse.blob();
+            console.log('📝 Fallback blob criado:', blob.size, 'bytes');
             
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            
-            // Extrair nome do arquivo do cabeçalho Content-Disposition
-            const contentDisposition = pdfResponse.headers.get('Content-Disposition');
-            let fileName = `card-${cardId}.pdf`;
-            
-            if (contentDisposition) {
-                const fileNameMatch = contentDisposition.match(/filename="([^"]+)"/);
-                if (fileNameMatch) {
-                    fileName = fileNameMatch[1];
-                }
-            }
-            
-            console.log('📄 Nome do arquivo:', fileName);
-            
-            a.download = fileName;
+            a.download = `card-${cardId}.txt`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
-            
-            showToast('PDF baixado com sucesso!');
+
+            showToast('📝 Arquivo baixado como texto (PDF temporariamente indisponível)', 'warning');
+            console.log('✅ Fallback realizado com sucesso');
             return;
         }
 
-        // STEP 2: Se PDF falhar, tentar download alternativo
-        console.log('⚠️ PDF falhou, tentando download alternativo...');
-        
-        const fallbackResponse = await fetch(`/api/cards/${cardId}/download`);
-        
-        console.log('📝 Resposta Fallback:', {
-            status: fallbackResponse.status,
-            statusText: fallbackResponse.statusText,
-            headers: Object.fromEntries(fallbackResponse.headers.entries())
-        });
-        
-        if (!fallbackResponse.ok) {
-            // Tentar buscar detalhes do erro
-            let errorDetails = 'Erro desconhecido';
-            try {
-                const errorData = await fallbackResponse.json();
-                errorDetails = errorData.error || errorData.message || fallbackResponse.statusText;
-                console.error('❌ Detalhes do erro:', errorData);
-            } catch (e) {
-                console.error('❌ Erro ao processar resposta de erro:', e);
-                errorDetails = `HTTP ${fallbackResponse.status}: ${fallbackResponse.statusText}`;
-            }
-            
-            throw new Error(`Erro ao gerar arquivo para download: ${errorDetails}`);
-        }
-
-        // Download do arquivo texto alternativo
-        console.log('✅ Fallback funcionou, baixando arquivo texto...');
-        
-        const blob = await fallbackResponse.blob();
-        console.log('📝 Blob texto criado:', blob.size, 'bytes');
-        
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `card-${cardId}.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-
-        showToast('Arquivo baixado como texto (PDF indisponível)', 'warning');
+        // Se nem o fallback funcionou
+        const fallbackError = await fallbackResponse.text();
+        throw new Error(`Ambas as tentativas falharam. PDF: ${errorMessage}, Fallback: ${fallbackError}`);
         
     } catch (error) {
-        console.error('❌ Erro completo ao baixar arquivo:', {
-            message: error.message,
-            stack: error.stack,
-            cardId: cardId
-        });
-        
-        showToast(`Erro ao baixar arquivo: ${error.message}`, 'error');
+        console.error('❌ Erro completo no download:', error);
+        showToast(`Erro no download: ${error.message}`, 'error');
     } finally {
-        const button = document.querySelector(`[data-card-id="${cardId}"].download-btn`);
         if (button) {
             button.classList.remove('loading');
         }
