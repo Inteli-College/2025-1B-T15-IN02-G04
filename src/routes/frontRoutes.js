@@ -43,7 +43,7 @@ router.get('/login2', (req, res) => {
 // Página dos cards
 router.get('/cards', (req, res) => {
   res.render('pages/cards', {
-    pageTitle: 'Entrar',
+    pageTitle: 'Cards',
     content: '../pages/cards',
     pageCSS: 'pages/cards.css',
     pageJS: 'cards.js',
