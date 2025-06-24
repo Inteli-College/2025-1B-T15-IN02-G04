@@ -154,8 +154,38 @@ class PDFController {
       res.send(pdfBuffer);
 
     } catch (error) {
-      console.error('❌ Erro ao gerar PDF:', error);
-      
+      console.error('❌ Erro ao gerar PDF (Puppeteer):', error);
+
+      // Tentar fallback com PDFKit
+      try {
+        const { cardId } = req.params;
+        const cardData = await CardModel.getCardById(cardId);
+
+        if (cardData) {
+          console.log('🔄 Gerando PDF simples via PDFKit...');
+          const PDFDocument = require('pdfkit');
+          const doc = new PDFDocument({ size: 'A4', margin: 50 });
+          const buffers = [];
+          doc.on('data', buffers.push.bind(buffers));
+          doc.on('end', () => {
+            const fallbackBuffer = Buffer.concat(buffers);
+            PDFController.sendPDF(fallbackBuffer, cardData.title, res);
+          });
+
+          // Conteúdo do PDF
+          doc.fontSize(20).fillColor('#10384F').text(cardData.title, { align: 'center' });
+          doc.moveDown();
+          doc.fontSize(12).fillColor('#555555').text(cardData.description || 'Sem descrição', { align: 'justify' });
+          doc.moveDown(2);
+          doc.fontSize(10).fillColor('#999999').text(`Gerado em ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR')}`, { align: 'right' });
+
+          doc.end();
+          return; // Resposta enviada no on('end')
+        }
+      } catch (fallbackError) {
+        console.error('❌ Fallback PDFKit falhou:', fallbackError);
+      }
+
       // Limpar browser se ainda estiver aberto
       if (browser) {
         try {
@@ -164,12 +194,12 @@ class PDFController {
           console.error('❌ Erro ao fechar browser:', closeError);
         }
       }
-      
+
       res.status(500).json({ 
         error: 'Erro interno ao gerar PDF',
         details: error.message,
         timestamp: new Date().toISOString(),
-        suggestion: 'Tente novamente ou use a opção de download de texto'
+        suggestion: 'Tente novamente mais tarde'
       });
     }
   }
@@ -361,6 +391,15 @@ Bayer - Todos os direitos reservados
         details: error.message 
       });
     }
+  }
+
+  // Função utilitária para enviar buffer PDF
+  static sendPDF(buffer, title, res) {
+    const fileName = `card-${title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '-').toLowerCase()}.pdf`;
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+    res.setHeader('Content-Length', buffer.length);
+    res.send(buffer);
   }
 }
 

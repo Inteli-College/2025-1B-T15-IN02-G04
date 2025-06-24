@@ -8,8 +8,6 @@ router.get("/login", checkAuth, (req, res) => {
   res.render("pages/login", {
     pageTitle: 'Entrar',
     content: '../pages/login',
-    pageCSS: 'pages/auth.css',
-    pageJS: 'login.js',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
 });
@@ -32,8 +30,6 @@ router.get('/', (req, res) => {
   res.render('layout/main', {
     pageTitle: 'Transforme sua carreira no agronegócio',
     content: '../pages/home',
-    pageCSS: 'pages/home.css',
-    pageJS: 'home.js',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
 });
@@ -43,8 +39,6 @@ router.get('/login2', (req, res) => {
   res.render('layout/main', {
     pageTitle: 'Entrar',
     content: '../pages/login2',
-    pageCSS: 'pages/auth.css',
-    pageJS: 'login.js',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
 });
@@ -53,8 +47,6 @@ router.get('/login2', (req, res) => {
 router.get('/cards', (req, res) => {
   res.render('pages/cards', {
     pageTitle: 'Cards',
-    content: '../pages/cards',
-    pageCSS: 'pages/cards.css',
     pageJS: 'cards.js',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });

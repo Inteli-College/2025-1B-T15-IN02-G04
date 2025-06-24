@@ -12,6 +12,13 @@ const noCardsMessage = document.getElementById('noCardsMessage');
 const errorMessage = document.getElementById('errorMessage');
 const favoriteModal = document.getElementById('favoriteModal');
 
+// SVG Icons
+const ICONS = {
+  heartOutline: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.172 5.172a4 4 0 015.656 0L12 8.343l3.172-3.171a4 4 0 115.656 5.656L12 21.172l-8.828-8.828a4 4 0 010-5.656z" /></svg>`,
+  heartSolid: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M11.998 21.8l-.697-.637C5.252 15.552 2 12.592 2 8.5 2 5.44 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.44 22 8.5c0 4.092-3.252 7.052-9.303 12.663l-.699.637z" /></svg>`,
+  download: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 12v9m0 0-5-5m5 5 5-5M12 12V3" /></svg>`
+};
+
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
     initializePage();
@@ -170,51 +177,49 @@ async function checkIfCardIsFavorited(cardId) {
 
 // Criar HTML do card
 function createCardHTML(card, isFavorited, searchTerm = '') {
-    const highlightClass = searchTerm ? 'search-highlight' : '';
-    const favoritedClass = isFavorited ? 'favorited' : '';
-    const favoriteIcon = isFavorited ? '❤️' : '🤍';
-    const favoriteTooltip = isFavorited ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
-    
+    const highlightClasses = searchTerm ? 'ring-2 ring-field-blue' : '';
+    const favoritedClass = isFavorited ? 'favorited bg-field-green text-white' : '';
+
     // Verificar se há imagem válida
     const hasImage = card.image && card.image.trim() !== '';
-    const imageHTML = hasImage 
-        ? `<img src="${card.image}" alt="${card.title}" class="card-image" onerror="this.parentElement.innerHTML='<div class=\\'card-image-placeholder\\'>📄</div>'">`
-        : `<div class="card-image-placeholder">📄</div>`;
-    
+    const imageHTML = hasImage
+        ? `<img src="${card.image}" alt="${card.title}" class="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-105" onerror="this.parentElement.innerHTML='<div class=\\'flex items-center justify-center w-full h-full bg-gray-300\\'><svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' class=\\'w-10 h-10 text-gray-400\\'><path stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' stroke-width=\\'2\\' d=\\'M4 16V8a4 4 0 014-4h8a4 4 0 014 4v8a4 4 0 01-4 4H8a4 4 0 01-4-4z\\'/></svg></div>'">`
+        : `<div class="flex items-center justify-center w-full h-full bg-gray-300"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-10 h-10 text-gray-400"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16V8a4 4 0 014-4h8a4 4 0 014 4v8a4 4 0 01-4 4H8a4 4 0 01-4-4z"/></svg></div>`;
+
     return `
-        <div class="card ${highlightClass}" data-card-id="${card.id}">
-            <div class="card-image-container">
+        <div class="card group bg-white rounded-xl overflow-hidden shadow-md transform transition hover:-translate-y-1 hover:shadow-lg border-2 border-transparent ${highlightClasses}" data-card-id="${card.id}">
+            <div class="relative w-full h-48 overflow-hidden bg-gray-200">
                 ${imageHTML}
             </div>
-            <div class="card-content">
-                <h3 class="card-title">${escapeHtml(card.title)}</h3>
-                <p class="card-description">${escapeHtml(card.description)}</p>
-                <div class="card-actions">
+            <div class="p-6 flex flex-col flex-1 card-content">
+                <h3 class="text-lg font-semibold text-field-blue-dark mb-2 card-title">${escapeHtml(card.title)}</h3>
+                <p class="text-gray-500 text-sm mb-4 card-description">${escapeHtml(card.description)}</p>
+                <div class="flex justify-between items-center pt-4 border-t border-gray-100 mt-auto card-actions">
                     ${isLoggedIn ? `
                         <button 
-                            class="card-action-btn favorite-btn ${favoritedClass}" 
+                            class="card-action-btn favorite-btn flex items-center justify-center w-10 h-10 rounded-full border-2 border-field-green bg-white text-gray-500 hover:bg-field-green hover:text-white transition transform hover:scale-110 ${favoritedClass}" 
                             data-card-id="${card.id}"
-                            data-tooltip="${favoriteTooltip}"
+                            title="${isFavorited ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}"
                             onclick="handleFavorite(${card.id}, ${isFavorited})"
                         >
-                            ${favoriteIcon}
+                            ${isFavorited ? ICONS.heartSolid : ICONS.heartOutline}
                         </button>
                     ` : `
                         <button 
-                            class="card-action-btn favorite-btn" 
-                            data-tooltip="Faça login para favoritar"
+                            class="card-action-btn favorite-btn flex items-center justify-center w-10 h-10 rounded-full border-2 border-field-green bg-white text-gray-500 hover:bg-field-green hover:text-white transition transform hover:scale-110" 
+                            title="Faça login para favoritar"
                             onclick="redirectToLogin()"
                         >
-                            🤍
+                            ${ICONS.heartOutline}
                         </button>
                     `}
                     <button 
-                        class="card-action-btn download-btn" 
+                        class="card-action-btn download-btn flex items-center justify-center w-10 h-10 rounded-full border-2 border-field-blue bg-white text-gray-500 hover:bg-field-blue hover:text-white transition transform hover:scale-110" 
                         data-card-id="${card.id}"
-                        data-tooltip="Baixar como PDF"
+                        title="Baixar como PDF"
                         onclick="downloadCardAsPDF(${card.id})"
                     >
-                        📥
+                        ${ICONS.download}
                     </button>
                 </div>
             </div>
@@ -247,7 +252,9 @@ function handleFavorite(cardId, isFavorited) {
 async function executeFavoriteToggle(cardId, action) {
     try {
         const button = document.querySelector(`[data-card-id="${cardId}"].favorite-btn`);
-        button.classList.add('loading');
+        if (button) {
+            button.classList.add('animate-spin', 'pointer-events-none', 'opacity-70');
+        }
         
         const url = `/api/cards/${cardId}/favorite`;
         const method = action === 'favorite' ? 'POST' : 'DELETE';
@@ -272,141 +279,40 @@ async function executeFavoriteToggle(cardId, action) {
 // Atualizar botão de favorito
 function updateFavoriteButton(cardId, isFavorited) {
     const button = document.querySelector(`[data-card-id="${cardId}"].favorite-btn`);
-    if (button) {
-        button.classList.remove('loading');
-        
-        if (isFavorited) {
-            button.classList.add('favorited');
-            button.innerHTML = '❤️';
-            button.setAttribute('data-tooltip', 'Remover dos favoritos');
-            button.setAttribute('onclick', `handleFavorite(${cardId}, true)`);
-        } else {
-            button.classList.remove('favorited');
-            button.innerHTML = '🤍';
-            button.setAttribute('data-tooltip', 'Adicionar aos favoritos');
-            button.setAttribute('onclick', `handleFavorite(${cardId}, false)`);
-        }
+    if (!button) return;
+
+    button.classList.remove('animate-spin', 'pointer-events-none', 'opacity-70');
+
+    if (isFavorited) {
+        button.classList.add('favorited', 'bg-field-green', 'text-white');
+        button.innerHTML = ICONS.heartSolid;
+        button.setAttribute('title', 'Remover dos favoritos');
+        button.setAttribute('onclick', `handleFavorite(${cardId}, true)`);
+    } else {
+        button.classList.remove('favorited', 'bg-field-green', 'text-white');
+        button.classList.add('bg-white', 'text-gray-500');
+        button.innerHTML = ICONS.heartOutline;
+        button.setAttribute('title', 'Adicionar aos favoritos');
+        button.setAttribute('onclick', `handleFavorite(${cardId}, false)`);
     }
 }
 
-// Baixar card como PDF
-async function downloadCardAsPDF(cardId) {
-    console.log('📥 Iniciando download do card:', cardId);
-    
+// Baixar card como PDF (versão simplificada)
+function downloadCardAsPDF(cardId) {
     const button = document.querySelector(`[data-card-id="${cardId}"].download-btn`);
     if (button) {
-        button.classList.add('loading');
+        button.classList.add('animate-spin', 'pointer-events-none', 'opacity-70');
     }
-    
-    try {
-        // PRIMEIRO: Tentar gerar PDF (rota principal)
-        console.log('📄 Tentando gerar PDF...');
-        
-        const pdfResponse = await fetch(`/api/cards/${cardId}/pdf`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/pdf'
-            }
-        });
 
-        console.log('📄 Resposta da rota PDF:', {
-            status: pdfResponse.status,
-            statusText: pdfResponse.statusText,
-            contentType: pdfResponse.headers.get('Content-Type')
-        });
+    const link = document.createElement('a');
+    link.href = `/api/cards/${cardId}/pdf`;
+    link.setAttribute('download', ''); // nome definido pelo servidor via Content-Disposition
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
-        // Se PDF foi gerado com sucesso
-        if (pdfResponse.ok && pdfResponse.headers.get('Content-Type')?.includes('application/pdf')) {
-            console.log('✅ PDF gerado com sucesso!');
-            
-            const blob = await pdfResponse.blob();
-            console.log('📄 Blob PDF criado:', blob.size, 'bytes');
-            
-            // Verificar se é realmente um PDF
-            if (blob.type === 'application/pdf' || blob.size > 0) {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                
-                // Extrair nome do arquivo do cabeçalho
-                const contentDisposition = pdfResponse.headers.get('Content-Disposition');
-                let fileName = `card-${cardId}.pdf`;
-                
-                if (contentDisposition) {
-                    const fileNameMatch = contentDisposition.match(/filename="([^"]+)"/);
-                    if (fileNameMatch) {
-                        fileName = fileNameMatch[1];
-                    }
-                }
-                
-                console.log('📄 Baixando PDF:', fileName);
-                
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-                
-                showToast('📄 PDF baixado com sucesso!', 'success');
-                return; // Sucesso! Não precisa do fallback
-            }
-        }
-
-        // Se chegou aqui, o PDF falhou. Vamos ver por quê.
-        let errorMessage = 'PDF não disponível';
-        
-        if (!pdfResponse.ok) {
-            try {
-                const errorData = await pdfResponse.json();
-                errorMessage = errorData.error || errorData.details || pdfResponse.statusText;
-                console.log('❌ Erro detalhado do PDF:', errorData);
-            } catch (e) {
-                errorMessage = `Erro HTTP ${pdfResponse.status}: ${pdfResponse.statusText}`;
-                console.log('❌ Erro HTTP:', errorMessage);
-            }
-        }
-
-        // SEGUNDO: Tentar fallback (arquivo texto)
-        console.log('⚠️ PDF falhou, tentando download alternativo...');
-        console.log('⚠️ Motivo da falha:', errorMessage);
-        
-        const fallbackResponse = await fetch(`/api/cards/${cardId}/download`);
-        
-        console.log('📝 Resposta do fallback:', {
-            status: fallbackResponse.status,
-            statusText: fallbackResponse.statusText,
-            contentType: fallbackResponse.headers.get('Content-Type')
-        });
-        
-        if (fallbackResponse.ok) {
-            const blob = await fallbackResponse.blob();
-            console.log('📝 Fallback blob criado:', blob.size, 'bytes');
-            
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `card-${cardId}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-
-            showToast('📝 Arquivo baixado como texto (PDF temporariamente indisponível)', 'warning');
-            console.log('✅ Fallback realizado com sucesso');
-            return;
-        }
-
-        // Se nem o fallback funcionou
-        const fallbackError = await fallbackResponse.text();
-        throw new Error(`Ambas as tentativas falharam. PDF: ${errorMessage}, Fallback: ${fallbackError}`);
-        
-    } catch (error) {
-        console.error('❌ Erro completo no download:', error);
-        showToast(`Erro no download: ${error.message}`, 'error');
-    } finally {
-        if (button) {
-            button.classList.remove('loading');
-        }
+    if (button) {
+        button.classList.remove('animate-spin', 'pointer-events-none', 'opacity-70');
     }
 }
 

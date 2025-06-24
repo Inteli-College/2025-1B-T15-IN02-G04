@@ -1,96 +1,78 @@
-<div class="cards-page">
-  <!-- Título da página -->
-  <div class="page-header">
-    <h1 class="page-title">Biblioteca de Cards</h1>
-    <p class="page-subtitle">Explore nosso conteúdo educativo sobre agronegócio</p>
-  </div>
+<!-- Página Cards reconstruída com Tailwind XD-->
+<div class="cards-page container mx-auto px-4 py-10">
+  <!-- Título -->
+  <section class="text-center mb-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-field-blue-dark mb-2">Biblioteca de Cards</h1>
+    <p class="text-gray-500 text-lg">Explore nosso conteúdo educativo sobre agronegócio</p>
+  </section>
 
   <!-- Barra de pesquisa -->
-  <div class="search-container">
-    <div class="search-wrapper">
-      <div class="search-input-container">
-        <input 
-          type="text" 
-          id="searchInput" 
-          placeholder="Pesquisar cards por título ou descrição..."
-          class="search-input"
-        >
-        <div class="search-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-        </div>
-        <button 
-          id="clearSearch" 
-          class="clear-search-btn hidden"
-          title="Limpar busca"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
+  <section class="bg-gradient-to-r from-field-green to-field-blue p-8 rounded-xl shadow-md mb-12">
+    <div class="max-w-xl mx-auto relative">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Pesquisar cards por título ou descrição..."
+        class="w-full py-3 pl-12 pr-12 text-lg rounded-lg outline-none text-field-blue-dark placeholder-gray-400 focus:ring-2 focus:ring-field-green"
+      />
+      <!-- Ícone de busca -->
+      <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
       </div>
+      <!-- Limpar busca -->
+      <button id="clearSearch" title="Limpar busca" class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 hover:text-field-blue-dark hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-full h-full">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
+  </section>
+
+  <!-- Carregando -->
+  <div id="loadingIndicator" class="hidden flex flex-col items-center justify-center py-16">
+    <div class="w-8 h-8 border-4 border-gray-200 border-t-field-green rounded-full animate-spin mb-3"></div>
+    <p class="text-gray-500">Carregando cards...</p>
   </div>
 
-  <!-- Loading indicator -->
-  <div id="loadingIndicator" class="loading-container hidden">
-    <div class="loading-spinner"></div>
-    <p class="loading-text">Carregando cards...</p>
+  <!-- Grid de cards -->
+  <div id="cardsContainer" class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Cards dinâmicos -->
   </div>
 
-  <!-- Cards container -->
-  <div id="cardsContainer" class="cards-grid">
-    <!-- Os cards serão carregados dinamicamente aqui -->
-  </div>
-
-  <!-- Mensagem quando não há cards -->
-  <div id="noCardsMessage" class="message-container hidden">
-    <div class="message-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+  <!-- Sem cards -->
+  <div id="noCardsMessage" class="hidden flex flex-col items-center py-16">
+    <div class="w-24 h-24 text-gray-400 mb-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-full h-full">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
       </svg>
     </div>
-    <h3 class="message-title">Nenhum card encontrado</h3>
-    <p class="message-text">Não há conteúdo disponível no momento ou sua pesquisa não retornou resultados.</p>
+    <h3 class="text-2xl font-semibold text-field-blue-dark mb-2">Nenhum card encontrado</h3>
+    <p class="text-gray-500">Não há conteúdo disponível no momento ou sua pesquisa não retornou resultados.</p>
   </div>
 
-  <!-- Mensagem de erro -->
-  <div id="errorMessage" class="message-container error-message hidden">
-    <div class="message-icon error-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+  <!-- Erro -->
+  <div id="errorMessage" class="hidden flex flex-col items-center py-16">
+    <div class="w-24 h-24 text-red-500 mb-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-full h-full">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     </div>
-    <h3 class="message-title error-title">Erro ao carregar cards</h3>
-    <p class="message-text">Ocorreu um erro ao carregar os cards. Tente novamente mais tarde.</p>
-    <button 
-      onclick="loadCards()" 
-      class="retry-btn"
-    >
-      Tentar novamente
-    </button>
+    <h3 class="text-2xl font-semibold text-red-600 mb-2">Erro ao carregar cards</h3>
+    <p class="text-gray-500 mb-4">Ocorreu um erro ao carregar os cards. Tente novamente mais tarde.</p>
+    <button onclick="loadCards()" class="bg-field-green hover:bg-field-green-dark text-white px-6 py-3 rounded-lg transition-colors">Tentar novamente</button>
   </div>
 </div>
 
-<!-- Modal de confirmação para favoritar -->
-<div id="favoriteModal" class="modal-overlay hidden">
-  <div class="modal-content">
-    <h3 class="modal-title">Confirmar ação</h3>
-    <p id="favoriteModalText" class="modal-text"></p>
-    <div class="modal-actions">
-      <button 
-        id="confirmFavorite" 
-        class="btn btn-primary"
-      >
-        Confirmar
-      </button>
-      <button 
-        id="cancelFavorite" 
-        class="btn btn-secondary"
-      >
-        Cancelar
-      </button>
+<!-- Modal favorito -->
+<div id="favoriteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 max-w-md w-full">
+    <h3 class="text-xl font-semibold text-center mb-4">Confirmar ação</h3>
+    <p id="favoriteModalText" class="text-gray-600 text-center mb-6"></p>
+    <div class="flex justify-center gap-4">
+      <button id="confirmFavorite" class="bg-field-green hover:bg-field-green-dark text-white px-4 py-2 rounded-lg">Confirmar</button>
+      <button id="cancelFavorite" class="border border-gray-300 hover:bg-gray-100 px-4 py-2 rounded-lg">Cancelar</button>
     </div>
   </div>
 </div>
