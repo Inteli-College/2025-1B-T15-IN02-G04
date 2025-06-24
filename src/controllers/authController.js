@@ -6,7 +6,7 @@ const db = require("../config/db");
 const UserModel = require("../models/userModel");
 
 const register = async (req, res) => {
-  const { first_name, last_name, email, username, password , id_role} = req.body;
+  const { first_name, last_name, email, username, password , id_role } = req.body;
 
   try {
     const saltRounds = 10;
@@ -14,8 +14,12 @@ const register = async (req, res) => {
 
     await db.query(
       'INSERT INTO "user" (first_name, last_name, email, username, password) VALUES ($1, $2, $3, $4, $5)',
-      'INSERT INTO role_user (id_user, id_role) VALUES ((SELECT id FROM "user" WHERE email = $3), $6)',
-      [first_name, last_name, email, username, hashSenha, id_role]
+      [first_name, last_name, email, username, hashSenha]
+    );
+    
+    await db.query(
+      'INSERT INTO role_user (id_user, id_role) VALUES ((SELECT id FROM "user" WHERE email = $1), $2)',
+      [email, id_role]
     );
 
     res.redirect("/login");
