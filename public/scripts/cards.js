@@ -289,70 +289,117 @@ function updateFavoriteButton(cardId, isFavorited) {
     }
 }
 
-// Download do card como PDF
+// Baixar card como PDF
 async function downloadCardAsPDF(cardId) {
+    console.log('🔄 Iniciando download do card:', cardId);
+    
     try {
         const button = document.querySelector(`[data-card-id="${cardId}"].download-btn`);
-        button.classList.add('loading');
-        
-        const card = allCards.find(c => c.id === cardId);
-        if (!card) {
-            throw new Error('Card não encontrado');
+        if (button) {
+            button.classList.add('loading');
         }
         
-        // Verificar se jsPDF está carregado
-        if (typeof window.jsPDF === 'undefined') {
-            throw new Error('Biblioteca de PDF não carregada');
+        // STEP 1: Tentar PDF primeiro
+        console.log('📄 Tentando gerar PDF...');
+        
+        const pdfResponse = await fetch(`/api/cards/${cardId}/pdf`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/pdf'
+            }
+        });
+
+        console.log('📄 Resposta PDF:', {
+            status: pdfResponse.status,
+            statusText: pdfResponse.statusText,
+            headers: Object.fromEntries(pdfResponse.headers.entries())
+        });
+
+        if (pdfResponse.ok) {
+            console.log('✅ PDF gerado com sucesso');
+            
+            // Download do PDF
+            const blob = await pdfResponse.blob();
+            console.log('📄 Blob PDF criado:', blob.size, 'bytes');
+            
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            
+            // Extrair nome do arquivo do cabeçalho Content-Disposition
+            const contentDisposition = pdfResponse.headers.get('Content-Disposition');
+            let fileName = `card-${cardId}.pdf`;
+            
+            if (contentDisposition) {
+                const fileNameMatch = contentDisposition.match(/filename="([^"]+)"/);
+                if (fileNameMatch) {
+                    fileName = fileNameMatch[1];
+                }
+            }
+            
+            console.log('📄 Nome do arquivo:', fileName);
+            
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showToast('PDF baixado com sucesso!');
+            return;
         }
+
+        // STEP 2: Se PDF falhar, tentar download alternativo
+        console.log('⚠️ PDF falhou, tentando download alternativo...');
         
-        const { jsPDF } = window.jsPDF;
-        const doc = new jsPDF();
+        const fallbackResponse = await fetch(`/api/cards/${cardId}/download`);
         
-        // Configurações do PDF
-        const pageWidth = doc.internal.pageSize.getWidth();
-        const pageHeight = doc.internal.pageSize.getHeight();
-        const margin = 20;
-        const contentWidth = pageWidth - (margin * 2);
+        console.log('📝 Resposta Fallback:', {
+            status: fallbackResponse.status,
+            statusText: fallbackResponse.statusText,
+            headers: Object.fromEntries(fallbackResponse.headers.entries())
+        });
         
-        // Cabeçalho
-        doc.setFillColor(16, 56, 79); // bayer-dark
-        doc.rect(0, 0, pageWidth, 40, 'F');
+        if (!fallbackResponse.ok) {
+            // Tentar buscar detalhes do erro
+            let errorDetails = 'Erro desconhecido';
+            try {
+                const errorData = await fallbackResponse.json();
+                errorDetails = errorData.error || errorData.message || fallbackResponse.statusText;
+                console.error('❌ Detalhes do erro:', errorData);
+            } catch (e) {
+                console.error('❌ Erro ao processar resposta de erro:', e);
+                errorDetails = `HTTP ${fallbackResponse.status}: ${fallbackResponse.statusText}`;
+            }
+            
+            throw new Error(`Erro ao gerar arquivo para download: ${errorDetails}`);
+        }
+
+        // Download do arquivo texto alternativo
+        console.log('✅ Fallback funcionou, baixando arquivo texto...');
         
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(20);
-        doc.setFont('helvetica', 'bold');
-        doc.text('AprendizAGRO', margin, 25);
+        const blob = await fallbackResponse.blob();
+        console.log('📝 Blob texto criado:', blob.size, 'bytes');
         
-        // Título do card
-        doc.setTextColor(16, 56, 79);
-        doc.setFontSize(18);
-        doc.setFont('helvetica', 'bold');
-        const titleLines = doc.splitTextToSize(card.title, contentWidth);
-        doc.text(titleLines, margin, 60);
-        
-        // Descrição
-        doc.setTextColor(0, 0, 0);
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'normal');
-        const descLines = doc.splitTextToSize(card.description, contentWidth);
-        doc.text(descLines, margin, 80);
-        
-        // Rodapé
-        const footerY = pageHeight - 20;
-        doc.setTextColor(153, 153, 153);
-        doc.setFontSize(10);
-        doc.text('Gerado pela plataforma AprendizAGRO', margin, footerY);
-        doc.text(new Date().toLocaleDateString('pt-BR'), pageWidth - margin - 30, footerY);
-        
-        // Download
-        const fileName = `card-${card.title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}.pdf`;
-        doc.save(fileName);
-        
-        showToast('PDF baixado com sucesso!');
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `card-${cardId}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+
+        showToast('Arquivo baixado como texto (PDF indisponível)', 'warning');
         
     } catch (error) {
-        console.error('Erro ao gerar PDF:', error);
-        showToast('Erro ao gerar PDF', 'error');
+        console.error('❌ Erro completo ao baixar arquivo:', {
+            message: error.message,
+            stack: error.stack,
+            cardId: cardId
+        });
+        
+        showToast(`Erro ao baixar arquivo: ${error.message}`, 'error');
     } finally {
         const button = document.querySelector(`[data-card-id="${cardId}"].download-btn`);
         if (button) {
