@@ -4,9 +4,8 @@ const bcrypt = require("bcrypt");
 class UserModel {
   static async verificarCredenciais(email, senha) {
     try {
-      const result = await db.query("SELECT * FROM Usuario WHERE email = $1", [
-        email,
-      ]);
+      const result = await db.query('SELECT * FROM "user" WHERE email = $1', 
+        [email]);
       const usuario = result.rows[0];
 
       if (!usuario) {
@@ -14,7 +13,7 @@ class UserModel {
         return { error: "Email não encontrado" };
       }
 
-      const senhaCorreta = await bcrypt.compare(senha, usuario.hash_senha);
+      const senhaCorreta = await bcrypt.compare(senha, usuario.password);
 
       if (senhaCorreta) {
         console.log(`Login bem-sucedido para: ${email}`);
@@ -33,7 +32,7 @@ class UserModel {
   static async listarUsuariosPorScore() {
     try {
       const result = await db.query(
-        "SELECT nome, score FROM Usuario ORDER BY score DESC"
+        'SELECT nome, score FROM "user" ORDER BY score DESC'
       );
       return result.rows;
     } catch (err) {
@@ -45,7 +44,7 @@ class UserModel {
   static async buscarPorId(id) {
     try {
       const result = await db.query(
-        "SELECT id_usuario, nome, email, tipo, score FROM Usuario WHERE id_usuario = $1",
+        'SELECT u.id, u.first_name, u.last_name, u.email, u.score, r.role_name FROM "user" u, role r, role_user ru WHERE u.id = $1 AND u.id = ru.id_user AND r.id = ru.id_role',
         [id]
       );
 

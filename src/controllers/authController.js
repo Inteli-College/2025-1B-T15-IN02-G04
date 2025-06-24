@@ -6,15 +6,16 @@ const db = require("../config/db");
 const UserModel = require("../models/userModel");
 
 const register = async (req, res) => {
-  const { nome, email, senha } = req.body;
+  const { first_name, last_name, email, username, password , id_role} = req.body;
 
   try {
     const saltRounds = 10;
-    const hashSenha = await bcrypt.hash(senha, saltRounds);
+    const hashSenha = await bcrypt.hash(password, saltRounds);
 
     await db.query(
-      "INSERT INTO Usuario (nome, email, hash_senha, tipo) VALUES ($1, $2, $3, $4)",
-      [nome, email, hashSenha, "PTD"]
+      'INSERT INTO "user" (first_name, last_name, email, username, password) VALUES ($1, $2, $3, $4, $5)',
+      'INSERT INTO role_user (id_user, id_role) VALUES ((SELECT id FROM "user" WHERE email = $3), $6)',
+      [first_name, last_name, email, username, hashSenha, id_role]
     );
 
     res.redirect("/login");
@@ -42,7 +43,7 @@ const login = async (req, res) => {
 
     // Geração do token JWT
     const token = jwt.sign(
-      { id: user.id_usuario, email: user.email },
+      { id: user.id, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -59,9 +60,8 @@ const login = async (req, res) => {
       message: "Login realizado com sucesso",
       user: {
         id: user.id,
-        nome: user.nome,
+        nome: user.first_name,
         email: user.email,
-        tipo: user.tipo,
       },
     });
   } catch (error) {
