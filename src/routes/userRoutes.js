@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.get("/me", checkApiAuth, userController.meuPerfil);
 router.get("/ranking", userController.listarRanking);
+router.get("/:id", userController.obterUsuario);
 
 module.exports = router;

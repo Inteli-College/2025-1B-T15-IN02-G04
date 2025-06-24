@@ -7,7 +7,7 @@
     <meta name="keywords" content="cursos, agronegócio, Bayer, agricultura, tecnologia">
     <meta name="author" content="Bayer">
     
-    <title><%= pageTitle %> | AprendizAGRO</title>
+    <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' | AprendizAGRO' : 'AprendizAGRO' %></title>
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -71,7 +71,7 @@
     <% } %>
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="<%= pageTitle %> | AprendizAGRO">
+    <meta property="og:title" content="<%= typeof pageTitle !== 'undefined' ? pageTitle + ' | AprendizAGRO' : 'AprendizAGRO' %>">
     <meta property="og:description" content="Plataforma de cursos da Bayer para o agronegócio">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<%= typeof currentUrl !== 'undefined' ? currentUrl : '' %>">
@@ -91,6 +91,8 @@
         <!-- Content will be injected here -->
         <% if (typeof content !== 'undefined') { %>
             <%- include(content) %>
+        <% } else if (typeof body !== 'undefined') { %>
+            <%- body %>
         <% } else { %>
             <!-- Default content if no specific content is provided -->
             <div class="container">

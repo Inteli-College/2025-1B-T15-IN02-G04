@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 const checkAuth = (req, res, next) => {
   const token = req.cookies.token;
 
-  // Rotas que EXIGEM autenticação
-  if (req.path === "/dashboard" || req.path === "/me") {
+  if (req.path === "/dashboard" || req.path === "/me" || req.path.startsWith("/perfil")) {
+
     if (!token) {
       console.log("No token found, redirecting to /login");
       return res.redirect("/login");
