@@ -26,6 +26,14 @@ class CardModel {
       throw error;
   }
 
+  static async getCardByFav(fav) {
+    const result = await db.query('SELECT * FROM card WHERE fav === true', [fav]);
+    return result.rows[0];
+      } catch (error) {
+      console.error('Erro ao buscar card:', error);
+      throw error;
+  }
+
   static async createCard(data) {
     const result = await db.query(
       'INSERT INTO card (title, description, image) VALUES ($1, $2, $3) RETURNING *',
