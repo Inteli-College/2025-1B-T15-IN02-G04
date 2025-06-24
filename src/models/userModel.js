@@ -44,7 +44,7 @@ class UserModel {
   static async buscarPorId(id) {
     try {
       const result = await db.query(
-        'SELECT "user".id, "user".first_name, "user".last_name, "user".email, "user".score, r.role_name FROM "user", role r, role_user ru WHERE "user".id = $1 AND "user".id = ru.id_user AND r.id = ru.id_role',
+        'SELECT "user".id, "user".name, "user".email, "user".score, r.role_name FROM "user", role r, role_user ru WHERE "user".id = $1 AND "user".id = ru.id_user AND r.id = ru.id_role',
         [id]
       );
 

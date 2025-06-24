@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS "user" (
   id BIGSERIAL PRIMARY KEY,
-  first_name VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   username VARCHAR(255) UNIQUE NOT NULL,
@@ -299,7 +299,7 @@ CREATE INDEX IF NOT EXISTS idx_card_user_user_id ON card_user(id_user);
 CREATE OR REPLACE VIEW v_user_progress AS
 SELECT 
   u.id as user_id,
-  u.first_name,
+  u.name,
   u.last_name,
   u.email,
   t.id as trail_id,
@@ -318,7 +318,7 @@ LEFT JOIN module m ON t.id = m.id_trail
 LEFT JOIN module_user mu ON u.id = mu.id_user AND m.id = mu.id_module AND mu.percentage = 100
 LEFT JOIN class c ON m.id = c.id_module
 LEFT JOIN class_user cu ON u.id = cu.id_user AND c.id = cu.id_class AND cu.complete = TRUE
-GROUP BY u.id, u.first_name, u.last_name, u.email, t.id, t.name, tu.percentage, tu.started_at, tu.completed_at;
+GROUP BY u.id, u.name, u.last_name, u.email, t.id, t.name, tu.percentage, tu.started_at, tu.completed_at;
 
 CREATE OR REPLACE VIEW v_posts_with_interactions AS
 SELECT 
@@ -327,7 +327,7 @@ SELECT
   p.description,
   p.image,
   p.created_at,
-  u.first_name as author_first_name,
+  u.name as author_name,
   u.last_name as author_last_name,
   u.username as author_username,
   COUNT(DISTINCT ul.id) as total_likes,
@@ -336,7 +336,7 @@ FROM post p
 JOIN "user" u ON p.id_user = u.id
 LEFT JOIN user_like ul ON p.id = ul.id_post AND ul.liked = TRUE
 LEFT JOIN comment_post cp ON p.id = cp.id_post
-GROUP BY p.id, p.title, p.description, p.image, p.created_at, u.first_name, u.last_name, u.username
+GROUP BY p.id, p.title, p.description, p.image, p.created_at, u.name, u.last_name, u.username
 ORDER BY p.created_at DESC;
 
 CREATE OR REPLACE FUNCTION calculate_trail_progress(

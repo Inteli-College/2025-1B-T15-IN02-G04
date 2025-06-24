@@ -6,15 +6,15 @@ const db = require("../config/db");
 const UserModel = require("../models/userModel");
 
 const register = async (req, res) => {
-  const { first_name, last_name, email, username, password , id_role } = req.body;
+  const { name, email, username, password , id_role } = req.body;
 
   try {
     const saltRounds = 10;
     const hashSenha = await bcrypt.hash(password, saltRounds);
 
     await db.query(
-      'INSERT INTO "user" (first_name, last_name, email, username, password) VALUES ($1, $2, $3, $4, $5)',
-      [first_name, last_name, email, username, hashSenha]
+      'INSERT INTO "user" (name, email, username, password) VALUES ($1, $2, $3, $4)',
+      [name, email, username, hashSenha]
     );
     
     await db.query(
@@ -64,7 +64,7 @@ const login = async (req, res) => {
       message: "Login realizado com sucesso",
       user: {
         id: user.id,
-        nome: user.first_name,
+        nome: user.name,
         email: user.email,
       },
     });

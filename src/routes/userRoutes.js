@@ -1,10 +1,11 @@
 const express = require("express");
 const userController = require("../controllers/userController");
-const checkAuth = require("../middlewares/authMiddleware");
+// const checkAuth = require("../middlewares/authMiddleware");
+const checkApiAuth = require("../middlewares/authApiMiddleware");
 
 const router = express.Router();
 
-router.get("/me", checkAuth, userController.meuPerfil);
+router.get("/me", checkApiAuth, userController.meuPerfil);
 router.get("/ranking", userController.listarRanking);
 
 module.exports = router;
