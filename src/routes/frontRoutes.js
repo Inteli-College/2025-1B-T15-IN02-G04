@@ -6,7 +6,11 @@ const router = express.Router();
 
 router.get("/login", checkAuth, (req, res) => {
   res.render("pages/login", {
-    title: "Login",
+    pageTitle: 'Entrar',
+    content: '../pages/login',
+    pageCSS: 'pages/auth.css',
+    pageJS: 'login.js',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
 });
 
@@ -38,7 +42,7 @@ router.get('/login2', (req, res) => {
 
 // Página dos cards
 router.get('/cards', (req, res) => {
-  res.render('layout/main', {
+  res.render('pages/cards', {
     pageTitle: 'Entrar',
     content: '../pages/cards',
     pageCSS: 'pages/cards.css',
