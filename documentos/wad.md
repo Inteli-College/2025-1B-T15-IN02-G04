@@ -1023,11 +1023,12 @@ Em função do contexto em que o produto está inserido (cujo objetivo consiste 
 
 # <a name="c7"></a>7. Conclusões e trabalhos futuros (sprint 5)
 
-_Escreva de que formas a solução da aplicação web atingiu os objetivos descritos na seção 2 deste documento. Indique pontos fortes e pontos a melhorar de maneira geral._
+Durante as 5 Sprints, a equipe conseguiu contemplar as principais funcionalidades almejadas pelo parceiro na plataforma. Nessa esfera, é perceptível a presença de trilhas, módulos, aulas e provas, imprescindíveis para abraçar a principal necessidade da Bayer Crop Science - a capacitação qualificada dos Promotores Técnicos Digitais (PTDs) -, assim como a visualização dos gestores e dos administradores de conteúdo, os testes, os certificados e as métricas de desempenho do usuário. Assim, com essas funcionalidades, foi possível conquistar os objetivos de mitigar a problemática de rotatividade dos funcionários e otimizar o treinamento dos PTDs - conforme descrito na segunda seção deste documento.
 
-_Relacione os pontos de melhorias evidenciados nos testes com planos de ações para serem implementadas. O grupo não precisa implementá-las, pode deixar registrado aqui o plano para ações futuras_
+Além disso, é válido mencionar que foi possível implementar um ranking e um feed, no qual os usuários podem compartilhar suas experiências de trabalho em comunidade, de modo que tal efeito torna-se o principal diferencial e ponto forte da aplicação. No entanto, a equipe enxerga que existem aspectos que devem ser lapidados, como o design das telas no que tange à usabilidade e consertar bugs nos testes. Paralelamente, a equipe aspira concretizar a user storie de gamificação com a implementação de um talhão interativo, no qual os usuários recebem insígnias de mérito após completarem uma determinada quantidade de atividades no sistema. 
 
-_Relacione também quaisquer outras ideias que o grupo tenha para melhorias futuras_
+Portanto, conclui-se a excelência do AprendizAgro em mitigar as principais dores da empresa parceira do módulo, embora seja notória a demanda das melhorias supracitadas. 
+
 
 # <a name="c8"></a>8. Referências (sprints 1 a 5)
 
