@@ -40,9 +40,9 @@ router.get('/login2', (req, res) => {
 router.get('/cards', (req, res) => {
   res.render('layout/main', {
     pageTitle: 'Entrar',
-    content: '../pages/login',
-    pageCSS: 'pages/auth.css',
-    pageJS: 'login.js',
+    content: '../pages/cards',
+    pageCSS: 'pages/cards.css',
+    pageJS: 'cards.js',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
 });
