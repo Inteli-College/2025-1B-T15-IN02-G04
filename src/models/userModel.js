@@ -33,7 +33,7 @@ class UserModel {
   static async listarUsuariosPorScore() {
     try {
       const result = await db.query(
-        "SELECT nome, score FROM Usuario ORDER BY score DESC"
+        "SELECT id_usuario, nome, score FROM Usuario ORDER BY score DESC"
       );
       return result.rows;
     } catch (err) {

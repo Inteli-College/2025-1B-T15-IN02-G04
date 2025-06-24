@@ -11,7 +11,16 @@ router.get("/login", checkAuth, (req, res) => {
 });
 
 router.get("/dashboard", checkAuth, (req, res) => {
-  res.send("Você está na dashboard");
+  res.render("pages/gestorDashboard", {
+    title: "Dashboard",
+  });
+});
+
+router.get("/perfil/:id", checkAuth, (req, res) => {
+  res.render("pages/perfil", {
+    title: "Perfil",
+    userId: req.params.id,
+  });
 });
 
 module.exports = router;

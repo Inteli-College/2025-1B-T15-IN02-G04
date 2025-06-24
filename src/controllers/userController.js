@@ -47,6 +47,21 @@ class UserController {
       console.error("Erro ao buscar perfil do usuário:", err);
       return res.status(500).json({ error: "Erro ao buscar perfil do usuário" });
     }
-}}
+  }
+
+  static async obterUsuario(req, res) {
+    const { id } = req.params;
+    try {
+      const usuario = await UserModel.buscarPorId(id);
+      if (!usuario) {
+        return res.status(404).json({ error: "Usuário não encontrado" });
+      }
+      return res.status(200).json(usuario);
+    } catch (err) {
+      console.error("Erro ao buscar usuário por ID:", err);
+      return res.status(500).json({ error: "Erro ao buscar usuário" });
+    }
+  }
+}
 
 module.exports = UserController
