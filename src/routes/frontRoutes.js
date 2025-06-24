@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 router.get('/login2', (req, res) => {
   res.render('layout/main', {
     pageTitle: 'Entrar',
-    content: '../pages/login',
+    content: '../pages/login2',
     pageCSS: 'pages/auth.css',
     pageJS: 'login.js',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
