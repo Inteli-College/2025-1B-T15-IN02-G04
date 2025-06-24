@@ -24,6 +24,7 @@ app.use(cookieParser());
 
 app.use("/", routes);
 
+
 // app.use((req, res, next) => {
 //   res.status(404).render("404", { message: "Página não encontrada" });
 // });
@@ -34,6 +35,7 @@ app.use("/", routes);
 //     .status(500)
 //     .render("pages/error", { message: "Erro interno do servidor" });
 // });
+
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);

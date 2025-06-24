@@ -34,8 +34,8 @@ class TrailModel {
   static async createTrail(data) {
     try {
       const result = await db.query(
-        'INSERT INTO trail (title, description, image) VALUES ($1, $2, $3) RETURNING *',
-        [data.title, data.description, data.image]
+        'INSERT INTO trail (name, description) VALUES ($1, $2) RETURNING *',
+        [data.name, data.description]
       );
       return result.rows[0];
     } catch (error) {
@@ -44,11 +44,11 @@ class TrailModel {
     }
   }
 
-  static async updateTrail(id, title, description, image) {
+  static async updateTrail(id, name, description) {
     try {
       const result = await db.query(
-        'UPDATE trail SET title = $1, description = $2, image = $3 WHERE id = $4 RETURNING *',
-        [title, description, image, id]
+        'UPDATE trail SET name = $1, description = $2 WHERE id = $3 RETURNING *',
+        [name, description, id]
       );
       return result.rows[0];
     } catch (error) {

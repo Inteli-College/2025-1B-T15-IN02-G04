@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const trailController = require('../controllers/trailController');
+
+const router = express.Router();
 
 
 router.get('/trails', trailController.getAllTrails);

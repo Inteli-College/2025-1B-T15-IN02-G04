@@ -51,12 +51,11 @@ class TrailController {
 
   static async updateTrail(req, res) {
     try {
-      const { title, description, image } = req.body;
+      const { name, description } = req.body;
       console.log("REQ.BODY:", req.body);          
-      console.log("TITLE:", title);                   
+      console.log("NAME:", name);                   
       console.log("DESCRIPTION:", description);      
-      console.log("IMAGE:", image);
-      const updatedTrail = await TrailModel.updateTrail(req.params.id, title, description, image);
+      const updatedTrail = await TrailModel.updateTrail(req.params.id, name, description);
       if (updatedTrail) {
         res.status(200).json(updatedTrail);
       } else {
