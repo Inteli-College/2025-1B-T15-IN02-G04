@@ -4,8 +4,8 @@ const cardController = require('../controllers/cardController');
 const checkApiAuth = require('../middlewares/authApiMiddleware');
 
 // Rotas públicas (não precisam de autenticação)
-router.get('/cards', cardController.getAllCards);
 router.get('/cards/search', cardController.searchCards);
+router.get('/cards', cardController.getAllCards);
 router.get('/cards/:id', cardController.getCardById);
 
 // Rotas protegidas (precisam de autenticação)
