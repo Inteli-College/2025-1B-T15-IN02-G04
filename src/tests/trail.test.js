@@ -1,7 +1,18 @@
 const request = require('supertest');
 const express = require('express');
-const app = express();
+
+// Mock do pool de conexão para todos os testes
+jest.mock('../config/db');
+// Mock do model para a parte de API
+jest.mock('../models/trailModel');
+
+// O TrailModel será importado já com mock aplicado (para rotas) ou real via requireActual nos testes de model
 const TrailModel = require('../models/trailModel');
+
+// Seções de API precisam do TrailModel mockado para isolar camada de rota
+const db = require('../config/db');
+
+const app = express();
 
 // Configurar o app para os testes
 app.use(express.json());
@@ -65,9 +76,6 @@ app.delete('/trails/:id', async (req, res) => {
     res.status(500).json({ error: 'Erro ao deletar trilha.' });
   }
 });
-
-jest.mock('../models/trailModel');
-const db = require('../config/db');
 
 describe('API de Trilhas', () => {
   beforeEach(() => {
@@ -279,6 +287,8 @@ describe('API de Trilhas', () => {
 });
 
 describe('TrailModel', () => {
+  // Usa a implementação real para testar camada de dados
+  const TrailModel = jest.requireActual('../models/trailModel');
   afterEach(() => {
     jest.clearAllMocks();
   });
