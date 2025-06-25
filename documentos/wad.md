@@ -56,6 +56,8 @@ Entre os aspectos essenciais para a criação de valor estão a centralização 
 
 ### 2.1.2. Análise SWOT da Instituição Parceira
 
+&nbsp; &nbsp; &nbsp; &nbsp;A análise SWOT configura-se como um instrumento estratégico com o fito de avaliar a posição de uma empresa, instituição, projeto ou indivíduo, considerando, para tal efeito, fatores internos e externos. Nessa esfera, é válido observar que a ferramenta é dividida em quatro aspectos: forças (strengths), os quais representam os pontos fortes internos; fraquezas (weaknesses), que caracterizam-se pelos desafios internos; oportunidades (opportunities), que contempla os fatores externos positivos com potencial de aproveitamento; ameaças (threats), as quais são riscos externos com essência negativa (Casarotto, 2019). Com isso em mente, segue a análise SWOT da empresa Bayer Crop Sciense:
+
 <p align = "center"> Figura 2: Análise SWOT</p>
 
 <p align="center"> <img src="./assets/wad/analise-swot.png" alt="Análise SWOT"> </p>
