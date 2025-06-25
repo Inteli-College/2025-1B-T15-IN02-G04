@@ -1,4 +1,5 @@
 const PostModel = require("../models/postModel");
+const UserModel = require("../models/userModel");
 
 class PostController {
   static async criar(req, res) {
@@ -54,13 +55,21 @@ class PostController {
 
   static async deletar(req, res) {
     const { id } = req.params;
+    const userId = req.userId;
 
-    try {
-      await PostModel.deletarPost(id);
-      return res.status(200).json({ message: "Post deletado com sucesso" });
-    } catch (err) {
-      console.error("Erro ao deletar post:", err);
-      return res.status(500).json({ error: "Erro ao deletar post" });
+    const user = await UserModel.buscarPorId(userId);
+    const post = await PostModel.buscarPorId(id);
+
+    if (user.autor === post.name) {
+      try {
+        await PostModel.deletarPost(id);
+        return res.status(200).json({ message: "Post deletado com sucesso" });
+      } catch (err) {
+        console.error("Erro ao deletar post:", err);
+        return res.status(500).json({ error: "Erro ao deletar post" });
+      }
+    } else {
+      return res.status(401).json({ error: "Usuário não autorizado" });
     }
   }
 }
