@@ -1,4 +1,5 @@
-// Variáveis globais
+const ModuleModel = require('../../src/models/moduleModel');
+
 let allModules = [];
 let allTrails = [];
 let currentEditingModule = null;
@@ -364,7 +365,8 @@ function createModuleHTML(module) {
 
 // Visualizar módulo
 function viewModule(moduleId) {
-    const module = allModules.find(m => m.id === moduleId);
+    const module = ModuleModel.getModuleById(moduleId);
+
     if (!module) {
         showToast('Módulo não encontrado', 'error');
         return;
