@@ -27,16 +27,21 @@ router.get("/perfil/:id", checkAuth, (req, res) => {
   });
 });
 
+router.get('/trails', (req, res) => {
+  res.render('pages/trails', {
+    title: 'Trilhas de Aprendizado'
+  })})
+  
 // Página inicial
 router.get('/', (req, res) => {
-  res.render('layout/main', {
-    pageTitle: 'Transforme sua carreira no agronegócio',
-    content: '../pages/home',
-    pageCSS: 'pages/home.css',
-    pageJS: 'home.js',
-    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+    res.render('layout/main', {
+      pageTitle: 'Transforme sua carreira no agronegócio',
+      content: '../pages/home',
+      pageCSS: 'pages/home.css',
+      pageJS: 'home.js',
+      currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+    });
   });
-});
 
 // Página de login
 router.get('/login2', (req, res) => {
