@@ -1,0 +1,227 @@
+<!-- Container principal dos módulos -->
+<div class="module-container">
+    <!-- Header -->
+    <div class="module-header">
+        <h1 class="module-title" id="moduleTitle">
+            Módulos - Carregando...
+        </h1>
+        <button class="close-button" onclick="goBackToTrails()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Wrapper dos módulos -->
+    <div class="modules-wrapper">
+        <!-- Setas de navegação -->
+        <button class="nav-arrow left" onclick="scrollModules('left')">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-arrow right" onclick="scrollModules('right')">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Grid dos módulos -->
+        <div class="modules-grid" id="modulesGrid">
+            <!-- Loading inicial -->
+            <div class="loading" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>Carregando módulos...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão de voltar -->
+    <div style="text-align: center;">
+        <a href="/Trilhas" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Voltar para Trilhas
+        </a>
+    </div>
+</div>
+
+<script>
+    // Configuração da API
+    const API_BASE_URL = 'http://localhost:3000/api';
+
+    // Obter ID da trilha da URL
+    function getTrailIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('trilha') || urlParams.get('trail');
+    }
+
+    // Função para carregar módulos da trilha específica
+    async function loadModules() {
+        const grid = document.getElementById('modulesGrid');
+        const trailId = getTrailIdFromUrl();
+        
+        if (!trailId) {
+            grid.innerHTML = `
+                <div class="error">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Trilha não especificada</h3>
+                    <p>Nenhuma trilha foi selecionada. Volte e selecione uma trilha.</p>
+                    <button class="btn-primary" onclick="goBackToTrails()">
+                        Voltar para Trilhas
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        try {
+            console.log('Carregando módulos da trilha:', trailId);
+            const response = await fetch(`${API_BASE_URL}/modules/trail/${trailId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('Dados carregados:', data);
+            
+            // Atualizar título
+            const moduleTitle = document.getElementById('moduleTitle');
+            if (data.trail && data.trail.name) {
+                moduleTitle.textContent = `Módulos - ${data.trail.name}`;
+            }
+            
+            // Limpar loading
+            grid.innerHTML = '';
+            
+            if (data.modules && data.modules.length > 0) {
+                data.modules.forEach(module => {
+                    const moduleCard = createModuleCard(module);
+                    grid.appendChild(moduleCard);
+                });
+                
+                // Ocultar setas se houver poucos módulos
+                if (data.modules.length <= 4) {
+                    document.querySelector('.nav-arrow.left').style.display = 'none';
+                    document.querySelector('.nav-arrow.right').style.display = 'none';
+                }
+            } else {
+                grid.innerHTML = `
+                    <div class="error">
+                        <div class="error-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3>Nenhum módulo encontrado</h3>
+                        <p>Esta trilha ainda não possui módulos disponíveis.</p>
+                        <button class="btn-primary" onclick="goBackToTrails()">
+                            Voltar para Trilhas
+                        </button>
+                    </div>
+                `;
+            }
+            
+        } catch (error) {
+            console.error('Erro ao carregar módulos:', error);
+            grid.innerHTML = `
+                <div class="error">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Erro ao carregar módulos</h3>
+                    <p>Não foi possível conectar com o servidor. Verifique se a API está rodando em ${API_BASE_URL}/modules</p>
+                    <button class="btn-primary" onclick="loadModules()">
+                        Tentar Novamente
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // Função para criar card de módulo
+    function createModuleCard(module) {
+        const card = document.createElement('div');
+        card.className = 'module-card';
+        card.setAttribute('data-module-id', module.id);
+        
+        card.innerHTML = `
+            <h3 class="module-card-title">${module.name}</h3>
+            <p class="module-card-description">
+                ${module.description || 'Descrição não disponível'}
+            </p>
+            <div class="module-duration">
+                Duração: ${module.duration || '1h 00min'}
+            </div>
+        `;
+        
+        // Adicionar click para abrir módulo
+        card.addEventListener('click', () => {
+            openModule(module.id);
+        });
+        
+        return card;
+    }
+
+    // Função para scroll horizontal dos módulos
+    function scrollModules(direction) {
+        const grid = document.getElementById('modulesGrid');
+        const scrollAmount = 320; // largura do card + gap
+        
+        if (direction === 'left') {
+            grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+
+    // Função para abrir módulo específico
+    function openModule(moduleId) {
+        console.log(`Abrindo módulo ${moduleId}`);
+        // Aqui você pode implementar a lógica para abrir o conteúdo do módulo
+        // Por exemplo: window.location.href = `/modulos/${moduleId}`;
+        alert(`Funcionalidade em desenvolvimento. Módulo ID: ${moduleId}`);
+    }
+
+    // Função para voltar às trilhas
+    function goBackToTrails() {
+        window.location.href = '/Trilhas';
+    }
+
+    // Buscar módulo por ID
+    async function getModuleById(id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/modules/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Erro ao buscar módulo:', error);
+            return null;
+        }
+    }
+
+    // Inicialização quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Página de módulos carregada');
+        loadModules();
+    });
+
+    // Função para recarregar módulos
+    function refreshModules() {
+        const grid = document.getElementById('modulesGrid');
+        grid.innerHTML = `
+            <div class="loading" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>Carregando módulos...</p>
+            </div>
+        `;
+        loadModules();
+    }
+
+    // Detecção de teclas para navegação
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            goBackToTrails();
+        } else if (e.key === 'ArrowLeft') {
+            scrollModules('left');
+        } else if (e.key === 'ArrowRight') {
+            scrollModules('right');
+        }
+    });
+</script>
