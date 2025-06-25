@@ -54,6 +54,22 @@ class UserModel {
       throw new Error("Erro ao buscar usuário");
     }
   }
+
+  static async buscarRolesPorUsuario(userId) {
+    try {
+      const result = await db.query(`
+        SELECT ru.id_role, r.role_name, r.description
+        FROM role_user ru
+        INNER JOIN role r ON ru.id_role = r.id
+        WHERE ru.id_user = $1
+      `, [userId]);
+
+      return result.rows;
+    } catch (err) {
+      console.error("Erro ao buscar roles do usuário:", err);
+      throw new Error("Erro ao buscar roles do usuário");
+    }
+  }
 }
 
 module.exports = UserModel;

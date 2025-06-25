@@ -2,6 +2,8 @@
 let allCards = [];
 let currentUser = null;
 let isLoggedIn = false;
+let isAdmin = false;
+let editingCardId = null;
 
 // Elementos DOM
 const cardsContainer = document.getElementById('cardsContainer');
@@ -11,6 +13,17 @@ const loadingIndicator = document.getElementById('loadingIndicator');
 const noCardsMessage = document.getElementById('noCardsMessage');
 const errorMessage = document.getElementById('errorMessage');
 const favoriteModal = document.getElementById('favoriteModal');
+
+// Elementos admin
+const addCardBtn = document.getElementById('addCardBtn');
+const editCardModal = document.getElementById('editCardModal');
+const editCardForm = document.getElementById('editCardForm');
+const editModalTitle = document.getElementById('editModalTitle');
+const editModalClose = document.getElementById('editModalClose');
+const editModalCancel = document.getElementById('editModalCancel');
+const editModalDelete = document.getElementById('editModalDelete');
+const editModalSave = document.getElementById('editModalSave');
+const editModalLoading = document.getElementById('editModalLoading');
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
@@ -22,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function initializePage() {
     await checkAuthStatus();
     await loadCards();
+    toggleAdminElements();
 }
 
 // Verificar status de autenticação
@@ -31,11 +45,35 @@ async function checkAuthStatus() {
         if (response.ok) {
             currentUser = await response.json();
             isLoggedIn = true;
+            isAdmin = currentUser.isAdmin || false;
+            console.log('🔑 Usuário autenticado:', { 
+                id: currentUser.id, 
+                name: currentUser.name, 
+                isAdmin: isAdmin 
+            });
         }
     } catch (error) {
-        console.log('Usuário não autenticado');
+        console.log('👤 Usuário não autenticado');
         isLoggedIn = false;
+        isAdmin = false;
     }
+}
+
+// Mostrar/ocultar elementos de admin
+function toggleAdminElements() {
+    const adminElements = document.querySelectorAll('.admin-only');
+    adminElements.forEach(element => {
+        if (isAdmin) {
+            element.classList.add('show-admin');
+            if (element.style.display === 'flex' || element.classList.contains('flex')) {
+                element.classList.add('flex');
+            }
+        } else {
+            element.classList.remove('show-admin', 'flex');
+        }
+    });
+    
+    console.log('👑 Elementos admin:', isAdmin ? 'mostrados' : 'ocultados');
 }
 
 // Configurar event listeners
@@ -56,6 +94,35 @@ function setupEventListeners() {
             hideModal();
         }
     });
+
+    // Event listeners de admin
+    if (addCardBtn) {
+        addCardBtn.addEventListener('click', openCreateCardModal);
+    }
+
+    if (editModalClose) {
+        editModalClose.addEventListener('click', closeEditModal);
+    }
+
+    if (editModalCancel) {
+        editModalCancel.addEventListener('click', closeEditModal);
+    }
+
+    if (editModalDelete) {
+        editModalDelete.addEventListener('click', confirmDeleteCard);
+    }
+
+    if (editCardForm) {
+        editCardForm.addEventListener('submit', handleCardSubmit);
+    }
+
+    if (editCardModal) {
+        editCardModal.addEventListener('click', function(e) {
+            if (e.target === editCardModal) {
+                closeEditModal();
+            }
+        });
+    }
 }
 
 // Debounce function para otimizar busca
@@ -175,6 +242,10 @@ function createCardHTML(card, isFavorited, searchTerm = '') {
     const favoriteIcon = isFavorited ? '❤️' : '🤍';
     const favoriteTooltip = isFavorited ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
     
+    // Classe admin para cards clicáveis
+    const adminCardClass = isAdmin ? 'admin-card' : '';
+    const cardClickHandler = isAdmin ? `onclick="openEditCardModal(${card.id})"` : '';
+    
     // Verificar se há imagem válida
     const hasImage = card.image && card.image.trim() !== '';
     const imageHTML = hasImage 
@@ -182,7 +253,7 @@ function createCardHTML(card, isFavorited, searchTerm = '') {
         : `<div class="card-image-placeholder">📄</div>`;
     
     return `
-        <div class="card ${highlightClass}" data-card-id="${card.id}">
+        <div class="card ${highlightClass} ${adminCardClass}" data-card-id="${card.id}" ${cardClickHandler}>
             <div class="card-image-container">
                 ${imageHTML}
             </div>
@@ -195,7 +266,7 @@ function createCardHTML(card, isFavorited, searchTerm = '') {
                             class="card-action-btn favorite-btn ${favoritedClass}" 
                             data-card-id="${card.id}"
                             data-tooltip="${favoriteTooltip}"
-                            onclick="handleFavorite(${card.id}, ${isFavorited})"
+                            onclick="event.stopPropagation(); handleFavorite(${card.id}, ${isFavorited})"
                         >
                             ${favoriteIcon}
                         </button>
@@ -203,7 +274,7 @@ function createCardHTML(card, isFavorited, searchTerm = '') {
                         <button 
                             class="card-action-btn favorite-btn" 
                             data-tooltip="Faça login para favoritar"
-                            onclick="redirectToLogin()"
+                            onclick="event.stopPropagation(); redirectToLogin()"
                         >
                             🤍
                         </button>
@@ -212,7 +283,7 @@ function createCardHTML(card, isFavorited, searchTerm = '') {
                         class="card-action-btn download-btn" 
                         data-card-id="${card.id}"
                         data-tooltip="Baixar como PDF"
-                        onclick="downloadCardAsPDF(${card.id})"
+                        onclick="event.stopPropagation(); downloadCardAsPDF(${card.id})"
                     >
                         📥
                     </button>
@@ -227,6 +298,188 @@ function addCardEventListeners() {
     // Os event listeners são adicionados via onclick no HTML
     // para melhor performance com muitos cards
 }
+
+// =========================
+// ADMIN FUNCTIONS
+// =========================
+
+// Abrir modal para criar novo card
+function openCreateCardModal() {
+    editingCardId = null;
+    editModalTitle.textContent = 'Criar Novo Card';
+    editModalDelete.classList.add('hidden');
+    editModalSave.textContent = 'Criar Card';
+    
+    // Limpar formulário
+    document.getElementById('editCardTitle').value = '';
+    document.getElementById('editCardDescription').value = '';
+    document.getElementById('editCardImage').value = '';
+    
+    showEditModal();
+}
+
+// Abrir modal para editar card
+async function openEditCardModal(cardId) {
+    try {
+        editingCardId = cardId;
+        editModalTitle.textContent = 'Editar Card';
+        editModalDelete.classList.remove('hidden');
+        editModalSave.textContent = 'Salvar Alterações';
+        
+        showEditModalLoading();
+        
+        // Buscar dados do card
+        const response = await fetch(`/api/cards/${cardId}`);
+        if (!response.ok) {
+            throw new Error('Erro ao carregar dados do card');
+        }
+        
+        const card = await response.json();
+        
+        // Preencher formulário
+        document.getElementById('editCardTitle').value = card.title;
+        document.getElementById('editCardDescription').value = card.description;
+        document.getElementById('editCardImage').value = card.image || '';
+        
+        hideEditModalLoading();
+        showEditModal();
+        
+    } catch (error) {
+        console.error('Erro ao carregar card para edição:', error);
+        hideEditModalLoading();
+        showToast('Erro ao carregar dados do card', 'error');
+    }
+}
+
+// Mostrar modal de edição
+function showEditModal() {
+    editCardModal.classList.remove('hidden');
+    editCardModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+// Fechar modal de edição
+function closeEditModal() {
+    editCardModal.classList.remove('show');
+    setTimeout(() => {
+        editCardModal.classList.add('hidden');
+        document.body.style.overflow = '';
+        editingCardId = null;
+    }, 300);
+}
+
+// Mostrar loading no modal
+function showEditModalLoading() {
+    editModalLoading.classList.remove('hidden');
+}
+
+// Esconder loading no modal
+function hideEditModalLoading() {
+    editModalLoading.classList.add('hidden');
+}
+
+// Manipular submissão do formulário
+async function handleCardSubmit(e) {
+    e.preventDefault();
+    
+    const title = document.getElementById('editCardTitle').value.trim();
+    const description = document.getElementById('editCardDescription').value.trim();
+    const image = document.getElementById('editCardImage').value.trim();
+    
+    if (!title || !description) {
+        showToast('Título e descrição são obrigatórios', 'error');
+        return;
+    }
+    
+    try {
+        editModalSave.classList.add('loading');
+        editModalSave.disabled = true;
+        
+        const cardData = { title, description, image };
+        
+        let response;
+        if (editingCardId) {
+            // Editar card existente
+            response = await fetch(`/api/cards/${editingCardId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cardData)
+            });
+        } else {
+            // Criar novo card
+            response = await fetch('/api/cards', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cardData)
+            });
+        }
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Erro ao salvar card');
+        }
+        
+        const actionText = editingCardId ? 'atualizado' : 'criado';
+        showToast(`Card ${actionText} com sucesso!`, 'success');
+        
+        closeEditModal();
+        await loadCards(); // Recarregar cards
+        
+    } catch (error) {
+        console.error('Erro ao salvar card:', error);
+        showToast(`Erro ao salvar card: ${error.message}`, 'error');
+    } finally {
+        editModalSave.classList.remove('loading');
+        editModalSave.disabled = false;
+    }
+}
+
+// Confirmar deleção do card
+function confirmDeleteCard() {
+    if (!editingCardId) return;
+    
+    const card = allCards.find(c => c.id === editingCardId);
+    const cardTitle = card ? card.title : 'este card';
+    
+    if (confirm(`Tem certeza que deseja deletar "${cardTitle}"? Esta ação não pode ser desfeita.`)) {
+        deleteCard();
+    }
+}
+
+// Deletar card
+async function deleteCard() {
+    if (!editingCardId) return;
+    
+    try {
+        editModalDelete.classList.add('loading');
+        editModalDelete.disabled = true;
+        
+        const response = await fetch(`/api/cards/${editingCardId}`, {
+            method: 'DELETE'
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Erro ao deletar card');
+        }
+        
+        showToast('Card deletado com sucesso!', 'success');
+        
+        closeEditModal();
+        await loadCards(); // Recarregar cards
+        
+    } catch (error) {
+        console.error('Erro ao deletar card:', error);
+        showToast(`Erro ao deletar card: ${error.message}`, 'error');
+    } finally {
+        editModalDelete.classList.remove('loading');
+        editModalDelete.disabled = false;
+    }
+}
+
+// =========================
+// EXISTING FUNCTIONS (mantidas inalteradas)
+// =========================
 
 // Lidar com favoritar/desfavoritar
 function handleFavorite(cardId, isFavorited) {
@@ -279,12 +532,12 @@ function updateFavoriteButton(cardId, isFavorited) {
             button.classList.add('favorited');
             button.innerHTML = '❤️';
             button.setAttribute('data-tooltip', 'Remover dos favoritos');
-            button.setAttribute('onclick', `handleFavorite(${cardId}, true)`);
+            button.setAttribute('onclick', `event.stopPropagation(); handleFavorite(${cardId}, true)`);
         } else {
             button.classList.remove('favorited');
             button.innerHTML = '🤍';
             button.setAttribute('data-tooltip', 'Adicionar aos favoritos');
-            button.setAttribute('onclick', `handleFavorite(${cardId}, false)`);
+            button.setAttribute('onclick', `event.stopPropagation(); handleFavorite(${cardId}, false)`);
         }
     }
 }
@@ -477,7 +730,7 @@ function hideMessages() {
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg text-white font-medium transform transition-all duration-300 translate-x-full ${
-        type === 'error' ? 'bg-red-500' : 'bg-green-500'
+        type === 'error' ? 'bg-red-500' : type === 'warning' ? 'bg-yellow-500' : 'bg-green-500'
     }`;
     toast.textContent = message;
     
@@ -492,7 +745,9 @@ function showToast(message, type = 'success') {
     setTimeout(() => {
         toast.classList.add('translate-x-full');
         setTimeout(() => {
-            document.body.removeChild(toast);
+            if (document.body.contains(toast)) {
+                document.body.removeChild(toast);
+            }
         }, 300);
     }, 3000);
 }
@@ -506,3 +761,9 @@ function escapeHtml(text) {
 
 // Função para recarregar cards (usada no botão de retry)
 window.loadCards = loadCards;
+
+// Tornar funções disponíveis globalmente para uso em onclick
+window.openEditCardModal = openEditCardModal;
+window.handleFavorite = handleFavorite;
+window.downloadCardAsPDF = downloadCardAsPDF;
+window.redirectToLogin = redirectToLogin;
