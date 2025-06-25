@@ -140,6 +140,16 @@ router.get('/Trilhas', (req, res) => {
   });
 });
 
+// Página de Módulos
+router.get('/Modulos', (req, res) => {
+  res.render('layout/main', {
+    pageTitle: 'Módulos',
+    content: '../pages/modules',
+    pageCSS: 'pages/module.css',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  });
+});
+
 // Página de Aulas
 router.get('/Aulas', (req, res) => {
   res.render('layout/main', {
