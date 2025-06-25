@@ -33,11 +33,9 @@
 
 [8. Referências](c#8)
 
-[Anexos](#c9)
-
 <br>
 
-# <a name="c1"></a>1. Introdução (sprints 1 a 5)
+# <a name="c1"></a>1. Introdução 
 
 A Bayer Crop Science, por meio de sua solução digital Climate FieldView, oferece tecnologias que permitem aos produtores monitorar, planejar e otimizar suas operações agrícolas. No entanto, a execução dessa proposta de valor depende diretamente de uma rede de Promotores Técnicos Digitais (PTDs), profissionais responsáveis pela instalação e configuração do Kit FieldView em campo, além do treinamento inicial dos clientes e atendimento.
 
@@ -47,16 +45,16 @@ Para enfrentar esse cenário, foi proposta a criação de uma plataforma digital
 
 Entre os aspectos essenciais para a criação de valor estão a centralização e organização de conteúdos técnicos, a possibilidade de diagnóstico individual de conhecimento, a certificação de profissionais antes de seu envio a campo e a oferta de recursos offline. Além disso, a plataforma permitirá à Bayer acompanhar a evolução dos colaboradores, identificar lacunas e alinhar os treinamentos às demandas regionais e de safra, otimizando o atendimento ao produtor e fortalecendo a experiência com o Climate FieldView.
 
-# <a name="c2"></a>2. Visão Geral da Aplicação Web (sprint 1)
+# <a name="c2"></a>2. Visão Geral da Aplicação Web 
 
-## 2.1. Escopo do Projeto (sprints 1 e 4)
+## 2.1. Escopo do Projeto 
 
-### 2.1.1. Modelo de 5 Forças de Porter (sprint 1)
+### 2.1.1. Modelo de 5 Forças de Porter 
 
 <p align="center"> <img src="./assets/wad/5-forças-de-porter.png" alt="5 Forças de Porter"> </p>
 <p align = 'center'>template de Porter (1979), adaptado pelos autores (2025).</p>
 
-### 2.1.2. Análise SWOT da Instituição Parceira (sprint 1)
+### 2.1.2. Análise SWOT da Instituição Parceira
 
 <p align = "center"> Figura 2: Análise SWOT</p>
 
@@ -64,7 +62,7 @@ Entre os aspectos essenciais para a criação de valor estão a centralização 
 <p align = "center"> Canva: Circle Infographic Diagram SWOT Analysis (sem data), adaptada pelos autores (2025). <br>
 Fontes da pesquisa em referências. </p> <br><br>
 
-### 2.1.3. Solução (sprints 1 a 5)
+### 2.1.3. Solução 
 
 1. Problema a ser resolvido: alta rotatividade e falta de capacitação adequada dos Promotores Técnicos Digitais (PTDs) da Bayer, responsáveis pelo suporte do FieldView. Isso gera insatisfação nos produtores, sobrecarga no suporte remoto e PTDs despreparados em campo, impactando a adoção e o valor percebido da plataforma digital.
 2. Dados disponíveis (mencionar fonte e conteúdo; se não houver, indicar "não se aplica"): não se aplica.
@@ -73,7 +71,7 @@ Fontes da pesquisa em referências. </p> <br><br>
 5. Benefícios esperados: certificação e melhor preparo dos Promotores Técnicos Digitais antes do campo, redução da rotatividade e da carga do suporte remoto, aumento da satisfação dos produtores, padronização do conhecimento técnico sobre o FieldView e otimização do processo de capacitação da equipe.
 6. Critério de sucesso e como será avaliado: aumento na taxa de Promotores Técnicos Digitais (PTDs) certificados antes de ir a campo (>90%), redução no volume de chamados de suporte relacionados a dúvidas básicas (>20%), e alta taxa de engajamento/conclusão de trilhas na plataforma (>80%). Avaliado via relatórios da plataforma e pesquisas de satisfação com os profissionais e produtores.
 
-### 2.1.4. Value Proposition Canvas (sprint 1):
+### 2.1.4. Value Proposition Canvas
 
 O Canvas de Proposta de Valor é uma ferramenta visual que apoia a organização e validação de hipóteses sobre o perfil de clientes e o valor que uma solução oferece. Ele é dividido em duas áreas principais: o Perfil do Cliente (tarefas, dores e ganhos) e o Mapa de Valor (produtos/serviços, criadores de ganho e aliviadores de dor). Essa estrutura facilita o alinhamento entre as necessidades do cliente e as soluções propostas, aumentando as chances de sucesso no desenvolvimento de produtos e serviços.
 
@@ -87,7 +85,7 @@ Esse material serviu como base para estruturar as funcionalidades e o roadmap da
 
 FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template gratuito. Somos Tera, 2023. Disponível em: https://blog.somostera.com/product-management/canvas-de-proposta-de-valor. Acesso em: 23 abril 2025.
 
-### 2.1.5. Matriz de Riscos do Projeto (sprint 1)
+### 2.1.5. Matriz de Riscos do Projeto
 
 &nbsp; &nbsp; &nbsp; &nbsp;A matriz de risco é uma ferramenta que favorece a identificação e a análise de possíveis adversidades com potencial de afetar o desenvolvimento e a entrega do projeto, assim como de oportunidades viáveis que podem elevar o escopo do projeto a uma esfera maior. Para isso, haja vista que risco = impacto \* probabilidade, a matriz quantifica e classifica os riscos e oportunidades por intermédio de uma tabela orientada por colunas que representam os impactos e por linhas que configuram as probabilidades, em porcentagem de ocorrência. Assim, é possível dimensionar e catalogar os riscos e oportunidades, tornando-os mais transparentes e, portanto, mais tangíveis para elaborar um plano de ação, garantindo que os esforços e os recursos da equipe sejam estrategicamente e adequadamente alocados.
 
@@ -194,7 +192,7 @@ FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template
 <p align="center"> <img src="./assets/wad/matriz-de-risco.png" alt="Matriz de Risco"> </p>
 <p align = 'center'>Tabela de Napoleão (2020), adaptada pelos autores (2025).</p> <br><br>
 
-## 2.2. Personas (sprint 1)
+## 2.2. Personas 
 
 Persona PTD:
 <p align="center"> <img src="./assets/wad/persona-ptd.png" alt="Persona PTD"> </p>
@@ -202,7 +200,7 @@ Persona PTD:
 Persona RTD:
 <p align="center"> <img src="./assets/wad/persona-rtd.png" alt="Persona RTD"> </p>
 
-## 2.3. User Stories (sprints 1 a 5)
+## 2.3. User Stories 
 
 O levantamento de User Stories é uma prática essencial na gestão ágil de projetos, pois permite representar de forma objetiva as necessidades e expectativas dos usuários e stakeholders. As User Stories (US) são formuladas com base em perfis reais dos envolvidos no sistema, facilitando o alinhamento entre o time de desenvolvimento e os objetivos do projeto. Este documento apresenta a lista completa de User Stories levantadas para o projeto, organizadas de acordo com a estrutura padrão "Como [persona], posso [ação/meta], para [benefício/razão]". Todas foram numeradas com a referência USXX, a ser utilizada também no roadmap do quadro Kanban. Dentre elas, cinco foram priorizadas com base em critérios de valor, dependência e viabilidade, e seus aspectos INVEST estão detalhados a seguir.
 
@@ -347,20 +345,18 @@ User Story | Como PTD, posso acessar um sistema de ensino gamificado, para torna
 Critério de aceite 1 | O sistema deve incluir atividades interativas que estimulem a participação contínua e o aprofundamento no conteúdo.
 Critério de aceite 2 | O sistema deve fornecer feedback em tempo real sobre o desempenho do usuário.
 
-
-
 O conjunto de User Stories descrito acima reflete a complexidade e os objetivos do projeto, ao mesmo tempo em que segue os princípios da metodologia ágil. A priorização das cinco primeiras histórias garante um foco inicial na compreensão do problema, do contexto da plataforma, e no alinhamento das funcionalidades e design com os usuários finais. A documentação organizada em formato USXX contribui para o planejamento visual no quadro Kanban, além de facilitar a rastreabilidade e o acompanhamento da execução. Mesmo as histórias que não forem implementadas imediatamente permanecem registradas para referência futura, assegurando a continuidade e consistência do desenvolvimento do produto.
 
-# <a name="c3"></a>3. Projeto da Aplicação Web (sprints 1 a 4)
+# <a name="c3"></a>3. Projeto da Aplicação Web 
 
+## 3.1. Arquitetura
 
+<p align="center"> <img src="./assets/diagrama-mvc1.png" alt=" Primeira parte do DIagrama de Arquitetura"> </p>
+<p align="center"> <img src="./assets/diagrama-mvc2.png" alt=" Segunda parte do DIagrama de Arquitetura"> </p>
 
-## 3.1. Arquitetura (sprints 3 e 4)
+<p align = 'center'>imagem feita pelos autores (2025).</p><p align="center"> <img src="./assets/diagrama-mvc1.png" alt=" DIagrama de Arquitetura"> </p>
 
-<p align="center"> <img src="./assets/diagrama-mvc.png" alt=" DIagrama de Arquitetura"> </p>
-<p align = 'center'>imagem feita pelos autores (2025).</p>
-
-## 3.2. Wireframes (sprint 2)
+## 3.2. Wireframes 
 
 Um wireframe é um esboço visual simples usado para planejar a estrutura e a navegação de uma interface, como um site ou aplicativo. Ele mostra a disposição dos elementos na tela, como botões, menus e campos, sem se preocupar com design visual ou cores. Seu objetivo é organizar ideias e funcionalidades antes da fase de desenvolvimento. Segue abaixo a idealização do nosso wireframe, desenvolvido com base no contexto e nas necessidades do projeto.
 
@@ -433,7 +429,7 @@ Alguns pré-requisitos foram estabelecidos pelo parceiro e devem ser avaliados e
 O design da aplicação tem como objetivo facilitar o acesso do usuário e incentivar o engajamento por meio de diversas estratégias. É imprescindível que tanto os PTDs quanto os consultores possam estudar e adicionar conteúdos de forma simples e gamificada. Dessa maneira, o design centrado no usuário busca eliminar a lacuna de conhecimento dos PTDs em relação ao FieldView, promovendo um aprendizado eficiente e produtivo.
 
 
-## 3.3. Guia de estilos (sprint 3)
+## 3.3. Guia de estilos 
 
 Este guia de estilos foi elaborado para garantir consistência visual, funcional e de comunicação em toda a solução. Ele reúne os principais componentes da identidade visual e da interface do sistema.
 
@@ -462,7 +458,7 @@ A padronização aqui proposta visa facilitar a manutenção, evolução e escal
 <p align = 'center'> criado pelos autores (2025).</p>
 
 
-## 3.4 Protótipo de alta fidelidade (sprint 3)
+## 3.4 Protótipo de alta fidelidade 
 
 
 Os Mockups, presentes no protótipo de alta fidelidade do projeto, tem o objetivo de adicionar ao projeto, à partir do mapeamento de funcionalidades constituido nos Wireframes, o refinamento visual e detalhamentos destes elementos - de forma a priorizar a acessibilidade, clareza das informações e experiência total do usuário PTD. Nesse sentido, desenvolvemos as cerca de 20 telas presentes no projeto. Como exemplo, seguem:
@@ -516,14 +512,14 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 
 ---
 
-## 3.5. Modelagem do banco de dados (sprints 2 e 4)
+## 3.5. Modelagem do banco de dados 
 
-### 3.5.1. Modelo relacional (sprints 2 e 4)
+### 3.5.1. Modelo relacional 
 
 <p align="center"> <img src="./assets/wad/modelagem-relacional-banco.png" alt="Modelagem Relacional"> </p>
 <p align = 'center'>Conteúdo feito pelos autores (2025).</p>
 
-### 3.5.2. Consultas SQL e lógica proposicional (sprint 2)
+### 3.5.2. Consultas SQL e lógica proposicional 
 
 #1 | ---
 --- | ---
@@ -717,7 +713,7 @@ Tela para visualização e gerenciamento de membros da equipe. Cada colaborador 
 
 # <a name="c4"></a>4. Desenvolvimento da Aplicação Web
 
-## 4.1. Primeira versão da aplicação web (sprint 3)
+## 4.1. Primeira versão da aplicação web 
 
 No que tange à primeira versão da aplicação web - realizada durante a terceira Sprint -, a equipe desenvolveu o backend consoante a estrutura MVC e deu início ao frontend. Nesse sentido, vale mencionar que todas as APIs criadas foram testadas com o software Insomnia e foram elaborados 40 endpoints no total - documentados na seção 3.6 do WAD.
 
@@ -737,7 +733,7 @@ Por fim, seguem as imagens do frontend desenvolvido durante a sprint:
 <p align="center"> <img src="./assets/tela-inicio.jpeg" alt="Tela de Início"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
-## 4.2. Segunda versão da aplicação web (sprint 4)
+## 4.2. Segunda versão da aplicação web 
 
 Na Sprint 4, desenvolvemos a parte da aplicação que permite aos usuários navegar por trilhas de aprendizado, acessar módulos específicos e participar de aulas interativas. O sistema implementa um fluxo completo de **Trilhas → Módulos → Aulas** com funcionalidades avançadas de interação e acompanhamento de progresso.
 
@@ -824,8 +820,6 @@ Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final
 - **JavaScript:** ~1800 linhas (2 arquivos)
 - **Total:** ~3400 linhas de código
 
-
-
 ###  Dificuldades Encontradas
 
 ### 1. Integração Entre Páginas
@@ -911,13 +905,13 @@ Time:        ≈4 s
 
 _Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de testes de usabilidade. Ou utilize um link para seu relatório de testes (mantenha o link sempre público para visualização)_
 
-# <a name="c6"></a>6. Estudo de Mercado e Plano de Marketing (sprint 4)
+# <a name="c6"></a>6. Estudo de Mercado e Plano de Marketing
 
 ## 6.1 Resumo Executivo
 
-_Preencher com até 300 palavras, sem necessidade de fonte_
-
-_Apresente de forma clara e objetiva os principais destaques do projeto: oportunidades de mercado, diferenciais competitivos da aplicação web e os objetivos estratégicos pretendidos._
+O AprendizAgro é uma aplicação web desenvolvida para otimizar a capacitação dos PTDs (Profissionais Técnicos de Desenvolvimento) da Bayer Crop Science, atuando diretamente no processo de aprendizagem e integração de conhecimentos técnicos e de campo. O mercado agrícola, altamente dinâmico e dependente de atualizações frequentes, apresenta uma oportunidade relevante para soluções digitais que unam capacitação, engajamento e gestão de performance.
+O diferencial competitivo do AprendizAgro está na estrutura modular de trilhas de aprendizagem, no talhão gamificado que estimula o desenvolvimento contínuo e no acompanhamento de progresso personalizado para cada usuário por meio da comunidade de aprendizagem. A integração de um feed comunitário também contribui para o fortalecimento do networking e troca de experiências entre os PTDs.
+Os objetivos estratégicos incluem: melhorar a performance técnica da equipe, otimizar o tempo de capacitação, promover o aprendizado contínuo e incentivar a cultura organizacional voltada para resultados. Além disso, a aplicação pretende se consolidar como ferramenta indispensável para a gestão e retenção de talentos técnicos no campo, valorizando o protagonismo dos profissionais na transformação digital do agronegócio.
 
 ## 6.2 Análise de Mercado
 
@@ -932,7 +926,7 @@ O mercado global de EdTech corporativa foi avaliado em aproximadamente US$ 27 bi
 
 No Brasil, o mercado de educação corporativa movimentou cerca de R$ 8 bilhões em 2023, de acordo com dados da ABED (Associação Brasileira de Educação a Distância). O agronegócio, sendo responsável por cerca de 24,8% do PIB brasileiro (CNA, 2024), representa um segmento estratégico, com alta demanda por capacitação técnica e digital. As empresas do setor estão investindo significativamente em treinamento remoto, principalmente em plataformas personalizadas para suas operações específicas.
 
-###  Tendências de Mercado 
+### Tendências de Mercado
 As principais tendências que impactam o mercado de treinamento corporativo no agronegócio incluem:
 
 Transformação Digital: Crescimento do uso de plataformas LMS, inteligência artificial e análise de dados para personalizar trilhas de aprendizagem.
@@ -951,7 +945,8 @@ Análise de Dados: Uso de dashboards e relatórios inteligentes para medir desem
 
 ## 6.3 Análise da Concorrência
 
-###  Principais Concorrentes 
+### Principais Concorrentes 
+
 Os principais concorrentes são plataformas de LMS (Learning Management Systems) e soluções de treinamento corporativo, como:
 
 Sambatech: Oferece soluções de educação corporativa com foco em vídeos, trilhas e gamificação.
@@ -963,11 +958,13 @@ Moodlerooms e Moodle: Sistema open-source muito utilizado no meio corporativo, c
 Udemy Business e Coursera for Business: Oferecem cursos prontos de capacitação, mas com menor personalização para contextos específicos do agronegócio.
 
 ###  Vantagens Competitivas da Aplicação Web 
+
 As principais vantagens competitivas são a gameficação, a experiência centrada no usuário, com design responsivo e acessível e as trilhas de aprendizagem que se adaptam ao perfil e progresso de cada funcionário.
 
 ## 6.4 Público-Alvo
 
 ###  Segmentação de Mercado 
+
 O público-alvo está segmentado em:
 
 Funcionários recém-contratados: Participantes de programas de onboarding e treinamento inicial.
@@ -979,6 +976,7 @@ Funcionários administrativos e técnicos: Envolvidos em processos de controle, 
 Gestores: Líderes responsáveis pela condução de equipes, que necessitam de treinamento em gestão de pessoas, processos e compliance.
 
 ###  Perfil do Público-Alvo 
+
 Demográficos: Idade entre 22 e 55 anos, com predominância de profissionais de ensino médio técnico, superior e pós-graduação. Localizados em áreas rurais, semiurbanas e sedes corporativas.
 
 Psicográficos: Profissionais orientados à inovação, sustentabilidade, segurança e alta performance. Valorizam aprendizado prático, aplicável e acessível.
@@ -987,10 +985,12 @@ Comportamentais: Utilizam tecnologia no trabalho (smartphones, tablets, sistemas
 
 ## 6.5 Posicionamento
 
-### Proposta de Valor Única 
+### Proposta de Valor Única
+
 A plataforma oferece uma experiência de capacitação digital totalmente adaptada à realidade da Bayer Crop Science, unindo conteúdo especializado, interação dinâmica, gamificação e dados analíticos para acelerar o desenvolvimento dos colaboradores. Diferente de soluções genéricas, nosso sistema entende as dores do setor agrícola e as necessidades internas da empresa, proporcionando treinamentos altamente relevantes, eficazes e escaláveis.
 
-###  Estratégia de Diferenciação 
+### Estratégia de Diferenciação
+
 Nossa diferenciação está no desenvolvimento de uma solução que não é um LMS genérico, mas sim uma plataforma sob medida, que incorpora os processos, tecnologias, cultura e desafios específicos da Bayer Crop Science. Utilizamos uma abordagem centrada no usuário, com foco em:
 
 Flexibilidade e acessibilidade: Treinamentos disponíveis em qualquer dispositivo, online e offline.
@@ -1004,6 +1004,7 @@ Alinhamento estratégico: Atende não só às necessidades operacionais, mas tam
 ## 6.6 Estratégia de Marketing
 
 ### Produto
+
 O produto configura-se como uma aplicação web direcionada aos PTDs da Bayer Crop Science, com o fito de promover uma capacitação de excelência a esses funcionários. 
 
 Diante disso, a plataforma contempla trilhas de aprendizagem, cursos, conteúdos instrutivos - os quais são anexados pelos gestores da empresa -, cards para acesso rápido aos assuntos, página de progresso para que o PTD e o gestor possam acompanhar o desenvolvimento de aprendizagem do usuário, calendário para organização e notificação das obrigações do usuário, página de comunidade com feed de posts para a troca de experiências e conquistas entre os funcionários e página de registro de atendimentos. Assim, é notório que, com essas funcionalidades, torna-se possível conquistar excelência no que tange a fornecer treinamento adequado à equipe da empresa parceira.
@@ -1011,14 +1012,17 @@ Diante disso, a plataforma contempla trilhas de aprendizagem, cursos, conteúdos
 Além disso, o produto se destaca pela sua gamificação. Sob a ótica do PTD, a equipe enxergou a imprescindibilidade de fornecer mecanismos e dinâmicas para engajar o funcionário à se desenvolver profissionalmente na plataforma, de modo que, para tal efeito, tornou o produto ainda mais atrativo por intermédio de um ranking e de um talhão gamificado - segundo o qual, a cada término de responsabilidade, o usuário recebe uma plantação em seu talhão fictício. 
 
 ### Preço
+
 Em razão do contexto acadêmico sob o qual o produto foi confeccionado, entende-se que não há intenções de monetizá-lo. Nesse sentido, quanto a quaisquer custos imprevistos tangentes à plataforma, acredita-se que serão financiados integralmente pela empresa Bayer, de modo que os PTDs tenham acesso gratuito. 
 
 No entanto, caso houvesse desígnio de precificação, dentre as opções de estratégias de preço adotadas, compreende-se a assinatura corporativa como a forma mais eficiente no cenário em questão - de forma que os PTDs ou a Bayer poderia aderir à aplicação por intermédio de assinatura mensal por usuário, ou por licenciamento anual baseado no número de PTDs.
 
 ### Praça
+
 No que tange aos canais de distribuição da aplicação, o produto será disponibilizado via web e aplicativo móvel, diretamente no ambiente de trabalho dos canais internos da Bayer Crop Science. Os argumentos que sustentam essa escolha dizem respeito ao contexto da aplicação (a qual configura-se uma aplicação digital e, por isso, requer um meio similar para ser executado) e ao fato de, a via web e a aplicação móvel estar disponível ao PTD mesmo fora do ambiente de trabalho da empresa, de modo que o funcionário pode acessar os conteúdos independentemente do lugar e do horário, conforme as suas necessidades. Dessa forma, o produto é acessado no ambiente adequada e mais coerente ao contexto em questão. 
 
 ### Promoção
+
 Em função do contexto em que o produto está inserido (cujo objetivo consiste em ser uma aplicação de uso interno da Bayer Crop Science), é possível inferir que a promoção será realizada por intermédio do incentivo da empresa, focando na maximização de engajamento dos PTDs. Nesse sentido, as possibilidades estruturadas para tal finalidade foram: notificações nos dispositivos dos funcionários, por exemplo por meio de e-mails, incentivando o uso da plataforma; Workshops de treinamento para capacitação dos funcionários no que tange a utilização da plataforma, aproveitando para potencializar a promoção; O reconhecimento, em reuniões e eventos da empresa, dos PTDs que mais se destacam no ranking que o produto contempla, de modo a motivar os usuários que ainda não se demonstraram engajados. Além disso, a plataforma também poderá ser divulgada em demais reuniões e eventos corporativos, assim como por meio das redes sociais corporativas da Bayer, ampliando o alcance, a visibilidade e a importância do AprendizaAgro no processo de capacitação dos PTDs.
 
 # <a name="c7"></a>7. Conclusões e trabalhos futuros (sprint 5)
@@ -1028,7 +1032,6 @@ Durante as 5 Sprints, a equipe conseguiu contemplar as principais funcionalidade
 Além disso, é válido mencionar que foi possível implementar um ranking e um feed, no qual os usuários podem compartilhar suas experiências de trabalho em comunidade, de modo que tal efeito torna-se o principal diferencial e ponto forte da aplicação. No entanto, a equipe enxerga que existem aspectos que devem ser lapidados, como o design das telas no que tange à usabilidade e consertar bugs nos testes. Paralelamente, a equipe aspira concretizar a user storie de gamificação com a implementação de um talhão interativo, no qual os usuários recebem insígnias de mérito após completarem uma determinada quantidade de atividades no sistema. 
 
 Portanto, conclui-se a excelência do AprendizAgro em mitigar as principais dores da empresa parceira do módulo, embora seja notória a demanda das melhorias supracitadas. 
-
 
 # <a name="c8"></a>8. Referências (sprints 1 a 5)
 
@@ -1049,6 +1052,4 @@ Portanto, conclui-se a excelência do AprendizAgro em mitigar as principais dore
 5. O TEMPO ECONOMIA. Setor farmacêutico cresce 11% e movimenta R$ 158,4 bilhões em 2024, mostra levantamento. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025.
 
 6. O PRESENTE RURAL. Mercado brasileiro de sementes deve crescer 8,3% ao ano até 2027. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr 2025.
-
-# <a name="c9"></a>Anexos
 
