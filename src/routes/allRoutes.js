@@ -5,10 +5,12 @@ const userRoutes = require("./userRoutes");
 const trailRoutes = require("./trailRoutes");
 const cardRoutes = require("./cardRoutes");
 const pdfRoutes = require("./pdfRoutes");
+const postRoutes = require("./postRoutes");
 
 const router = express.Router();
 
 // Rotas de API
+router.use("/api/posts", postRoutes);
 router.use("/api/usuarios", userRoutes);
 router.use("/api/auth", authRoutes);
 router.use("/api/trails", trailRoutes);

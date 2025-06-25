@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "nodemon app.js",
-    "init-db": "node src/scripts/runSQLScript.js"
+    "init-db": "node src/scripts/runSQLScript.js",
+    "pupulate": "node src/scripts/ExemploInsertBancoDeDados.sql"
   },
   "license": "ISC",
   "dependencies": {

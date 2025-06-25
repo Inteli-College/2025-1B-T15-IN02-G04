@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS certificate_user (
   id_certificate BIGINT NOT NULL,
   id_user BIGINT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE
+  FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE,
   FOREIGN KEY (id_certificate) REFERENCES certificate(id) ON DELETE CASCADE
 );
 
@@ -136,11 +136,6 @@ CREATE TABLE IF NOT EXISTS answer (
   FOREIGN KEY (id_question) REFERENCES question(id) ON DELETE CASCADE
 );
 
-
-
-
-
-
 CREATE TABLE IF NOT EXISTS trail_user (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
@@ -190,53 +185,34 @@ CREATE TABLE IF NOT EXISTS test_user (
 );
 
 CREATE TABLE IF NOT EXISTS post (
-  id BIGSERIAL PRIMARY KEY,
+  id_post BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
-  image VARCHAR(255),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  titulo VARCHAR(255) NOT NULL,
+  descricao TEXT NOT NULL,
+  imagem VARCHAR(255),
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS comment (
   id BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
+  id_post BIGINT NOT NULL,
   comment_text TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE
+  FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_post) REFERENCES post(id_post) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS comment_post (
-  id BIGSERIAL PRIMARY KEY,
-  id_post BIGINT NOT NULL,
-  id_comment BIGINT NOT NULL,
-  FOREIGN KEY (id_post) REFERENCES post(id) ON DELETE CASCADE,
-  FOREIGN KEY (id_comment) REFERENCES comment(id) ON DELETE CASCADE,
-  UNIQUE(id_post, id_comment)
-);
-
-
-CREATE TABLE IF NOT EXISTS comment_class (
-  id BIGSERIAL PRIMARY KEY,
-  id_class BIGINT NOT NULL,
-  id_comment BIGINT NOT NULL,
-  FOREIGN KEY (id_class) REFERENCES class(id) ON DELETE CASCADE,
-  FOREIGN KEY (id_comment) REFERENCES comment(id) ON DELETE CASCADE,
-  UNIQUE(id_class, id_comment)
-);
-
-CREATE TABLE IF NOT EXISTS user_like (
-  id BIGSERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS post_likes (
+  id_like BIGSERIAL PRIMARY KEY,
   id_user BIGINT NOT NULL,
   id_post BIGINT NOT NULL,
-  liked BOOLEAN NOT NULL DEFAULT FALSE,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_user) REFERENCES "user"(id) ON DELETE CASCADE,
-  FOREIGN KEY (id_post) REFERENCES post(id) ON DELETE CASCADE,
-  UNIQUE(id_user, id_post)
+  FOREIGN KEY (id_post) REFERENCES post(id_post) ON DELETE CASCADE,
+  UNIQUE (id_user, id_post)
 );
 
 CREATE TABLE IF NOT EXISTS card (
@@ -298,11 +274,9 @@ CREATE INDEX IF NOT EXISTS idx_class_user_class_id ON class_user(id_class);
 CREATE INDEX IF NOT EXISTS idx_test_user_user_id ON test_user(id_user);
 CREATE INDEX IF NOT EXISTS idx_test_user_test_id ON test_user(id_test);
 
-CREATE INDEX IF NOT EXISTS idx_post_user_id ON post(id_user);
-CREATE INDEX IF NOT EXISTS idx_post_created_at ON post(created_at);
+CREATE INDEX IF NOT EXISTS idx_post_likes_user_id ON post_likes(id_user);
+CREATE INDEX IF NOT EXISTS idx_post_likes_post_id ON post_likes(id_post);
 CREATE INDEX IF NOT EXISTS idx_comment_user_id ON comment(id_user);
-CREATE INDEX IF NOT EXISTS idx_user_like_user_id ON user_like(id_user);
-CREATE INDEX IF NOT EXISTS idx_user_like_post_id ON user_like(id_post);
 
 CREATE INDEX IF NOT EXISTS idx_card_user_user_id ON card_user(id_user);
 
@@ -310,7 +284,6 @@ CREATE OR REPLACE VIEW v_user_progress AS
 SELECT 
   u.id as user_id,
   u.name,
-  u.last_name,
   u.email,
   t.id as trail_id,
   t.name as trail_name,
@@ -328,26 +301,25 @@ LEFT JOIN module m ON t.id = m.id_trail
 LEFT JOIN module_user mu ON u.id = mu.id_user AND m.id = mu.id_module AND mu.percentage = 100
 LEFT JOIN class c ON m.id = c.id_module
 LEFT JOIN class_user cu ON u.id = cu.id_user AND c.id = cu.id_class AND cu.complete = TRUE
-GROUP BY u.id, u.name, u.last_name, u.email, t.id, t.name, tu.percentage, tu.started_at, tu.completed_at;
+GROUP BY u.id, u.name, u.email, t.id, t.name, tu.percentage, tu.started_at, tu.completed_at;
 
 CREATE OR REPLACE VIEW v_posts_with_interactions AS
 SELECT 
-  p.id as post_id,
-  p.title,
-  p.description,
-  p.image,
-  p.created_at,
+  p.id_post as post_id,
+  p.titulo as title,
+  p.descricao as description,
+  p.imagem as image,
+  p.criado_em as created_at,
   u.name as author_name,
-  u.last_name as author_last_name,
   u.username as author_username,
-  COUNT(DISTINCT ul.id) as total_likes,
-  COUNT(DISTINCT cp.id) as total_comments
+  COUNT(DISTINCT pl.id_like) as total_likes,
+  COUNT(DISTINCT c.id) as total_comments
 FROM post p
 JOIN "user" u ON p.id_user = u.id
-LEFT JOIN user_like ul ON p.id = ul.id_post AND ul.liked = TRUE
-LEFT JOIN comment_post cp ON p.id = cp.id_post
-GROUP BY p.id, p.title, p.description, p.image, p.created_at, u.name, u.last_name, u.username
-ORDER BY p.created_at DESC;
+LEFT JOIN post_likes pl ON p.id_post = pl.id_post
+LEFT JOIN comment c ON p.id_post = c.id_post
+GROUP BY p.id_post, p.titulo, p.descricao, p.imagem, p.criado_em, u.name, u.username
+ORDER BY p.criado_em DESC;
 
 CREATE OR REPLACE FUNCTION calculate_trail_progress(
   p_user_id BIGINT,
@@ -409,11 +381,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_class_user_update
-  AFTER UPDATE ON class_user
-  FOR EACH ROW
-  EXECUTE FUNCTION trigger_update_progress();
-
 INSERT INTO role (role_name, description) VALUES
 ('admin', 'Administrador do sistema'),
 ('instructor', 'Instrutor de trilhas'),
@@ -432,7 +399,7 @@ WHERE table_schema = 'public'
     'user', 'role', 'role_user', 'trail', 'module', 'class', 
     'certificate', 'merit', 'merit_user', 'test', 'question', 
     'answer', 'trail_user', 'module_user', 'class_user', 'test_user',
-    'post', 'comment', 'comment_post', 'comment_class', 'user_like',
+    'post', 'comment', 'comment_post', 'comment_class',
     'card', 'card_user', 'hierarchy', 'hierarchy_trail'
   );
 

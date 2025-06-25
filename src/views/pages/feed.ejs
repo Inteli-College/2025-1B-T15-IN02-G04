@@ -1,0 +1,439 @@
+<!-- Container principal -->
+<div class="max-w-4xl mx-auto p-4 min-h-screen">
+  <!-- Formulário para novo post -->
+  <div class="bg-white rounded-2xl p-6 mb-6 shadow-lg border border-gray-100">
+    <h3 class="text-field-blue text-xl font-bold mb-4">
+      Compartilhe seu conhecimento
+    </h3>
+    <form id="newPostForm">
+      <div class="mb-4">
+        <input
+          id="postTitle"
+          type="text"
+          placeholder="Título do seu post"
+          required
+          class="w-full p-4 border-2 border-gray-200 rounded-xl mb-3 focus:outline-none focus:border-field-green transition-colors duration-300"
+        />
+        <textarea
+          id="postDescription"
+          placeholder="O que você está aprendendo hoje?"
+          required
+          class="w-full p-4 border-2 border-gray-200 rounded-xl resize-none min-h-[100px] focus:outline-none focus:border-field-green transition-colors duration-300"
+        ></textarea>
+        <input
+          id="postImage"
+          type="url"
+          placeholder="URL da imagem (opcional)"
+          class="w-full p-4 border-2 border-gray-200 rounded-xl mt-3 focus:outline-none focus:border-field-green transition-colors duration-300"
+        />
+      </div>
+      <button
+        type="submit"
+        class="bg-gradient-to-r from-field-green to-field-green-dark text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+      >
+        Publicar
+      </button>
+    </form>
+  </div>
+
+  <!-- Feed de posts -->
+  <div id="postsContainer">
+    <div class="text-center py-8 text-gray-500">Carregando posts...</div>
+  </div>
+</div>
+
+<script>
+  // Estado da aplicação
+  let posts = [];
+  let currentUser = null;
+
+  // Elementos DOM
+  const postsContainer = document.getElementById("postsContainer");
+  const newPostForm = document.getElementById("newPostForm");
+  const postTitleInput = document.getElementById("postTitle");
+  const postDescriptionInput = document.getElementById("postDescription");
+  const postImageInput = document.getElementById("postImage");
+
+  // Inicialização
+  document.addEventListener("DOMContentLoaded", function () {
+    loadPosts();
+    setupEventListeners();
+  });
+
+  // Event listeners
+  function setupEventListeners() {
+    newPostForm.addEventListener("submit", handleNewPost);
+  }
+
+  // Carregar posts
+  async function loadPosts() {
+    try {
+      const response = await fetch("/api/posts/");
+      if (response.ok) {
+        posts = await response.json();
+        renderPosts();
+      } else {
+        throw new Error("Erro ao carregar posts");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      postsContainer.innerHTML =
+        '<div class="text-center py-8 text-red-500">Erro ao carregar posts. Tente novamente.</div>';
+    }
+  }
+
+  // Renderizar posts
+  function renderPosts() {
+    if (posts.length === 0) {
+      postsContainer.innerHTML =
+        '<div class="text-center py-8 text-gray-500">Nenhum post encontrado. Seja o primeiro a compartilhar!</div>';
+      return;
+    }
+
+    postsContainer.innerHTML = posts
+      .map(
+        (post) => `
+            <div class="bg-white rounded-2xl p-6 mb-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-post-id="${
+              post.id_post
+            }">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-field-green to-field-green-dark flex items-center justify-center text-white font-bold text-lg mr-4">
+                        ${getInitials(post.autor || "Usuário")}
+                    </div>
+                    <div>
+                        <h4 class="text-field-blue font-semibold text-lg">${
+                          post.autor || "Usuário"
+                        }</h4>
+                        <div class="text-gray-500 text-sm">${formatDate(
+                          post.criado_em || new Date()
+                        )}</div>
+                    </div>
+                </div>
+                ${
+                  post.titulo
+                    ? `<h3 class="text-xl font-bold text-gray-900 mb-3">${post.titulo}</h3>`
+                    : ""
+                }
+                <div class="text-gray-800 mb-4 leading-relaxed">${
+                  post.descricao
+                }</div>
+                ${
+                  post.imagem
+                    ? `<img src="${post.imagem}" alt="Imagem do post" class="w-full rounded-xl mb-4 max-h-96 object-cover">`
+                    : ""
+                }
+                <div class="flex gap-4 pt-4 border-t border-gray-100">
+                    <button class="flex items-center gap-2 text-gray-600 hover:text-field-pink hover:bg-pink-50 px-3 py-2 rounded-lg transition-all duration-300 like-btn" onclick="toggleLike('${
+                      post.id_post
+                    }')">
+                        <span class="text-xl heart">♥</span>
+                        <span class="like-count font-medium">0</span>
+                    </button>
+                    <button class="flex items-center gap-2 text-gray-600 hover:text-field-blue hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-300 comment-btn" onclick="toggleComments('${
+                      post.id_post
+                    }')">
+                        <span class="text-xl">💬</span>
+                        <span class="comment-count font-medium">0</span>
+                    </button>
+                    <button 
+                      class="flex items-center gap-2 text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-300 delete-btn" 
+                      onclick="deletePost('${post.id_post}')"
+                      title="Apagar post"
+                    >
+                      <span class="text-xl">🗑️</span> Apagar
+                    </button>
+                </div>
+                <div class="comments-section hidden mt-4 pt-4 border-t border-gray-100" id="comments-${
+                  post.id_post
+                }">
+                    <div class="comments-list mb-4" id="comments-list-${
+                      post.id_post
+                    }">
+                        <!-- Comentários serão carregados aqui -->
+                    </div>
+                    <form class="flex gap-3" onsubmit="addComment(event, '${
+                      post.id_post
+                    }')">
+                        <input 
+                            type="text" 
+                            class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-full focus:outline-none focus:border-field-blue transition-colors duration-300" 
+                            placeholder="Adicione um comentário..." 
+                            required
+                        >
+                        <button 
+                            type="submit" 
+                            class="bg-field-blue hover:bg-field-blue-dark text-white px-6 py-3 rounded-full font-medium transition-colors duration-300"
+                        >
+                            Enviar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        `
+      )
+      .join("");
+
+    // Carregar curtidas e comentários para cada post
+    posts.forEach((post) => {
+      loadLikeStatus(post.id_post);
+      loadCommentsCount(post.id_post);
+    });
+  }
+
+  // Renderizar comentários
+  function renderComments(comments) {
+    return comments
+      .map(
+        (comment) => `
+            <div class="bg-gray-50 rounded-xl p-4 mb-3">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-semibold text-field-blue">${
+                      comment.autor || "Usuário"
+                    }</span>
+                    <span class="text-gray-500 text-xs">${formatDate(
+                      comment.created_at
+                    )}</span>
+                </div>
+                <div class="text-gray-700">${comment.comment_text}</div>
+            </div>
+        `
+      )
+      .join("");
+  }
+
+  // Criar novo post
+  async function handleNewPost(event) {
+    event.preventDefault();
+
+    const titulo = postTitleInput.value.trim();
+    const descricao = postDescriptionInput.value.trim();
+    const imagem = postImageInput.value.trim();
+
+    if (!titulo || !descricao) return;
+
+    try {
+      const postData = {
+        titulo: titulo,
+        descricao: descricao,
+      };
+
+      if (imagem) {
+        postData.imagem = imagem;
+      }
+
+      const response = await fetch("/api/posts/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (response.ok) {
+        postTitleInput.value = "";
+        postDescriptionInput.value = "";
+        postImageInput.value = "";
+        loadPosts(); // Recarregar posts
+      } else {
+        throw new Error("Erro ao criar post");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao criar post. Tente novamente.");
+    }
+  }
+
+  // Toggle curtida
+  async function toggleLike(postId) {
+    try {
+      const likeBtn = document.querySelector(
+        `[data-post-id="${postId}"] .like-btn`
+      );
+      const isLiked = likeBtn.classList.contains("liked");
+
+      const method = isLiked ? "DELETE" : "POST";
+      const response = await fetch(`/api/posts/${postId}/curtir`, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        loadLikeStatus(postId);
+      } else {
+        throw new Error("Erro ao curtir/descurtir");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+    }
+  }
+
+  // Carregar status da curtida
+  async function loadLikeStatus(postId) {
+    try {
+      // Carregar contagem de curtidas
+      const countResponse = await fetch(`/api/posts/${postId}/curtidas`);
+      if (countResponse.ok) {
+        const data = await countResponse.json();
+        const likeCountElement = document.querySelector(
+          `[data-post-id="${postId}"] .like-count`
+        );
+        if (likeCountElement) {
+          likeCountElement.textContent = data.total || 0;
+        }
+      }
+
+      // Verificar se o usuário curtiu
+      const verifyResponse = await fetch(
+        `/api/posts/${postId}/curtidas/verificar`
+      );
+      if (verifyResponse.ok) {
+        const { curtiu } = await verifyResponse.json();
+        const likeBtn = document.querySelector(
+          `[data-post-id="${postId}"] .like-btn`
+        );
+        if (likeBtn) {
+          if (curtiu) {
+            likeBtn.classList.add("liked", "text-field-pink", "bg-pink-50");
+            likeBtn.classList.remove("text-gray-600");
+          } else {
+            likeBtn.classList.remove("liked", "text-field-pink", "bg-pink-50");
+            likeBtn.classList.add("text-gray-600");
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao carregar status da curtida:", error);
+    }
+  }
+
+  // Toggle comentários
+  function toggleComments(postId) {
+    const commentsSection = document.getElementById(`comments-${postId}`);
+    commentsSection.classList.toggle("hidden");
+
+    if (!commentsSection.classList.contains("hidden")) {
+      loadComments(postId);
+    }
+  }
+
+  // Carregar comentários
+  async function loadComments(postId) {
+    try {
+      const response = await fetch(`/api/posts/${postId}/comentarios`);
+      if (response.ok) {
+        const comments = await response.json();
+        const commentsList = document.getElementById(`comments-list-${postId}`);
+        if (commentsList) {
+          commentsList.innerHTML = renderComments(comments);
+        }
+
+        // Atualizar contador de comentários
+        const commentCount = document.querySelector(
+          `[data-post-id="${postId}"] .comment-count`
+        );
+        if (commentCount) {
+          commentCount.textContent = comments.length;
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao carregar comentários:", error);
+    }
+  }
+
+  // Carregar apenas a contagem de comentários
+  async function loadCommentsCount(postId) {
+    try {
+      const response = await fetch(`/api/posts/${postId}/comentarios`);
+      if (response.ok) {
+        const comments = await response.json();
+        const commentCount = document.querySelector(
+          `[data-post-id="${postId}"] .comment-count`
+        );
+        if (commentCount) {
+          commentCount.textContent = comments.length;
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao carregar contagem de comentários:", error);
+    }
+  }
+
+  // Adicionar comentário
+  async function addComment(event, postId) {
+    event.preventDefault();
+
+    const form = event.target;
+    const input = form.querySelector('input[type="text"]');
+    const content = input.value.trim();
+
+    if (!content) return;
+
+    try {
+      const response = await fetch(`/api/posts/${postId}/comentarios`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          comment_text: content,
+        }),
+      });
+
+      if (response.ok) {
+        input.value = "";
+        loadComments(postId);
+      } else {
+        throw new Error("Erro ao adicionar comentário");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao adicionar comentário. Tente novamente.");
+    }
+  }
+
+  // Funções utilitárias
+  function getInitials(name) {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  }
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) {
+      return "Hoje";
+    } else if (diffDays === 2) {
+      return "Ontem";
+    } else if (diffDays <= 7) {
+      return `${diffDays - 1} dias atrás`;
+    } else {
+      return date.toLocaleDateString("pt-BR");
+    }
+  }
+
+  async function deletePost(postId) {
+    if (!confirm("Tem certeza que quer apagar este post?")) return;
+
+    try {
+      const res = await fetch(`/api/posts/${postId}`, { method: "DELETE" });
+      if (res.ok) {
+        // Remove o card da UI, por exemplo:
+        document.querySelector(`[data-post-id="${postId}"]`).remove();
+        alert("Post apagado com sucesso!");
+      } else {
+        alert("Erro ao apagar post.");
+      }
+    } catch (err) {
+      alert("Erro na requisição: " + err.message);
+    }
+  }
+</script>
