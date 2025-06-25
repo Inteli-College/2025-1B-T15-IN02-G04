@@ -51,12 +51,13 @@ class ModuleController {
 
   static async updateModule(req, res) {
     try {
-      const { name, description, id_trail } = req.body;
+      const { name, description, id_trail, module_order } = req.body;
       console.log("REQ.BODY:", req.body);
       console.log("NAME:", name);
       console.log("DESCRIPTION:", description);
       console.log("ID_TRILHA:", id_trail);
-      const updatedModule = await ModuleModel.updateModule(req.params.id, name, description, id_trail);
+      console.log("MODULE_ORDER:", module_order);
+      const updatedModule = await ModuleModel.updateModule(req.params.id, name, description, id_trail, module_order);
       if (updatedModule) {
         res.status(200).json(updatedModule);
       } else {
