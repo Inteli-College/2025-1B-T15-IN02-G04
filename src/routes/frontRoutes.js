@@ -159,15 +159,7 @@ router.get('/modulos', (req, res) => {
     pageCSS: 'pages/modules.css',
     pageJS: 'modules.js',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
-  });router.get('/modulos', (req, res) => {
-  res.render('layout/main', {
-    pageTitle: 'Módulos de Aprendizagem',
-    content: '../pages/modules',
-    pageCSS: 'pages/modules.css',
-    pageJS: 'modules.js',
-    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
-});
 });
 
 module.exports = router;
