@@ -3,8 +3,13 @@ const jwt = require("jsonwebtoken");
 const checkAuth = (req, res, next) => {
   const token = req.cookies.token;
 
-  if (req.path === "/dashboard" || req.path === "/me" || req.path.startsWith("/perfil")) {
-
+  if (
+    req.path === "/dashboard" ||
+    req.path === "/me" ||
+    req.path.startsWith("/perfil") ||
+    req.path.startsWith("/feed") ||
+    req.path.startsWith("/cards")
+  ) {
     if (!token) {
       console.log("No token found, redirecting to /login");
       return res.redirect("/login");
@@ -12,8 +17,8 @@ const checkAuth = (req, res, next) => {
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.userId = decoded.id; 
-      return next(); 
+      req.userId = decoded.id;
+      return next();
     } catch (err) {
       console.error("Erro ao verificar token:", err);
       res.clearCookie("token");
