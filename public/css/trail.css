@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #10384F 0%, #00BCFF 100%);
+  min-height: 100vh;
+  color: #FFFFFF;
+}
+
+/* Main Content */
+.main-content {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #FFFFFF;
+}
+
+/* Trails Container */
+.trails-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trails-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 3rem;
+}
+
+/* Trail Card */
+.trail-card {
+  background: linear-gradient(135deg, #00BCFF 0%, #89D329 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.trail-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.trail-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.trail-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+}
+
+.trail-description {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+  color: #FFFFFF;
+}
+
+.trail-button {
+  background: rgba(255, 255, 255, 0.9);
+  color: #10384F;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trail-button:hover {
+  background: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation Arrows */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 2;
+}
+
+.nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.left {
+  left: 1rem;
+}
+
+.nav-arrow.right {
+  right: 1rem;
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+}
+
+.btn-outline:hover {
+  background: #FFFFFF;
+  color: #10384F;
+}
+
+.btn-primary {
+  background: #89D329;
+  color: #FFFFFF;
+  border: 2px solid #89D329;
+}
+
+.btn-primary:hover {
+  background: #7BC225;
+  border-color: #7BC225;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 2rem 1rem;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+
+  .trails-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .nav-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .trail-card {
+    padding: 1.5rem;
+    min-height: 300px;
+  }
+
+  .trail-icon {
+    font-size: 3rem;
+  }
+
+  .trail-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #FFFFFF;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #FFFFFF;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error {
+  text-align: center;
+  padding: 3rem;
+  color: #FFFFFF;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+}
+
+.error h3 {
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+.error p {
+  color: #999999;
+  margin-bottom: 1.5rem;
+}
