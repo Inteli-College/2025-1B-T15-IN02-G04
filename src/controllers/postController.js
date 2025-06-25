@@ -60,7 +60,9 @@ class PostController {
     const user = await UserModel.buscarPorId(userId);
     const post = await PostModel.buscarPorId(id);
 
-    if (user.autor === post.name) {
+    console.log(user, post);
+
+    if (user.autor == post.name) {
       try {
         await PostModel.deletarPost(id);
         return res.status(200).json({ message: "Post deletado com sucesso" });
