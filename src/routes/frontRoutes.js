@@ -4,7 +4,8 @@ const checkAuth = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-router.get("/login", checkAuth, (req, res) => {
+// Página de login
+router.get("/login", (req, res) => {
   res.render("pages/login", {
     pageTitle: "Entrar",
     content: "../pages/login",
@@ -15,6 +16,7 @@ router.get("/login", checkAuth, (req, res) => {
   });
 });
 
+// Dashboard
 router.get("/dashboard", checkAuth, (req, res) => {
   res.render("pages/gestorDashboard", {
     title: "Dashboard",
@@ -22,13 +24,15 @@ router.get("/dashboard", checkAuth, (req, res) => {
   });
 });
 
+// Perfil
 router.get("/perfil/:id", checkAuth, (req, res) => {
   res.render("pages/perfil", {
     title: "Perfil",
-    userId: req.userId,
+    userId: req.userId || req.params.id, // Usa req.userId se disponível, senão req.params.id
   });
 });
 
+// Trilhas de aprendizado
 router.get("/trails", (req, res) => {
   res.render("pages/trails", {
     title: "Trilhas de Aprendizado",
@@ -47,7 +51,7 @@ router.get("/", (req, res) => {
   });
 });
 
-// Página de login
+// Página de login alternativa
 router.get("/login2", (req, res) => {
   res.render("layout/main", {
     pageTitle: "Entrar",
@@ -58,7 +62,7 @@ router.get("/login2", (req, res) => {
   });
 });
 
-// Página dos cards
+// Página de cards
 router.get("/cards", checkAuth, (req, res) => {
   res.render("pages/cards", {
     pageTitle: "Cards",
@@ -70,8 +74,8 @@ router.get("/cards", checkAuth, (req, res) => {
   });
 });
 
-// Dashboard (página protegida)
-router.get("/dashboard2", (req, res) => {
+// Dashboard alternativo
+router.get("/dashboard2", checkAuth, (req, res) => {
   res.render("layout/main", {
     pageTitle: "Dashboard",
     content: "../pages/dashboard",
@@ -87,7 +91,7 @@ router.get("/sobre", (req, res) => {
   res.render("layout/main", {
     pageTitle: "Sobre Nós",
     content: "../pages/about",
-    pageCSS: null, // Usar apenas estilos globais
+    pageCSS: null,
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
   });
@@ -98,7 +102,8 @@ router.get("/cursos", checkAuth, (req, res) => {
   res.render("layout/main", {
     pageTitle: "Cursos",
     content: "../pages/courses",
-    pageCSS: ["pages/home.css"], // Reutilizar estilos da home para cards de curso
+    pageCSS: ["pages/home.css"],
+    userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
   });
 });
@@ -108,35 +113,36 @@ router.get("/contato", (req, res) => {
   res.render("layout/main", {
     pageTitle: "Contato",
     content: "../pages/contact",
-    pageCSS: "pages/auth.css", // Reutilizar estilos de formulário
+    pageCSS: "pages/auth.css",
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
   });
 });
 
-// Páginas de termos e privacidade
+// Página de termos
 router.get("/termos", (req, res) => {
   res.render("layout/main", {
     pageTitle: "Termos de Uso",
     content: "../pages/terms",
-    pageCSS: null, // Apenas estilos globais
+    pageCSS: null,
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
   });
 });
 
+// Página de privacidade
 router.get("/privacidade", checkAuth, (req, res) => {
   res.render("layout/main", {
     pageTitle: "Política de Privacidade",
     content: "../pages/privacy",
-    pageCSS: null, // Apenas estilos globais
+    pageCSS: null,
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
   });
 });
 
 // Página de recuperação de senha
-router.get("/esqueci-senha", checkAuth, (req, res) => {
+router.get("/esqueci-senha", (req, res) => {
   res.render("layout/main", {
     pageTitle: "Recuperar Senha",
     content: "../pages/forgot-password",
@@ -146,7 +152,7 @@ router.get("/esqueci-senha", checkAuth, (req, res) => {
   });
 });
 
-// Página de Trilhas/módulos
+// Página de trilhas
 router.get("/Trilhas", checkAuth, (req, res) => {
   res.render("layout/main", {
     pageTitle: "Trilhas",
@@ -157,7 +163,18 @@ router.get("/Trilhas", checkAuth, (req, res) => {
   });
 });
 
-// Página de Aulas
+// Página de módulos (adicionada da branch develop)
+router.get("/Modulos", checkAuth, (req, res) => {
+  res.render("layout/main", {
+    pageTitle: "Módulos",
+    content: "../pages/modules",
+    pageCSS: "pages/module.css",
+    userId: req.userId,
+    currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
+  });
+});
+
+// Página de aulas
 router.get("/Aulas", checkAuth, (req, res) => {
   res.render("layout/main", {
     pageTitle: "Aulas",
@@ -168,6 +185,7 @@ router.get("/Aulas", checkAuth, (req, res) => {
   });
 });
 
+// Página de feed (adicionada da branch feat/adiciona=feed)
 router.get("/feed", checkAuth, (req, res) => {
   res.render("layout/main", {
     pageTitle: "Feed",

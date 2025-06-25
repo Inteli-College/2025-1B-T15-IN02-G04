@@ -101,7 +101,7 @@
 
       // Ordena alfabeticamente pelo nome (case-insensitive, PT-BR)
       const sorted = [...data].sort((a, b) =>
-        (a.nome || "").localeCompare(b.nome || "", "pt", {
+        (a.name || "").localeCompare(b.name || "", "pt", {
           sensitivity: "base",
         })
       );
@@ -111,17 +111,17 @@
         card.className =
           "min-w-[120px] flex-shrink-0 bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer text-center p-4";
         card.addEventListener("click", () => {
-          window.location.href = `/perfil/${usuario.id_usuario}`;
+          window.location.href = `/perfil/${usuario.id}`;
         });
 
         const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-          usuario.nome ?? "U"
+          usuario.name ?? "U"
         )}&background=FF5D9C&color=fff&size=128`;
 
         card.innerHTML = `
           <img src="${avatarUrl}" alt="Avatar" class="w-16 h-16 mx-auto rounded-full mb-2" />
           <p class="text-sm font-medium text-gray-700 truncate max-w-[100px] mx-auto">${
-            usuario.nome ?? "-"
+            usuario.name ?? "-"
           }</p>
         `;
 
@@ -136,30 +136,77 @@
       }
 
       const total = data.length;
-      const mediaScore = (
-        data.reduce((sum, u) => sum + (u.score ?? 0), 0) / total
-      ).toFixed(1);
-      const topScore = data[0].score ?? 0;
-      const ptdCount = data.filter((u) => u.tipo === "PTD").length;
-      const consultorCount = data.filter((u) => u.tipo === "Consultor").length;
+      const ptdCount = data.filter((u) => (u.roles || []).includes("PTD")).length;
+      const somaScores = data.reduce((sum, u) => sum + (u.score ?? 0), 0);
+      const mediaScore = (somaScores / (total || 1)).toFixed(1);
+      const topScore = Math.max(...data.map((u) => u.score ?? 0));
+      const topUser = data.find((u) => (u.score ?? 0) === topScore) || {};
 
       analyticsContainer.innerHTML = `
         <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">Total de Usuários</p>
-          <p class="text-3xl font-bold text-field-green">${total}</p>
+          <p class="text-sm text-gray-500">Total de PTDs</p>
+          <p class="text-3xl font-bold text-field-green">${ptdCount}</p>
         </div>
         <div class="bg-white rounded-lg shadow p-4 text-center">
           <p class="text-sm text-gray-500">Média de Score</p>
           <p class="text-3xl font-bold text-field-green">${mediaScore}</p>
         </div>
         <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">Maior Score</p>
+          <p class="text-sm text-gray-500">Score Máximo</p>
           <p class="text-3xl font-bold text-field-green">${topScore}</p>
+          <p class="text-xs text-gray-500 truncate">${topUser.name ?? ""}</p>
         </div>
-        <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">PTD / Consultor</p>
-          <p class="text-3xl font-bold text-field-green">${ptdCount} / ${consultorCount}</p>
+        <div class="bg-white rounded-lg shadow p-4">
+          <canvas id="chart-score" height="120"></canvas>
         </div>`;
+
+      // Desenhar gráfico de barras (top 5)
+      const drawChart = () => {
+        const ctx = document.getElementById("chart-score");
+        if (!ctx) return;
+
+        // Limpar gráfico anterior se existir
+        if (window._scoreChart) {
+          window._scoreChart.destroy();
+        }
+
+        const topFive = [...data]
+          .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+          .slice(0, 5);
+
+        const labels = topFive.map((u) => u.name ?? "-");
+        const scores = topFive.map((u) => u.score ?? 0);
+
+        window._scoreChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              {
+                label: "Top 5 Scores",
+                data: scores,
+                backgroundColor: "#10B981",
+              },
+            ],
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true },
+            },
+          },
+        });
+      };
+
+      // Carrega Chart.js se necessário e então desenha
+      if (typeof Chart === "undefined") {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/chart.js";
+        script.onload = drawChart;
+        document.body.appendChild(script);
+      } else {
+        drawChart();
+      }
     };
 
     const renderRows = (data) => {
@@ -179,14 +226,14 @@
         const tr = document.createElement("tr");
         tr.classList.add("cursor-pointer", "hover:bg-gray-100");
         tr.addEventListener("click", () => {
-          window.location.href = `/perfil/${usuario.id_usuario}`;
+          window.location.href = `/perfil/${usuario.id}`;
         });
         tr.innerHTML = `
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${
             usuario.position
           }</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">${
-            usuario.nome ?? "-"
+            usuario.name ?? "-"
           }</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${
             usuario.score ?? 0
@@ -241,7 +288,7 @@
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.toLowerCase();
       const filtered = rankingData.filter((u) =>
-        (u.nome || "").toLowerCase().includes(query)
+        (u.name || "").toLowerCase().includes(query)
       );
       renderRows(filtered);
       renderCarousel(filtered);

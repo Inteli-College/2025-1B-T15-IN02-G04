@@ -32,9 +32,26 @@ class UserModel {
   static async listarUsuariosPorScore() {
     try {
       const result = await db.query(
-        'SELECT id, name, score FROM "user" ORDER BY score DESC'
+        `SELECT u.id,
+                u.name,
+                u.score,
+                COALESCE(array_agg(r.role_name) FILTER (WHERE r.role_name IS NOT NULL), '{}') AS roles
+         FROM "user" u
+         LEFT JOIN role_user ru ON ru.id_user = u.id
+         LEFT JOIN role r ON r.id = ru.id_role
+         GROUP BY u.id
+         ORDER BY u.score DESC`
       );
-      return result.rows;
+      return result.rows.map((row) => {
+        let rolesParsed = [];
+        if (Array.isArray(row.roles)) {
+          rolesParsed = row.roles;
+        } else if (typeof row.roles === "string") {
+          // Remove chaves { } e divide por vírgula
+          rolesParsed = row.roles.replace(/^{|}$/g, "").split(",").filter(Boolean);
+        }
+        return { ...row, roles: rolesParsed };
+      });
     } catch (err) {
       console.error("Erro ao listar usuários por score:", err);
       throw new Error("Erro ao buscar ranking de usuários");

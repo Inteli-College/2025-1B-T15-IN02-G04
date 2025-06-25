@@ -6,6 +6,7 @@ const trailRoutes = require("./trailRoutes");
 const cardRoutes = require("./cardRoutes");
 const pdfRoutes = require("./pdfRoutes");
 const postRoutes = require("./postRoutes");
+const moduleRoutes = require("./moduleRoutes");
 
 const router = express.Router();
 
@@ -16,8 +17,7 @@ router.use("/api/auth", authRoutes);
 router.use("/api/trails", trailRoutes);
 router.use("/api", cardRoutes);
 router.use("/api", pdfRoutes);
-
-// Rotas de Frontend
+router.use("/api/modules", moduleRoutes); 
 router.use("/", frontRoutes);
 
 module.exports = router;
