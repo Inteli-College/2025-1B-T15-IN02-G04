@@ -15,8 +15,12 @@ router.get("/login", checkAuth, (req, res) => {
 });
 
 router.get("/dashboard", checkAuth, (req, res) => {
-  res.render("pages/gestorDashboard", {
-    title: "Dashboard",
+  res.render("pages/dashboard", {
+    pageTitle: 'Dashboard',
+    content: '../pages/dashboard',
+    pageCSS: 'pages/dashboard.css',
+    pageJS: ['dashboard-api.js', 'dashboard-core.js', 'dashboard-modals.js', 'dashboard-notifications.js'],
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
 });
 

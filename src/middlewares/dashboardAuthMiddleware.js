@@ -55,9 +55,10 @@ const dashboardAuth = async (req, res, next) => {
       req.primaryRole = userRoles[0]; // Role principal (menor ID = maior prioridade)
       
       // Flags de conveniência para verificações rápidas
-      req.isPTD = userRoles.some(role => role.id_role === 3);
-      req.isGestor = userRoles.some(role => role.id_role === 2);
-      req.isAdmin = userRoles.some(role => role.id_role === 1);
+    const roleNames = userRoles.map(role => role.role_name.toLowerCase());
+    req.isPTD = roleNames.includes('ptd');
+    req.isGestor = roleNames.includes('gestor');
+    req.isAdmin = roleNames.includes('admin');;
 
       console.log('✅ [DASHBOARD] Autenticação bem-sucedida:', {
         userId,

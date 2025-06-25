@@ -33,6 +33,7 @@ class CacheMiddleware {
     } = options;
 
     return (req, res, next) => {
+      const self = this;
       try {
         // Verificar condição de cache
         if (condition && !condition(req)) {

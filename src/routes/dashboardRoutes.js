@@ -180,10 +180,21 @@ router.get('/api/ranking/ptd-general',
 );
 
 /**
- * Posição no ranking - GET /api/ranking/ptd-position/:ptdId?
+ * Posição no ranking (próprio usuário) - GET /api/ranking/ptd-position
  */
-router.get('/api/ranking/ptd-position/:ptdId?',
+router.get('/api/ranking/ptd-position',
   dashboardAPIMiddleware,
+  rateLimiter.generalAPI,
+  cacheMiddleware.ranking,
+  RankingController.getPTDRankingPosition
+);
+
+/**
+ * Posição no ranking (usuário específico) - GET /api/ranking/ptd-position/:ptdId
+ */
+router.get('/api/ranking/ptd-position/:ptdId',
+  dashboardAPIMiddleware,
+  ValidationMiddleware.validateIdParam('ptdId'),
   rateLimiter.generalAPI,
   cacheMiddleware.ranking,
   RankingController.getPTDRankingPosition

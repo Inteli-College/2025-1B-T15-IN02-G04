@@ -29,6 +29,8 @@ class DashboardController {
       // Buscar dados específicos baseado no role
       const dashboardData = await DashboardModel.getDashboardDataByRole(userId, userRole.id_role);
       
+      dashboardData.user.primaryRole = userRole;
+
       // Atualizar última atividade
       await DashboardModel.updateLastActivity(userId);
 

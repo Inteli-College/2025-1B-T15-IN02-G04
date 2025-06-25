@@ -31,6 +31,7 @@ class RateLimitMiddleware {
     } = options;
 
     return (req, res, next) => {
+      const self = this;
       try {
         // Verificar condição de bypass
         if (bypassCondition && bypassCondition(req)) {
