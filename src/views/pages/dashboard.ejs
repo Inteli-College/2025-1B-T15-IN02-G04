@@ -1,0 +1,77 @@
+<!-- Dashboard Page Content -->
+<div class="dashboard-page">
+    <!-- Meta para JavaScript -->
+    <script>
+        window.dashboardConfig = {
+            userId: '<%= dashboardData.user.id %>',
+            userRole: '<%= dashboardData.user.primaryRole.id_role %>',
+            apiBase: '/api/dashboard',
+            userName: '<%= dashboardData.user.name %>',
+            userRoleName: '<%= dashboardData.user.primaryRole.role_name %>'
+        };
+    </script>
+    
+    <!-- Header do Dashboard -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <!-- Informações do usuário -->
+            <div class="header-welcome">
+                <h1 class="welcome-message">Olá, <%= dashboardData.user.name %>!</h1>
+                <span class="user-role-badge"><%= dashboardData.user.primaryRole.role_name %></span>
+            </div>
+            
+            <!-- Ações do header -->
+            <div class="header-actions">
+                <button id="refresh-dashboard" class="action-btn" title="Atualizar dados">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+                <button id="dashboard-notifications" class="action-btn" title="Notificações">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                    </svg>
+                    <span class="notification-badge" style="display: none;">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading Overlay -->
+    <div id="dashboard-loading" class="loading-overlay hidden">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Carregando dados...</p>
+    </div>
+    
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            
+            <!-- Dashboard específico baseado no role -->
+            <% if (dashboardData.user.primaryRole.id_role === 3) { %>
+                <%- include('../components/ptd-dashboard', {data: dashboardData}) %>
+            <% } else if (dashboardData.user.primaryRole.id_role === 2) { %>
+                <%- include('../components/gestor-dashboard', {data: dashboardData}) %>
+            <% } else if (dashboardData.user.primaryRole.id_role === 1) { %>
+                <%- include('../components/admin-dashboard', {data: dashboardData}) %>
+            <% } else { %>
+                <!-- Fallback para role não reconhecido -->
+                <div class="error-container">
+                    <div class="error-icon">⚠️</div>
+                    <h2 class="error-title">Erro de Permissões</h2>
+                    <p class="error-message">Seu perfil não possui permissões adequadas para acessar o dashboard.</p>
+                    <a href="/api/auth/logout" class="btn btn-primary">Sair do Sistema</a>
+                </div>
+            <% } %>
+            
+        </div>
+    </main>
+
+    <!-- Notificações Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Modais Container -->
+    <div id="modal-container">
+        <!-- Modais serão inseridos dinamicamente aqui -->
+    </div>
+</div>
