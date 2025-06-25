@@ -1,0 +1,223 @@
+<!-- Dashboard específico para Admin (id_role = 1) -->
+<div class="admin-dashboard">
+    
+    <!-- Ações Administrativas -->
+    <div class="dashboard-section admin-actions-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="section-icon">⚙️</span>
+                Administração
+            </h2>
+        </div>
+        
+        <div class="admin-actions-grid">
+            <!-- ET: Editar Trilhas -->
+            <button class="admin-action-card" onclick="window.location.href='/edit_trails'">
+                <div class="action-icon">🛤️</div>
+                <div class="action-content">
+                    <h3 class="action-title">Editar Trilhas</h3>
+                    <p class="action-description">Gerenciar trilhas de aprendizado</p>
+                </div>
+            </button>
+            
+            <!-- EM: Editar Módulos -->
+            <button class="admin-action-card" onclick="window.location.href='/edit_modules'">
+                <div class="action-icon">📚</div>
+                <div class="action-content">
+                    <h3 class="action-title">Editar Módulos</h3>
+                    <p class="action-description">Gerenciar módulos de conteúdo</p>
+                </div>
+            </button>
+            
+            <!-- EA: Editar Aulas -->
+            <button class="admin-action-card" onclick="window.location.href='/edit_classes'">
+                <div class="action-icon">🎓</div>
+                <div class="action-content">
+                    <h3 class="action-title">Editar Aulas</h3>
+                    <p class="action-description">Gerenciar aulas e conteúdos</p>
+                </div>
+            </button>
+            
+            <!-- EP: Editar Provas -->
+            <button class="admin-action-card" onclick="window.location.href='/edit_tests'">
+                <div class="action-icon">📝</div>
+                <div class="action-content">
+                    <h3 class="action-title">Editar Provas</h3>
+                    <p class="action-description">Gerenciar avaliações e testes</p>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- CRGA: Criar Gestor/Admin -->
+    <div class="dashboard-section user-creation-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="section-icon">👤</span>
+                Gestão de Usuários
+            </h2>
+        </div>
+        
+        <div class="user-creation-container">
+            <button id="create-user-btn" class="create-user-card">
+                <div class="creation-icon">➕</div>
+                <div class="creation-content">
+                    <h3 class="creation-title">Criar Gestor/Admin</h3>
+                    <p class="creation-description">Cadastrar novo usuário administrativo</p>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Trilhas Analytics -->
+    <div class="dashboard-section analytics-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                Trilhas Analytics
+            </h2>
+            <button id="refresh-analytics" class="refresh-btn" title="Atualizar analytics">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div id="trails-analytics" class="analytics-grid">
+            <!-- Analytics serão carregados dinamicamente -->
+            <div class="analytics-loading">Carregando analytics de trilhas...</div>
+        </div>
+    </div>
+
+    <!-- Cards Analytics -->
+    <div class="dashboard-section cards-analytics-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="section-icon">💳</span>
+                Cards Analytics
+            </h2>
+            <button id="refresh-cards-analytics" class="refresh-btn" title="Atualizar cards analytics">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="cards-analytics-container">
+            <!-- C+F: Cards Mais Favoritados -->
+            <div class="analytics-widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">
+                        <span class="widget-icon">❤️</span>
+                        Cards Mais Favoritados
+                    </h3>
+                </div>
+                <div id="most-favorited-cards" class="cards-list">
+                    <!-- Cards serão carregados dinamicamente -->
+                    <div class="cards-loading">Carregando cards...</div>
+                </div>
+            </div>
+            
+            <!-- C-F: Cards Menos Favoritados -->
+            <div class="analytics-widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">
+                        <span class="widget-icon">💔</span>
+                        Cards Menos Favoritados
+                    </h3>
+                </div>
+                <div id="least-favorited-cards" class="cards-list">
+                    <!-- Cards serão carregados dinamicamente -->
+                    <div class="cards-loading">Carregando cards...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Templates para elementos dinâmicos -->
+<template id="trail-analytics-template">
+    <div class="trail-analytics-card" data-trail-id="">
+        <div class="trail-header">
+            <h4 class="trail-name"></h4>
+        </div>
+        <div class="trail-metrics">
+            <div class="metric">
+                <span class="metric-label">PTDs na Trilha</span>
+                <span class="metric-value ptd-count"></span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Média de Progresso</span>
+                <div class="metric-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="progress-percentage"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="card-analytics-item-template">
+    <div class="card-analytics-item" data-card-id="">
+        <div class="item-position"></div>
+        <div class="item-content">
+            <h5 class="item-title"></h5>
+            <span class="item-count"></span>
+        </div>
+    </div>
+</template>
+
+<!-- Modal para criar Gestor/Admin -->
+<%- include('../components/modals/create-admin-modal') %>
+
+<script>
+// Carregar dados específicos do Admin
+document.addEventListener('DOMContentLoaded', function() {
+    // Carregar analytics de trilhas
+    window.Dashboard.loadTrailsAnalytics();
+    
+    // Carregar analytics de cards
+    window.Dashboard.loadCardsAnalytics();
+    
+    // Event listeners para ações
+    document.getElementById('create-user-btn')?.addEventListener('click', function() {
+        window.Dashboard.openCreateAdminModal();
+    });
+    
+    // Event listeners para refresh
+    document.getElementById('refresh-analytics')?.addEventListener('click', function() {
+        window.Dashboard.loadTrailsAnalytics();
+    });
+    
+    document.getElementById('refresh-cards-analytics')?.addEventListener('click', function() {
+        window.Dashboard.loadCardsAnalytics();
+    });
+});
+
+// Funções específicas para Admin
+window.AdminDashboard = {
+    // Redirecionar para páginas de edição
+    editTrails: () => window.location.href = '/edit_trails',
+    editModules: () => window.location.href = '/edit_modules',
+    editClasses: () => window.location.href = '/edit_classes',
+    editTests: () => window.location.href = '/edit_tests',
+    
+    // Analytics functions
+    loadAnalytics: function() {
+        this.loadTrailsAnalytics();
+        this.loadCardsAnalytics();
+    },
+    
+    loadTrailsAnalytics: function() {
+        // Implementação será feita no dashboard-api.js
+        window.Dashboard.loadTrailsAnalytics();
+    },
+    
+    loadCardsAnalytics: function() {
+        // Implementação será feita no dashboard-api.js
+        window.Dashboard.loadCardsAnalytics();
+    }
+};
+</script>
