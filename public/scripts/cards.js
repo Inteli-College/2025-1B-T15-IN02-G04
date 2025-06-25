@@ -5,6 +5,9 @@ let isLoggedIn = false;
 let isAdmin = false;
 let editingCardId = null;
 
+// DEBUG: Adicionar logs detalhados
+console.log('🔄 [DEBUG] Script cards.js carregado');
+
 // Elementos DOM
 const cardsContainer = document.getElementById('cardsContainer');
 const searchInput = document.getElementById('searchInput');
@@ -25,14 +28,22 @@ const editModalDelete = document.getElementById('editModalDelete');
 const editModalSave = document.getElementById('editModalSave');
 const editModalLoading = document.getElementById('editModalLoading');
 
+console.log('🔍 [DEBUG] Elementos DOM encontrados:', {
+    cardsContainer: !!cardsContainer,
+    addCardBtn: !!addCardBtn,
+    editCardModal: !!editCardModal
+});
+
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 [DEBUG] DOM carregado, iniciando página');
     initializePage();
     setupEventListeners();
 });
 
 // Inicializar página
 async function initializePage() {
+    console.log('🔄 [DEBUG] Iniciando página...');
     await checkAuthStatus();
     await loadCards();
     toggleAdminElements();
@@ -40,20 +51,59 @@ async function initializePage() {
 
 // Verificar status de autenticação
 async function checkAuthStatus() {
+    console.log('🔍 [DEBUG] Verificando status de autenticação...');
+    
     try {
         const response = await fetch('/api/usuarios/me');
+        console.log('📡 [DEBUG] Resposta da API /me:', {
+            status: response.status,
+            ok: response.ok
+        });
+        
         if (response.ok) {
             currentUser = await response.json();
             isLoggedIn = true;
-            isAdmin = currentUser.isAdmin || false;
-            console.log('🔑 Usuário autenticado:', { 
-                id: currentUser.id, 
-                name: currentUser.name, 
-                isAdmin: isAdmin 
+            
+            console.log('👤 [DEBUG] Dados do usuário recebidos:', {
+                id: currentUser.id,
+                name: currentUser.name,
+                email: currentUser.email,
+                roles: currentUser.roles,
+                isAdmin: currentUser.isAdmin
             });
+            
+            // Verificação dupla do isAdmin
+            isAdmin = currentUser.isAdmin || false;
+            
+            // Verificação adicional se currentUser.roles existe
+            if (currentUser.roles && Array.isArray(currentUser.roles)) {
+                const hasAdminRole = currentUser.roles.some(role => {
+                    console.log('🔍 [DEBUG] Verificando role:', role, 'id_role:', role.id_role);
+                    return parseInt(role.id_role) === 1;
+                });
+                
+                console.log('👑 [DEBUG] Verificação manual de admin role:', hasAdminRole);
+                
+                // Se a verificação manual encontrou admin role, mas isAdmin é false
+                if (hasAdminRole && !isAdmin) {
+                    console.log('⚠️ [DEBUG] DISCREPÂNCIA: Role admin encontrada mas isAdmin=false');
+                    isAdmin = true; // Forçar true
+                }
+            }
+            
+            console.log('🔑 [DEBUG] Status final de autenticação:', { 
+                isLoggedIn,
+                isAdmin,
+                userId: currentUser.id,
+                userRoles: currentUser.roles?.length || 0
+            });
+        } else {
+            console.log('❌ [DEBUG] Usuário não autenticado (status:', response.status, ')');
+            isLoggedIn = false;
+            isAdmin = false;
         }
     } catch (error) {
-        console.log('👤 Usuário não autenticado');
+        console.log('❌ [DEBUG] Erro ao verificar autenticação:', error);
         isLoggedIn = false;
         isAdmin = false;
     }
@@ -61,23 +111,40 @@ async function checkAuthStatus() {
 
 // Mostrar/ocultar elementos de admin
 function toggleAdminElements() {
+    console.log('🎛️ [DEBUG] Alternando elementos admin. isAdmin:', isAdmin);
+    
     const adminElements = document.querySelectorAll('.admin-only');
-    adminElements.forEach(element => {
+    console.log('🔍 [DEBUG] Elementos admin encontrados:', adminElements.length);
+    
+    adminElements.forEach((element, index) => {
+        console.log(`🔍 [DEBUG] Elemento ${index}:`, {
+            tag: element.tagName,
+            id: element.id,
+            classes: element.className,
+            isAdmin: isAdmin
+        });
+        
         if (isAdmin) {
             element.classList.add('show-admin');
             if (element.style.display === 'flex' || element.classList.contains('flex')) {
                 element.classList.add('flex');
             }
+            console.log(`✅ [DEBUG] Elemento ${index} mostrado`);
         } else {
             element.classList.remove('show-admin', 'flex');
+            console.log(`❌ [DEBUG] Elemento ${index} ocultado`);
         }
     });
     
-    console.log('👑 Elementos admin:', isAdmin ? 'mostrados' : 'ocultados');
+    // Log final
+    const visibleAdminElements = document.querySelectorAll('.admin-only.show-admin');
+    console.log('📊 [DEBUG] Elementos admin visíveis após toggle:', visibleAdminElements.length);
 }
 
 // Configurar event listeners
 function setupEventListeners() {
+    console.log('🔗 [DEBUG] Configurando event listeners...');
+    
     // Busca em tempo real
     searchInput.addEventListener('input', debounce(handleSearch, 300));
     
@@ -85,11 +152,11 @@ function setupEventListeners() {
     clearSearchBtn.addEventListener('click', clearSearch);
     
     // Modal de favoritos
-    document.getElementById('cancelFavorite').addEventListener('click', hideModal);
-    document.getElementById('confirmFavorite').addEventListener('click', executeFavoriteAction);
+    document.getElementById('cancelFavorite')?.addEventListener('click', hideModal);
+    document.getElementById('confirmFavorite')?.addEventListener('click', executeFavoriteAction);
     
     // Fechar modal clicando fora
-    favoriteModal.addEventListener('click', function(e) {
+    favoriteModal?.addEventListener('click', function(e) {
         if (e.target === favoriteModal) {
             hideModal();
         }
@@ -97,7 +164,10 @@ function setupEventListeners() {
 
     // Event listeners de admin
     if (addCardBtn) {
+        console.log('✅ [DEBUG] Adicionando listener ao botão de adicionar card');
         addCardBtn.addEventListener('click', openCreateCardModal);
+    } else {
+        console.log('❌ [DEBUG] Botão de adicionar card não encontrado');
     }
 
     if (editModalClose) {
@@ -123,6 +193,8 @@ function setupEventListeners() {
             }
         });
     }
+    
+    console.log('✅ [DEBUG] Event listeners configurados');
 }
 
 // Debounce function para otimizar busca
@@ -199,6 +271,8 @@ function clearSearch() {
 
 // Renderizar cards
 async function renderCards(cards, searchTerm = '') {
+    console.log('🎨 [DEBUG] Renderizando cards. Total:', cards.length, 'isAdmin:', isAdmin);
+    
     if (cards.length === 0) {
         showNoCards();
         return;
@@ -217,6 +291,8 @@ async function renderCards(cards, searchTerm = '') {
     
     // Adicionar event listeners aos botões dos cards
     addCardEventListeners();
+    
+    console.log('✅ [DEBUG] Cards renderizados');
 }
 
 // Verificar se card é favorito
@@ -245,6 +321,8 @@ function createCardHTML(card, isFavorited, searchTerm = '') {
     // Classe admin para cards clicáveis
     const adminCardClass = isAdmin ? 'admin-card' : '';
     const cardClickHandler = isAdmin ? `onclick="openEditCardModal(${card.id})"` : '';
+    
+    console.log('🎨 [DEBUG] Criando card HTML. ID:', card.id, 'isAdmin:', isAdmin, 'adminCardClass:', adminCardClass);
     
     // Verificar se há imagem válida
     const hasImage = card.image && card.image.trim() !== '';
@@ -305,6 +383,8 @@ function addCardEventListeners() {
 
 // Abrir modal para criar novo card
 function openCreateCardModal() {
+    console.log('➕ [DEBUG] Abrindo modal para criar card');
+    
     editingCardId = null;
     editModalTitle.textContent = 'Criar Novo Card';
     editModalDelete.classList.add('hidden');
@@ -320,6 +400,8 @@ function openCreateCardModal() {
 
 // Abrir modal para editar card
 async function openEditCardModal(cardId) {
+    console.log('✏️ [DEBUG] Abrindo modal para editar card:', cardId);
+    
     try {
         editingCardId = cardId;
         editModalTitle.textContent = 'Editar Card';
@@ -353,6 +435,7 @@ async function openEditCardModal(cardId) {
 
 // Mostrar modal de edição
 function showEditModal() {
+    console.log('📱 [DEBUG] Mostrando modal de edição');
     editCardModal.classList.remove('hidden');
     editCardModal.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -360,6 +443,7 @@ function showEditModal() {
 
 // Fechar modal de edição
 function closeEditModal() {
+    console.log('❌ [DEBUG] Fechando modal de edição');
     editCardModal.classList.remove('show');
     setTimeout(() => {
         editCardModal.classList.add('hidden');

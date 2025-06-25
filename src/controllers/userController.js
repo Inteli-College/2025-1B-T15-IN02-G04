@@ -36,20 +36,43 @@ class UserController {
     const idUsuario = req.userId;
 
     try {
+      console.log('🔍 [DEBUG] Buscando perfil para userId:', idUsuario);
+      
       const usuario = await UserModel.buscarPorId(idUsuario);
 
       if (!usuario) {
+        console.log('❌ [DEBUG] Usuário não encontrado:', idUsuario);
         return res.status(404).json({ error: "Usuário não encontrado" });
       }
 
+      console.log('✅ [DEBUG] Usuário encontrado:', {
+        id: usuario.id,
+        name: usuario.name,
+        email: usuario.email
+      });
+
       // Buscar roles do usuário
+      console.log('🔍 [DEBUG] Buscando roles para usuário:', idUsuario);
       const roles = await UserModel.buscarRolesPorUsuario(idUsuario);
+      console.log('📋 [DEBUG] Roles encontradas:', roles);
+      
       usuario.roles = roles;
-      usuario.isAdmin = roles.some(role => role.id_role === 1);
+      usuario.isAdmin = roles.some(role => {
+        console.log('🔍 [DEBUG] Verificando role:', role.id_role, 'É admin?', role.id_role === 1);
+        return role.id_role === 1;
+      });
+
+      console.log('👑 [DEBUG] É admin?', usuario.isAdmin);
+      console.log('📤 [DEBUG] Resposta final:', {
+        id: usuario.id,
+        name: usuario.name,
+        isAdmin: usuario.isAdmin,
+        rolesCount: roles.length
+      });
 
       return res.status(200).json(usuario);
     } catch (err) {
-      console.error("Erro ao buscar perfil do usuário:", err);
+      console.error("❌ [DEBUG] Erro ao buscar perfil do usuário:", err);
       return res.status(500).json({ error: "Erro ao buscar perfil do usuário" });
     }
   }
@@ -57,19 +80,26 @@ class UserController {
   static async obterUsuario(req, res) {
     const { id } = req.params;
     try {
+      console.log('🔍 [DEBUG] Buscando usuário por ID:', id);
+      
       const usuario = await UserModel.buscarPorId(id);
       if (!usuario) {
+        console.log('❌ [DEBUG] Usuário não encontrado:', id);
         return res.status(404).json({ error: "Usuário não encontrado" });
       }
 
       // Buscar roles do usuário
       const roles = await UserModel.buscarRolesPorUsuario(id);
+      console.log('📋 [DEBUG] Roles para usuário', id, ':', roles);
+      
       usuario.roles = roles;
       usuario.isAdmin = roles.some(role => role.id_role === 1);
 
+      console.log('👑 [DEBUG] Usuário', id, 'é admin?', usuario.isAdmin);
+
       return res.status(200).json(usuario);
     } catch (err) {
-      console.error("Erro ao buscar usuário por ID:", err);
+      console.error("❌ [DEBUG] Erro ao buscar usuário por ID:", err);
       return res.status(500).json({ error: "Erro ao buscar usuário" });
     }
   }
