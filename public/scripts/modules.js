@@ -23,14 +23,54 @@ const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Página de módulos carregada');
+    console.log('🔍 Verificando elementos DOM...');
+    
+    // Verificar se todos os elementos necessários existem
+    const requiredElements = [
+        'modulesContainer',
+        'searchInput', 
+        'trailFilter',
+        'loadingIndicator',
+        'noModulesMessage',
+        'errorMessage',
+        'moduleModal',
+        'deleteModal',
+        'moduleForm',
+        'moduleTrail'
+    ];
+    
+    const missingElements = requiredElements.filter(id => !document.getElementById(id));
+    
+    if (missingElements.length > 0) {
+        console.error('❌ Elementos DOM ausentes:', missingElements);
+        showToast('Erro na página: elementos ausentes', 'error');
+        return;
+    }
+    
+    console.log('✅ Todos os elementos DOM encontrados');
+    
     initializePage();
     setupEventListeners();
 });
 
 // Inicializar página
 async function initializePage() {
-    await loadTrails();
-    await loadModules();
+    console.log('🔄 Inicializando página...');
+    
+    try {
+        // Carregar trilhas primeiro (necessário para os filtros)
+        await loadTrails();
+        
+        // Depois carregar módulos
+        await loadModules();
+        
+        console.log('✅ Página inicializada com sucesso');
+        
+    } catch (error) {
+        console.error('❌ Erro na inicialização:', error);
+        showToast('Erro ao inicializar página', 'error');
+    }
 }
 
 // Configurar event listeners
@@ -86,43 +126,113 @@ function debounce(func, wait) {
 // Carregar trilhas
 async function loadTrails() {
     try {
+        console.log('🔄 Carregando trilhas...');
         const response = await fetch('/api/trails');
         
+        console.log('📡 Resposta da API trails:', response.status, response.statusText);
+        
         if (!response.ok) {
-            throw new Error('Erro ao carregar trilhas');
+            throw new Error(`Erro HTTP ${response.status}: ${response.statusText}`);
         }
         
         allTrails = await response.json();
+        console.log('✅ Trilhas carregadas:', allTrails.length, 'trilhas encontradas');
+        console.log('📋 Trilhas:', allTrails);
+        
         populateTrailFilters();
         
     } catch (error) {
-        console.error('Erro ao carregar trilhas:', error);
-        showToast('Erro ao carregar trilhas', 'error');
+        console.error('❌ Erro ao carregar trilhas:', error);
+        showToast(`Erro ao carregar trilhas: ${error.message}`, 'error');
+        
+        // Fallback: tentar carregar trilhas com rota alternativa
+        await loadTrailsFallback();
+    }
+}
+
+// Função de fallback para carregar trilhas
+async function loadTrailsFallback() {
+    try {
+        console.log('🔄 Tentando rota alternativa para trilhas...');
+        const response = await fetch('/api/trails/');
+        
+        if (!response.ok) {
+            throw new Error('Trilhas não disponíveis');
+        }
+        
+        allTrails = await response.json();
+        console.log('✅ Trilhas carregadas via fallback:', allTrails.length);
+        populateTrailFilters();
+        
+    } catch (error) {
+        console.error('❌ Fallback também falhou:', error);
+        // Criar opção manual se necessário
+        allTrails = [];
+        populateTrailFilters();
+        showToast('Trilhas não puderam ser carregadas. Verifique se existem trilhas cadastradas.', 'error');
     }
 }
 
 // Popular filtros de trilha
 function populateTrailFilters() {
+    console.log('🔄 Populando filtros de trilha...');
+    
     // Filtro da página
-    trailFilter.innerHTML = '<option value="">Todas as trilhas</option>';
+    const trailFilterEl = document.getElementById('trailFilter');
+    const moduleTrailEl = document.getElementById('moduleTrail');
     
-    // Seletor do modal
-    const moduleTrail = document.getElementById('moduleTrail');
-    moduleTrail.innerHTML = '<option value="">Selecione uma trilha</option>';
+    if (!trailFilterEl || !moduleTrailEl) {
+        console.error('❌ Elementos de trilha não encontrados no DOM');
+        return;
+    }
     
-    allTrails.forEach(trail => {
+    // Limpar opções existentes
+    trailFilterEl.innerHTML = '<option value="">Todas as trilhas</option>';
+    moduleTrailEl.innerHTML = '<option value="">Selecione uma trilha</option>';
+    
+    console.log(`📝 Adicionando ${allTrails.length} trilhas aos filtros`);
+    
+    if (!allTrails || allTrails.length === 0) {
+        console.warn('⚠️ Nenhuma trilha disponível');
+        // Adicionar opção indicando que não há trilhas
+        const noTrailOption1 = document.createElement('option');
+        noTrailOption1.value = '';
+        noTrailOption1.textContent = 'Nenhuma trilha cadastrada';
+        noTrailOption1.disabled = true;
+        trailFilterEl.appendChild(noTrailOption1);
+        
+        const noTrailOption2 = document.createElement('option');
+        noTrailOption2.value = '';
+        noTrailOption2.textContent = 'Nenhuma trilha cadastrada';
+        noTrailOption2.disabled = true;
+        moduleTrailEl.appendChild(noTrailOption2);
+        
+        return;
+    }
+    
+    allTrails.forEach((trail, index) => {
+        console.log(`📌 Adicionando trilha ${index + 1}:`, trail);
+        
+        // Verificar se a trilha tem as propriedades necessárias
+        if (!trail.id || !trail.name) {
+            console.warn('⚠️ Trilha com dados incompletos:', trail);
+            return;
+        }
+        
         // Filtro da página
         const option1 = document.createElement('option');
         option1.value = trail.id;
         option1.textContent = trail.name;
-        trailFilter.appendChild(option1);
+        trailFilterEl.appendChild(option1);
         
         // Seletor do modal
         const option2 = document.createElement('option');
         option2.value = trail.id;
         option2.textContent = trail.name;
-        moduleTrail.appendChild(option2);
+        moduleTrailEl.appendChild(option2);
     });
+    
+    console.log('✅ Filtros de trilha populados com sucesso');
 }
 
 // Carregar todos os módulos
@@ -499,12 +609,62 @@ function escapeHtml(text) {
 // Função para recarregar módulos (usada no botão de retry)
 window.loadModules = loadModules;
 
-router.get('/modulos', (req, res) => {
-  res.render('layout/main', {
-    pageTitle: 'Módulos de Aprendizagem',
-    content: '../pages/modules',
-    pageCSS: 'pages/modules.css',
-    pageJS: 'modules.js',
-    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
-  });
-});
+// Função de debug para testar API manualmente
+window.debugTrails = async function() {
+    console.log('🔍 DEBUG: Testando API de trilhas...');
+    
+    try {
+        const response = await fetch('/api/trails');
+        console.log('📡 Status:', response.status);
+        console.log('📡 Headers:', [...response.headers.entries()]);
+        
+        const data = await response.json();
+        console.log('📋 Dados recebidos:', data);
+        console.log('📋 Tipo:', typeof data);
+        console.log('📋 É array?:', Array.isArray(data));
+        
+        if (Array.isArray(data)) {
+            console.log(`📋 Quantidade: ${data.length} trilhas`);
+            data.forEach((trail, i) => {
+                console.log(`  ${i + 1}. ID: ${trail.id}, Nome: ${trail.name}`);
+            });
+        }
+        
+        return data;
+    } catch (error) {
+        console.error('❌ Erro no debug:', error);
+        return null;
+    }
+};
+
+// Função de debug para testar criação manual de trilhas no select
+window.debugAddTrail = function(id, name) {
+    console.log(`🔧 DEBUG: Adicionando trilha manual - ID: ${id}, Nome: ${name}`);
+    
+    const moduleTrail = document.getElementById('moduleTrail');
+    if (moduleTrail) {
+        const option = document.createElement('option');
+        option.value = id;
+        option.textContent = name;
+        moduleTrail.appendChild(option);
+        console.log('✅ Trilha adicionada manualmente');
+    } else {
+        console.error('❌ Elemento moduleTrail não encontrado');
+    }
+};
+
+// Função para verificar estado atual
+window.debugState = function() {
+    console.log('🔍 DEBUG: Estado atual da aplicação');
+    console.log('📋 Trilhas carregadas:', allTrails);
+    console.log('📋 Módulos carregados:', allModules.length);
+    
+    const moduleTrail = document.getElementById('moduleTrail');
+    if (moduleTrail) {
+        console.log('📋 Opções no select:', moduleTrail.options.length);
+        for (let i = 0; i < moduleTrail.options.length; i++) {
+            const option = moduleTrail.options[i];
+            console.log(`  ${i}. Valor: "${option.value}", Texto: "${option.textContent}"`);
+        }
+    }
+};
