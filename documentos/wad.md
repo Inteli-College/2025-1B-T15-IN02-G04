@@ -51,6 +51,8 @@ Entre os aspectos essenciais para a criação de valor estão a centralização 
 
 ### 2.1.1. Modelo de 5 Forças de Porter 
 
+&nbsp; &nbsp; &nbsp; &nbsp;As 5 forças de Porter consistem em pontos principais: poder de barganha dos clientes, ameaça de novos entrantes, poder de barganha dos fornecedores, ameaça de produtos substitutos e rivalidade entre concorrentes. O objetivo de utilizá-las no projeto é entender o contexto do mercado e obter insights valiosos para ideias de inovação. Ao analisar essas forças, identificou-se oportunidades e ameaças que impactam diretamente o posicionamento do nosso produto ou serviço. 
+
 <p align="center"> <img src="./assets/wad/5-forças-de-porter.png" alt="5 Forças de Porter"> </p>
 <p align = 'center'>template de Porter (1979), adaptado pelos autores (2025).</p>
 
