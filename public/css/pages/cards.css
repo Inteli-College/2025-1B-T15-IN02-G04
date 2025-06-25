@@ -831,11 +831,6 @@
   display: flex !important;
 }
 
-/* Utility classes */
-.hidden {
-  display: none !important;
-}
-
 /* Responsive design */
 @media (max-width: 768px) {
   .cards-page {
