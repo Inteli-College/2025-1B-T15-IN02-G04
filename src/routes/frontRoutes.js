@@ -27,21 +27,16 @@ router.get("/perfil/:id", checkAuth, (req, res) => {
   });
 });
 
-router.get('/trails', (req, res) => {
-  res.render('pages/trails', {
-    title: 'Trilhas de Aprendizado'
-  })})
-  
 // Página inicial
 router.get('/', (req, res) => {
-    res.render('layout/main', {
-      pageTitle: 'Transforme sua carreira no agronegócio',
-      content: '../pages/home',
-      pageCSS: 'pages/home.css',
-      pageJS: 'home.js',
-      currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
-    });
+  res.render('layout/main', {
+    pageTitle: 'Transforme sua carreira no agronegócio',
+    content: '../pages/home',
+    pageCSS: 'pages/home.css',
+    pageJS: 'home.js',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
+});
 
 // Página de login
 router.get('/login2', (req, res) => {
@@ -141,6 +136,16 @@ router.get('/Trilhas', (req, res) => {
     pageTitle: 'Trilhas',
     content: '../pages/trail',
     pageCSS: 'pages/trail.css',
+    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  });
+});
+
+// Página de Módulos
+router.get('/Modulos', (req, res) => {
+  res.render('layout/main', {
+    pageTitle: 'Módulos',
+    content: '../pages/modules',
+    pageCSS: 'pages/module.css',
     currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
   });
 });

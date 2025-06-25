@@ -1,0 +1,436 @@
+<!-- Trilhas de Aprendizado Page -->
+<link rel="stylesheet" href="css/trail.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Main Content -->
+<main class="main-content">
+    <h1 class="page-title">Trilhas de Aprendizado</h1>
+    <p class="page-subtitle">Escolha uma trilha e comece sua jornada de conhecimento</p>
+
+    <!-- Barra de Pesquisa -->
+    <div class="search-container">
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Buscar trilha por nome ou ID..."
+                class="search-input"
+            >
+            <button class="search-button" onclick="searchTrail()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="clear-button" onclick="clearSearch()" style="display: none;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-suggestions" id="searchSuggestions" style="display: none;"></div>
+    </div>
+
+    <!-- Área de Resultado da Pesquisa - Simplificado -->
+    <div class="search-result-area" id="searchResultArea" style="display: none;">
+        <!-- Resultado aparecerá aqui -->
+    </div>
+
+    <!-- Container das Trilhas (Carrossel) -->
+    <div class="trails-container">
+        <!-- Navigation Arrows -->
+        <button class="nav-arrow left" onclick="scrollTrails('left')">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-arrow right" onclick="scrollTrails('right')">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Trails Grid -->
+        <div class="trails-grid" id="trailsGrid">
+            <!-- Loading inicial -->
+            <div class="loading" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>Carregando trilhas...</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Variáveis globais para controle de pesquisa
+    let allTrails = []; // Para armazenar todas as trilhas para sugestões
+
+    // Função para buscar trilha (principal)
+    async function searchTrail() {
+        const searchTerm = document.getElementById('searchInput').value.trim();
+        
+        if (!searchTerm) {
+            alert('Digite um nome ou ID para buscar');
+            return;
+        }
+
+        // Mostrar loading na área de resultados
+        showSearchLoading();
+        
+        try {
+            let trail = null;
+            
+            // Verificar se é um número (ID) ou texto (nome)
+            if (!isNaN(searchTerm) && Number.isInteger(Number(searchTerm))) {
+                // Buscar por ID
+                trail = await searchTrailById(searchTerm);
+            } else {
+                // Buscar por nome
+                trail = await searchTrailByName(searchTerm);
+            }
+            
+            if (trail) {
+                displaySearchResult(trail);
+                showClearButton();
+            } else {
+                displayNoResult(searchTerm);
+            }
+            
+        } catch (error) {
+            console.error('Erro na busca:', error);
+            displaySearchError();
+        }
+    }
+
+    // Função para buscar trilha por ID
+    async function searchTrailById(id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/trails/${id}`);
+            if (response.ok) {
+                return await response.json();
+            }
+            return null;
+        } catch (error) {
+            console.error('Erro ao buscar por ID:', error);
+            return null;
+        }
+    }
+
+    // Função para buscar trilha por nome
+    async function searchTrailByName(name) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/trails/name/${encodeURIComponent(name)}`);
+            if (response.ok) {
+                return await response.json();
+            }
+            return null;
+        } catch (error) {
+            console.error('Erro ao buscar por nome:', error);
+            return null;
+        }
+    }
+
+    // Função para mostrar loading da pesquisa
+    function showSearchLoading() {
+        const searchResultArea = document.getElementById('searchResultArea');
+        
+        searchResultArea.innerHTML = `
+            <div class="search-loading">
+                <div class="loading-spinner"></div>
+                <p>Buscando trilha...</p>
+            </div>
+        `;
+        
+        searchResultArea.style.display = 'block';
+    }
+
+    // Função para exibir resultado da pesquisa
+    function displaySearchResult(trail) {
+        const searchResultArea = document.getElementById('searchResultArea');
+        
+        const resultCard = `
+            <div class="search-result-card" data-trail-id="${trail.id}">
+                <button class="close-search" onclick="closeSearchResults()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3 class="trail-title">${trail.name}</h3>
+                <p class="trail-description">
+                    ${trail.description || 'Descrição não disponível'}
+                </p>
+                <button class="trail-button" onclick="viewTrailModules(${trail.id})">
+                    VER MÓDULOS
+                </button>
+            </div>
+        `;
+        
+        searchResultArea.innerHTML = resultCard;
+    }
+
+    // Função para exibir quando não encontrar resultado
+    function displayNoResult(searchTerm) {
+        const searchResultArea = document.getElementById('searchResultArea');
+        
+        searchResultArea.innerHTML = `
+            <div class="search-no-result">
+                <button class="close-search" onclick="closeSearchResults()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <i class="fas fa-search"></i>
+                <h3>Nenhuma trilha encontrada</h3>
+                <p>Não foi possível encontrar uma trilha com "${searchTerm}"</p>
+                <button class="btn-primary" onclick="closeSearchResults()">
+                    Voltar às trilhas
+                </button>
+            </div>
+        `;
+    }
+
+    // Função para exibir erro na pesquisa
+    function displaySearchError() {
+        const searchResultArea = document.getElementById('searchResultArea');
+        
+        searchResultArea.innerHTML = `
+            <div class="search-no-result">
+                <button class="close-search" onclick="closeSearchResults()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Erro na pesquisa</h3>
+                <p>Ocorreu um erro ao buscar a trilha. Tente novamente.</p>
+                <button class="btn-primary" onclick="searchTrail()">
+                    Tentar Novamente
+                </button>
+            </div>
+        `;
+    }
+
+    // Função para fechar resultados da pesquisa
+    function closeSearchResults() {
+        document.getElementById('searchResultArea').style.display = 'none';
+        clearSearch();
+    }
+
+    // Função para limpar pesquisa
+    function clearSearch() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('searchResultArea').style.display = 'none';
+        document.querySelector('.clear-button').style.display = 'none';
+        hideSuggestions();
+    }
+
+    // Função para mostrar botão de limpar
+    function showClearButton() {
+        document.querySelector('.clear-button').style.display = 'flex';
+    }
+
+    // Função para pesquisa em tempo real (sugestões)
+    function handleSearchInput() {
+        const searchTerm = document.getElementById('searchInput').value.trim();
+        
+        if (searchTerm.length >= 2) {
+            showSuggestions(searchTerm);
+            showClearButton();
+        } else {
+            hideSuggestions();
+            if (searchTerm.length === 0) {
+                document.querySelector('.clear-button').style.display = 'none';
+            }
+        }
+    }
+
+    // Função para mostrar sugestões
+    function showSuggestions(searchTerm) {
+        const suggestions = document.getElementById('searchSuggestions');
+        
+        // Filtrar trilhas que contêm o termo de busca
+        const matches = allTrails.filter(trail => 
+            trail.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            trail.id.toString().includes(searchTerm)
+        ).slice(0, 5); // Máximo 5 sugestões
+        
+        if (matches.length > 0) {
+            const suggestionHTML = matches.map(trail => `
+                <div class="suggestion-item" onclick="selectSuggestion('${trail.name}')">
+                    <strong>${trail.name}</strong> (ID: ${trail.id})
+                </div>
+            `).join('');
+            
+            suggestions.innerHTML = suggestionHTML;
+            suggestions.style.display = 'block';
+        } else {
+            hideSuggestions();
+        }
+    }
+
+    // Função para selecionar sugestão
+    function selectSuggestion(trailName) {
+        document.getElementById('searchInput').value = trailName;
+        hideSuggestions();
+        searchTrail();
+    }
+
+    // Função para ocultar sugestões
+    function hideSuggestions() {
+        document.getElementById('searchSuggestions').style.display = 'none';
+    }
+
+    // Configuração da API
+    const API_BASE_URL = 'http://localhost:3000/api';
+
+    // Função para carregar trilhas da API
+    async function loadTrails() {
+        const grid = document.getElementById('trailsGrid');
+        
+        try {
+            console.log('Carregando trilhas da API...');
+            const response = await fetch(`${API_BASE_URL}/trails`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const trails = await response.json();
+            console.log('Trilhas carregadas:', trails);
+            
+            // Armazenar trilhas para sugestões
+            allTrails = trails || [];
+            
+            // Limpar loading
+            grid.innerHTML = '';
+            
+            if (trails && trails.length > 0) {
+                trails.forEach(trail => {
+                    const trailCard = createTrailCard(trail);
+                    grid.appendChild(trailCard);
+                });
+                // Setas sempre visíveis, independente da quantidade de trilhas
+            } else {
+                grid.innerHTML = `
+                    <div class="error">
+                        <div class="error-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3>Nenhuma trilha encontrada</h3>
+                        <p>Não há trilhas disponíveis no momento.</p>
+                    </div>
+                `;
+            }
+            
+        } catch (error) {
+            console.error('Erro ao carregar trilhas:', error);
+            grid.innerHTML = `
+                <div class="error">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Erro ao carregar trilhas</h3>
+                    <p>Não foi possível conectar com o servidor. Verifique se a API está rodando em ${API_BASE_URL}/trails</p>
+                    <button class="btn btn-primary" onclick="loadTrails()">
+                        Tentar Novamente
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // Função para criar card de trilha
+    function createTrailCard(trail) {
+        const card = document.createElement('div');
+        card.className = 'trail-card';
+        card.setAttribute('data-trail-id', trail.id);
+        
+        card.innerHTML = `
+            <h3 class="trail-title">${trail.name}</h3>
+            <p class="trail-description">
+                ${trail.description || 'Descrição não disponível'}
+            </p>
+            <button class="trail-button" onclick="viewTrailModules(${trail.id})">
+                VER MÓDULOS
+            </button>
+        `;
+        
+        return card;
+    }
+
+    // Função para navegar pelas trilhas (scroll horizontal)
+    function scrollTrails(direction) {
+        const grid = document.getElementById('trailsGrid');
+        const scrollAmount = 320; // largura do card + gap
+        
+        if (direction === 'left') {
+            grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+
+    // Função para visualizar módulos da trilha
+    function viewTrailModules(trailId) {
+        // Redirecionar para página de módulos com ID da trilha
+        window.location.href = `/Modulos?trilha=${trailId}`;
+    }
+
+    // Função para buscar trilha por ID
+    async function getTrailById(id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/trails/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Erro ao buscar trilha:', error);
+            return null;
+        }
+    }
+
+    // Função para buscar trilha por nome
+    async function getTrailByName(name) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/trails/name/${encodeURIComponent(name)}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Erro ao buscar trilha:', error);
+            return null;
+        }
+    }
+
+    // Inicialização quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Página carregada, iniciando carregamento das trilhas...');
+        loadTrails();
+
+        // Event listeners para a barra de pesquisa
+        const searchInput = document.getElementById('searchInput');
+        
+        // Pesquisa em tempo real
+        searchInput.addEventListener('input', handleSearchInput);
+        
+        // Pesquisa ao pressionar Enter
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchTrail();
+            }
+        });
+
+        // Ocultar sugestões ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-container')) {
+                hideSuggestions();
+            }
+        });
+
+        // Esc para fechar pesquisa
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSearchResults();
+            }
+        });
+    });
+
+    // Função para recarregar trilhas (útil para botão de refresh)
+    function refreshTrails() {
+        const grid = document.getElementById('trailsGrid');
+        grid.innerHTML = `
+            <div class="loading" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>Carregando trilhas...</p>
+            </div>
+        `;
+        loadTrails();
+    }
+</script>
