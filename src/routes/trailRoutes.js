@@ -1,17 +1,19 @@
 const express = require('express');
-const router = express.Router();
 const trailController = require('../controllers/trailController');
 
-router.get('/', trailController.getAllTrails);
+const router = express.Router();
 
-router.get('/name/:name', trailController.getTrailByName);
 
-router.get('/:id', trailController.getTrailById);
+router.get('/trails', trailController.getAllTrails);
 
-router.post('/', trailController.createTrail);
+router.get('/trails/:id', trailController.getTrailById);
 
-router.put('/:id', trailController.updateTrail);
+router.get('/trails/name/:name', trailController.getTrailByName);
 
-router.delete('/:id', trailController.deleteTrail);
+router.post('/trails', trailController.createTrail);
+
+router.put('/trails/:id', trailController.updateTrail);
+
+router.delete('/trails/:id', trailController.deleteTrail);
 
 module.exports = router;
