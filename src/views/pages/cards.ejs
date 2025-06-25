@@ -5,9 +5,19 @@
     <p class="page-subtitle">Explore nosso conteúdo educativo sobre agronegócio</p>
   </div>
 
-  <!-- Barra de pesquisa -->
+<!-- Barra de pesquisa -->
   <div class="search-container">
     <div class="search-wrapper">
+      <!-- Admin controls - Only visible for admins -->
+      <div class="admin-controls admin-only">
+        <button id="addCardBtn" class="add-card-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          Adicionar Card
+        </button>
+      </div>
+      
       <div class="search-input-container">
         <input 
           type="text" 
@@ -91,6 +101,73 @@
       >
         Cancelar
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de edição/criação de cards - Only visible for admins -->
+<div id="editCardModal" class="edit-modal-overlay admin-only">
+  <div class="edit-modal-content">
+    <div class="edit-modal-header">
+      <h3 id="editModalTitle" class="edit-modal-title">Editar Card</h3>
+      <button id="editModalClose" class="edit-modal-close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <form id="editCardForm" class="edit-form">
+      <div class="form-group">
+        <label for="editCardTitle" class="form-label">Título *</label>
+        <input 
+          type="text" 
+          id="editCardTitle" 
+          name="title" 
+          class="form-input" 
+          required
+          placeholder="Digite o título do card"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="editCardDescription" class="form-label">Descrição *</label>
+        <textarea 
+          id="editCardDescription" 
+          name="description" 
+          class="form-textarea" 
+          required
+          placeholder="Digite a descrição do card"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="editCardImage" class="form-label">URL da Imagem</label>
+        <input 
+          type="url" 
+          id="editCardImage" 
+          name="image" 
+          class="form-input" 
+          placeholder="https://exemplo.com/imagem.jpg"
+        >
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="editModalCancel" class="form-btn form-btn-secondary">
+          Cancelar
+        </button>
+        <button type="button" id="editModalDelete" class="form-btn form-btn-danger hidden">
+          Deletar Card
+        </button>
+        <button type="submit" id="editModalSave" class="form-btn form-btn-primary">
+          Salvar
+        </button>
+      </div>
+    </form>
+
+    <!-- Loading overlay -->
+    <div id="editModalLoading" class="modal-loading hidden">
+      <div class="modal-loading-spinner"></div>
     </div>
   </div>
 </div>
