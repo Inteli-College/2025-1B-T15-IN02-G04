@@ -1,157 +1,128 @@
-<header
-  class="bg-field-blue shadow-lg sticky top-0 z-50 border-b-2 border-field-green"
->
-  <div class="container mx-auto px-4">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2">
-        <div class="text-2xl font-bold text-white">
-          aprendiz<span class="text-field-green">AGRO</span>
-        </div>
-      </a>
+<!-- Atualize a seção de navegação no header existente -->
+<!-- Substitua a parte do menu desktop no arquivo header.ejs -->
 
-      <!-- Mobile Menu Toggle -->
-      <button
-        class="md:hidden text-white hover:text-field-green transition-colors"
-        id="mobile-menu-toggle"
-        aria-label="Abrir menu de navegação"
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center space-x-8">
+  <ul class="flex items-center space-x-6">
+    <li>
+      <a
+        href="/dashboard"
+        class="text-gray-200 hover:text-field-green transition-colors font-medium"
+        >Dashboard</a
       >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-        </svg>
-      </button>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-8">
-        <ul class="flex items-center space-x-6">
-          <li>
-            <a
-              href="/dashboard"
-              class="text-gray-200 hover:text-field-green transition-colors font-medium"
-              >Dashboard</a
-            >
-          </li>
-          <li>
-            <a
-              href="/estudos"
-              class="text-gray-200 hover:text-field-green transition-colors font-medium"
-              >Estudos</a
-            >
-          </li>
-          <li>
-            <a
-              href="/cards"
-              class="text-gray-200 hover:text-field-green transition-colors font-medium"
-              >Cards</a
-            >
-          </li>
-          <li>
-            <a
-              href="/comunidade"
-              class="text-gray-200 hover:text-field-green transition-colors font-medium"
-              >Comunidade</a
-            >
-          </li>
-          <li>
-            <a
-              href="/atendimento"
-              class="text-gray-200 hover:text-field-green transition-colors font-medium"
-              >Atendimento</a
-            >
-          </li>
-        </ul>
-
-        <!-- Authentication Buttons -->
-        <div class="flex items-center space-x-3">
-          <a
-            href="/login"
-            class="px-4 py-2 bg-white text-center text-black hover:text-field-green border border-white hover:border-field-green rounded-lg transition-all duration-200"
-          >
-            Entrar
-          </a>
-          <button
-            id="logout-btn"
-            class="px-4 py-2 text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200 hidden"
-          >
-            Sair
-          </button>
-        </div>
-      </nav>
-    </div>
-
-    <!-- Mobile Navigation Menu -->
-    <div class="md:hidden hidden" id="mobile-menu">
-      <div
-        class="px-2 pt-2 pb-3 space-y-1 bg-field-blue-dark rounded-lg mt-2 border border-field-green/30"
+    </li>
+    <li>
+      <a
+        href="/modulos"
+        class="text-gray-200 hover:text-field-green transition-colors font-medium"
+        >Módulos</a
       >
-        <a
-          href="/dashboard"
-          class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
-          >Dashboard</a
-        >
-        <a
-          href="/estudos"
-          class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
-          >Estudos</a
-        >
-        <a
-          href="/cards"
-          class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
-          >Cards</a
-        >
-        <a
-          href="/comunidade"
-          class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
-          >Comunidade</a
-        >
-        <a
-          href="/atendimento"
-          class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
-          >Atendimento</a
-        >
+    </li>
+    <li>
+      <a
+        href="/cards"
+        class="text-gray-200 hover:text-field-green transition-colors font-medium"
+        >Cards</a
+      >
+    </li>
+    <li>
+      <a
+        href="/Trilhas"
+        class="text-gray-200 hover:text-field-green transition-colors font-medium"
+        >Trilhas</a
+      >
+    </li>
+    <li>
+      <a
+        href="/Aulas"
+        class="text-gray-200 hover:text-field-green transition-colors font-medium"
+        >Aulas</a
+      >
+    </li>
+    <li>
+      <a
+        href="/comunidade"
+        class="text-gray-200 hover:text-field-green transition-colors font-medium"
+        >Comunidade</a
+      >
+    </li>
+  </ul>
 
-        <div class="pt-4 pb-2 border-t border-field-green/30">
-          <div class="flex flex-col space-y-2">
-            <a
-              href="/login"
-              class="px-3 py-2 bg-white text-center text-black hover:text-field-green border border-white hover:border-field-green rounded-lg transition-all duration-200"
-            >
-              Entrar
-            </a>
-            <a
-              href="/register"
-              class="px-3 py-2 text-center bg-field-green text-white hover:bg-field-green-dark rounded-lg transition-all duration-200 font-medium"
-            >
-              Cadastrar
-            </a>
-            <button
-              id="logout-btn-mobile"
-              class="px-3 py-2 text-center text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200 hidden"
-            >
-              Sair
-            </button>
-          </div>
-        </div>
+  <!-- Authentication Buttons -->
+  <div class="flex items-center space-x-3">
+    <a
+      href="/login"
+      class="px-4 py-2 bg-white text-center text-black hover:text-field-green border border-white hover:border-field-green rounded-lg transition-all duration-200"
+    >
+      Entrar
+    </a>
+    <button
+      id="logout-btn"
+      class="px-4 py-2 text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200 hidden"
+    >
+      Sair
+    </button>
+  </div>
+</nav>
+
+<!-- E também atualize o menu mobile -->
+<!-- Mobile Navigation Menu -->
+<div class="md:hidden hidden" id="mobile-menu">
+  <div
+    class="px-2 pt-2 pb-3 space-y-1 bg-field-blue-dark rounded-lg mt-2 border border-field-green/30"
+  >
+    <a
+      href="/dashboard"
+      class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
+      >Dashboard</a
+    >
+    <a
+      href="/modulos"
+      class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
+      >Módulos</a
+    >
+    <a
+      href="/cards"
+      class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
+      >Cards</a
+    >
+    <a
+      href="/Trilhas"
+      class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
+      >Trilhas</a
+    >
+    <a
+      href="/Aulas"
+      class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
+      >Aulas</a
+    >
+    <a
+      href="/comunidade"
+      class="block px-3 py-2 text-gray-200 hover:text-field-green hover:bg-field-blue-dark/50 rounded-md transition-colors"
+      >Comunidade</a
+    >
+
+    <div class="pt-4 pb-2 border-t border-field-green/30">
+      <div class="flex flex-col space-y-2">
+        <a
+          href="/login"
+          class="px-3 py-2 bg-white text-center text-black hover:text-field-green border border-white hover:border-field-green rounded-lg transition-all duration-200"
+        >
+          Entrar
+        </a>
+        <a
+          href="/register"
+          class="px-3 py-2 text-center bg-field-green text-white hover:bg-field-green-dark rounded-lg transition-all duration-200 font-medium"
+        >
+          Cadastrar
+        </a>
+        <button
+          id="logout-btn-mobile"
+          class="px-3 py-2 text-center text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200 hidden"
+        >
+          Sair
+        </button>
       </div>
     </div>
   </div>
-</header>
-
-<script>
-  document
-    .getElementById("mobile-menu-toggle")
-    .addEventListener("click", function () {
-      const mobileMenu = document.getElementById("mobile-menu");
-      mobileMenu.classList.toggle("hidden");
-    });
-</script>
+</div>
