@@ -145,5 +145,6 @@ class ModuleController {
   }
 }
 
+
 module.exports = ModuleController;
 

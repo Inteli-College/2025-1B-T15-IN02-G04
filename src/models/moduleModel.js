@@ -24,7 +24,7 @@ class ModuleModel {
   static async getModulesByTrailId(trailId) {
     try {
       const result = await db.query(
-        'SELECT * FROM module WHERE trail_id = $1 ORDER BY order_position', 
+        'SELECT * FROM module WHERE Id_trail = $1 ORDER BY module_order', 
         [trailId]
       );
       return result.rows;
