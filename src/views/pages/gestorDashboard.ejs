@@ -42,7 +42,7 @@
   </div>
 
   <!-- Tabela de Ranking -->
-  <div class="overflow-x-auto rounded-lg shadow max-h-80 overflow-y-auto">
+  <div class="overflow-x-auto rounded-lg shadow">
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-field-green">
         <tr>
@@ -71,10 +71,6 @@
       </tbody>
     </table>
   </div>
-
-  <!-- Analytics -->
-  <h2 class="text-2xl font-semibold text-field-blue mt-8 mb-4 text-center">Analytics</h2>
-  <div id="analytics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
 </div>
 
 <script>
@@ -88,8 +84,6 @@
     const carousel = document.getElementById("carousel");
     const btnLeft = document.getElementById("carousel-left");
     const btnRight = document.getElementById("carousel-right");
-
-    const analyticsContainer = document.getElementById("analytics");
 
     const renderCarousel = (data) => {
       carousel.innerHTML = "";
@@ -127,39 +121,6 @@
 
         carousel.appendChild(card);
       });
-    };
-
-    const renderAnalytics = (data) => {
-      if (!data.length) {
-        analyticsContainer.innerHTML = "<p class='text-gray-500 text-center col-span-full'>Sem dados para analytics</p>";
-        return;
-      }
-
-      const total = data.length;
-      const mediaScore = (
-        data.reduce((sum, u) => sum + (u.score ?? 0), 0) / total
-      ).toFixed(1);
-      const topScore = data[0].score ?? 0;
-      const ptdCount = data.filter((u) => u.tipo === "PTD").length;
-      const consultorCount = data.filter((u) => u.tipo === "Consultor").length;
-
-      analyticsContainer.innerHTML = `
-        <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">Total de Usuários</p>
-          <p class="text-3xl font-bold text-field-green">${total}</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">Média de Score</p>
-          <p class="text-3xl font-bold text-field-green">${mediaScore}</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">Maior Score</p>
-          <p class="text-3xl font-bold text-field-green">${topScore}</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">PTD / Consultor</p>
-          <p class="text-3xl font-bold text-field-green">${ptdCount} / ${consultorCount}</p>
-        </div>`;
     };
 
     const renderRows = (data) => {
@@ -210,7 +171,6 @@
 
       renderRows(rankingData);
       renderCarousel(rankingData);
-      renderAnalytics(rankingData);
     } catch (error) {
       console.error(error);
       tbody.innerHTML = `
@@ -231,7 +191,6 @@
         searchInput.value = "";
         renderRows(rankingData);
         renderCarousel(rankingData);
-        renderAnalytics(rankingData);
         searchInput.classList.remove("w-64", "opacity-100");
         searchInput.classList.add("w-0", "opacity-0");
       }
@@ -245,7 +204,6 @@
       );
       renderRows(filtered);
       renderCarousel(filtered);
-      renderAnalytics(filtered);
       updateArrows();
     });
 

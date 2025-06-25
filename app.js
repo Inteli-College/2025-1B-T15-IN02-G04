@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src/views"));
-app.set("layout", path.join(__dirname, "src/views/layout/main"));
+app.set("layout", path.join(__dirname, "src/views/layouts/main"));
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
