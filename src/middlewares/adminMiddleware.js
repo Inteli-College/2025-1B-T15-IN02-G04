@@ -10,7 +10,7 @@ const checkAdminAuth = async (req, res, next) => {
 
     // Buscar roles do usuário
     const roles = await UserModel.buscarRolesPorUsuario(userId);
-    const isAdmin = roles.some(role => role.id_role === 1);
+    const isAdmin = roles.some(role => role.id_role == 1);
 
     if (!isAdmin) {
       return res.status(403).json({ error: "Acesso negado. Permissões administrativas necessárias." });
