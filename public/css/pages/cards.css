@@ -1,9 +1,9 @@
 /* Variáveis de cores da Bayer */
 :root {
-  --bayer-green: #89D329;
-  --bayer-blue: #00BCFF;
-  --bayer-dark: #10384F;
-  --bayer-white: #FFFFFF;
+  --bayer-green: #89d329;
+  --bayer-blue: #00bcff;
+  --bayer-dark: #10384f;
+  --bayer-white: #ffffff;
   --bayer-gray: #999999;
   --bayer-black: #000000;
   --border-radius: 12px;
@@ -42,7 +42,11 @@
 
 /* Container de pesquisa */
 .search-container {
-  background: linear-gradient(135deg, var(--bayer-green) 0%, var(--bayer-blue) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bayer-green) 0%,
+    var(--bayer-blue) 100%
+  );
   padding: 2rem;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-light);
@@ -143,8 +147,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Grid de cards */
@@ -253,7 +261,6 @@
   flex: 1;
 }
 
-
 /* Card actions */
 .card-actions {
   display: flex;
@@ -329,7 +336,7 @@
 }
 
 .card-action-btn::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 110%;
   left: 50%;
@@ -541,49 +548,46 @@
 }
 
 /* Utility classes */
-.hidden {
-  display: none !important;
-}
 
 /* Responsive design */
 @media (max-width: 768px) {
   .cards-page {
     padding: 1rem 0.5rem;
   }
-  
+
   .page-title {
     font-size: 2rem;
   }
-  
+
   .search-container {
     padding: 1.5rem 1rem;
     margin: 0 1rem 2rem;
   }
-  
+
   .cards-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 0 1rem;
   }
-  
+
   .card-content {
     padding: 1rem;
   }
-  
+
   .card-title {
     font-size: 1.1rem;
   }
-  
+
   .card-description {
     font-size: 0.9rem;
     -webkit-line-clamp: 2;
     line-clamp: 2;
   }
-  
+
   .card-actions {
     padding-top: 0.75rem;
   }
-  
+
   .card-action-btn {
     width: 40px;
     height: 40px;
@@ -596,15 +600,15 @@
     gap: 1rem;
     padding: 0 0.5rem;
   }
-  
+
   .card-image-container {
     height: 160px;
   }
-  
+
   .modal-content {
     padding: 1.5rem;
   }
-  
+
   .modal-actions {
     flex-direction: column;
   }
