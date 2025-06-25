@@ -1,85 +1,149 @@
+const ModuleModel = require('../models/moduleModel');
 const TrailModel = require('../models/trailModel');
 
-class TrailController {
-  static async getAllTrails(req, res) {
+class ModuleController {
+  static async getAllModules(req, res) {
     try {
-      const trails = await TrailModel.getAllTrails();
-      return res.status(200).json(trails);
+      const modules = await ModuleModel.getAllModules();
+      return res.status(200).json(modules);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: 'Erro ao listar trilhas.' });
+      return res.status(500).json({ error: 'Erro ao listar módulos.' });
     }
   }
 
-  static async getTrailById(req, res) {
+  static async getModuleById(req, res) {
     try {
       const { id } = req.params;
-      const trail = await TrailModel.getTrailById(id);
-      if (!trail) {
-        return res.status(404).json({ error: 'Trilha não encontrada' });
+      const module = await ModuleModel.getModuleById(id);
+      if (!module) {
+        return res.status(404).json({ error: 'Módulo não encontrado' });
       }
-      return res.status(200).json(trail);
+      return res.status(200).json(module);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: 'Erro ao obter trilha.' });
+      return res.status(500).json({ error: 'Erro ao obter módulo.' });
     }
   }
 
-  static async getTrailByName(req, res) {
+  static async getModulesByTrailId(req, res) {
+    try {
+      const { trailId } = req.params;
+      
+      // Verificar se a trilha existe
+      const trail = await TrailModel.getTrailById(trailId);
+      if (!trail) {
+        return res.status(404).json({ error: 'Trilha não encontrada' });
+      }
+
+      const modules = await ModuleModel.getModulesByTrailId(trailId);
+      return res.status(200).json({
+        trail: trail,
+        modules: modules
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Erro ao obter módulos da trilha.' });
+    }
+  }
+
+  static async getModuleByName(req, res) {
     try {
       const { name } = req.params;
-      const trail = await TrailModel.getTrailByName(name);
+      const module = await ModuleModel.getModuleByName(name);
+      if (!module) {
+        return res.status(404).json({ error: 'Módulo não encontrado' });
+      }
+      return res.status(200).json(module);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Erro ao obter módulo.' });
+    }
+  }
+
+  static async createModule(req, res) {
+    try {
+      const { name, description, duration, trail_id, order_position } = req.body;
+
+      // Validações básicas
+      if (!name || !trail_id) {
+        return res.status(400).json({ error: 'Nome e ID da trilha são obrigatórios.' });
+      }
+
+      // Verificar se a trilha existe
+      const trail = await TrailModel.getTrailById(trail_id);
       if (!trail) {
         return res.status(404).json({ error: 'Trilha não encontrada' });
       }
-      return res.status(200).json(trail);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Erro ao obter trilha.' });
-    }
-  }
 
-  static async createTrail(req, res) {
-    try {
-      const newTrail = await TrailModel.createTrail(req.body);
-      return res.status(201).json(newTrail);
+      const newModule = await ModuleModel.createModule({
+        name,
+        description,
+        duration: duration || '1h 00min',
+        trail_id,
+        order_position: order_position || 1
+      });
+      
+      return res.status(201).json(newModule);
     } catch (err) {
-      console.error('Erro ao criar trilha:', err); 
-      res.status(500).json({ error: 'Erro ao criar trilha' });
+      console.error('Erro ao criar módulo:', err); 
+      res.status(500).json({ error: 'Erro ao criar módulo' });
     }
   }
 
-  static async updateTrail(req, res) {
+  static async updateModule(req, res) {
     try {
-      const { name, description } = req.body;
-      console.log("REQ.BODY:", req.body);          
-      console.log("NAME:", name);                   
-      console.log("DESCRIPTION:", description);      
-      const updatedTrail = await TrailModel.updateTrail(req.params.id, name, description);
-      if (updatedTrail) {
-        res.status(200).json(updatedTrail);
+      const { id } = req.params;
+      const { name, description, duration, order_position } = req.body;
+      
+      console.log("REQ.BODY:", req.body);
+      console.log("MODULE ID:", id);
+      
+      const updatedModule = await ModuleModel.updateModule(
+        id, 
+        name, 
+        description, 
+        duration, 
+        order_position
+      );
+      
+      if (updatedModule) {
+        res.status(200).json(updatedModule);
       } else {
-        res.status(404).json({ error: 'Trilha não encontrada' });
+        res.status(404).json({ error: 'Módulo não encontrado' });
       }
     } catch (error) {
+      console.error('Erro ao atualizar módulo:', error);
+
       res.status(500).json({ error: error.message });
     }
   }
 
-  static async deleteTrail(req, res) {
+  static async deleteModule(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const trailDeleted = await TrailModel.deleteTrail(id);
-      if (trailDeleted) {
-        return res.status(200).json({ message: 'Trilha deletada com sucesso' });
+      const moduleDeleted = await ModuleModel.deleteModule(id);
+      if (moduleDeleted) {
+        return res.status(200).json({ message: 'Módulo deletado com sucesso' });
       } else {
-        return res.status(404).json({ error: 'Trilha não encontrada' });
+        return res.status(404).json({ error: 'Módulo não encontrado' });
       }
     } catch (err) {
-      console.error('Erro ao deletar trilha:', err);
-      res.status(500).json({ error: 'Erro ao deletar trilha' });
+      console.error('Erro ao deletar módulo:', err);
+      res.status(500).json({ error: 'Erro ao deletar módulo' });
+    }
+  }
+
+  static async getModulesWithTrailInfo(req, res) {
+    try {
+      const modules = await ModuleModel.getModulesWithTrailInfo();
+      return res.status(200).json(modules);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Erro ao listar módulos com informações da trilha.' });
     }
   }
 }
 
-module.exports = TrailController;
+module.exports = ModuleController;
+
