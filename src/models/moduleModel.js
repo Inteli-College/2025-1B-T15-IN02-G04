@@ -34,8 +34,8 @@ class ModuleModel {
   static async createModule(data) {
     try {
       const result = await db.query(
-        'INSERT INTO module (name, description) VALUES ($1, $2) RETURNING *',
-        [data.name, data.description]
+        'INSERT INTO module (name, description, id_trail) VALUES ($1, $2, $3) RETURNING *',
+        [data.name, data.description, data.id_trail]
       );
       return result.rows[0];
     } catch (error) {
@@ -44,11 +44,11 @@ class ModuleModel {
     }
   }
 
-  static async updateModule(id, name, description) {
+  static async updateModule(id, name, description, id_trail) {
     try {
       const result = await db.query(
-        'UPDATE module SET name = $1, description = $2 WHERE id = $3 RETURNING *',
-        [name, description, id]
+        'UPDATE module SET name = $1, description = $2, id_trail = $3 WHERE id = $4 RETURNING *',
+        [name, description, id_trail, id]
       );
       return result.rows[0];
     } catch (error) {
