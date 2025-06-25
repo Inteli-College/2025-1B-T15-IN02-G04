@@ -23,4 +23,10 @@ router.get("/perfil/:id", checkAuth, (req, res) => {
   });
 });
 
+router.get('/trails', (req, res) => {
+  res.render('pages/trails', { 
+    title: 'Trilhas de Aprendizado' 
+  });
+});
+
 module.exports = router;
