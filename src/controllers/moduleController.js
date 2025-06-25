@@ -114,6 +114,7 @@ class ModuleController {
       }
     } catch (error) {
       console.error('Erro ao atualizar módulo:', error);
+
       res.status(500).json({ error: error.message });
     }
   }
@@ -145,3 +146,4 @@ class ModuleController {
 }
 
 module.exports = ModuleController;
+
