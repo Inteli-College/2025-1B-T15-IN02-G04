@@ -42,6 +42,11 @@ class UserController {
         return res.status(404).json({ error: "Usuário não encontrado" });
       }
 
+      // Buscar roles do usuário
+      const roles = await UserModel.buscarRolesPorUsuario(idUsuario);
+      usuario.roles = roles;
+      usuario.isAdmin = roles.some(role => role.id_role === 1);
+
       return res.status(200).json(usuario);
     } catch (err) {
       console.error("Erro ao buscar perfil do usuário:", err);
@@ -56,6 +61,12 @@ class UserController {
       if (!usuario) {
         return res.status(404).json({ error: "Usuário não encontrado" });
       }
+
+      // Buscar roles do usuário
+      const roles = await UserModel.buscarRolesPorUsuario(id);
+      usuario.roles = roles;
+      usuario.isAdmin = roles.some(role => role.id_role === 1);
+
       return res.status(200).json(usuario);
     } catch (err) {
       console.error("Erro ao buscar usuário por ID:", err);
