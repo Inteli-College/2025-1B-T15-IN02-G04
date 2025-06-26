@@ -175,9 +175,17 @@
     // Função para abrir módulo específico
     function openModule(moduleId) {
         console.log(`Abrindo módulo ${moduleId}`);
-        // Aqui você pode implementar a lógica para abrir o conteúdo do módulo
-        // Por exemplo: window.location.href = `/modulos/${moduleId}`;
-        alert(`Funcionalidade em desenvolvimento. Módulo ID: ${moduleId}`);
+        
+        // Obter ID da trilha atual para manter o contexto
+        const urlParams = new URLSearchParams(window.location.search);
+        const trailId = urlParams.get('trilha') || urlParams.get('trail');
+        
+        // Redirecionar para aulas do módulo
+        if (trailId) {
+            window.location.href = `/Aulas?modulo=${moduleId}&trilha=${trailId}`;
+        } else {
+            window.location.href = `/Aulas?modulo=${moduleId}`;
+        }
     }
 
     // Função para voltar às trilhas

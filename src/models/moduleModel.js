@@ -21,10 +21,11 @@ class ModuleModel {
     }
   }
 
+  // 🔧 CORRIGIDO: Campos corretos do banco
   static async getModulesByTrailId(trailId) {
     try {
       const result = await db.query(
-        'SELECT * FROM module WHERE Id_trail = $1 ORDER BY module_order', 
+        'SELECT * FROM module WHERE id_trail = $1 ORDER BY module_order', 
         [trailId]
       );
       return result.rows;

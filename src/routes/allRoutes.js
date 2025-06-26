@@ -7,6 +7,7 @@ const cardRoutes = require("./cardRoutes");
 const pdfRoutes = require("./pdfRoutes");
 const postRoutes = require("./postRoutes");
 const moduleRoutes = require("./moduleRoutes");
+const classRoutes = require("./classRoutes");
 
 const router = express.Router();
 
@@ -19,5 +20,6 @@ router.use("/api", cardRoutes);
 router.use("/api", pdfRoutes);
 router.use("/api/modules", moduleRoutes); 
 router.use("/", frontRoutes);
+router.use("/api/class", classRoutes); 
 
 module.exports = router;
