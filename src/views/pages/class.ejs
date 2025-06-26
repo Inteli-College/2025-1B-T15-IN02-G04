@@ -76,7 +76,7 @@
 
         try {
             console.log('Carregando aulas do módulo:', moduleId);
-            const response = await fetch(`${API_BASE_URL}/classes/module/${moduleId}`);
+            const response = await fetch(`${API_BASE_URL}/class/module/${moduleId}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -150,9 +150,6 @@
             <p class="class-card-description">
                 ${classItem.description || 'Descrição não disponível'}
             </p>
-            <div class="class-duration">
-                Duração: ${classItem.duration || '30min'}
-            </div>
         `;
         
         // Adicionar click para abrir aula
@@ -206,7 +203,7 @@
     // Buscar aula por ID
     async function getClassById(id) {
         try {
-            const response = await fetch(`${API_BASE_URL}/classes/${id}`);
+            const response = await fetch(`${API_BASE_URL}/class/${id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
