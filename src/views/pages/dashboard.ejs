@@ -70,8 +70,253 @@
     <!-- Notificações Toast -->
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Modais Container -->
-    <div id="modal-container">
-        <!-- Modais serão inseridos dinamicamente aqui -->
-    </div>
+    <!-- Modais - Incluir todos os modais necessários -->
+    <% if (dashboardData.user.primaryRole.id_role == 2) { %>
+        <!-- Modais para Gestor -->
+        <%- include('../components/modals/add-ptd-modal') %>
+        <%- include('../components/modals/assign-trail-modal') %>
+        <%- include('../components/modals/create-ptd-modal') %>
+    <% } %>
+    
+    <% if (dashboardData.user.primaryRole.id_role == 1) { %>
+        <!-- Modais para Admin -->
+        <%- include('../components/modals/create-admin-modal') %>
+    <% } %>
+
+    <!-- Scripts do Dashboard - Ordem importante! -->
+    <script src="/scripts/dashboard-core.js"></script>
+    <script src="/scripts/dashboard-notifications.js"></script>
+    <script src="/scripts/dashboard-modals.js"></script>
+    <script src="/scripts/dashboard-api.js"></script>
+    <script src="/scripts/dashboard-debug.js"></script>
+    
+    <!-- Inicialização do Dashboard -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 [DASHBOARD] Inicializando dashboard...');
+        
+        // Configuração baseada nos dados do usuário
+        const userConfig = {
+            user: '<%= dashboardData.user.name %>',
+            role: parseInt('<%= dashboardData.user.primaryRole.id_role %>'),
+            apiBase: '/api/dashboard'
+        };
+        
+        // Marcar roles no req object (simulação para JavaScript)
+        window.dashboardState = {
+            isPTD: userConfig.role === 3,
+            isGestor: userConfig.role === 2,
+            isAdmin: userConfig.role === 1
+        };
+        
+        console.log('👤 [DASHBOARD] Estado do usuário:', window.dashboardState);
+        
+        // Aguardar que todos os scripts carreguem
+        setTimeout(() => {
+            // Inicializar o sistema de dashboard
+            if (window.Dashboard) {
+                try {
+                    window.Dashboard.init(userConfig);
+                    console.log('✅ [DASHBOARD] Dashboard inicializado com sucesso');
+                } catch (error) {
+                    console.error('❌ [DASHBOARD] Erro na inicialização:', error);
+                }
+            } else {
+                console.error('❌ [DASHBOARD] Sistema de dashboard não encontrado');
+            }
+            
+            // Configurar event listeners específicos para modais
+            setupModalEventListeners();
+        }, 100); // Pequeno delay para garantir que scripts carregaram
+    });
+
+    function setupModalEventListeners() {
+        console.log('🔗 [DASHBOARD] Configurando event listeners dos modais...');
+        
+        // Event listeners para Gestor
+        if (window.dashboardState && window.dashboardState.isGestor) {
+            console.log('👨‍💼 [DASHBOARD] Configurando listeners para Gestor');
+            
+            // Botão Adicionar PTD
+            const addPTDBtn = document.getElementById('add-ptd-btn');
+            if (addPTDBtn) {
+                // Remover listeners existentes
+                addPTDBtn.replaceWith(addPTDBtn.cloneNode(true));
+                const newAddPTDBtn = document.getElementById('add-ptd-btn');
+                
+                newAddPTDBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('➕ [DASHBOARD] Clique em Adicionar PTD detectado');
+                    
+                    if (window.openAddPTDModal) {
+                        window.openAddPTDModal();
+                    } else {
+                        console.error('❌ [DASHBOARD] Função openAddPTDModal não encontrada');
+                        alert('Função não encontrada. Recarregue a página.');
+                    }
+                });
+                
+                console.log('✅ [DASHBOARD] Listener do botão Adicionar PTD configurado');
+            } else {
+                console.warn('⚠️ [DASHBOARD] Botão Adicionar PTD não encontrado');
+            }
+            
+            // Botão Atribuir Trilha
+            const assignTrailBtn = document.getElementById('assign-trail-btn');
+            if (assignTrailBtn) {
+                assignTrailBtn.replaceWith(assignTrailBtn.cloneNode(true));
+                const newAssignTrailBtn = document.getElementById('assign-trail-btn');
+                
+                newAssignTrailBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('🎯 [DASHBOARD] Clique em Atribuir Trilha detectado');
+                    
+                    if (window.openAssignTrailModal) {
+                        window.openAssignTrailModal();
+                    } else {
+                        console.error('❌ [DASHBOARD] Função openAssignTrailModal não encontrada');
+                        alert('Função não encontrada. Recarregue a página.');
+                    }
+                });
+                
+                console.log('✅ [DASHBOARD] Listener do botão Atribuir Trilha configurado');
+            } else {
+                console.warn('⚠️ [DASHBOARD] Botão Atribuir Trilha não encontrado');
+            }
+            
+            // Botão Criar PTD
+            const createPTDBtn = document.getElementById('create-ptd-btn');
+            if (createPTDBtn) {
+                createPTDBtn.replaceWith(createPTDBtn.cloneNode(true));
+                const newCreatePTDBtn = document.getElementById('create-ptd-btn');
+                
+                newCreatePTDBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('👤 [DASHBOARD] Clique em Criar PTD detectado');
+                    
+                    if (window.openCreatePTDModal) {
+                        window.openCreatePTDModal();
+                    } else {
+                        console.error('❌ [DASHBOARD] Função openCreatePTDModal não encontrada');
+                        alert('Função não encontrada. Recarregue a página.');
+                    }
+                });
+                
+                console.log('✅ [DASHBOARD] Listener do botão Criar PTD configurado');
+            } else {
+                console.warn('⚠️ [DASHBOARD] Botão Criar PTD não encontrado');
+            }
+        }
+        
+        // Event listeners para Admin
+        if (window.dashboardState && window.dashboardState.isAdmin) {
+            console.log('👑 [DASHBOARD] Configurando listeners para Admin');
+            
+            // Botão Criar Gestor/Admin
+            const createUserBtn = document.getElementById('create-user-btn');
+            if (createUserBtn) {
+                createUserBtn.replaceWith(createUserBtn.cloneNode(true));
+                const newCreateUserBtn = document.getElementById('create-user-btn');
+                
+                newCreateUserBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('👤 [DASHBOARD] Clique em Criar Gestor/Admin detectado');
+                    
+                    if (window.openCreateAdminModal) {
+                        window.openCreateAdminModal();
+                    } else {
+                        console.error('❌ [DASHBOARD] Função openCreateAdminModal não encontrada');
+                        alert('Função não encontrada. Recarregue a página.');
+                    }
+                });
+                
+                console.log('✅ [DASHBOARD] Listener do botão Criar Gestor/Admin configurado');
+            } else {
+                console.warn('⚠️ [DASHBOARD] Botão Criar Gestor/Admin não encontrado');
+            }
+        }
+        
+        console.log('🔗 [DASHBOARD] Event listeners configurados');
+    }
+
+    // Funções globais para abrir modais
+    window.openAddPTDModal = function() {
+        console.log('🪟 [MODAL] Função openAddPTDModal chamada');
+        
+        if (window.DashboardModals && window.DashboardModals.openAddPTDModal) {
+            console.log('🪟 [MODAL] Chamando DashboardModals.openAddPTDModal');
+            window.DashboardModals.openAddPTDModal();
+        } else if (window.Dashboard && window.Dashboard.openAddPTDModal) {
+            console.log('🪟 [MODAL] Chamando Dashboard.openAddPTDModal');
+            window.Dashboard.openAddPTDModal();
+        } else {
+            console.error('❌ [MODAL] Nenhum sistema de modais disponível');
+            console.log('  - DashboardModals:', typeof window.DashboardModals);
+            console.log('  - Dashboard:', typeof window.Dashboard);
+            alert('Sistema de modais não está funcionando. Verifique o console e recarregue a página.');
+        }
+    };
+
+    window.openAssignTrailModal = function() {
+        console.log('🪟 [MODAL] Função openAssignTrailModal chamada');
+        
+        if (window.DashboardModals && window.DashboardModals.openAssignTrailModal) {
+            window.DashboardModals.openAssignTrailModal();
+        } else if (window.Dashboard && window.Dashboard.openAssignTrailModal) {
+            window.Dashboard.openAssignTrailModal();
+        } else {
+            console.error('❌ [MODAL] Sistema de modais não disponível');
+            alert('Sistema de modais não está funcionando. Recarregue a página.');
+        }
+    };
+
+    window.openCreatePTDModal = function() {
+        console.log('🪟 [MODAL] Função openCreatePTDModal chamada');
+        
+        if (window.DashboardModals && window.DashboardModals.openCreatePTDModal) {
+            window.DashboardModals.openCreatePTDModal();
+        } else if (window.Dashboard && window.Dashboard.openCreatePTDModal) {
+            window.Dashboard.openCreatePTDModal();
+        } else {
+            console.error('❌ [MODAL] Sistema de modais não disponível');
+            alert('Sistema de modais não está funcionando. Recarregue a página.');
+        }
+    };
+
+    window.openCreateAdminModal = function() {
+        console.log('🪟 [MODAL] Função openCreateAdminModal chamada');
+        
+        if (window.DashboardModals && window.DashboardModals.openCreateAdminModal) {
+            window.DashboardModals.openCreateAdminModal();
+        } else if (window.Dashboard && window.Dashboard.openCreateAdminModal) {
+            window.Dashboard.openCreateAdminModal();
+        } else {
+            console.error('❌ [MODAL] Sistema de modais não disponível');
+            alert('Sistema de modais não está funcionando. Recarregue a página.');
+        }
+    };
+
+    // Função para fechar modais
+    window.closeModal = function(modalId) {
+        console.log('❌ [MODAL] Fechando modal:', modalId);
+        
+        if (window.DashboardModals && window.DashboardModals.closeModal) {
+            window.DashboardModals.closeModal(modalId);
+        } else if (window.Dashboard && window.Dashboard.closeModal) {
+            window.Dashboard.closeModal(modalId);
+        } else {
+            // Fallback manual
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            }
+        }
+    };
+    </script>
 </div>

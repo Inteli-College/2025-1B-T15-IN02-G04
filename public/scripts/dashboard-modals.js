@@ -21,11 +21,15 @@
          * @param {Object} options - Opções do modal
          */
         openModal(modalId, options = {}) {
+            console.log(`🪟 [MODALS] Tentando abrir modal: ${modalId}`);
+            
             const modal = document.getElementById(modalId);
             if (!modal) {
-                console.error(`❌ [MODALS] Modal ${modalId} não encontrado`);
-                return;
+                console.error(`❌ [MODALS] Modal ${modalId} não encontrado no DOM`);
+                return false;
             }
+
+            console.log(`✅ [MODALS] Modal ${modalId} encontrado, abrindo...`);
 
             // Fechar modal anterior se necessário
             if (this.state.activeModal && !options.keepPrevious) {
@@ -38,6 +42,7 @@
 
             // Mostrar modal
             modal.style.display = 'flex';
+            modal.classList.remove('hidden');
             document.body.classList.add('modal-open');
 
             // Aplicar animação
@@ -53,10 +58,14 @@
                 options.onOpen(modal);
             }
 
-            console.log(`🪟 [MODALS] Modal ${modalId} aberto`);
+            console.log(`🪟 [MODALS] Modal ${modalId} aberto com sucesso`);
             
             // Disparar evento
-            window.Dashboard.dispatchEvent('modal:opened', { modalId, modal });
+            if (window.Dashboard && window.Dashboard.dispatchEvent) {
+                window.Dashboard.dispatchEvent('modal:opened', { modalId, modal });
+            }
+
+            return true;
         },
 
         /**
@@ -65,6 +74,8 @@
          * @param {boolean} silent - Se deve ser silencioso
          */
         closeModal(modalId, silent = false) {
+            console.log(`❌ [MODALS] Fechando modal: ${modalId}`);
+            
             const modal = document.getElementById(modalId);
             if (!modal) {
                 if (!silent) {
@@ -84,6 +95,7 @@
 
             setTimeout(() => {
                 modal.style.display = 'none';
+                modal.classList.add('hidden');
                 
                 // Limpar estado
                 this.state.modalStack = this.state.modalStack.filter(id => id !== modalId);
@@ -106,10 +118,12 @@
 
             }, 300); // Tempo da animação CSS
 
-            console.log(`🪟 [MODALS] Modal ${modalId} fechado`);
+            console.log(`❌ [MODALS] Modal ${modalId} fechado`);
             
             // Disparar evento
-            window.Dashboard.dispatchEvent('modal:closed', { modalId, modal });
+            if (window.Dashboard && window.Dashboard.dispatchEvent) {
+                window.Dashboard.dispatchEvent('modal:closed', { modalId, modal });
+            }
         },
 
         /**
@@ -156,93 +170,141 @@
          * Modal: Adicionar PTD à equipe
          */
         async openAddPTDModal() {
+            console.log('👥 [MODALS] Abrindo modal de adicionar PTD');
+            
             try {
-                // Carregar dados primeiro
-                const data = await window.Dashboard.getAddPTDModalData();
-                
-                this.openModal('add-ptd-modal', {
-                    onOpen: () => {
-                        this.populateAddPTDModal(data.data);
+                // Verificar se o modal existe
+                const modal = document.getElementById('add-ptd-modal');
+                if (!modal) {
+                    console.error('❌ [MODALS] Modal add-ptd-modal não encontrado no DOM');
+                    alert('Modal não encontrado. Verifique se está logado como Gestor.');
+                    return;
+                }
+
+                // Abrir modal primeiro
+                const opened = this.openModal('add-ptd-modal', {
+                    onOpen: async () => {
+                        console.log('📊 [MODALS] Carregando dados do modal...');
+                        await this.populateAddPTDModal();
                     }
                 });
+
+                if (!opened) {
+                    throw new Error('Falha ao abrir modal');
+                }
                 
             } catch (error) {
                 console.error('❌ [MODALS] Erro ao abrir modal de adicionar PTD:', error);
-                window.Dashboard.showError('Erro ao carregar dados do modal');
+                if (window.Dashboard && window.Dashboard.showNotification) {
+                    window.Dashboard.showNotification('Erro ao carregar dados do modal', 'error');
+                } else {
+                    alert('Erro ao carregar dados do modal');
+                }
             }
         },
 
-        populateAddPTDModal(data) {
+        async populateAddPTDModal() {
             const container = document.getElementById('available-ptds-list');
             const loadingEl = document.getElementById('available-ptds-loading');
             const noResultsEl = document.getElementById('no-ptds-message');
             const template = document.getElementById('available-ptd-template');
 
-            if (!container || !template) return;
-
-            // Esconder loading
-            if (loadingEl) loadingEl.style.display = 'none';
-
-            // Limpar container
-            container.innerHTML = '';
-
-            if (!data.availablePTDs || data.availablePTDs.length === 0) {
-                if (noResultsEl) noResultsEl.style.display = 'block';
+            if (!container || !template) {
+                console.error('❌ [MODALS] Elementos do modal não encontrados');
                 return;
             }
 
-            // Renderizar PTDs disponíveis
-            data.availablePTDs.forEach(ptd => {
-                const item = template.content.cloneNode(true);
-                const ptdItem = item.querySelector('.ptd-item');
-                
-                ptdItem.dataset.ptdId = ptd.ptdId;
-                
-                // Avatar
-                const avatarImg = item.querySelector('.avatar-img');
-                avatarImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(ptd.ptdName)}&background=89D329&color=fff&size=128`;
-                avatarImg.alt = ptd.ptdName;
-                
-                // Informações
-                item.querySelector('.ptd-name').textContent = ptd.ptdName;
-                item.querySelector('.ptd-email').textContent = ptd.ptdEmail;
-                
-                // Botão adicionar
-                const addBtn = item.querySelector('.add-ptd-btn');
-                addBtn.dataset.ptdId = ptd.ptdId;
-                
-                container.appendChild(item);
-            });
+            try {
+                // Mostrar loading
+                if (loadingEl) loadingEl.style.display = 'block';
+                if (noResultsEl) noResultsEl.style.display = 'none';
 
-            console.log(`✅ [MODALS] ${data.availablePTDs.length} PTDs carregados no modal`);
+                // Buscar PTDs disponíveis
+                const response = await fetch('/api/team/available-ptds');
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar PTDs disponíveis');
+                }
+
+                const data = await response.json();
+                console.log('📊 [MODALS] PTDs disponíveis recebidos:', data);
+
+                // Esconder loading
+                if (loadingEl) loadingEl.style.display = 'none';
+
+                // Limpar container
+                container.innerHTML = '';
+
+                if (!data.success || !data.data || data.data.length === 0) {
+                    if (noResultsEl) noResultsEl.style.display = 'block';
+                    return;
+                }
+
+                // Renderizar PTDs disponíveis
+                data.data.forEach(ptd => {
+                    const item = template.content.cloneNode(true);
+                    const ptdItem = item.querySelector('.ptd-item');
+                    
+                    ptdItem.dataset.ptdId = ptd.ptdId;
+                    
+                    // Avatar
+                    const avatarImg = item.querySelector('.avatar-img');
+                    avatarImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(ptd.ptdName)}&background=89D329&color=fff&size=128`;
+                    avatarImg.alt = ptd.ptdName;
+                    
+                    // Informações
+                    item.querySelector('.ptd-name').textContent = ptd.ptdName;
+                    item.querySelector('.ptd-email').textContent = ptd.ptdEmail;
+                    
+                    // Botão adicionar
+                    const addBtn = item.querySelector('.add-ptd-btn');
+                    addBtn.dataset.ptdId = ptd.ptdId;
+                    
+                    container.appendChild(item);
+                });
+
+                console.log(`✅ [MODALS] ${data.data.length} PTDs carregados no modal`);
+
+            } catch (error) {
+                console.error('❌ [MODALS] Erro ao carregar PTDs:', error);
+                if (loadingEl) loadingEl.style.display = 'none';
+                container.innerHTML = '<div class="error-message">Erro ao carregar PTDs disponíveis</div>';
+            }
         },
 
         /**
          * Modal: Atribuir trilha
          */
         async openAssignTrailModal() {
+            console.log('🎯 [MODALS] Abrindo modal de atribuir trilha');
+            
             try {
-                this.openModal('assign-trail-modal', {
+                const modal = document.getElementById('assign-trail-modal');
+                if (!modal) {
+                    console.error('❌ [MODALS] Modal assign-trail-modal não encontrado no DOM');
+                    alert('Modal não encontrado. Verifique se está logado como Gestor.');
+                    return;
+                }
+
+                const opened = this.openModal('assign-trail-modal', {
                     onOpen: async () => {
-                        await this.loadAssignTrailModalData();
+                        console.log('📊 [MODALS] Carregando dados do modal de atribuição...');
+                        if (window.loadAssignTrailModalData) {
+                            await window.loadAssignTrailModalData();
+                        }
                     }
                 });
+
+                if (!opened) {
+                    throw new Error('Falha ao abrir modal');
+                }
                 
             } catch (error) {
                 console.error('❌ [MODALS] Erro ao abrir modal de atribuir trilha:', error);
-                window.Dashboard.showError('Erro ao carregar modal');
-            }
-        },
-
-        async loadAssignTrailModalData() {
-            try {
-                // Chamar a função global definida no modal
-                if (window.loadAssignTrailModalData) {
-                    await window.loadAssignTrailModalData();
+                if (window.Dashboard && window.Dashboard.showNotification) {
+                    window.Dashboard.showNotification('Erro ao carregar modal', 'error');
+                } else {
+                    alert('Erro ao carregar modal');
                 }
-            } catch (error) {
-                console.error('❌ [MODALS] Erro ao carregar dados do modal de atribuição:', error);
-                window.Dashboard.showError('Erro ao carregar dados do modal');
             }
         },
 
@@ -250,6 +312,15 @@
          * Modal: Criar PTD
          */
         openCreatePTDModal() {
+            console.log('👤 [MODALS] Abrindo modal de criar PTD');
+            
+            const modal = document.getElementById('create-ptd-modal');
+            if (!modal) {
+                console.error('❌ [MODALS] Modal create-ptd-modal não encontrado no DOM');
+                alert('Modal não encontrado. Verifique se está logado como Gestor.');
+                return;
+            }
+
             this.openModal('create-ptd-modal', {
                 onOpen: (modal) => {
                     // Focar no primeiro campo
@@ -265,6 +336,15 @@
          * Modal: Criar Gestor/Admin
          */
         openCreateAdminModal() {
+            console.log('👑 [MODALS] Abrindo modal de criar Admin/Gestor');
+            
+            const modal = document.getElementById('create-admin-modal');
+            if (!modal) {
+                console.error('❌ [MODALS] Modal create-admin-modal não encontrado no DOM');
+                alert('Modal não encontrado. Verifique se está logado como Admin.');
+                return;
+            }
+
             this.openModal('create-admin-modal', {
                 onOpen: (modal) => {
                     // Focar no primeiro campo
@@ -299,61 +379,6 @@
         },
 
         /**
-         * Validar formulário
-         * @param {HTMLElement} form - Elemento do formulário
-         * @returns {boolean} - Se o formulário é válido
-         */
-        validateForm(form) {
-            let isValid = true;
-            const requiredFields = form.querySelectorAll('[required]');
-
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    this.showFieldError(field, 'Este campo é obrigatório');
-                    isValid = false;
-                } else {
-                    this.hideFieldError(field);
-                }
-            });
-
-            return isValid;
-        },
-
-        /**
-         * Mostrar erro em campo específico
-         * @param {HTMLElement} field - Campo do formulário
-         * @param {string} message - Mensagem de erro
-         */
-        showFieldError(field, message) {
-            const fieldId = field.id;
-            const errorEl = document.getElementById(`${fieldId}-error`) || 
-                           document.querySelector(`[data-field="${fieldId}"] .field-error`);
-            
-            if (errorEl) {
-                errorEl.textContent = message;
-                errorEl.style.display = 'block';
-            }
-            
-            field.classList.add('error');
-        },
-
-        /**
-         * Esconder erro de campo
-         * @param {HTMLElement} field - Campo do formulário
-         */
-        hideFieldError(field) {
-            const fieldId = field.id;
-            const errorEl = document.getElementById(`${fieldId}-error`) || 
-                           document.querySelector(`[data-field="${fieldId}"] .field-error`);
-            
-            if (errorEl) {
-                errorEl.style.display = 'none';
-            }
-            
-            field.classList.remove('error');
-        },
-
-        /**
          * Bloquear fechamento do modal
          * @param {boolean} block - Se deve bloquear
          */
@@ -385,51 +410,25 @@
             modalsToClose.forEach(modalId => {
                 this.closeModal(modalId, true);
             });
-        },
-
-        /**
-         * Configurar eventos globais
-         */
-        setupGlobalEvents() {
-            // Fechar modais ao clicar em links externos
-            document.addEventListener('click', (e) => {
-                const link = e.target.closest('a[href]');
-                if (link && link.href && !link.href.startsWith('#')) {
-                    if (this.hasActiveModal()) {
-                        this.closeAllModals();
-                    }
-                }
-            });
-
-            // Interceptar eventos de formulário
-            document.addEventListener('submit', (e) => {
-                const form = e.target;
-                if (form.closest('.modal-overlay')) {
-                    // Bloquear fechamento durante envio
-                    this.blockModalClose(true);
-                    
-                    // Desbloquear após um tempo ou quando o formulário for resetado
-                    setTimeout(() => {
-                        this.blockModalClose(false);
-                    }, 5000);
-                }
-            });
         }
     };
-
-    // Configurar eventos globais quando o DOM estiver pronto
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            DashboardModals.setupGlobalEvents();
-        });
-    } else {
-        DashboardModals.setupGlobalEvents();
-    }
 
     // Estender o Dashboard principal com os modais
     if (window.Dashboard) {
         Object.assign(window.Dashboard, DashboardModals);
+        console.log('🪟 [DASHBOARD] Modals integrado ao Dashboard principal');
+    } else {
+        // Se Dashboard não existe ainda, aguardar
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.Dashboard) {
+                Object.assign(window.Dashboard, DashboardModals);
+                console.log('🪟 [DASHBOARD] Modals integrado ao Dashboard principal (delayed)');
+            }
+        });
     }
+
+    // Também expor globalmente para acesso direto
+    window.DashboardModals = DashboardModals;
 
     console.log('🪟 [DASHBOARD] Modals carregado');
 
