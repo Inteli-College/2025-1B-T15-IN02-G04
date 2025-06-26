@@ -380,7 +380,7 @@ Critério de aceite 2 | O sistema deve fornecer feedback em tempo real sobre o d
 
 <p align = "center"> Figura 9: Wireframe</p>
 
-[[Clique aqui para ver o wireframe completo!]<p align="center"> <img src="./assets/wad/wireframepreview.png" alt="Wireframe"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1) 
+[[Clique aqui para ver o wireframe completo!]<p align="center"> <img src="./assets/wad/wireframepreview.png" alt="Wireframe"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1)
 
 <p align = 'center'>Preview wireframe, desenvolvida pelos autores (2025).</p> <br><br>
 
@@ -880,7 +880,7 @@ Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final
 - [ ] **Editor de perguntas** com interface visual
 - [ ] **Gerenciamento de usuários** e progresso
 
-## 4.3. Versão final da aplicação web (sprint 5)
+## 4.3. Versão final da aplicação web
 
 &nbsp; &nbsp; &nbsp; &nbsp;No que tange à última versão do sistema web, a equipe aproveitou e lapidou o backend da Sprint anterior e desenvolveu o frontend de todas as telas imprescindíveis na visão da empresa parceira, sendo elas: tela de trilhas, módulos, aulas, cards para acesso rápido dos conteúdos e as telas de gestão para os gerentes dos PTDs. Além disso, foi implementada uma tela de feed com a finalidade de incentivar a interação entre os funcionários na comunidade da Bayer Crop Sciense.
 
@@ -968,17 +968,20 @@ Tests:       214 passed, 214 total
 Time:        ≈4 s
 ```
 
-## 5.2. Testes de usabilidade (sprint 5)
+## 5.2. Testes de usabilidade 
 
-_Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de testes de usabilidade. Ou utilize um link para seu relatório de testes (mantenha o link sempre público para visualização)_
+<h4 align="center">Segue o link para acesso ao teste de usabilidade:</h4>
+<p align="center">https://docs.google.com/spreadsheets/d/1xwWl_6lpjmyupM71f46wCSd9RCiO9FzZMoR-oe98pwI/edit?usp=sharing</p>
 
 # <a name="c6"></a>6. Estudo de Mercado e Plano de Marketing
 
 ## 6.1 Resumo Executivo
 
 &nbsp; &nbsp; &nbsp; &nbsp;O AprendizAgro é uma aplicação web desenvolvida para otimizar a capacitação dos PTDs (Profissionais Técnicos de Desenvolvimento) da Bayer Crop Science, atuando diretamente no processo de aprendizagem e integração de conhecimentos técnicos e de campo. O mercado agrícola, altamente dinâmico e dependente de atualizações frequentes, apresenta uma oportunidade relevante para soluções digitais que unam capacitação, engajamento e gestão de performance.
-&nbsp; &nbsp; &nbsp; &nbsp;O diferencial competitivo do AprendizAgro está na estrutura modular de trilhas de aprendizagem, no talhão gamificado que estimula o desenvolvimento contínuo e no acompanhamento de progresso personalizado para cada usuário por meio da comunidade de aprendizagem. A integração de um feed comunitário também contribui para o fortalecimento do networking e troca de experiências entre os PTDs.
-&nbsp; &nbsp; &nbsp; &nbsp;Os objetivos estratégicos incluem: melhorar a performance técnica da equipe, otimizar o tempo de capacitação, promover o aprendizado contínuo e incentivar a cultura organizacional voltada para resultados. Além disso, a aplicação pretende se consolidar como ferramenta indispensável para a gestão e retenção de talentos técnicos no campo, valorizando o protagonismo dos profissionais na transformação digital do agronegócio.
+
+O diferencial competitivo do AprendizAgro está na estrutura modular de trilhas de aprendizagem, no talhão gamificado que estimula o desenvolvimento contínuo e no acompanhamento de progresso personalizado para cada usuário por meio da comunidade de aprendizagem. A integração de um feed comunitário também contribui para o fortalecimento do networking e troca de experiências entre os PTDs.
+
+Os objetivos estratégicos incluem: melhorar a performance técnica da equipe, otimizar o tempo de capacitação, promover o aprendizado contínuo e incentivar a cultura organizacional voltada para resultados. Além disso, a aplicação pretende se consolidar como ferramenta indispensável para a gestão e retenção de talentos técnicos no campo, valorizando o protagonismo dos profissionais na transformação digital do agronegócio.
 
 ## 6.2 Análise de Mercado
 
@@ -1072,14 +1075,11 @@ _Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de tes
 
 ### Produto
 
-&nbsp; &nbsp; &nbsp; &nbsp;O produto configura-se como uma aplicação web direcionada aos PTDs da Bayer Crop Science, com o fito de promover uma capacitação de excelência a esses funcionários. 
-&nbsp; &nbsp; &nbsp; &nbsp;Diante disso, a plataforma contempla trilhas de aprendizagem, cursos, conteúdos instrutivos - os quais são anexados pelos gestores da empresa -, cards para acesso rápido aos assuntos, página de progresso para que o PTD e o gestor possam acompanhar o desenvolvimento de aprendizagem do usuário, calendário para organização e notificação das obrigações do usuário, página de comunidade com feed de posts para a troca de experiências e conquistas entre os funcionários e página de registro de atendimentos. Assim, é notório que, com essas funcionalidades, torna-se possível conquistar excelência no que tange a fornecer treinamento adequado à equipe da empresa parceira.
-&nbsp; &nbsp; &nbsp; &nbsp;Além disso, o produto se destaca pela sua gamificação. Sob a ótica do PTD, a equipe enxergou a imprescindibilidade de fornecer mecanismos e dinâmicas para engajar o funcionário à se desenvolver profissionalmente na plataforma, de modo que, para tal efeito, tornou o produto ainda mais atrativo por intermédio de um ranking e de um talhão gamificado - segundo o qual, a cada término de responsabilidade, o usuário recebe uma plantação em seu talhão fictício. 
+&nbsp; &nbsp; &nbsp; &nbsp;O produto configura-se como uma aplicação web direcionada aos PTDs da Bayer Crop Science, com o fito de promover uma capacitação de excelência a esses funcionários. Diante disso, a plataforma contempla trilhas de aprendizagem, cursos, conteúdos instrutivos - os quais são anexados pelos gestores da empresa -, cards para acesso rápido aos assuntos, página de progresso para que o PTD e o gestor possam acompanhar o desenvolvimento de aprendizagem do usuário, calendário para organização e notificação das obrigações do usuário, página de comunidade com feed de posts para a troca de experiências e conquistas entre os funcionários e página de registro de atendimentos. Assim, é notório que, com essas funcionalidades, torna-se possível conquistar excelência no que tange a fornecer treinamento adequado à equipe da empresa parceira. Além disso, o produto se destaca pela sua gamificação. Sob a ótica do PTD, a equipe enxergou a imprescindibilidade de fornecer mecanismos e dinâmicas para engajar o funcionário à se desenvolver profissionalmente na plataforma, de modo que, para tal efeito, tornou o produto ainda mais atrativo por intermédio de um ranking e de um talhão gamificado - segundo o qual, a cada término de responsabilidade, o usuário recebe uma plantação em seu talhão fictício. 
 
 ### Preço
 
-&nbsp; &nbsp; &nbsp; &nbsp;Em razão do contexto acadêmico sob o qual o produto foi confeccionado, entende-se que não há intenções de monetizá-lo. Nesse sentido, quanto a quaisquer custos imprevistos tangentes à plataforma, acredita-se que serão financiados integralmente pela empresa Bayer, de modo que os PTDs tenham acesso gratuito. 
-&nbsp; &nbsp; &nbsp; &nbsp;No entanto, caso houvesse desígnio de precificação, dentre as opções de estratégias de preço adotadas, compreende-se a assinatura corporativa como a forma mais eficiente no cenário em questão - de forma que os PTDs ou a Bayer poderia aderir à aplicação por intermédio de assinatura mensal por usuário, ou por licenciamento anual baseado no número de PTDs.
+&nbsp; &nbsp; &nbsp; &nbsp;Em razão do contexto acadêmico sob o qual o produto foi confeccionado, entende-se que não há intenções de monetizá-lo. Nesse sentido, quanto a quaisquer custos imprevistos tangentes à plataforma, acredita-se que serão financiados integralmente pela empresa Bayer, de modo que os PTDs tenham acesso gratuito. No entanto, caso houvesse desígnio de precificação, dentre as opções de estratégias de preço adotadas, compreende-se a assinatura corporativa como a forma mais eficiente no cenário em questão - de forma que os PTDs ou a Bayer poderia aderir à aplicação por intermédio de assinatura mensal por usuário, ou por licenciamento anual baseado no número de PTDs.
 
 ### Praça
 
@@ -1089,14 +1089,15 @@ _Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de tes
 
 &nbsp; &nbsp; &nbsp; &nbsp;Em função do contexto em que o produto está inserido (cujo objetivo consiste em ser uma aplicação de uso interno da Bayer Crop Science), é possível inferir que a promoção será realizada por intermédio do incentivo da empresa, focando na maximização de engajamento dos PTDs. Nesse sentido, as possibilidades estruturadas para tal finalidade foram: notificações nos dispositivos dos funcionários, por exemplo por meio de e-mails, incentivando o uso da plataforma; Workshops de treinamento para capacitação dos funcionários no que tange a utilização da plataforma, aproveitando para potencializar a promoção; O reconhecimento, em reuniões e eventos da empresa, dos PTDs que mais se destacam no ranking que o produto contempla, de modo a motivar os usuários que ainda não se demonstraram engajados. Além disso, a plataforma também poderá ser divulgada em demais reuniões e eventos corporativos, assim como por meio das redes sociais corporativas da Bayer, ampliando o alcance, a visibilidade e a importância do AprendizaAgro no processo de capacitação dos PTDs.
 
-# <a name="c7"></a>7. Conclusões e trabalhos futuros (sprint 5)
+# <a name="c7"></a>7. Conclusões e trabalhos futuros 
 
 &nbsp; &nbsp; &nbsp; &nbsp;Durante as 5 Sprints, a equipe conseguiu contemplar as principais funcionalidades almejadas pelo parceiro na plataforma. Nessa esfera, é perceptível a presença de trilhas, módulos, aulas e provas, imprescindíveis para abraçar a principal necessidade da Bayer Crop Science - a capacitação qualificada dos Promotores Técnicos Digitais (PTDs) -, assim como a visualização dos gestores e dos administradores de conteúdo, os testes, os certificados e as métricas de desempenho do usuário. Assim, com essas funcionalidades, foi possível conquistar os objetivos de mitigar a problemática de rotatividade dos funcionários e otimizar o treinamento dos PTDs - conforme descrito na segunda seção deste documento.
-&nbsp; &nbsp; &nbsp; &nbsp;Além disso, é válido mencionar que foi possível implementar um ranking e um feed, no qual os usuários podem compartilhar suas experiências de trabalho em comunidade, de modo que tal efeito torna-se o principal diferencial e ponto forte da aplicação. No entanto, a equipe enxerga que existem aspectos que devem ser lapidados, como o design das telas no que tange à usabilidade e consertar bugs nos testes. Paralelamente, a equipe aspira concretizar a user storie de gamificação com a implementação de um talhão interativo, no qual os usuários recebem insígnias de mérito após completarem uma determinada quantidade de atividades no sistema. 
+
+&nbsp; &nbsp; &nbsp; &nbspAlém disso, é válido mencionar que foi possível implementar um ranking e um feed, no qual os usuários podem compartilhar suas experiências de trabalho em comunidade, de modo que tal efeito torna-se o principal diferencial e ponto forte da aplicação. No entanto, a equipe enxerga que existem aspectos que devem ser lapidados, como o design das telas no que tange à usabilidade e consertar bugs nos testes. Paralelamente, a equipe aspira concretizar a user storie de gamificação com a implementação de um talhão interativo, no qual os usuários recebem insígnias de mérito após completarem uma determinada quantidade de atividades no sistema. 
 
 &nbsp; &nbsp; &nbsp; &nbsp;Portanto, conclui-se a excelência do AprendizAgro em mitigar as principais dores da empresa parceira do módulo, embora seja notória a demanda das melhorias supracitadas. 
 
-# <a name="c8"></a>8. Referências (sprints 1 a 5)
+# <a name="c8"></a>8. Referências
 
 ## Gerais
 
