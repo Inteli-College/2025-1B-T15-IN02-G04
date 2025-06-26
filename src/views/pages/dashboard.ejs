@@ -1,0 +1,22 @@
+<div class="dashboard-wrapper">
+  <% if (roleId === 1 || roleId === 2) { %>
+    <div class="flex gap-2 mb-4">
+      <% if (roleId === 1) { %>
+        <a href="/dashboard" class="px-3 py-1 rounded <%= (viewRoleId === 1 ? 'bg-field-green text-white' : 'bg-gray-200') %>">Admin</a>
+        <a href="/dashboard?view=gestor" class="px-3 py-1 rounded <%= (viewRoleId === 2 ? 'bg-field-green text-white' : 'bg-gray-200') %>">Gestor</a>
+      <% } else if (roleId === 2) { %>
+        <a href="/dashboard" class="px-3 py-1 rounded <%= (viewRoleId === 2 ? 'bg-field-green text-white' : 'bg-gray-200') %>">Gestor</a>
+      <% } %>
+      <a href="/dashboard?view=ptd" class="px-3 py-1 rounded <%= (viewRoleId === 3 ? 'bg-field-green text-white' : 'bg-gray-200') %>">PTD</a>
+    </div>
+  <% } %>
+
+  <% const activeRole = typeof viewRoleId !== 'undefined' ? viewRoleId : roleId; %>
+  <% if (activeRole === 1) { %>
+    <%- include('../components/admin-dashboard', { data }) %>
+  <% } else if (activeRole === 2) { %>
+    <%- include('../components/gestor-dashboard', { data }) %>
+  <% } else { %>
+    <%- include('../components/ptd-dashboard', { data }) %>
+  <% } %>
+</div> 

@@ -1,0 +1,43 @@
+<div id="assign-trail-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow p-6 w-full max-w-md">
+    <h3 class="text-lg font-semibold mb-4">Atribuir Trilha</h3>
+    <form id="form-assign-trail" class="space-y-4">
+      <select name="ptdId" class="w-full border px-3 py-2 rounded" required>
+        <% (data.team || []).forEach(t => { %>
+          <option value="<%= t.id %>"><%= t.name %></option>
+        <% }) %>
+      </select>
+      <select name="trailId" class="w-full border px-3 py-2 rounded" required>
+        <% (data.trails || []).forEach(tr => { %>
+          <option value="<%= tr.id %>"><%= tr.name %></option>
+        <% }) %>
+      </select>
+      <div class="flex justify-end space-x-2">
+        <button type="button" class="btn-cancel text-gray-600">Cancelar</button>
+        <button type="submit" class="btn-submit bg-field-green text-white px-4 py-2 rounded">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('form-assign-trail').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const payload = {
+      ptdId: form.ptdId.value,
+      trailId: form.trailId.value,
+    };
+    try {
+      const resp = await fetch('/team/assignTrail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!resp.ok) throw new Error('Erro ao atribuir trilha');
+      location.reload();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+</script> 

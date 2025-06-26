@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const UserModel = require("../models/userModel");
 
 const checkAuth = (req, res, next) => {
   const token = req.cookies.token;
@@ -51,4 +52,56 @@ const checkAuth = (req, res, next) => {
   return next();
 };
 
+/**
+ * Middleware para restringir rota a usuários com role_id = 2 (Gestor)
+ */
+const onlyGestor = async (req, res, next) => {
+  try {
+    if (!req.userId) {
+      return res.status(401).json({ error: "Usuário não autenticado" });
+    }
+
+    const roles = await UserModel.buscarRolesPorUsuario(req.userId);
+    const isGestor = roles.some((r) => parseInt(r.id_role) === 2);
+
+    if (!isGestor) {
+      return res
+        .status(403)
+        .json({ error: "Acesso restrito a usuários Gestor" });
+    }
+    next();
+  } catch (err) {
+    console.error("Erro no onlyGestor:", err);
+    return res.status(500).json({ error: "Erro interno do servidor" });
+  }
+};
+
+/**
+ * Middleware para restringir rota a usuários com role_id = 1 (Admin)
+ */
+const onlyAdmin = async (req, res, next) => {
+  try {
+    if (!req.userId) {
+      return res.status(401).json({ error: "Usuário não autenticado" });
+    }
+
+    const roles = await UserModel.buscarRolesPorUsuario(req.userId);
+    const isAdmin = roles.some((r) => parseInt(r.id_role) === 1);
+
+    if (!isAdmin) {
+      return res
+        .status(403)
+        .json({ error: "Acesso restrito a usuários Administradores" });
+    }
+    next();
+  } catch (err) {
+    console.error("Erro no onlyAdmin:", err);
+    return res.status(500).json({ error: "Erro interno do servidor" });
+  }
+};
+
 module.exports = checkAuth;
+// mantendo exportações adicionais para uso avançado
+module.exports.ensureAuth = checkAuth;
+module.exports.onlyGestor = onlyGestor;
+module.exports.onlyAdmin = onlyAdmin;

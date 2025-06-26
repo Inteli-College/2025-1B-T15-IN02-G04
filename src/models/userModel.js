@@ -112,6 +112,32 @@ class UserModel {
       throw new Error("Erro ao buscar roles do usuário");
     }
   }
+
+  static async createUser({ name, email, password }) {
+    try {
+      const hashed = await bcrypt.hash(password, 10);
+      const result = await db.query(
+        'INSERT INTO "user" (name, email, password) VALUES ($1, $2, $3) RETURNING id, name, email',
+        [name, email, hashed]
+      );
+      return result.rows[0];
+    } catch (err) {
+      console.error("Erro ao criar usuário:", err);
+      throw new Error("Erro ao criar usuário");
+    }
+  }
+
+  static async assignRoleToUser(userId, roleId) {
+    try {
+      await db.query(
+        'INSERT INTO role_user (id_user, id_role) VALUES ($1, $2) ON CONFLICT DO NOTHING',
+        [userId, roleId]
+      );
+    } catch (err) {
+      console.error("Erro ao atribuir role ao usuário:", err);
+      throw new Error("Erro ao atribuir role ao usuário");
+    }
+  }
 }
 
 module.exports = UserModel;

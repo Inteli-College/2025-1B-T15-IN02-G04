@@ -16,14 +16,6 @@ router.get("/login", (req, res) => {
   });
 });
 
-// Dashboard
-router.get("/dashboard", checkAuth, (req, res) => {
-  res.render("pages/gestorDashboard", {
-    title: "Dashboard",
-    userId: req.userId,
-  });
-});
-
 // Perfil
 router.get("/perfil/:id", checkAuth, (req, res) => {
   res.render("pages/perfil", {
