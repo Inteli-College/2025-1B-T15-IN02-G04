@@ -419,7 +419,7 @@ Critério de aceite 2 | O sistema deve fornecer feedback em tempo real sobre o d
   <img src="./assets/wad/calendario-mobile.png" width="200"/>
   <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
 
-  <p align = "center"> Figura 12: Tela de Calendário - Desktop</p>
+  <p align = "center"> Figura 13: Tela de Calendário - Desktop</p>
   
   <img src="./assets/wad/calendario-desktop.png" width="600"/>
   <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
@@ -481,14 +481,17 @@ A padronização aqui proposta visa facilitar a manutenção, evolução e escal
 
 ### 3.3.1 Cores
 
+<p align = "center"> Figura 14: Paleta de Cores</p>
 <p align="center"> <img src="./assets/wad/Paleta de Cores.png" alt="Paleta de Cores"> </p>
 <p align = 'center'> criado pelos autores (2025).</p>
 
 ### 3.3.2 Tipografia
 
+<p align = "center"> Figura 15: Tipografia</p>
 <p align="center"> <img src="./assets/wad/Tipografia.png" alt="Tipografia"> </p>
 <p align = 'center'> criado pelos autores (2025).</p>
 
+<p align = "center"> Figura 16: Hierarquia Tipográfica</p>
 <p align="center"> <img src="./assets/wad/Hierarquia Tipográfica.png" alt="Hierarquia Tipográfica"> </p>
 <p align = 'center'> criado pelos autores (2025).</p>
 
@@ -550,6 +553,7 @@ A padronização aqui proposta visa facilitar a manutenção, evolução e escal
 
 ### 3.5.1. Modelo relacional 
 
+<p align = "center"> Figura 17: Modelagem Relacional do Banco de Dados</p>
 <p align="center"> <img src="./assets/wad/modelagem-relacional-banco.png" alt="Modelagem Relacional"> </p>
 <p align = 'center'>Conteúdo feito pelos autores (2025).</p>
 
@@ -583,7 +587,7 @@ A padronização aqui proposta visa facilitar a manutenção, evolução e escal
 **Expressão lógica proposicional** | $(A \land B) \lor (C \land D)$
 **Tabela Verdade** | <table> <thead> <tr> <th>$A$</th> <th>$B$</th> <th>$C$</th> <th>$D$</th> <th>$(A \land B)$</th> <th>$(C \land D)$</th> <th>$(A \land B) \lor (C \land D)$</th> </tr> </thead> <tbody> <tr> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>V</td> </th> </tr> <td>V</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>V</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>V</td> <td>V</td> <td>F</td> <td>V</td> <td>V</td> </th> </tr> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>F</td> <td>V</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> <td>F</td> </th> </tr> </tbody> </table>
  
-## 3.6. WebAPI e endpoints (sprints 3 e 4)
+## 3.6. WebAPI e endpoints 
 
 **Usuários**
 
@@ -755,15 +759,15 @@ A padronização aqui proposta visa facilitar a manutenção, evolução e escal
 
 Por fim, seguem as imagens do frontend desenvolvido durante a sprint: 
 
-<h4 align="center">Header e Footer </h4>
+<h4 align="center">Figura 18: Header e Footer </h4>
 <p align="center"> <img src="./assets/header-footer.jpeg" alt=" Header e Footer"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
-<h4 align="center">Tela de Login </h4>
+<h4 align="center">Figura 19: Tela de Login </h4>
 <p align="center"> <img src="./assets/login.jpeg" alt="Tela de Login"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
-<h4 align="center">Tela de Início </h4>
+<h4 align="center">Figura 20: Tela de Início </h4>
 <p align="center"> <img src="./assets/tela-inicio.jpeg" alt="Tela de Início"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
@@ -775,16 +779,19 @@ Por fim, seguem as imagens do frontend desenvolvido durante a sprint:
 
 ### Página de Trilhas (`trail.ejs`)
 
-Figura 1: Página principal com categorias de trilhas organizadas em carrossel
+<p align = "center">Figura 21: Página principal com categorias de trilhas organizadas em carrossel</p>
 <p align="center"> <img src="./assets/wad/Trilha.png" alt="Trilhas"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
 
-Figura 2: Modal popup mostrando módulos disponíveis em uma trilha
- <img src="./assets/wad/Módulos.png" alt="Módulos"> </p>
+<p align = "center">Figura 22: Modal popup mostrando módulos disponíveis em uma trilha</p>
+<p align="center"> <img src="./assets/wad/Módulos.png" alt="Módulos"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
 
 ### Página de Aulas (`class.ejs`)
 
-Figura 3: Interface de aula com conteúdo 
- <img src="./assets/wad/Provas.png" alt="Aulas"> </p>
+<p align = "center">Figura 23: Interface de aula com conteúdo </p>
+<p align="center">  <img src="./assets/wad/Provas.png" alt="Aulas"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
 
 - **Menu lateral** com navegação entre aulas
 - **Barra de progresso** visual dinâmica
@@ -879,34 +886,34 @@ Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final
 
 &nbsp; &nbsp; &nbsp; &nbsp;Segue abaixo o detalhamento de cada tela desenvolvida na quinta Sprint:
 
-<h4 align="center">Tela de Trilhas</h4>
+<h4 align="center">Figura 24: Tela de Trilhas</h4>
 <p align="center">A tela de trilhas tem o fito de fornecer um ambiente para alocar os conteúdos de aprendizado dos PTDs e, assim, introduzí-los à jornada de capacitação.</p>
 <p align="center"> <img src="./assets/tela-trilhas.jpeg" alt="Tela de Trilhas"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
-<h4 align="center">Tela de Módulos</h4>
+<h4 align="center">Fgura 25: Tela de Módulos</h4>
 <p align="center">O argumento que sustenta a escolha da página de módulos está fundado na maior eficiência da organização dos conteúdos, visando, dessa forma, melhorar a experiência do usuário no que diz respeito ao aprendizado dos funcionários. Sob essa ótica, os módulos foram estruturados de modo que são visíveis somente após a escolha de uma trilha, sendo, portanto, intrinsícos a elas.</p>
 <p align="center"> <img src="./assets/tela-modulos.jpeg" alt="Tela de Módulos"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
-<h4 align="center">Painel de Gestão</h4>
+<h4 align="center">Figura 27: Painel de Gestão</h4>
 <p align="center">Conforme a figura abaixo, o painel de gestão contempla a visualização dos gestores dos PTDs, abrangendo a posição de cada funcionário no ranking e métricas de aprendizados baseados no desempenho.</p>
 <p align="center"> <img src="./assets/painel-de-gestao.jpeg" alt="Painel de Gestão"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
-<h4 align="center">Tela de Cards</h4>
+<h4 align="center">Figura 28: Tela de Cards</h4>
 <p align="center">A tela de cards foi desenvolvida para facilitar o acesso dos PTDs aos conteúdos de aprendizado. Para tal efeito, os cards contemplam informações técnicas de maneira concisa de modo que a busca seja rápida e precisa. Ademais, para abraçar a necessidade do parceiro de promover as informações técnicas em contextos que não contemplam rede de internet, a equipe desenvolveu a funcionalidade de baixar cada card localmente em formado PDF. </p>
 <p align="center"> <img src="./assets/tela-cards.jpeg" alt="Tela de Cards"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
-<h4 align="center">Tela de Feed</h4>
+<h4 align="center">Figura 29: Tela de Feed</h4>
 <p align="center">A tela de feed configura-se como um diferencial do AprendizAgro. Nessa esfera, o feed funciona de modo a permitir que os funcionários, por intermédio de postagens autorais, troquem conhecimento e experiências tangentes as suas tarefas na Bayer Crop Sciense. Ademais, é válido mencionar que, na página em questão, foram contempladas as funcionalidades de curtida, comentário e exclusão da postagem.</p>
 <p align="center"> <img src="./assets/tela-feed.jpeg" alt="Tela de Feed"> </p>
 <p align = 'center'>imagem feita pelos autores (2025).</p>
 
 # <a name="c5"></a>5. Testes
 
-## 5.1. Relatório de testes de integração de endpoints automatizados (sprint 4)
+## 5.1. Relatório de testes de integração de endpoints automatizados 
 
 &nbsp; &nbsp; &nbsp; &nbsp;Durante a Sprint&nbsp;4 foi criada uma suíte **100 % automatizada** para garantir a qualidade de todos os endpoints REST do back-end.  A estratégia adotada concentrou-se em testes de integração dos controladores, onde cada rota é exercitada de ponta-a-ponta, porém com as dependências de banco de dados simuladas por _mocks_.
 
