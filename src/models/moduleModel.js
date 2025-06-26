@@ -1,22 +1,22 @@
-const db = require('../config/db');
+const db = require("../config/db");
 
 class ModuleModel {
   static async getAllModules() {
     try {
-      const result = await db.query('SELECT * FROM module ORDER BY trail_id, order_position');
+      const result = await db.query("SELECT * FROM module");
       return result.rows;
     } catch (error) {
-      console.error('Erro ao buscar módulos:', error);
+      console.error("Erro ao buscar módulos:", error);
       throw error;
     }
   }
 
   static async getModuleById(id) {
     try {
-      const result = await db.query('SELECT * FROM module WHERE id = $1', [id]);
+      const result = await db.query("SELECT * FROM module WHERE id = $1", [id]);
       return result.rows[0];
     } catch (error) {
-      console.error('Erro ao buscar módulo:', error);
+      console.error("Erro ao buscar módulo:", error);
       throw error;
     }
   }
@@ -25,22 +25,24 @@ class ModuleModel {
   static async getModulesByTrailId(trailId) {
     try {
       const result = await db.query(
-        'SELECT * FROM module WHERE id_trail = $1 ORDER BY module_order', 
+        "SELECT * FROM module WHERE id_trail = $1 ORDER BY module_order",
         [trailId]
       );
       return result.rows;
     } catch (error) {
-      console.error('Erro ao buscar módulos da trilha:', error);
+      console.error("Erro ao buscar módulos da trilha:", error);
       throw error;
     }
   }
 
   static async getModuleByName(name) {
     try {
-      const result = await db.query('SELECT * FROM module WHERE name = $1', [name]);
+      const result = await db.query("SELECT * FROM module WHERE name = $1", [
+        name,
+      ]);
       return result.rows[0];
     } catch (error) {
-      console.error('Erro ao buscar módulo por nome:', error);
+      console.error("Erro ao buscar módulo por nome:", error);
       throw error;
     }
   }
@@ -48,35 +50,44 @@ class ModuleModel {
   static async createModule(data) {
     try {
       const result = await db.query(
-        'INSERT INTO module (name, description, duration, trail_id, order_position) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-        [data.name, data.description, data.duration, data.trail_id, data.order_position]
+        "INSERT INTO module (name, description, duration, trail_id, order_position) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [
+          data.name,
+          data.description,
+          data.duration,
+          data.trail_id,
+          data.order_position,
+        ]
       );
       return result.rows[0];
     } catch (error) {
-      console.error('Erro ao criar módulo:', error);
+      console.error("Erro ao criar módulo:", error);
       throw error;
     }
   }
 
-  static async updateModule(id, name, description, duration, order_position) {
+  static async updateModule(id, name, description, id_trail, module_order) {
     try {
       const result = await db.query(
-        'UPDATE module SET name = $1, description = $2, duration = $3, order_position = $4 WHERE id = $5 RETURNING *',
-        [name, description, duration, order_position, id]
+        "UPDATE module SET name = $1, description = $2, id_trail = $3, module_order = $4 WHERE id = $5 RETURNING *",
+        [name, description, id_trail, module_order, id]
       );
       return result.rows[0];
     } catch (error) {
-      console.error('Erro ao atualizar módulo:', error);
+      console.error("Erro ao atualizar módulo:", error);
       throw error;
     }
   }
 
   static async deleteModule(id) {
     try {
-      const result = await db.query('DELETE FROM module WHERE id = $1 RETURNING *', [id]);
+      const result = await db.query(
+        "DELETE FROM module WHERE id = $1 RETURNING *",
+        [id]
+      );
       return result.rowCount > 0;
     } catch (error) {
-      console.error('Erro ao deletar módulo:', error);
+      console.error("Erro ao deletar módulo:", error);
       throw error;
     }
   }
@@ -94,7 +105,7 @@ class ModuleModel {
       `);
       return result.rows;
     } catch (error) {
-      console.error('Erro ao buscar módulos com informações da trilha:', error);
+      console.error("Erro ao buscar módulos com informações da trilha:", error);
       throw error;
     }
   }

@@ -93,28 +93,21 @@ class ModuleController {
 
   static async updateModule(req, res) {
     try {
-      const { id } = req.params;
-      const { name, description, duration, order_position } = req.body;
-      
-      console.log("REQ.BODY:", req.body);
-      console.log("MODULE ID:", id);
-      
+      const { name, description, id_trail, module_order } = req.body;
+
       const updatedModule = await ModuleModel.updateModule(
-        id, 
-        name, 
-        description, 
-        duration, 
-        order_position
+        req.params.id,
+        name,
+        description,
+        id_trail,
+        module_order
       );
-      
       if (updatedModule) {
         res.status(200).json(updatedModule);
       } else {
-        res.status(404).json({ error: 'Módulo não encontrado' });
+        res.status(404).json({ error: "Module não encontrado" });
       }
     } catch (error) {
-      console.error('Erro ao atualizar módulo:', error);
-
       res.status(500).json({ error: error.message });
     }
   }

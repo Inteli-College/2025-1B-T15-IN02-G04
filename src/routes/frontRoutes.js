@@ -119,7 +119,6 @@ router.get("/contato", (req, res) => {
   });
 });
 
-
 // Página de termos
 router.get("/termos", (req, res) => {
   res.render("layout/main", {
@@ -164,12 +163,13 @@ router.get("/Trilhas", checkAuth, (req, res) => {
   });
 });
 
-// Página de módulos (adicionada da branch develop)
-router.get("/Modulos", checkAuth, (req, res) => {
+// Página de módulos
+router.get("/modulos", (req, res) => {
   res.render("layout/main", {
-    pageTitle: "Módulos",
+    pageTitle: "Módulos de Aprendizagem",
     content: "../pages/modules",
-    pageCSS: "pages/module.css",
+    pageCSS: "pages/modules.css",
+    pageJS: "modules.js",
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
   });
