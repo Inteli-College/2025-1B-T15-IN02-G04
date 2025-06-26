@@ -53,7 +53,7 @@ const dashboardAuth = async (req, res, next) => {
       req.user = userData;
       req.userRoles = userRoles;
       req.primaryRole = userRoles[0]; // Role principal (menor ID = maior prioridade)
-      
+      req.primaryRole.id_role = userRoles[0].id_role; // Garantir que o ID seja numérico
       // Flags de conveniência para verificações rápidas
     const roleNames = userRoles.map(role => role.role_name.toLowerCase());
     req.isPTD = roleNames.includes('ptd');
@@ -64,6 +64,7 @@ const dashboardAuth = async (req, res, next) => {
         userId,
         name: userData.name,
         primaryRole: req.primaryRole.role_name,
+        role_id: req.primaryRole.id_role,
         isPTD: req.isPTD,
         isGestor: req.isGestor,
         isAdmin: req.isAdmin
