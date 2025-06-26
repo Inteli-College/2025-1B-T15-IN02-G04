@@ -43,7 +43,7 @@
           </li>
           <li>
             <a
-              href="/estudos"
+              href="/trilhas"
               class="text-gray-200 hover:text-field-green transition-colors font-medium"
               >Estudos</a
             >
@@ -57,9 +57,9 @@
           </li>
           <li>
             <a
-              href="/comunidade"
+              href="/feed"
               class="text-gray-200 hover:text-field-green transition-colors font-medium"
-              >Comunidade</a
+              >Feed</a
             >
           </li>
           <li>
@@ -73,18 +73,22 @@
 
         <!-- Authentication Buttons -->
         <div class="flex items-center space-x-3">
+          <% if (!userId) { %>
           <a
             href="/login"
             class="px-4 py-2 bg-white text-center text-black hover:text-field-green border border-white hover:border-field-green rounded-lg transition-all duration-200"
           >
             Entrar
           </a>
-          <button
+          <% } else { %>
+          <a
             id="logout-btn"
-            class="px-4 py-2 text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200 hidden"
+            href="/api/auth/logout"
+            class="px-4 py-2 text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200"
           >
             Sair
-          </button>
+          </a>
+          <% } %>
         </div>
       </nav>
     </div>
@@ -122,6 +126,7 @@
 
         <div class="pt-4 pb-2 border-t border-field-green/30">
           <div class="flex flex-col space-y-2">
+            <% if (!userId) { %>
             <a
               href="/login"
               class="px-3 py-2 bg-white text-center text-black hover:text-field-green border border-white hover:border-field-green rounded-lg transition-all duration-200"
@@ -134,12 +139,14 @@
             >
               Cadastrar
             </a>
+            <% } else { %>
             <button
               id="logout-btn-mobile"
-              class="px-3 py-2 text-center text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200 hidden"
+              class="px-3 py-2 text-center text-white hover:text-red-400 border border-white hover:border-red-400 rounded-lg transition-all duration-200"
             >
               Sair
             </button>
+            <% } %>
           </div>
         </div>
       </div>
@@ -154,4 +161,26 @@
       const mobileMenu = document.getElementById("mobile-menu");
       mobileMenu.classList.toggle("hidden");
     });
+
+  // Handle logout functionality
+  const logoutButtons = [
+    document.getElementById("logout-btn"),
+    document.getElementById("logout-btn-mobile"),
+  ];
+  logoutButtons.forEach((btn) => {
+    if (btn) {
+      btn.addEventListener("click", async () => {
+        try {
+          const response = await fetch("/logout", { method: "POST" });
+          if (response.ok) {
+            window.location.href = "/login";
+          } else {
+            alert("Erro ao sair. Tente novamente.");
+          }
+        } catch (error) {
+          alert("Erro ao sair. Tente novamente.");
+        }
+      });
+    }
+  });
 </script>

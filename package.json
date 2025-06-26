@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "nodemon app.js",
-    "init-db": "node src/scripts/runSQLScript.js"
+    "init-db": "node src/scripts/runSQLScript.js",
+    "pupulate": "node src/scripts/ExemploInsertBancoDeDados.sql",
+    "test": "jest --runInBand"
   },
   "license": "ISC",
   "dependencies": {
@@ -24,7 +26,9 @@
     "puppeteer": "^24.10.2"
   },
   "devDependencies": {
+    "jest": "^30.0.3",
     "nodemon": "^3.1.10",
+    "supertest": "^7.1.1",
     "tailwindcss": "^4.1.10"
   }
 }
