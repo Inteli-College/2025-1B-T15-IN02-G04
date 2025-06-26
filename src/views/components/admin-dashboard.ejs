@@ -1,7 +1,10 @@
 <div class="admin-dashboard p-6 space-y-6">
   <div class="flex justify-between items-center">
     <h2 class="text-2xl font-bold text-field-blue">Painel Admin</h2>
-    <button id="btn-create-user" class="px-4 py-2 bg-field-green text-white rounded hover:bg-field-green-dark">Criar Gestor/Admin</button>
+    <div class="flex gap-2">
+      <button id="btn-create-user" class="px-4 py-2 bg-field-green text-white rounded hover:bg-field-green-dark">Criar Gestor/Admin</button>
+      <button id="btn-delete-user" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Excluir Usuários</button>
+    </div>
   </div>
 
   <!-- Analytics simples -->
@@ -17,10 +20,15 @@
 </div>
 
 <%- include('./modals/create-user-modal') %>
+<%- include('./modals/delete-user-modal') %>
 
 <script>
   document.getElementById('btn-create-user')?.addEventListener('click', ()=> {
     document.getElementById('create-user-modal').classList.remove('hidden');
+  });
+  document.getElementById('btn-delete-user')?.addEventListener('click', ()=> {
+    document.getElementById('delete-user-modal').classList.remove('hidden');
+    loadUsersForDeletion();
   });
   document.querySelectorAll('.btn-cancel').forEach(btn=>btn.addEventListener('click', ()=>{
     btn.closest('[id$="-modal"]').classList.add('hidden');
@@ -43,4 +51,26 @@
         <div class="bg-white rounded shadow p-4 text-center"><p class="text-sm text-gray-500">Score Máximo</p><p class="text-3xl font-bold text-field-blue">${maxScore}</p></div>`;
     } catch(e){ console.error(e); }
   });
+
+  async function loadUsersForDeletion(){
+    const tbody = document.getElementById('delete-users-body');
+    tbody.innerHTML = '<tr><td class="p-4">Carregando...</td></tr>';
+    try {
+      const resp = await fetch('/api/usuarios/ranking');
+      const data = await resp.json();
+      tbody.innerHTML = data.map(u=>`<tr><td class="px-3 py-2">${u.name}</td><td class="px-3 py-2 text-sm text-gray-500">${u.roles.join(', ')}</td><td class="px-3 py-2"><button data-id="${u.id}" class="btn-del-user px-2 py-1 bg-red-500 text-white rounded text-xs">Excluir</button></td></tr>`).join('');
+      document.querySelectorAll('.btn-del-user').forEach(btn=>{
+        btn.addEventListener('click', ()=> askDelete(btn.dataset.id));
+      });
+    }catch(e){console.error(e);}
+  }
+
+  function askDelete(id){
+    const confirmText = prompt('Digite DELETE para confirmar exclusão do usuário '+id);
+    if(confirmText !== 'DELETE') return;
+    fetch('/admin/users/'+id, {method:'DELETE'}).then(r=>{
+      if(r.ok) location.reload();
+      else alert('Erro ao excluir');
+    });
+  }
 </script> 

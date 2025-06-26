@@ -1,18 +1,32 @@
 <div class="dashboard-wrapper">
-  <div class="mb-6 text-center">
-    <h2 class="text-2xl font-semibold">Bem-vindo, <%= user?.name %>! <span class="inline-block ml-2 px-2 py-1 text-xs rounded-full bg-field-green text-white"><%= roleName %></span></h2>
+  <div class="bg-gradient-to-r from-field-blue to-field-green/80 rounded-lg p-6 mb-8 shadow text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+    <h2 class="text-2xl sm:text-3xl font-semibold flex items-center gap-3">
+      Bem-vindo, <span class="font-bold"><%= user?.name %></span>
+    </h2>
+    <span class="px-3 py-1 text-sm rounded-full bg-white/20 backdrop-blur-sm inline-flex items-center"><%= roleName %></span>
   </div>
 
   <% if (roleId === 1 || roleId === 2) { %>
-    <div class="flex gap-2 mb-4">
-      <% if (roleId === 1) { %>
-        <a href="/dashboard" class="px-3 py-1 rounded <%= (viewRoleId === 1 ? 'bg-field-green text-white' : 'bg-gray-200') %>">Admin</a>
-        <a href="/dashboard?view=gestor" class="px-3 py-1 rounded <%= (viewRoleId === 2 ? 'bg-field-green text-white' : 'bg-gray-200') %>">Gestor</a>
-      <% } else if (roleId === 2) { %>
-        <a href="/dashboard" class="px-3 py-1 rounded <%= (viewRoleId === 2 ? 'bg-field-green text-white' : 'bg-gray-200') %>">Gestor</a>
-      <% } %>
-      <a href="/dashboard?view=ptd" class="px-3 py-1 rounded <%= (viewRoleId === 3 ? 'bg-field-green text-white' : 'bg-gray-200') %>">PTD</a>
+    <div class="mb-4 flex justify-end">
+      <select id="dash-selector" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none">
+        <% if (roleId === 1) { %>
+          <option value="admin" <%= viewRoleId === 1 ? 'selected' : '' %>>Admin</option>
+          <option value="gestor" <%= viewRoleId === 2 ? 'selected' : '' %>>Gestor</option>
+        <% } %>
+        <option value="ptd" <%= viewRoleId === 3 ? 'selected' : '' %>>PTD</option>
+      </select>
     </div>
+    <script>
+      document.getElementById('dash-selector').addEventListener('change', function(){
+        const v = this.value;
+        if(v === 'admin' || v === 'gestor'){
+          const url = v === 'admin' ? '/dashboard' : '/dashboard?view=gestor';
+          location.href = url;
+        }else{
+          location.href = '/dashboard?view=ptd';
+        }
+      });
+    </script>
   <% } %>
 
   <% const activeRole = typeof viewRoleId !== 'undefined' ? viewRoleId : roleId; %>

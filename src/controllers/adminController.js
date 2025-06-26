@@ -9,11 +9,15 @@ exports.createUser = async (req, res) => {
   }
   try {
     const password = Math.random().toString(36).slice(-8);
-    const newUser = await UserModel.createUser({ name, email, password });
+    const username = email.split('@')[0];
+    const newUser = await UserModel.createUser({ name, email, password, username });
     await UserModel.assignRoleToUser(newUser.id, role_id);
     return res.status(201).json({ success: true, userId: newUser.id });
   } catch (err) {
     console.error("Erro em createUser:", err);
+    if (err.message === 'EMAIL_DUPLICATE') {
+      return res.status(409).json({ error: 'Email já cadastrado' });
+    }
     return res.status(500).json({ error: "Erro ao criar usuário" });
   }
 };
@@ -41,4 +45,15 @@ exports.getCardsRanking = async (req, res) => {
 exports.genericUpdate = async (req, res) => {
   // TODO: Implementar atualização genérica de entidades
   return res.json({ todo: true });
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await UserModel.deleteUser(id);
+    return res.json({ success: true });
+  } catch (err) {
+    console.error("Erro em deleteUser:", err);
+    return res.status(500).json({ error: "Erro ao deletar usuário" });
+  }
 }; 

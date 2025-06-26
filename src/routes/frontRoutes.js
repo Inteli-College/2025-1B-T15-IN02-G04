@@ -20,7 +20,8 @@ router.get("/login", (req, res) => {
 router.get("/perfil/:id", checkAuth, (req, res) => {
   res.render("pages/perfil", {
     title: "Perfil",
-    userId: req.userId || req.params.id, // Usa req.userId se disponível, senão req.params.id
+    userId: req.params.id, // perfil visualizado
+    viewerId: req.userId,  // quem está logado
   });
 });
 
@@ -185,6 +186,17 @@ router.get("/feed", checkAuth, (req, res) => {
     content: "../pages/feed",
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
+  });
+});
+
+// Página de post individual
+router.get("/post/:id", checkAuth, (req, res) => {
+  res.render("layout/main", {
+    pageTitle: "Post",
+    content: "../pages/post",
+    pageCSS: null,
+    userId: req.userId,
+    postId: req.params.id,
   });
 });
 

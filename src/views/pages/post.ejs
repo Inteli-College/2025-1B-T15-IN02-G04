@@ -1,0 +1,33 @@
+<div class="container mx-auto py-10 max-w-2xl">
+  <div id="post-card" class="bg-white shadow rounded-lg p-6 mb-6 text-center">Carregando post...</div>
+  <h3 class="text-lg font-semibold text-field-blue mb-4">Comentários</h3>
+  <div id="comments" class="space-y-4"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const postId = "<%= postId %>";
+    const postCard = document.getElementById('post-card');
+    const commentsDiv = document.getElementById('comments');
+
+    try {
+      const resp = await fetch(`/api/posts/${postId}`);
+      if(!resp.ok) throw new Error();
+      const post = await resp.json();
+      postCard.innerHTML = `<h2 class="text-2xl font-bold text-field-blue mb-2">${post.titulo}</h2>
+        <p class="text-gray-700 mb-4">${post.descricao}</p>
+        <p class="text-sm text-gray-500">Por ${post.autor} em ${new Date(post.criado_em).toLocaleDateString('pt-BR')}</p>`;
+
+      // comentários
+      const cResp = await fetch(`/api/posts/${postId}/comentarios`);
+      const comments = cResp.ok ? await cResp.json() : [];
+      if(!comments.length){
+        commentsDiv.innerHTML = '<p class="text-gray-500 text-center">Sem comentários ainda.</p>';
+      }else{
+        commentsDiv.innerHTML = comments.map(c=>`<div class="bg-white border rounded p-3"><p class="text-gray-800 text-sm mb-1">${c.comment_text}</p><span class="text-xs text-gray-400">${c.autor} • ${new Date(c.created_at).toLocaleDateString('pt-BR')}</span></div>`).join('');
+      }
+    }catch(e){
+      postCard.innerHTML = '<p class="text-red-500">Erro ao carregar post.</p>';
+    }
+  });
+</script> 

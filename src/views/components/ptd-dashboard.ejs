@@ -60,16 +60,24 @@
       rankingBody.innerHTML = top.map((u, i) => {
         const highlight = u.id === userId ? 'bg-yellow-100 font-semibold' : (i%2?'bg-gray-50':'');
         if (u.id === userId) userInTop = true;
-        return `<tr class="${highlight}"><td class="px-4 py-2">${i+1}</td><td class="px-4 py-2">${u.name}</td><td class="px-4 py-2">${u.score??0}</td></tr>`;
+        return `<tr class="${highlight} cursor-pointer" data-user="${u.id}"><td class="px-4 py-2">${i+1}</td><td class="px-4 py-2">${u.name}</td><td class="px-4 py-2">${u.score??0}</td></tr>`;
       }).join('');
 
       if (!userInTop) {
         const pos = data.findIndex(u=>u.id===userId);
         if (pos!==-1) {
           const current = data[pos];
-          rankingBody.innerHTML += `<tr class="bg-yellow-100 font-semibold"><td class="px-4 py-2">${pos+1}</td><td class="px-4 py-2">${current.name}</td><td class="px-4 py-2">${current.score??0}</td></tr>`;
+          rankingBody.innerHTML += `<tr class="bg-yellow-100 font-semibold cursor-pointer" data-user="${current.id}"><td class="px-4 py-2">${pos+1}</td><td class="px-4 py-2">${current.name}</td><td class="px-4 py-2">${current.score??0}</td></tr>`;
         }
       }
+
+      // adiciona navegação
+      rankingBody.querySelectorAll('tr[data-user]').forEach(tr=>{
+        tr.addEventListener('click', ()=>{
+          const id = tr.dataset.user;
+          location.href = '/perfil/'+id;
+        });
+      });
     } catch(e){ console.error(e); }
   });
 </script> 

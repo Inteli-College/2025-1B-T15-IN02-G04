@@ -21,5 +21,6 @@ router.post("/admin/createUser", authMW.onlyAdmin, admin.createUser);
 router.get("/admin/analytics", authMW.onlyAdmin, admin.getAnalytics);
 router.get("/admin/cards/favorited", authMW.onlyAdmin, admin.getCardsRanking);
 router.put("/admin/entities/:type/:id", authMW.onlyAdmin, admin.genericUpdate);
+router.delete("/admin/users/:id", authMW.onlyAdmin, admin.deleteUser);
 
 module.exports = router; 

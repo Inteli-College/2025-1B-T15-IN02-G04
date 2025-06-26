@@ -3,15 +3,18 @@
     Perfil do Usuário
   </h1>
 
-  <div id="profile-card" class="max-w-md mx-auto bg-white rounded-xl shadow-lg p-6">
+  <div id="profile-card" class="max-w-md mx-auto bg-white rounded-xl shadow-lg p-6 mb-8">
     <p class="text-gray-500 text-center">Carregando...</p>
   </div>
+
+  <div id="posts-section" class="space-y-4"></div>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
     const userId = "<%= userId %>";
     const container = document.getElementById("profile-card");
+    const postsContainer = document.getElementById("posts-section");
 
     try {
       // Busca detalhes do usuário
@@ -44,9 +47,33 @@
           <p><span class="font-semibold">Score:</span> ${user.score}</p>
         </div>
       `;
+
+      // Seção de Posts (visível para todos)
+      await loadPosts(user);
     } catch (err) {
       console.error(err);
       container.innerHTML = `<p class="text-red-500 text-center">Erro ao carregar perfil.</p>`;
+    }
+
+    async function loadPosts(profileUser){
+      try{
+        const respPosts = await fetch('/api/posts');
+        if(!respPosts.ok) throw new Error();
+        const allPosts = await respPosts.json();
+        const userPosts = allPosts.filter(p=>p.autor === profileUser.name);
+
+        if(!userPosts.length){
+          postsContainer.innerHTML = '<p class="text-center text-gray-500">Este usuário ainda não publicou posts.</p>';
+          return;
+        }
+
+        postsContainer.innerHTML = `<h3 class="text-xl font-semibold text-field-blue mb-2">Posts</h3>` +
+          userPosts.map(p=>`<a href="/post/${p.id_post}" class="block bg-white border rounded-lg shadow p-4 hover:shadow-md transition">
+               <h4 class="font-medium text-field-blue mb-1">${p.titulo}</h4>
+               <p class="text-gray-700 text-sm mb-2 line-clamp-4">${p.descricao}</p>
+               <span class="text-xs text-gray-400">${new Date(p.criado_em).toLocaleDateString('pt-BR')}</span>
+           </a>`).join('');
+      }catch(e){console.error(e);}
     }
   });
 </script> 

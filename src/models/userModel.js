@@ -113,15 +113,19 @@ class UserModel {
     }
   }
 
-  static async createUser({ name, email, password }) {
+  static async createUser({ name, email, password, username }) {
     try {
       const hashed = await bcrypt.hash(password, 10);
+      const uname = username || (email ? email.split('@')[0] : name.replace(/\s+/g,'').toLowerCase());
       const result = await db.query(
-        'INSERT INTO "user" (name, email, password) VALUES ($1, $2, $3) RETURNING id, name, email',
-        [name, email, hashed]
+        'INSERT INTO "user" (name, email, username, password) VALUES ($1, $2, $3, $4) RETURNING id, name, email',
+        [name, email, uname, hashed]
       );
       return result.rows[0];
     } catch (err) {
+      if (err.code === '23505') {
+        throw new Error('EMAIL_DUPLICATE');
+      }
       console.error("Erro ao criar usuário:", err);
       throw new Error("Erro ao criar usuário");
     }
@@ -136,6 +140,15 @@ class UserModel {
     } catch (err) {
       console.error("Erro ao atribuir role ao usuário:", err);
       throw new Error("Erro ao atribuir role ao usuário");
+    }
+  }
+
+  static async deleteUser(userId) {
+    try {
+      await db.query('DELETE FROM "user" WHERE id = $1', [userId]);
+    } catch (err) {
+      console.error("Erro ao deletar usuário:", err);
+      throw new Error("Erro ao deletar usuário");
     }
   }
 }
