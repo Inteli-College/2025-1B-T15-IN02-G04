@@ -21,7 +21,7 @@
 
 /* Container principal das aulas */
 .class-container {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
   width: 95%;
   max-width: 1300px;
@@ -29,12 +29,12 @@
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   border: 2px solid rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Header das aulas */
 .class-header {
-  background: #FF5722;
+  background: #ff5722;
   padding: 1.8rem 2.5rem;
   display: flex;
   justify-content: space-between;
@@ -54,7 +54,7 @@
   border-radius: 12px;
   width: 45px;
   height: 45px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 1.3rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -72,7 +72,7 @@
 .class-title {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0;
 }
@@ -83,7 +83,7 @@
   border-radius: 8px;
   width: 35px;
   height: 35px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -108,7 +108,7 @@
 .classes-grid {
   display: flex;
   gap: 2rem;
-  padding: 0 3rem;
+  padding: 0 1rem;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -121,7 +121,7 @@
 
 /* Cards das aulas */
 .class-card {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
   padding: 2.5rem 2rem 2rem 2rem;
   min-width: 320px;
@@ -132,7 +132,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 400px;
+  min-height: 200px;
   cursor: pointer;
   position: relative;
   border: 1px solid rgba(255, 87, 34, 0.1);
@@ -148,8 +148,8 @@
   position: absolute;
   top: -15px;
   left: 2rem;
-  background: linear-gradient(135deg, #FF5722 0%, #FF7043 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #ff5722 0%, #ff7043 100%);
+  color: #ffffff;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -181,7 +181,7 @@
 /* Badge de duração */
 .class-duration {
   background: rgba(255, 87, 34, 0.1);
-  color: #FF5722;
+  color: #ff5722;
   padding: 0.8rem 1.5rem;
   border-radius: 15px;
   font-size: 0.95rem;
@@ -200,7 +200,7 @@
   top: 1.5rem;
   right: 1.5rem;
   background: rgba(255, 87, 34, 0.9);
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 0.5rem;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -219,7 +219,7 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  color: #FF5722;
+  color: #ff5722;
   font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -228,7 +228,7 @@
 }
 
 .nav-arrow:hover {
-  background: #FFFFFF;
+  background: #ffffff;
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
@@ -252,7 +252,7 @@
 .loading-spinner {
   border: 3px solid rgba(255, 87, 34, 0.3);
   border-radius: 50%;
-  border-top: 3px solid #FF5722;
+  border-top: 3px solid #ff5722;
   width: 45px;
   height: 45px;
   animation: spin 1s linear infinite;
@@ -260,8 +260,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .error {
@@ -292,8 +296,8 @@
 }
 
 .btn-primary {
-  background: #FF5722;
-  color: #FFFFFF;
+  background: #ff5722;
+  color: #ffffff;
   border: none;
   padding: 1rem 2.5rem;
   border-radius: 15px;
@@ -304,7 +308,7 @@
 }
 
 .btn-primary:hover {
-  background: #E64A19;
+  background: #e64a19;
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(255, 87, 34, 0.3);
 }
@@ -420,7 +424,8 @@
     display: none;
   }
 
-  .loading, .error {
+  .loading,
+  .error {
     padding: 3rem 1.5rem;
   }
 }

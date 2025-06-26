@@ -21,7 +21,7 @@ router.get("/perfil/:id", checkAuth, (req, res) => {
   res.render("pages/perfil", {
     title: "Perfil",
     userId: req.params.id, // perfil visualizado
-    viewerId: req.userId,  // quem está logado
+    viewerId: req.userId, // quem está logado
   });
 });
 
@@ -60,7 +60,7 @@ router.get("/cards", checkAuth, (req, res) => {
   res.render("pages/cards", {
     pageTitle: "Cards",
     content: "../pages/cards",
-    pageCSS: "pages/cards.css",
+    pageCSS: "pages/admin-cards.css",
     pageJS: "cards.js",
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
@@ -157,11 +157,22 @@ router.get("/Trilhas", checkAuth, (req, res) => {
 });
 
 // Página de módulos
-router.get("/modulos", (req, res) => {
+router.get("/Modulos", (req, res) => {
+  res.render("layout/main", {
+    pageTitle: "Módulos",
+    content: "../pages/modules",
+    pageCSS: "pages/module.css",
+    userId: req.userId,
+    currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
+  });
+});
+
+// Página de módulos
+router.get("/admin/modulos", (req, res) => {
   res.render("layout/main", {
     pageTitle: "Módulos de Aprendizagem",
-    content: "../pages/modules",
-    pageCSS: "pages/modules.css",
+    content: "../pages/admin-modules",
+    pageCSS: "pages/admin-modules.css",
     pageJS: "modules.js",
     userId: req.userId,
     currentUrl: req.protocol + "://" + req.get("host") + req.originalUrl,
@@ -169,7 +180,7 @@ router.get("/modulos", (req, res) => {
 });
 
 // Página de aulas
-router.get("/Aulas", checkAuth, (req, res) => {
+router.get("/Aulas", (req, res) => {
   res.render("layout/main", {
     pageTitle: "Aulas",
     content: "../pages/class",
