@@ -44,7 +44,11 @@ Além disso, temos um feed, onde é possível registrar os atendimentos em campo
 
 ## 📝 Link de demonstração
 
-_Coloque aqui o link para seu projeto publicado e link para vídeo de demonstração_
+[![Assista ao vídeo](https://img.youtube.com/vi/tSUMxPiNFGE/0.jpg)](https://www.youtube.com/watch?v=tSUMxPiNFGE)
+[Assista ao vídeo no YouTube](https://www.youtube.com/watch?v=tSUMxPiNFGE)
+
+
+
 
 ## 📁 Estrutura de pastas
 
@@ -55,6 +59,7 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 - <b>app</b>: aqui está a pasta principal da aplicação, onde estão centralizadas as configurações do banco de dados, os modelos, os controllers, as rotas e o arquivo responsável por iniciar a aplicação.
 
 - <b>README.md</b>: arquivo que serve como guia introdutório e explicação geral sobre o projeto e a aplicação (o mesmo arquivo que você está lendo agora).}
+
 
 ```plaintext
 aprendizAgro/
@@ -237,9 +242,7 @@ aprendizAgro/
 ├── README.md                # Explicação geral do projeto: descrição, como rodar, estrutura, etc
 
 ```
-
 ## 💻 Configuração para desenvolvimento e execução do código
-
 Aqui estão todas as instruções necessárias para configurar o ambiente de desenvolvimento, instalar as dependências e executar a aplicação localmente.
 
 #### ✅ Pré-requisitos
@@ -297,7 +300,6 @@ Para iniciar o projeto em ambiente de desenvolvimento, use o comando:
 ```bash
 npm run dev
 ```
-
 Se tudo estiver correto, você verá no terminal algo como:
 
 ```
@@ -341,11 +343,5 @@ npm test
 - ## 0.1.0 - 30/04/2025
 
 ## 📋 Licença/License
-
-```
-Alunos inteli (remover essa observação do readme.md após leitura e execução, junto com o link para o tutorial):
-
-1. Siga o tutorial para criação da licença: https://drive.google.com/file/d/1hXWLHUhjBkPVuGqeE2LZKozFntnJZzlx/view
-```
 
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Intelihub/Template_M2/">AprendizAGRP</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">Inteli, Leonardo Corbi, Lucas Pomin, Mariana Pereira, Nicolli Santana, Rafael Santana Rodrigues, Vivian Peres, Yuri Boczar</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
