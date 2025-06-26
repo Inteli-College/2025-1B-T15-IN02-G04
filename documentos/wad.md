@@ -842,7 +842,34 @@ Trilhas → Módulos → Aulas → Quiz → Próxima Aula → Prova Final
 
 ## 4.3. Versão final da aplicação web (sprint 5)
 
-_Descreva e ilustre aqui o desenvolvimento da última versão do sistema web, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar. Indique as eventuais dificuldades e próximos passos._
+&nbsp; &nbsp; &nbsp; &nbsp;No que tange à última versão do sistema web, a equipe aproveitou e lapidou o backend da Sprint anterior e desenvolveu o frontend de todas as telas imprescindíveis na visão da empresa parceira, sendo elas: tela de trilhas, módulos, aulas, cards para acesso rápido dos conteúdos e as telas de gestão para os gerentes dos PTDs. Além disso, foi implementada uma tela de feed com a finalidade de incentivar a interação entre os funcionários na comunidade da Bayer Crop Sciense.
+
+&nbsp; &nbsp; &nbsp; &nbsp;Segue abaixo o detalhamento de cada tela desenvolvida na quinta Sprint:
+
+<h4 align="center">Tela de Trilhas</h4>
+<p align="center">A tela de trilhas tem o fito de fornecer um ambiente para alocar os conteúdos de aprendizado dos PTDs e, assim, introduzí-los à jornada de capacitação.</p>
+<p align="center"> <img src="./assets/tela-trilhas.jpeg" alt="Tela de Trilhas"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
+
+<h4 align="center">Tela de Módulos</h4>
+<p align="center">O argumento que sustenta a escolha da página de módulos está fundado na maior eficiência da organização dos conteúdos, visando, dessa forma, melhorar a experiência do usuário no que diz respeito ao aprendizado dos funcionários. Sob essa ótica, os módulos foram estruturados de modo que são visíveis somente após a escolha de uma trilha, sendo, portanto, intrinsícos a elas.</p>
+<p align="center"> <img src="./assets/tela-modulos.jpeg" alt="Tela de Módulos"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
+
+<h4 align="center">Painel de Gestão</h4>
+<p align="center">Conforme a figura abaixo, o painel de gestão contempla a visualização dos gestores dos PTDs, abrangendo a posição de cada funcionário no ranking e métricas de aprendizados baseados no desempenho.</p>
+<p align="center"> <img src="./assets/painel-de-gestao.jpeg" alt="Painel de Gestão"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
+
+<h4 align="center">Tela de Cards</h4>
+<p align="center">A tela de cards foi desenvolvida para facilitar o acesso dos PTDs aos conteúdos de aprendizado. Para tal efeito, os cards contemplam informações técnicas de maneira concisa de modo que a busca seja rápida e precisa. Ademais, para abraçar a necessidade do parceiro de promover as informações técnicas em contextos que não contemplam rede de internet, a equipe desenvolveu a funcionalidade de baixar cada card localmente em formado PDF. </p>
+<p align="center"> <img src="./assets/tela-cards.jpeg" alt="Tela de Cards"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
+
+<h4 align="center">Tela de Feed</h4>
+<p align="center">A tela de feed configura-se como um diferencial do AprendizAgro. Nessa esfera, o feed funciona de modo a permitir que os funcionários, por intermédio de postagens autorais, troquem conhecimento e experiências tangentes as suas tarefas na Bayer Crop Sciense. Ademais, é válido mencionar que, na página em questão, foram contempladas as funcionalidades de curtida, comentário e exclusão da postagem.</p>
+<p align="center"> <img src="./assets/tela-feed.jpeg" alt="Tela de Feed"> </p>
+<p align = 'center'>imagem feita pelos autores (2025).</p>
 
 # <a name="c5"></a>5. Testes
 
