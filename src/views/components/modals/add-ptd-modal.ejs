@@ -1,0 +1,152 @@
+<!-- Modal: Adicionar PTD à Equipe -->
+<div id="add-ptd-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3 class="modal-title">Adicionar PTD à Equipe</h3>
+            <button class="modal-close" onclick="window.Dashboard.closeModal('add-ptd-modal')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-content">
+            <!-- Barra de pesquisa -->
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="ptd-search-input" 
+                        class="search-input" 
+                        placeholder="Pesquisar PTDs disponíveis..."
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+            
+            <!-- Lista de PTDs disponíveis -->
+            <div id="available-ptds-container" class="ptds-list-container">
+                <div id="available-ptds-loading" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">Carregando PTDs disponíveis...</p>
+                </div>
+                
+                <div id="available-ptds-list" class="ptds-list">
+                    <!-- PTDs serão carregados dinamicamente -->
+                </div>
+                
+                <div id="no-ptds-message" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4m0 0V6a2 2 0 012-2h12a2 2 0 012 2v7"/>
+                        </svg>
+                    </div>
+                    <h4 class="empty-title">Nenhum PTD disponível</h4>
+                    <p class="empty-description">Todos os PTDs já estão em equipes ou não há PTDs cadastrados.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="window.Dashboard.closeModal('add-ptd-modal')">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Template para item de PTD -->
+<template id="available-ptd-template">
+    <div class="ptd-item" data-ptd-id="">
+        <div class="ptd-avatar">
+            <img src="" alt="Avatar" class="avatar-img">
+        </div>
+        <div class="ptd-info">
+            <h4 class="ptd-name"></h4>
+            <span class="ptd-email"></span>
+        </div>
+        <button class="add-ptd-btn" onclick="addPTDToTeam(this)" data-ptd-id="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Adicionar
+        </button>
+    </div>
+</template>
+
+<script>
+// Função para adicionar PTD à equipe
+function addPTDToTeam(button) {
+    const ptdId = button.dataset.ptdId;
+    const ptdItem = button.closest('.ptd-item');
+    const ptdName = ptdItem.querySelector('.ptd-name').textContent;
+    
+    if (confirm(`Deseja adicionar ${ptdName} à sua equipe?`)) {
+        // Desabilitar botão durante o processo
+        button.disabled = true;
+        button.innerHTML = '<div class="btn-loading"></div> Adicionando...';
+        
+        // Fazer requisição para adicionar PTD
+        window.Dashboard.addPTDToTeam(ptdId)
+            .then(response => {
+                if (response.success) {
+                    // Remover item da lista
+                    ptdItem.remove();
+                    
+                    // Mostrar notificação de sucesso
+                    window.Dashboard.showNotification('PTD adicionado à equipe com sucesso!', 'success');
+                    
+                    // Recarregar lista de membros da equipe
+                    window.Dashboard.loadTeamMembers();
+                    
+                    // Verificar se ainda há PTDs disponíveis
+                    const remainingPTDs = document.querySelectorAll('#available-ptds-list .ptd-item');
+                    if (remainingPTDs.length === 0) {
+                        document.getElementById('no-ptds-message').style.display = 'block';
+                    }
+                } else {
+                    throw new Error(response.error || 'Erro ao adicionar PTD');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao adicionar PTD:', error);
+                window.Dashboard.showNotification(error.message || 'Erro ao adicionar PTD', 'error');
+                
+                // Restaurar botão
+                button.disabled = false;
+                button.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Adicionar
+                `;
+            });
+    }
+}
+
+// Configurar pesquisa quando o modal for aberto
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('ptd-search-input');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const ptdItems = document.querySelectorAll('#available-ptds-list .ptd-item');
+            
+            ptdItems.forEach(item => {
+                const name = item.querySelector('.ptd-name').textContent.toLowerCase();
+                const email = item.querySelector('.ptd-email').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+});
+</script>
