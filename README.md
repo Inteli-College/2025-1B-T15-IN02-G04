@@ -44,7 +44,8 @@ Além disso, temos um feed, onde é possível registrar os atendimentos em campo
 
 ## 📝 Link de demonstração
 
-_Coloque aqui o link para seu projeto publicado e link para vídeo de demonstração_
+[![Assista ao vídeo](https://img.youtube.com/vi/tSUMxPiNFGE/0.jpg)](https://www.youtube.com/watch?v=tSUMxPiNFGE)
+
 
 ## 📁 Estrutura de pastas
 
