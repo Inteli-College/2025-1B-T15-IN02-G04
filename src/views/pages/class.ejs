@@ -1,0 +1,247 @@
+<!-- Página de Aulas -->
+<link rel="stylesheet" href="/css/class.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Wrapper para modal centralizado -->
+<div class="class-page-wrapper">
+    <!-- Container principal das aulas -->
+    <div class="class-container">
+        <!-- Header -->
+        <div class="class-header">
+            <div class="header-left">
+                <button class="back-arrow" onclick="goBackToModules()" title="Voltar aos Módulos">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="class-title" id="classTitle">
+                    Aulas - Carregando...
+                </h1>
+            </div>
+            <button class="close-button" onclick="goBackToModules()" title="Fechar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Wrapper das aulas -->
+        <div class="classes-wrapper">
+            <!-- Setas de navegação -->
+            <button class="nav-arrow left" onclick="scrollClasses('left')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-arrow right" onclick="scrollClasses('right')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Grid das aulas -->
+            <div class="classes-grid" id="classesGrid">
+                <!-- Loading inicial -->
+                <div class="loading" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando aulas...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Configuração da API
+    const API_BASE_URL = 'http://localhost:3000/api';
+
+    // Obter ID do módulo da URL
+    function getModuleIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('modulo') || urlParams.get('module');
+    }
+
+    // Função para carregar aulas do módulo específico
+    async function loadClasses() {
+        const grid = document.getElementById('classesGrid');
+        const moduleId = getModuleIdFromUrl();
+        
+        if (!moduleId) {
+            grid.innerHTML = `
+                <div class="error">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Módulo não especificado</h3>
+                    <p>Nenhum módulo foi selecionado. Volte e selecione um módulo.</p>
+                    <button class="btn-primary" onclick="goBackToModules()">
+                        Voltar para Módulos
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        try {
+            console.log('Carregando aulas do módulo:', moduleId);
+            const response = await fetch(`${API_BASE_URL}/class/module/${moduleId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('Dados carregados:', data);
+            
+            // Atualizar título
+            const classTitle = document.getElementById('classTitle');
+            if (data.module && data.module.name) {
+                classTitle.textContent = `Aulas - ${data.module.name}`;
+            }
+            
+            // Limpar loading
+            grid.innerHTML = '';
+            
+            if (data.classes && data.classes.length > 0) {
+                data.classes.forEach((classItem, index) => {
+                    const classCard = createClassCard(classItem, index + 1);
+                    grid.appendChild(classCard);
+                });
+                
+                // Ocultar setas se houver poucas aulas
+                if (data.classes.length <= 4) {
+                    document.querySelector('.nav-arrow.left').style.display = 'none';
+                    document.querySelector('.nav-arrow.right').style.display = 'none';
+                }
+            } else {
+                grid.innerHTML = `
+                    <div class="error">
+                        <div class="error-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3>Nenhuma aula encontrada</h3>
+                        <p>Este módulo ainda não possui aulas disponíveis.</p>
+                        <button class="btn-primary" onclick="goBackToModules()">
+                            Voltar para Módulos
+                        </button>
+                    </div>
+                `;
+            }
+            
+        } catch (error) {
+            console.error('Erro ao carregar aulas:', error);
+            grid.innerHTML = `
+                <div class="error">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Erro ao carregar aulas</h3>
+                    <p>Não foi possível conectar com o servidor. Verifique se a API está rodando em ${API_BASE_URL}/classes</p>
+                    <button class="btn-primary" onclick="loadClasses()">
+                        Tentar Novamente
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // Função para criar card de aula
+    function createClassCard(classItem, position) {
+        const card = document.createElement('div');
+        card.className = 'class-card';
+        card.setAttribute('data-class-id', classItem.id);
+        
+        card.innerHTML = `
+            <div class="class-card-number">${position}</div>
+            ${classItem.video_url ? '<div class="class-video-indicator"><i class="fas fa-play"></i> Vídeo</div>' : ''}
+            <h3 class="class-card-title">${classItem.name}</h3>
+            <p class="class-card-description">
+                ${classItem.description || 'Descrição não disponível'}
+            </p>
+        `;
+        
+        // Adicionar click para abrir aula
+        card.addEventListener('click', () => {
+            openClass(classItem.id);
+        });
+        
+        return card;
+    }
+
+    // Função para scroll horizontal das aulas
+    function scrollClasses(direction) {
+        const grid = document.getElementById('classesGrid');
+        const scrollAmount = 360; // largura do card + gap
+        
+        if (direction === 'left') {
+            grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+
+    // Função para abrir aula específica
+    function openClass(classId) {
+        console.log(`Abrindo aula ${classId}`);
+        // Aqui você pode implementar a lógica para abrir o conteúdo da aula
+        // Por exemplo: window.location.href = `/aulas/${classId}`;
+        alert(`Funcionalidade em desenvolvimento. Aula ID: ${classId}`);
+    }
+
+    // Função para voltar aos módulos
+    function goBackToModules() {
+        // Obter parâmetros atuais para manter a trilha
+        const urlParams = new URLSearchParams(window.location.search);
+        const trailId = urlParams.get('trilha') || urlParams.get('trail');
+        
+        if (trailId) {
+            window.location.href = `/Modulos?trilha=${trailId}`;
+        } else {
+            window.location.href = '/Trilhas';
+        }
+    }
+
+    // Função para fechar modal clicando fora dele
+    document.querySelector('.class-page-wrapper').addEventListener('click', function(e) {
+        if (e.target === this) {
+            goBackToModules();
+        }
+    });
+
+    // Buscar aula por ID
+    async function getClassById(id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/class/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Erro ao buscar aula:', error);
+            return null;
+        }
+    }
+
+    // Inicialização quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Página de aulas carregada');
+        loadClasses();
+    });
+
+    // Função para recarregar aulas
+    function refreshClasses() {
+        const grid = document.getElementById('classesGrid');
+        grid.innerHTML = `
+            <div class="loading" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>Carregando aulas...</p>
+            </div>
+        `;
+        loadClasses();
+    }
+
+    // Detecção de teclas para navegação
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            goBackToModules();
+        } else if (e.key === 'ArrowLeft') {
+            scrollClasses('left');
+        } else if (e.key === 'ArrowRight') {
+            scrollClasses('right');
+        }
+    });
+</script>
+
+</div> <!-- Fechar .class-page-wrapper -->

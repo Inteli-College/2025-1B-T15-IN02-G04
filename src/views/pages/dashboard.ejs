@@ -1,0 +1,41 @@
+<div class="dashboard-wrapper">
+  <div class="bg-gradient-to-r from-field-blue to-field-green/80 rounded-lg p-6 mb-8 shadow text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+    <h2 class="text-2xl sm:text-3xl font-semibold flex items-center gap-3">
+      Bem-vindo, <span class="font-bold"><%= user?.name %></span>
+    </h2>
+    <div class="flex items-center gap-4">
+      <span class="px-3 py-1 text-sm rounded-full bg-white/20 backdrop-blur-sm inline-flex items-center"><%= roleName %></span>
+      <% if (roleId === 1 || roleId === 2) { %>
+        <label for="dash-selector" class="text-sm font-medium hidden sm:inline">Visualizar como:</label>
+        <select id="dash-selector" class="border border-white/30 bg-white/10 text-white rounded px-2 py-1 text-sm focus:outline-none">
+          <% if (roleId === 1) { %>
+            <option value="admin" <%= viewRoleId === 1 ? 'selected' : '' %>>Admin</option>
+            <option value="gestor" <%= viewRoleId === 2 ? 'selected' : '' %>>Gestor</option>
+          <% } %>
+          <option value="ptd" <%= viewRoleId === 3 ? 'selected' : '' %>>PTD</option>
+        </select>
+      <% } %>
+    </div>
+  </div>
+
+  <% const activeRole = typeof viewRoleId !== 'undefined' ? viewRoleId : roleId; %>
+  <% if (activeRole === 1) { %>
+    <%- include('../components/admin-dashboard', { data, roleId }) %>
+  <% } else if (activeRole === 2) { %>
+    <%- include('../components/gestor-dashboard', { data, roleId }) %>
+  <% } else { %>
+    <%- include('../components/ptd-dashboard', { data, userId }) %>
+  <% } %>
+</div>
+
+<script>
+  document.getElementById('dash-selector')?.addEventListener('change', function(){
+    const v = this.value;
+    if(v === 'admin' || v === 'gestor'){
+      const url = v === 'admin' ? '/dashboard' : '/dashboard?view=gestor';
+      location.href = url;
+    }else{
+      location.href = '/dashboard?view=ptd';
+    }
+  });
+</script> 

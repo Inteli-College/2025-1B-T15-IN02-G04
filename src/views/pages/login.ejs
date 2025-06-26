@@ -1,0 +1,240 @@
+<div
+  class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+>
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <img
+      src="/images/login.jpg"
+      alt="Agricultor no campo"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <!-- Login Card -->
+  <div class="relative z-10 w-full max-w-4xl mx-auto">
+    <div
+      class="bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 min-h-[500px]"
+    >
+      <!-- Left Side - Registration Prompt -->
+      <div
+        class="bg-field-green p-8 lg:p-12 flex flex-col justify-center items-center text-center text-white"
+      >
+        <div class="max-w-sm">
+          <h2 class="text-2xl lg:text-3xl font-bold mb-4">
+            BEM-VINDO DE VOLTA!
+          </h2>
+          <p class="text-lg mb-8 text-green-100">
+            Comece sua jornada de conhecimento entrando com sua conta.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Side - Login Form -->
+      <div class="p-8 lg:p-12 flex flex-col justify-center">
+        <div class="max-w-sm mx-auto w-full">
+          <!-- Header -->
+          <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-field-blue mb-2">LOGIN</h1>
+            <div class="w-12 h-1 bg-field-green mx-auto rounded-full"></div>
+          </div>
+
+          <!-- Login Form -->
+          <form
+            id="login-form"
+            action="/api/auth/login"
+            method="POST"
+            class="space-y-6"
+          >
+            <!-- Email Field -->
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+              >
+                <svg
+                  class="h-5 w-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                  />
+                </svg>
+              </div>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full pl-12 pr-4 py-4 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-field-green focus:bg-white transition-all placeholder-gray-500 text-gray-700"
+                placeholder="Email"
+                required
+                autocomplete="email"
+                value="<%= typeof email !== 'undefined' ? email : '' %>"
+              />
+            </div>
+
+            <!-- Password Field -->
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+              >
+                <svg
+                  class="h-5 w-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                class="w-full pl-12 pr-12 py-4 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-field-green focus:bg-white transition-all placeholder-gray-500 text-gray-700"
+                placeholder="Senha"
+                required
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                id="password-toggle"
+                aria-label="Mostrar/ocultar senha"
+              >
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Error Message Container -->
+            <div
+              id="error-message"
+              class="text-red-500 text-sm text-center transition-opacity duration-300"
+              style="opacity: 0; height: 0"
+            >
+              <%= typeof error !== 'undefined' && error ? error : '' %>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full bg-field-green text-white py-4 px-6 rounded-xl font-semibold hover:bg-field-green-dark focus:ring-2 focus:ring-field-green focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+            >
+              Fazer login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Password toggle functionality
+  document
+    .getElementById("password-toggle")
+    .addEventListener("click", function () {
+      const senhaInput = document.getElementById("senha");
+      const type =
+        senhaInput.getAttribute("type") === "password" ? "text" : "password";
+      senhaInput.setAttribute("type", type);
+
+      // Toggle icon
+      const icon = this.querySelector("svg");
+      if (type === "text") {
+        icon.innerHTML =
+          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>';
+      } else {
+        icon.innerHTML =
+          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+      }
+    });
+
+  // Form submission with JSON
+  document
+    .getElementById("login-form")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+      const errorMessageDiv = document.getElementById("error-message");
+
+      // Reset error message style on submit
+      errorMessageDiv.style.opacity = "0";
+      errorMessageDiv.style.height = "0";
+
+      // Basic frontend validation
+      if (!email || !senha) {
+        errorMessageDiv.textContent = "Por favor, preencha todos os campos";
+        errorMessageDiv.style.opacity = "1";
+        errorMessageDiv.style.height = "auto";
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, senha }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          // Display error from server
+          errorMessageDiv.textContent = data.error || "Erro desconhecido";
+          errorMessageDiv.style.opacity = "1";
+          errorMessageDiv.style.height = "auto";
+        } else {
+          // Redirect to dashboard (cookie is set by backend)
+          window.location.href = "/dashboard";
+        }
+      } catch (err) {
+        // Network or other errors
+        errorMessageDiv.textContent = "Erro ao conectar com o servidor";
+        errorMessageDiv.style.opacity = "1";
+        errorMessageDiv.style.height = "auto";
+      }
+    });
+
+  // Add focus effects
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("focus", function () {
+      this.parentElement.classList.add("ring-2", "ring-field-green");
+    });
+
+    input.addEventListener("blur", function () {
+      this.parentElement.classList.remove("ring-2", "ring-field-green");
+    });
+  });
+</script>
