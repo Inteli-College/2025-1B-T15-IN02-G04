@@ -1,7 +1,6 @@
 const db = require('../config/db');
 
 class ClassModel {
-  
   // 📋 BUSCAR TODAS AS AULAS
   static async getAllClasses() {
     try {
@@ -23,6 +22,7 @@ class ClassModel {
       throw error;
     }
   }
+
 
   // 🎯 BUSCAR AULAS POR MÓDULO
   static async getClassesByModuleId(moduleId) {
