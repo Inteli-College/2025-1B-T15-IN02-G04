@@ -1,13 +1,19 @@
 <div id="create-user-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
   <div class="bg-white rounded-lg shadow p-6 w-full max-w-md">
     <h3 class="text-lg font-semibold mb-4">Criar Usuário</h3>
+    <% const endpointRoute = roleId === 1 ? '/admin/createUser' : (roleId === 2 ? '/team/createPTD' : '/admin/createUser'); %>
     <form id="form-create-user" class="space-y-4">
       <input type="text" name="name" placeholder="Nome" class="w-full border px-3 py-2 rounded" required />
       <input type="email" name="email" placeholder="Email" class="w-full border px-3 py-2 rounded" required />
-      <select name="role_id" class="w-full border px-3 py-2 rounded" required>
-        <option value="1">Administrador</option>
-        <option value="2">Gestor</option>
-      </select>
+      <% if (roleId === 1) { %>
+        <select name="role_id" class="w-full border px-3 py-2 rounded" required>
+          <option value="1">Administrador</option>
+          <option value="2">Gestor</option>
+          <option value="3" selected>PTD</option>
+        </select>
+      <% } else { %>
+        <input type="hidden" name="role_id" value="3" />
+      <% } %>
       <div class="flex justify-end space-x-2">
         <button type="button" class="btn-cancel text-gray-600">Cancelar</button>
         <button type="submit" class="btn-submit bg-field-green text-white px-4 py-2 rounded">Salvar</button>
@@ -23,10 +29,11 @@
     const payload = {
       name: form.name.value,
       email: form.email.value,
-      role_id: parseInt(form.role_id.value, 10),
+      role_id: parseInt(form.role_id ? form.role_id.value : 3, 10),
     };
     try {
-      const resp = await fetch('/admin/createUser', {
+      const endpoint = '<%= endpointRoute %>';
+      const resp = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -35,4 +42,7 @@
       location.reload();
     } catch (err) {
       alert(err.message);
+    }
+  });
+</script>
  

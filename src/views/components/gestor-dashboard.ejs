@@ -1,1 +1,24 @@
-<%- include('../pages/gestorDashboard') %> 
+<%- include('../pages/gestorDashboard') %>
+
+<!-- Botões Gestor -->
+<div class="fixed bottom-4 right-4 flex flex-col gap-2 z-40">
+  <button id="btn-add-ptd" class="bg-field-green text-white p-3 rounded-full shadow-md hover:bg-field-green-dark" title="Adicionar PTD">+
+  </button>
+  <button id="btn-assign-trail" class="bg-field-blue text-white p-3 rounded-full shadow-md hover:bg-field-blue-dark" title="Atribuir Trilha">T
+  </button>
+</div>
+
+<%- include('./modals/add-ptd-modal') %>
+<%- include('./modals/assign-trail-modal', { data }) %>
+
+<script>
+  document.getElementById('btn-add-ptd')?.addEventListener('click', ()=> {
+    document.getElementById('add-ptd-modal').classList.remove('hidden');
+  });
+  document.getElementById('btn-assign-trail')?.addEventListener('click', ()=> {
+    document.getElementById('assign-trail-modal').classList.remove('hidden');
+  });
+  document.querySelectorAll('.btn-cancel').forEach(btn=>btn.addEventListener('click', ()=>{
+    btn.closest('[id$="-modal"]').classList.add('hidden');
+  }));
+</script> 

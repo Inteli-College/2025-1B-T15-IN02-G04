@@ -51,6 +51,12 @@ exports.getDashboard = async (req, res) => {
     // Permite que Admin visualize painéis de Gestor/PTD e Gestor visualize PTD via query view
     let viewRoleId = finalRoleId; // valor padrão
     const viewParam = (req.query.view || "").toLowerCase();
+
+    // Busca dados básicos do usuário (nome) para saudação
+    const userRecord = await UserModel.buscarPorId(req.userId);
+    const roleNameMap = { 1: "Admin", 2: "Gestor", 3: "PTD" };
+    const roleName = roleNameMap[finalRoleId] || "Usuário";
+
     if (finalRoleId === 1) {
       if (viewParam === "gestor") viewRoleId = 2;
       else if (viewParam === "ptd") viewRoleId = 3;
@@ -69,6 +75,8 @@ exports.getDashboard = async (req, res) => {
         viewRoleId,         // painel que será exibido
         data,
         userId: req.userId,
+        user: { id: req.userId, name: userRecord?.name || "Usuário" },
+        roleName,
       });
     }
     return res.json(data);

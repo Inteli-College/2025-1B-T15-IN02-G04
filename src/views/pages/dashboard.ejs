@@ -1,4 +1,8 @@
 <div class="dashboard-wrapper">
+  <div class="mb-6 text-center">
+    <h2 class="text-2xl font-semibold">Bem-vindo, <%= user?.name %>! <span class="inline-block ml-2 px-2 py-1 text-xs rounded-full bg-field-green text-white"><%= roleName %></span></h2>
+  </div>
+
   <% if (roleId === 1 || roleId === 2) { %>
     <div class="flex gap-2 mb-4">
       <% if (roleId === 1) { %>
@@ -13,10 +17,10 @@
 
   <% const activeRole = typeof viewRoleId !== 'undefined' ? viewRoleId : roleId; %>
   <% if (activeRole === 1) { %>
-    <%- include('../components/admin-dashboard', { data }) %>
+    <%- include('../components/admin-dashboard', { data, roleId }) %>
   <% } else if (activeRole === 2) { %>
-    <%- include('../components/gestor-dashboard', { data }) %>
+    <%- include('../components/gestor-dashboard', { data, roleId }) %>
   <% } else { %>
-    <%- include('../components/ptd-dashboard', { data }) %>
+    <%- include('../components/ptd-dashboard', { data, userId }) %>
   <% } %>
 </div> 

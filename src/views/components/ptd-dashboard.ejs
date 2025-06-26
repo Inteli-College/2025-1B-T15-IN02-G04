@@ -1,4 +1,75 @@
-<div class="ptd-dashboard p-4">
-  <h2 class="text-2xl font-bold text-field-blue mb-4">Dashboard PTD</h2>
-  <p class="text-gray-600">Conteúdo em desenvolvimento...</p>
-</div> 
+<% const _uid = typeof userId !== 'undefined' ? userId : null; %>
+
+<div class="ptd-dashboard p-4 space-y-6" data-uid="<%= _uid %>">
+  <!-- conteúdo começa sem cabeçalho (saudação global na página) -->
+
+  <!-- Acesso rápido -->
+  <div class="flex justify-center gap-4">
+    <a href="/feed" class="px-4 py-2 bg-field-green text-white rounded shadow hover:bg-field-green-dark transition">Feed</a>
+  </div>
+
+  <!-- Favoritos -->
+  <section>
+    <h3 class="text-xl font-semibold text-field-blue mb-2">Meus Cards Favoritos</h3>
+    <div id="fav-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </section>
+
+  <!-- Ranking Geral -->
+  <section>
+    <h3 class="text-xl font-semibold text-field-blue mb-2">Top 5 Ranking Geral</h3>
+    <table class="w-full border border-gray-200 rounded-lg overflow-hidden text-sm">
+      <thead class="bg-field-green text-white">
+        <tr><th class="px-4 py-2 text-left">Posição</th><th class="px-4 py-2 text-left">Nome</th><th class="px-4 py-2 text-left">Score</th></tr>
+      </thead>
+      <tbody id="ranking-body"></tbody>
+    </table>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const favContainer = document.getElementById('fav-cards');
+    const rankingBody = document.getElementById('ranking-body');
+
+    // Carrega favoritos do usuário
+    try {
+      const favResp = await fetch('/api/favorites');
+      if (favResp.ok) {
+        const favCards = await favResp.json();
+        if (favCards.length) {
+          favCards.forEach(c => {
+            favContainer.innerHTML += `<div class="border rounded-lg p-4 shadow hover:shadow-md transition">
+              <h4 class="font-medium text-field-blue mb-1 truncate">${c.title}</h4>
+              <p class="text-gray-600 text-xs line-clamp-3">${c.description ?? ''}</p>
+            </div>`;
+          });
+        } else {
+          favContainer.innerHTML = '<p class="text-gray-500">Nenhum favorito.</p>';
+        }
+      }
+    } catch (err) { console.error(err); }
+
+    // Carrega ranking
+    try {
+      const rankResp = await fetch('/api/usuarios/ranking');
+      if (!rankResp.ok) throw new Error('rank');
+      const data = await rankResp.json();
+      const userId = Number(document.querySelector('.ptd-dashboard').dataset.uid || 0);
+      const top = data.slice(0, 5);
+      let userInTop = false;
+      rankingBody.innerHTML = top.map((u, i) => {
+        const highlight = u.id === userId ? 'bg-yellow-100 font-semibold' : (i%2?'bg-gray-50':'');
+        if (u.id === userId) userInTop = true;
+        return `<tr class="${highlight}"><td class="px-4 py-2">${i+1}</td><td class="px-4 py-2">${u.name}</td><td class="px-4 py-2">${u.score??0}</td></tr>`;
+      }).join('');
+
+      if (!userInTop) {
+        const pos = data.findIndex(u=>u.id===userId);
+        if (pos!==-1) {
+          const current = data[pos];
+          rankingBody.innerHTML += `<tr class="bg-yellow-100 font-semibold"><td class="px-4 py-2">${pos+1}</td><td class="px-4 py-2">${current.name}</td><td class="px-4 py-2">${current.score??0}</td></tr>`;
+        }
+      }
+    } catch(e){ console.error(e); }
+  });
+</script> 
