@@ -1,14 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
 const express = require("express");
 const frontRoutes = require("./frontRoutes");
 const authRoutes = require("./authRoutes");
@@ -19,7 +9,6 @@ const pdfRoutes = require("./pdfRoutes");
 const postRoutes = require("./postRoutes");
 const moduleRoutes = require("./moduleRoutes");
 const classRoutes = require("./classRoutes");
-const dashboardRoutes = require("./dashboardRoutes"); // Nova importação
 
 const router = express.Router();
 
@@ -33,7 +22,5 @@ router.use("/api", pdfRoutes);
 router.use("/api/modules", moduleRoutes); 
 router.use("/", frontRoutes);
 router.use("/api/class", classRoutes); 
-// Rotas do Dashboard (incluindo APIs e páginas do dashboard)
-router.use("/", dashboardRoutes);
 
 module.exports = router;

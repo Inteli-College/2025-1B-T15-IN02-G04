@@ -18,17 +18,9 @@ router.get("/login", (req, res) => {
 
 // Dashboard
 router.get("/dashboard", checkAuth, (req, res) => {
-  res.render("pages/dashboard", {
-    pageTitle: 'Dashboard',
-    content: '../pages/dashboard',
-    pageCSS: 'pages/dashboard.css',
-    pageJS: [
-      'dashboard-core.js', 
-      'dashboard-notifications.js', 
-      'dashboard-modals.js', 
-      'dashboard-api.js'
-    ],
-    currentUrl: req.protocol + '://' + req.get('host') + req.originalUrl
+  res.render("pages/gestorDashboard", {
+    title: "Dashboard",
+    userId: req.userId,
   });
 });
 
