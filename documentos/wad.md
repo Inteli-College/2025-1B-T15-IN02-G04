@@ -53,6 +53,8 @@ Entre os aspectos essenciais para a criação de valor estão a centralização 
 
 &nbsp; &nbsp; &nbsp; &nbsp;As 5 forças de Porter consistem em pontos principais: poder de barganha dos clientes, ameaça de novos entrantes, poder de barganha dos fornecedores, ameaça de produtos substitutos e rivalidade entre concorrentes. O objetivo de utilizá-las no projeto é entender o contexto do mercado e obter insights valiosos para ideias de inovação. Ao analisar essas forças, identificou-se oportunidades e ameaças que impactam diretamente o posicionamento do nosso produto ou serviço. 
 
+<p align = "center"> Figura 1: 5 Forças de Porter</p> 
+
 <p align="center"> <img src="./assets/wad/5-forças-de-porter.png" alt="5 Forças de Porter"> </p>
 <p align = 'center'>template de Porter (1979), adaptado pelos autores (2025).</p>
 
@@ -79,15 +81,16 @@ Fontes da pesquisa em referências. </p> <br>
 
 &nbsp; &nbsp; &nbsp; &nbsp;O Canvas de Proposta de Valor é uma ferramenta visual que apoia a organização e validação de hipóteses sobre o perfil de clientes e o valor que uma solução oferece. Ele é dividido em duas áreas principais: o Perfil do Cliente (tarefas, dores e ganhos) e o Mapa de Valor (produtos/serviços, criadores de ganho e aliviadores de dor). Essa estrutura facilita o alinhamento entre as necessidades do cliente e as soluções propostas, aumentando as chances de sucesso no desenvolvimento de produtos e serviços.
 
+<p align = "center"> Figura 3: Canvas Proposta de Valor</p>
+
 <p align="center"> <img src="./assets/wad/canvas-proposta-de-valor.png" alt="Value Proposition Canvas"> </p>
+<p align = 'center'>template de Alex Osterwalder e Yves Pigneur (2014), adaptado pelos autores (2025).</p>
 
 &nbsp; &nbsp; &nbsp; &nbsp;Para este projeto, foi desenvolvido um Canvas de Proposta de Valor visando mapear as necessidades, dores e expectativas dos PTDs (Profissionais Técnicos de Desenvolvimento) do Climate FieldView da Bayer no eixo de Crop Science. Eles atuam em campo, e alinham essas informações às soluções propostas pela plataforma digital de capacitação técnica. O objetivo é oferecer um ambiente acessível, atualizado e motivador, reduzindo a rotatividade e aumentando a eficiência no atendimento técnico aos produtores.
 
 &nbsp; &nbsp; &nbsp; &nbsp;No canvas, as tarefas dos clientes foram identificadas, assim como suas principais dores — como dificuldade de acesso a conteúdos técnicos atualizados, suporte remoto sobrecarregado e alta rotatividade — e os ganhos desejados, como certificações, crescimento na função e segurança técnica durante os atendimentos. Em resposta, a solução propõe trilhas de capacitação personalizadas, conteúdos acessíveis offline, gamificação para engajamento e painéis de desempenho para gestores.
 
-&nbsp; &nbsp; &nbsp; &nbsp;Esse material serviu como base para estruturar as funcionalidades e o roadmap da solução, garantindo aderência às reais demandas do público-alvo.
-
-FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template gratuito. Somos Tera, 2023. Disponível em: https://blog.somostera.com/product-management/canvas-de-proposta-de-valor. Acesso em: 23 abril 2025.
+&nbsp; &nbsp; &nbsp; &nbsp;O material supracitado serviu como base para estruturar as funcionalidades e o roadmap da solução, garantindo aderência às reais demandas do público-alvo.
 
 ### 2.1.5. Matriz de Riscos do Projeto
 
@@ -191,7 +194,7 @@ FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template
 
    **Probabilidade:** de 1% a 10%, pois as habilidades técnicas que tangem à integração com Inteligência Artificial não são contempladas na grade curricular da equipe no período de desenvolvimento desse projeto.
 
-<p align = "center">Figura 1: Matriz de risco</p>
+<p align = "center">Figura 4: Matriz de risco</p>
 
 <p align="center"> <img src="./assets/wad/matriz-de-risco.png" alt="Matriz de Risco"> </p>
 <p align = 'center'>Tabela de Napoleão (2020), adaptada pelos autores (2025).</p> <br><br>
@@ -199,10 +202,16 @@ FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template
 ## 2.2. Personas 
 
 Persona PTD:
+<p align = "center"> Figura 5: Persona PTD</p>
+
 <p align="center"> <img src="./assets/wad/persona-ptd.png" alt="Persona PTD"> </p>
+<p align = 'center'>Imagem feita pelos autores (2025).</p> <br><br>
 
 Persona RTD:
+<p align = "center"> Figura 6: Persona RTD</p>
+
 <p align="center"> <img src="./assets/wad/persona-rtd.png" alt="Persona RTD"> </p>
+<p align = 'center'>Imagem feita pelos autores (2025).</p> <br><br>
 
 ## 2.3. User Stories 
 
@@ -355,12 +364,21 @@ Critério de aceite 2 | O sistema deve fornecer feedback em tempo real sobre o d
 
 ## 3.1. Arquitetura
 
-<p align="center"> <img src="./assets/diagrama-mvc1.png" alt=" Primeira parte do DIagrama de Arquitetura"> </p>
-<p align="center"> <img src="./assets/diagrama-mvc2.png" alt=" Segunda parte do DIagrama de Arquitetura"> </p>
+<p align = "center"> Figura 7: Diagrama de Arquitetura - Primeira Parte</p>
+
+<p align="center"> <img src="./assets/diagrama-mvc1.png" alt=" Primeira parte do Diagrama de Arquitetura"> </p>
+<p align = 'center'>Imagem feita pelos autores (2025).</p> <br><br>
+
+<p align = "center"> Figura 8: Diagrama de Arquitetura - Segunda Parte</p>
+
+<p align="center"> <img src="./assets/diagrama-mvc2.png" alt=" Segunda parte do Diagrama de Arquitetura"> </p>
+<p align = 'center'>Imagem feita pelos autores (2025).</p> <br><br>
 
 ## 3.2. Wireframes 
 
 &nbsp; &nbsp; &nbsp; &nbsp;Um wireframe é um esboço visual simples usado para planejar a estrutura e a navegação de uma interface, como um site ou aplicativo. Ele mostra a disposição dos elementos na tela, como botões, menus e campos, sem se preocupar com design visual ou cores. Seu objetivo é organizar ideias e funcionalidades antes da fase de desenvolvimento. Segue abaixo a idealização do nosso wireframe, desenvolvido com base no contexto e nas necessidades do projeto.
+
+<p align = "center"> Figura 9: Wireframe</p>
 
 [[Clique aqui para ver o wireframe completo!]<p align="center"> <img src="./assets/wad/wireframepreview.png" alt="Wireframe"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1) 
 
@@ -371,25 +389,40 @@ Critério de aceite 2 | O sistema deve fornecer feedback em tempo real sobre o d
 &nbsp; &nbsp; &nbsp; &nbsp;Dentre as telas idealizadas, nós temos as seguintes funcionalidades: ( Algumas telas foram postas abaixo para fins ilustrativos. Para visualizar todo o wireframe,[[Acesse o link!] )<p align="center"> </p>](https://www.figma.com/design/7uvAOeSbYbH6db0KklQcIU/Untitled?node-id=9-13&t=vsw1AqcWLRfbM9lD-1)
 
 - Testes: A tela de **testes** permite ao usuário realizar avaliações dentro da plataforma. Ela apresenta perguntas objetivas ou dissertativas e fornece feedbacks com base no desempenho obtido.
-  <p float="left">
-  <img src="./assets/wad/tela-de testes-mobile.png" width="200"/>
-  <img src="./assets/wad/tela-de testes-desktop.png" width="600"/>
-</p>
-<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+
+  <p align = "center"> Figura 10: Tela de Teste - Mobile</p>
+  
+  <p align="center"><img src="./assets/wad/tela-de testes-mobile.png" width="200"/></p>
+  <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p>
+  
+  <p align = "center"> Figura 11: Tela de Teste - Desktop</p>
+    
+  <p align="center"><img src="./assets/wad/tela-de testes-desktop.png" width="600"/></p>
+  <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
 
 - Trilha de Conhecimento: A tela de **trilha de conhecimento** organiza conteúdos em etapas progressivas. O usuário pode acompanhar seu avanço e retomar de onde parou, seguindo uma jornada estruturada de aprendizado.
-    <p float="left">
+
+  <p align = "center"> Figura 12: Tela de Trilha - Mobile</p>
+  
   <img src="./assets/wad/trilha-conhecimento-mobile.png" width="200"/>
+  <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+
+  <p align = "center"> Figura 13: Tela de Trilha - Desktop</p>
+  
   <img src="./assets/wad/trilha-conhecimento-desktop.png" width="600"/>
-</p>
-<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+  <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
 
 - Calendário: A tela de **calendário** exibe eventos, prazos e compromissos relevantes para o usuário. É possível visualizar por mês, e também aparecem ao canto da tela os eventos diários.
-   <p float="left">
+  
+  <p align = "center"> Figura 12: Tela de Calendário - Mobile</p>
+  
   <img src="./assets/wad/calendario-mobile.png" width="200"/>
+  <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+
+  <p align = "center"> Figura 12: Tela de Calendário - Desktop</p>
+  
   <img src="./assets/wad/calendario-desktop.png" width="600"/>
-</p>
-<p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
+  <p align = 'center'>Exemplo de tela, desenvolvida pelos autores (2025).</p> <br><br>
 
 - Registro de Atendimento: A tela de **registro de atendimentos** armazena dados das sessões realizadas entre os PTDs e seu cliente final. Ela permite consultar históricos, anotar observações e registrar datas e horários.
 
@@ -1076,6 +1109,8 @@ _Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de tes
 
 6. O PRESENTE RURAL. Mercado brasileiro de sementes deve crescer 8,3% ao ano até 2027. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr 2025.
    
-7. CASAROTTO, Camila. Como fazer análise SWOT ou FOFA: confira o passo a passo completo com as melhores dicas. [S. l.], 20 dez. 2019. Disponível em: https://rockcontent.com/br/blog/como-fazer-uma-analise-swot/. Acesso em: 8 abr. 2025. 
+7. CASAROTTO, Camila. Como fazer análise SWOT ou FOFA: confira o passo a passo completo com as melhores dicas. [S. l.], 20 dez. 2019. Disponível em: https://rockcontent.com/br/blog/como-fazer-uma-analise-swot/. Acesso em: 8 abr. 2025.
+
+8. FERREIRA, Kellison. Canvas de Proposta de Valor: o que é, como fazer e template gratuito. Somos Tera, 2023. Disponível em: https://blog.somostera.com/product-management/canvas-de-proposta-de-valor. Acesso em: 23 abril 2025.
 
 
