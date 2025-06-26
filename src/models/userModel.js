@@ -32,9 +32,26 @@ class UserModel {
   static async listarUsuariosPorScore() {
     try {
       const result = await db.query(
-        'SELECT id, name, score FROM "user" ORDER BY score DESC'
+        `SELECT u.id,
+                u.name,
+                u.score,
+                COALESCE(array_agg(r.role_name) FILTER (WHERE r.role_name IS NOT NULL), '{}') AS roles
+         FROM "user" u
+         LEFT JOIN role_user ru ON ru.id_user = u.id
+         LEFT JOIN role r ON r.id = ru.id_role
+         GROUP BY u.id
+         ORDER BY u.score DESC`
       );
-      return result.rows;
+      return result.rows.map((row) => {
+        let rolesParsed = [];
+        if (Array.isArray(row.roles)) {
+          rolesParsed = row.roles;
+        } else if (typeof row.roles === "string") {
+          // Remove chaves { } e divide por vírgula
+          rolesParsed = row.roles.replace(/^{|}$/g, "").split(",").filter(Boolean);
+        }
+        return { ...row, roles: rolesParsed };
+      });
     } catch (err) {
       console.error("Erro ao listar usuários por score:", err);
       throw new Error("Erro ao buscar ranking de usuários");
@@ -43,15 +60,56 @@ class UserModel {
 
   static async buscarPorId(id) {
     try {
+      console.log('🔍 [DEBUG] Executando consulta buscarPorId para ID:', id);
+      
+      // Consulta corrigida - buscar apenas informações básicas do usuário
       const result = await db.query(
-        'SELECT "user".id, "user".name, "user".email, "user".score, r.role_name FROM "user", role r, role_user ru WHERE "user".id = $1 AND "user".id = ru.id_user AND r.id = ru.id_role',
+        'SELECT id, name, email, score FROM "user" WHERE id = $1',
         [id]
       );
 
+      console.log('📊 [DEBUG] Resultado da consulta buscarPorId:', {
+        rowCount: result.rows.length,
+        firstRow: result.rows[0] || 'nenhum'
+      });
+
       return result.rows[0];
     } catch (err) {
-      console.error("Erro ao buscar usuário por ID:", err);
+      console.error("❌ [DEBUG] Erro ao buscar usuário por ID:", err);
       throw new Error("Erro ao buscar usuário");
+    }
+  }
+
+  static async buscarRolesPorUsuario(userId) {
+    try {
+      console.log('🔍 [DEBUG] Buscando roles para userId:', userId);
+      
+      const result = await db.query(`
+        SELECT ru.id_role, r.role_name, r.description
+        FROM role_user ru
+        INNER JOIN role r ON ru.id_role = r.id
+        WHERE ru.id_user = $1
+        ORDER BY ru.id_role
+      `, [userId]);
+
+      console.log('📊 [DEBUG] Resultado buscarRolesPorUsuario:', {
+        userId: userId,
+        rowCount: result.rows.length,
+        roles: result.rows
+      });
+
+      // Verificar especificamente se tem role_id = 1
+      const hasAdminRole = result.rows.some(role => {
+        console.log('🔍 [DEBUG] Verificando role_id:', role.id_role, 'tipo:', typeof role.id_role);
+        return parseInt(role.id_role) === 1;
+      });
+
+      console.log('👑 [DEBUG] Tem role admin (id=1)?', hasAdminRole);
+
+      return result.rows;
+    } catch (err) {
+      console.error("❌ [DEBUG] Erro ao buscar roles do usuário:", err);
+      throw new Error("Erro ao buscar roles do usuário");
     }
   }
 }

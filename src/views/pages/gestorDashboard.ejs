@@ -41,40 +41,58 @@
       class="w-0 opacity-0 border border-gray-300 rounded-lg py-2 px-4 transition-all duration-300 ease-in-out focus:outline-none" />
   </div>
 
-  <!-- Tabela de Ranking -->
-  <div class="overflow-x-auto rounded-lg shadow max-h-80 overflow-y-auto">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-field-green">
-        <tr>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase"
-          >
-            Posição
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase"
-          >
-            Nome
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase"
-          >
-            Score
-          </th>
-        </tr>
-      </thead>
-      <tbody id="ranking-body" class="bg-white divide-y divide-gray-200">
-        <!-- Linhas serão adicionadas dinamicamente -->
-      </tbody>
-    </table>
+  <!-- Ranking + Gráfico -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+    <!-- Tabela de Ranking -->
+    <div class="overflow-x-auto rounded-lg shadow overflow-y-auto h-[300px]">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-field-green">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase"
+            >
+              Posição
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase"
+            >
+              Nome
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase"
+            >
+              Score
+            </th>
+          </tr>
+        </thead>
+        <tbody id="ranking-body" class="bg-white divide-y divide-gray-200">
+          <!-- Linhas serão adicionadas dinamicamente -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Gráfico de Ranking -->
+    <div class="bg-white rounded-lg shadow p-2 h-[300px] flex flex-col">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-lg font-semibold text-field-blue">Top 5</h3>
+        <select id="metric-select" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none">
+          <option value="score">Score</option>
+          <option value="posts">Posts</option>
+        </select>
+      </div>
+      <canvas id="chart-score" class="w-full h-full"></canvas>
+    </div>
+
   </div>
 
   <!-- Analytics -->
   <h2 class="text-2xl font-semibold text-field-blue mt-8 mb-4 text-center">Analytics</h2>
-  <div id="analytics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+  <!-- Agora exibimos apenas três cartões, portanto usamos três colunas no desktop -->
+  <div id="analytics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 </div>
 
 <script>
@@ -90,6 +108,10 @@
     const btnRight = document.getElementById("carousel-right");
 
     const analyticsContainer = document.getElementById("analytics");
+    const chartCanvas = document.getElementById("chart-score");
+    const metricSelect = document.getElementById("metric-select");
+
+    let postsData = null; // Cache de posts
 
     const renderCarousel = (data) => {
       carousel.innerHTML = "";
@@ -101,7 +123,7 @@
 
       // Ordena alfabeticamente pelo nome (case-insensitive, PT-BR)
       const sorted = [...data].sort((a, b) =>
-        (a.nome || "").localeCompare(b.nome || "", "pt", {
+        (a.name || "").localeCompare(b.name || "", "pt", {
           sensitivity: "base",
         })
       );
@@ -111,17 +133,17 @@
         card.className =
           "min-w-[120px] flex-shrink-0 bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer text-center p-4";
         card.addEventListener("click", () => {
-          window.location.href = `/perfil/${usuario.id_usuario}`;
+          window.location.href = `/perfil/${usuario.id}`;
         });
 
         const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-          usuario.nome ?? "U"
+          usuario.name ?? "U"
         )}&background=FF5D9C&color=fff&size=128`;
 
         card.innerHTML = `
           <img src="${avatarUrl}" alt="Avatar" class="w-16 h-16 mx-auto rounded-full mb-2" />
           <p class="text-sm font-medium text-gray-700 truncate max-w-[100px] mx-auto">${
-            usuario.nome ?? "-"
+            usuario.name ?? "-"
           }</p>
         `;
 
@@ -136,30 +158,118 @@
       }
 
       const total = data.length;
-      const mediaScore = (
-        data.reduce((sum, u) => sum + (u.score ?? 0), 0) / total
-      ).toFixed(1);
-      const topScore = data[0].score ?? 0;
-      const ptdCount = data.filter((u) => u.tipo === "PTD").length;
-      const consultorCount = data.filter((u) => u.tipo === "Consultor").length;
+      const ptdCount = data.filter((u) => (u.roles || []).includes("PTD")).length;
+      const somaScores = data.reduce((sum, u) => sum + (u.score ?? 0), 0);
+      const mediaScore = (somaScores / (total || 1)).toFixed(1);
+      const topScore = Math.max(...data.map((u) => u.score ?? 0));
+      const topUser = data.find((u) => (u.score ?? 0) === topScore) || {};
 
       analyticsContainer.innerHTML = `
         <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">Total de Usuários</p>
-          <p class="text-3xl font-bold text-field-green">${total}</p>
+          <p class="text-sm text-gray-500">Total de PTDs</p>
+          <p class="text-3xl font-bold text-field-green">${ptdCount}</p>
         </div>
         <div class="bg-white rounded-lg shadow p-4 text-center">
           <p class="text-sm text-gray-500">Média de Score</p>
           <p class="text-3xl font-bold text-field-green">${mediaScore}</p>
         </div>
         <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">Maior Score</p>
+          <p class="text-sm text-gray-500">Score Máximo</p>
           <p class="text-3xl font-bold text-field-green">${topScore}</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 text-center">
-          <p class="text-sm text-gray-500">PTD / Consultor</p>
-          <p class="text-3xl font-bold text-field-green">${ptdCount} / ${consultorCount}</p>
+          <p class="text-xs text-gray-500 truncate">${topUser.name ?? ""}</p>
         </div>`;
+    };
+
+    const renderChart = async (data, metric = metricSelect?.value || "score") => {
+      if (!chartCanvas) return;
+
+      const drawChart = (labels, values, labelName, backgroundColor) => {
+        if (window._scoreChart) {
+          window._scoreChart.destroy();
+        }
+
+        // Ajusta dinamicamente a altura do canvas ao container (evita crescimento e preenche melhor)
+        const parentHeight = chartCanvas.parentElement.clientHeight;
+        chartCanvas.height = parentHeight;
+        chartCanvas.style.height = parentHeight + "px";
+
+        window._scoreChart = new Chart(chartCanvas, {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              {
+                label: labelName,
+                data: values,
+                backgroundColor,
+              },
+            ],
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } },
+            maintainAspectRatio: false,
+          },
+        });
+      };
+
+      const buildDataByScore = () => {
+        const topFive = [...data]
+          .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+          .slice(0, 5);
+
+        const labels = topFive.map((u) => u.name ?? "-");
+        const values = topFive.map((u) => u.score ?? 0);
+
+        drawChart(labels, values, "Top 5 Scores", "#72b500");
+      };
+
+      const buildDataByPosts = async () => {
+        // Busca posts se ainda não temos
+        if (!postsData) {
+          try {
+            const resp = await fetch("/api/posts");
+            if (!resp.ok) throw new Error("Erro ao buscar posts");
+            postsData = await resp.json();
+          } catch (err) {
+            console.error(err);
+            return;
+          }
+        }
+
+        // Contar posts por autor
+        const counts = {};
+        postsData.forEach((p) => {
+          const autor = p.autor || "Desconhecido";
+          counts[autor] = (counts[autor] || 0) + 1;
+        });
+
+        const sorted = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5);
+
+        const labels = sorted.map((i) => i[0]);
+        const values = sorted.map((i) => i[1]);
+
+        drawChart(labels, values, "Top 5 Posts", "#3B82F6");
+      };
+
+      const exec = async () => {
+        if (metric === "posts") {
+          await buildDataByPosts();
+        } else {
+          buildDataByScore();
+        }
+      };
+
+      if (typeof Chart === "undefined") {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/chart.js";
+        script.onload = exec;
+        document.body.appendChild(script);
+      } else {
+        exec();
+      }
     };
 
     const renderRows = (data) => {
@@ -179,14 +289,14 @@
         const tr = document.createElement("tr");
         tr.classList.add("cursor-pointer", "hover:bg-gray-100");
         tr.addEventListener("click", () => {
-          window.location.href = `/perfil/${usuario.id_usuario}`;
+          window.location.href = `/perfil/${usuario.id}`;
         });
         tr.innerHTML = `
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${
             usuario.position
           }</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">${
-            usuario.nome ?? "-"
+            usuario.name ?? "-"
           }</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${
             usuario.score ?? 0
@@ -211,6 +321,7 @@
       renderRows(rankingData);
       renderCarousel(rankingData);
       renderAnalytics(rankingData);
+      renderChart(rankingData);
     } catch (error) {
       console.error(error);
       tbody.innerHTML = `
@@ -232,6 +343,7 @@
         renderRows(rankingData);
         renderCarousel(rankingData);
         renderAnalytics(rankingData);
+        renderChart(rankingData);
         searchInput.classList.remove("w-64", "opacity-100");
         searchInput.classList.add("w-0", "opacity-0");
       }
@@ -241,11 +353,12 @@
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.toLowerCase();
       const filtered = rankingData.filter((u) =>
-        (u.nome || "").toLowerCase().includes(query)
+        (u.name || "").toLowerCase().includes(query)
       );
       renderRows(filtered);
       renderCarousel(filtered);
       renderAnalytics(filtered);
+      renderChart(filtered);
       updateArrows();
     });
 
@@ -269,5 +382,12 @@
 
     // Atualiza setas após render inicial
     setTimeout(updateArrows, 100);
+
+    // Troca de métrica
+    if (metricSelect) {
+      metricSelect.addEventListener("change", () => {
+        renderChart(rankingData, metricSelect.value);
+      });
+    }
   });
 </script>
