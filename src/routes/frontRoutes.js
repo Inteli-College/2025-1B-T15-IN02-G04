@@ -127,6 +127,7 @@ router.get("/contato", (req, res) => {
   });
 });
 
+
 // Página de termos
 router.get("/termos", (req, res) => {
   res.render("layout/main", {
