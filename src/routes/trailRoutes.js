@@ -1,19 +1,34 @@
-const express = require('express');
-const trailController = require('../controllers/trailController');
+const express = require("express");
+const trailController = require("../controllers/trailController");
 
 const router = express.Router();
 
+console.log("🔧 DEBUG: Configurando rotas de trilhas...");
 
-router.get('/trails', trailController.getAllTrails);
+// Rota para listar todas as trilhas
+router.get("/", (req, res, next) => {
+  console.log("📡 GET /api/trails chamado");
+  trailController.getAllTrails(req, res, next);
+});
 
-router.get('/trails/:id', trailController.getTrailById);
+// Rota para buscar trilha por ID
+router.get("/:id", (req, res, next) => {
+  console.log("📡 GET /api/trails/:id chamado com ID:", req.params.id);
+  trailController.getTrailById(req, res, next);
+});
 
-router.get('/trails/name/:name', trailController.getTrailByName);
+// Rota para buscar trilha por nome
+router.get("/name/:name", trailController.getTrailByName);
 
-router.post('/trails', trailController.createTrail);
+// Rota para criar trilha
+router.post("/", trailController.createTrail);
 
-router.put('/trails/:id', trailController.updateTrail);
+// Rota para atualizar trilha
+router.put("/:id", trailController.updateTrail);
 
-router.delete('/trails/:id', trailController.deleteTrail);
+// Rota para deletar trilha
+router.delete("/:id", trailController.deleteTrail);
+
+console.log("✅ Rotas de trilhas configuradas");
 
 module.exports = router;
