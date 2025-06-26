@@ -1075,4 +1075,7 @@ _Posicione aqui as tabelas com enunciados de tarefas, etapas e resultados de tes
 5. O TEMPO ECONOMIA. Setor farmacêutico cresce 11% e movimenta R$ 158,4 bilhões em 2024, mostra levantamento. Disponível em: https://www.otempo.com.br/economia/2025/3/6/setor-farmaceutico-cresce-11-e-movimenta-r-158-4-bilhoes-em-2024-mostra-levantamento. Acesso em: 26 abr. 2025.
 
 6. O PRESENTE RURAL. Mercado brasileiro de sementes deve crescer 8,3% ao ano até 2027. Disponível em: https://opresenterural.com.br/mercado-brasileiro-de-sementes-deve-crescer-83-ao-ano-ate-2027/. Acesso em: 26 abr 2025.
+   
+7. CASAROTTO, Camila. Como fazer análise SWOT ou FOFA: confira o passo a passo completo com as melhores dicas. [S. l.], 20 dez. 2019. Disponível em: https://rockcontent.com/br/blog/como-fazer-uma-analise-swot/. Acesso em: 8 abr. 2025. 
+
 
